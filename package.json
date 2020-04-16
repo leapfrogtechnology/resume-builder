@@ -8,7 +8,13 @@
     "build": "next build",
     "start": "next start",
     "format": "prettier --write . '**/*.{ts,js,md,yaml,json}'",
-    "format:check": "prettier --check . '**/*.{ts,js,md,yaml,json}'"
+    "format:check": "prettier --check . '**/*.{ts,js,md,yaml,json}'",
+    "lint": "eslint pages"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
   },
   "repository": {
     "type": "git",
@@ -25,12 +31,31 @@
   },
   "homepage": "https://github.com/leapfrogtechnology/resume-builder#readme",
   "dependencies": {
-    "eslint-config-leapfrog": "^3.0.0",
+    "classnames": "^2.2.6",
+    "formik": "^2.1.4",
     "next": "^9.3.5",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "yup": "^0.28.3"
   },
   "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-leapfrog": "^3.0.0",
+    "eslint-plugin-react": "^7.19.0",
+    "husky": "^4.2.5",
     "prettier": "2.0.4"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
