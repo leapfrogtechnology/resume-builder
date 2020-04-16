@@ -9,7 +9,7 @@
     "start": "next start ./src",
     "format": "prettier --write . '**/*.{ts,js,md,yaml,json}'",
     "format:check": "prettier --check . '**/*.{ts,js,md,yaml,json}'",
-    "lint": "eslint pages"
+    "lint": "eslint src"
   },
   "husky": {
     "hooks": {
