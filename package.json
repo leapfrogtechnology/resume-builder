@@ -1,0 +1,36 @@
+{
+  "name": "resume-builder",
+  "version": "1.0.0",
+  "description": "Build resumes on the fly",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "format": "prettier --write . '**/*.{ts,js,md,yaml,json}'",
+    "format:check": "prettier --check . '**/*.{ts,js,md,yaml,json}'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/leapfrogtechnology/resume-builder"
+  },
+  "author": "Leapfrog Technology",
+  "contributors": [
+    "Yankee Maharjan",
+    "Nikita Shrestha"
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leapfrogtechnology/resume-builder/issues"
+  },
+  "homepage": "https://github.com/leapfrogtechnology/resume-builder#readme",
+  "dependencies": {
+    "eslint-config-leapfrog": "^3.0.0",
+    "next": "^9.3.5",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "prettier": "2.0.4"
+  }
+}
