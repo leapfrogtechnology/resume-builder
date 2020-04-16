@@ -1,0 +1,19 @@
+lib/
+coverage
+.vscode
+.github
+.next
+
+# dependencies
+/node_modules
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+CHANGELOG.md
+package.json
