@@ -1,10 +1,8 @@
 import React from 'react';
-import './Header.css';
+import '../../pages/_app';
 
 const Header = () => {
-   return(
-       <div className="header">Header</div>
-   )
-}
+  return <div className="header">Header</div>;
+};
 
 export default Header;
