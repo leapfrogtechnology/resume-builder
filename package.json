@@ -4,7 +4,10 @@
   "description": "Build resumes on the fly",
   "main": "index.js",
   "scripts": {
-    "dev": "next ./src",
+    "build-css": "node-sass-chokidar --include-path ./src src/ -o src/",
+    "watch-css": "npm run build-css && node-sass-chokidar ./src -o ./src --watch --include-path ./src",
+    "start-js": "react-scripts start",
+    "dev": "next ./src -p watch-css start-js",
     "build": "next build ./src",
     "start": "next start ./src",
     "format": "prettier --write . '**/*.{ts,js,md,yaml,json}'",
@@ -39,6 +42,8 @@
     "classnames": "^2.2.6",
     "formik": "^2.1.4",
     "next": "^9.3.5",
+    "node-sass": "^4.13.1",
+    "node-sass-chokidar": "^1.4.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "yup": "^0.28.3"
