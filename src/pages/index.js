@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
 import Header from '../components/header/Header';
-import UserDetail from '../components/userdetail/UserDetail';
-import PersonalInfo from '../components/preview/PersonalInfo';
+import Dashboard from '../components/dashboard/Dashboard';
+// import { BrowserRouter } from 'react-router-dom';
 
 const App = () => {
   // App state
@@ -21,13 +21,13 @@ const App = () => {
 
   return (
     <div className="page-container">
-      <Header name={personalInfo.name.data} status="Employee" />
-      <UserDetail
+      <Header
         name={personalInfo.name.data}
+        status="Employee"
         experience="5 years professional experience"
         onPreviewBtnClicked={handleOnPreviewBtnClicked}
       />
-      <PersonalInfo personalInfo={personalInfo} preview={preview}></PersonalInfo>
+      <Dashboard />
     </div>
   );
 };

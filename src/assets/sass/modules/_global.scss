@@ -1,6 +1,7 @@
 .header-container {
   max-width: 1170px;
   margin: 0 auto;
+  padding: 16px 0 18px;
   display: flex;
   justify-content: space-between;
 }
@@ -10,4 +11,33 @@
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
+}
+
+.main-container {
+  max-width: 1170px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.card {
+  background: $white;
+  box-shadow: 0px 2px 4px rgba(179, 179, 179, 0.25);
+  border-radius: 4px;
+}
+
+.title {
+  font: normal 600 20px/24px $font-primary;
+}
+
+.text-link {
+  color: $dodger-blue;
+
+  @include m(small) {
+    font: normal 600 14px/17px $font-primary;
+  }
+
+  @include m(danger) {
+    color: $pomegranate;
+  }
 }

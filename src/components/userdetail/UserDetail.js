@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 import Media from '../media/Media';
 import { FAVORITE_ICON } from '../icons/icon';
-
 import Button from '../button/Button';
+import { Image } from '../../assets/image';
 
 const UserDetail = props => {
   const { name, experience, onPreviewBtnClicked } = props;
@@ -14,7 +14,7 @@ const UserDetail = props => {
       <div className="user-detail-container">
         <div className="user-detail__left-content">
           <div className="user-detail__image-wrapper">
-            <img src="../../assets/Image.png" alt="Profile Picture" />
+            <img src={Image} alt="Profile Picture" />
           </div>
           <div className="user-detail__emp-attribute">
             <div className="user-detail__username">{name}</div>
