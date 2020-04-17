@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 
 import { useState } from 'react';
 
-export const PersonalInfo = props => {
-  const { personalInfo, isPreview } = props;
+const PersonalInfo = props => {
+  const { personalInfo, preview } = props;
 
   const personalInfoList = Object.keys(personalInfo).map(key => (
-    <PersonalInfoItem key={key} title={key} data={personalInfo[key]} isPreview={isPreview}></PersonalInfoItem>
+    <PersonalInfoItem key={key} title={key} data={personalInfo[key]} preview={preview}></PersonalInfoItem>
   ));
 
   return (
@@ -27,7 +27,7 @@ PersonalInfo.propTypes = {
 };
 
 const PersonalInfoItem = props => {
-  const { title, data, isPreview } = props;
+  const { title, data, preview } = props;
 
   const [hidden, setHidden] = useState(0);
 
@@ -39,7 +39,9 @@ const PersonalInfoItem = props => {
           <p>{data.data}</p>
           {hidden ? <span>Hidden</span> : <></>}
         </div>
-        {!isPreview ? (
+        {preview ? (
+          <></>
+        ) : (
           <div>
             <button
               onClick={e => {
@@ -50,8 +52,6 @@ const PersonalInfoItem = props => {
               {hidden ? 'Show' : 'Hide'}
             </button>
           </div>
-        ) : (
-          <></>
         )}
       </div>
     </li>
@@ -63,7 +63,7 @@ const PersonalInfoItem = props => {
 PersonalInfoItem.propTypes = {
   title: PropTypes.string,
   data: PropTypes.object,
-  isPreview: PropTypes.bool,
+  preview: PropTypes.bool,
 };
 
 /**
@@ -79,3 +79,5 @@ const onHiddenClicked = (_e, hidden) => {
     // console.log('added');
   }
 };
+
+export default PersonalInfo;
