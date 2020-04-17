@@ -23,7 +23,7 @@ const PersonalInfo = props => {
 
 PersonalInfo.propTypes = {
   personalInfo: PropTypes.object,
-  isPreview: PropTypes.bool,
+  preview: PropTypes.bool,
 };
 
 const PersonalInfoItem = props => {
