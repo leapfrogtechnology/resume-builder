@@ -1,7 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import '../../pages/_app';
 
-const Header = () => {
+const Header = props => {
+  const { name, status } = props;
+
   return (
     <header className="header">
       <div className="header-container">
@@ -14,8 +18,8 @@ const Header = () => {
         <div className="header__right-content">
           <div className="profile">
             <div className="profile-detail">
-              <div className="profile__name">Ribby Frog</div>
-              <div className="profile__status">Employee</div>
+              <div className="profile__name">{name}</div>
+              <div className="profile__status">{status}</div>
             </div>
             <div className="dropdown">
               <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -30,6 +34,11 @@ const Header = () => {
       </div>
     </header>
   );
+};
+
+Header.propTypes = {
+  name: PropTypes.string,
+  status: PropTypes.string,
 };
 
 export default Header;
