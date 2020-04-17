@@ -1,14 +1,14 @@
 import React from 'react';
 import Header from '../components/header/Header';
-import UserDetail from '../components/userdetail/UserDetail';
+import Dashboard from '../components/dashboard/Dashboard';
+import { BrowserRouter } from 'react-router-dom';
 
 const App = () => {
   return (
     <div className="page-container">
       <Header />
-      <UserDetail />
+      <Dashboard />
     </div>
-
   );
 };
 
