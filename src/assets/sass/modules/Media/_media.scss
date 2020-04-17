@@ -1,0 +1,11 @@
+.media{
+    display: flex;
+    align-items: center;
+    padding-top: 12px;
+
+    @include e(body){
+        font: normal bold 14px/17px $font-primary;
+        color: $mercury;
+        margin-left: 8px;
+    }
+}

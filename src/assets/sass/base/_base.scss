@@ -4,27 +4,6 @@
   box-sizing: border-box;
 }
 
-* {
-  &::after {
-    content: '';
-    clear: both;
-    display: table;
-  }
-}
 
-body {
-  font-family: $font-primary;
-  font-weight: 300;
-  font-size: 1rem;
-  line-height: 1.8;
-}
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: $font-secondary;
-  font-weight: normal;
-}
+

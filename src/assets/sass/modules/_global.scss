@@ -1,15 +1,13 @@
-.title {
-  font: normal 500 25px/24px $font-secondary;
-  text-align: center;
-  padding-bottom: 20px;
-
-  @include m(small) {
-    font: normal 500 20px/24px $font-secondary;
-  }
+.header-container{
+    max-width: 1170px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
 }
 
-.container {
-  background: $white;
-  border-radius: 10px;
-  padding: 20px;
+.user-detail-container{
+    max-width: 1170px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
 }
