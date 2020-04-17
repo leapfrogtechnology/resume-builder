@@ -13,7 +13,7 @@ const Media = props => {
 };
 
 Media.propTypes = {
-  icon: PropTypes.string,
+  icon: PropTypes.object,
   label: PropTypes.string,
 };
 
