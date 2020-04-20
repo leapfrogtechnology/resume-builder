@@ -1,7 +1,6 @@
 import React from 'react';
 import Header from '../components/header/Header';
 import Dashboard from '../components/dashboard/Dashboard';
-import { BrowserRouter } from 'react-router-dom';
 
 const App = () => {
   return (

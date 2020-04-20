@@ -33,13 +33,4 @@
     @include m(hidden){
         color: $dusty-gray;
     }
-
-    .hidden-tag{
-        border-radius: 95px;
-        background: $nobel;
-        color: $white;
-        font: normal 600 10px/12px $font-primary;
-        padding: 2px 4px;
-        margin-left: 10px;
-    }
 }
