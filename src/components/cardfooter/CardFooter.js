@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const CardFooter = ({ icon, label }) => {
   return (
@@ -9,6 +10,11 @@ const CardFooter = ({ icon, label }) => {
       <span className="card__footer-label text-link">{label}</span>
     </div>
   );
+};
+
+CardFooter.propTypes = {
+  icon: PropTypes.string,
+  label: PropTypes.string,
 };
 
 export default CardFooter;

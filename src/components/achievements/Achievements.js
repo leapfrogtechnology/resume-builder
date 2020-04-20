@@ -29,6 +29,7 @@ const Achievements = ({ achievements, preview }) => {
 
 Achievements.propTypes = {
   achievements: PropTypes.array,
+  preview: PropTypes.bool,
 };
 
 export default Achievements;

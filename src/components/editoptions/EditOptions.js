@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { View, EditGray, Trash, ViewHidden } from '~/assets/image';
 
 const EditOptions = ({ isHidden }) => {
@@ -15,6 +16,10 @@ const EditOptions = ({ isHidden }) => {
       </span>
     </div>
   );
+};
+
+EditOptions.propTypes = {
+  isHidden: PropTypes.bool,
 };
 
 export default EditOptions;

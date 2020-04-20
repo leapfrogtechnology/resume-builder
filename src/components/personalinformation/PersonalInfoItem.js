@@ -27,7 +27,7 @@ PersonalInfoItem.propTypes = {
   value: PropTypes.string,
   visibility: PropTypes.bool,
   preview: PropTypes.bool,
-  bold: PropTypes.bold,
+  bold: PropTypes.bool,
 };
 
 export default PersonalInfoItem;

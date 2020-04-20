@@ -29,6 +29,7 @@ const Dashboard = ({ profile, preview }) => {
 
 Dashboard.propTypes = {
   profile: PropTypes.object,
+  preview: PropTypes.bool,
 };
 
 export default Dashboard;
