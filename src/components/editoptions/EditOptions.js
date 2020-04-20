@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, EditGray, Trash, ViewHidden } from '~/assets/image';
 
-const EditOptions = ({ isHidden }) => {
+const EditOptions = ({ isHidden, component }) => {
 	return (
 		<div className="edit-options">
 			<span className="edit-options__item">

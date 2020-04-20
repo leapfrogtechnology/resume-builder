@@ -1,5 +1,6 @@
 import React from 'react';
 import EditOptions from '~/components/editoptions/EditOptions';
+import AddWorkExperience from '~/components/form/workexperience/AddWordExperience';
 
 const WorkExperienceShown = () => {
   return (
@@ -7,7 +8,7 @@ const WorkExperienceShown = () => {
       <div className="work-experience__row">
         <div className="work-experience__row-header">
           <div className="sub-title">Hewlett Packard Enterprise</div>
-          <EditOptions />
+          <EditOptions component={AddWorkExperience}/>
         </div>
         <div className="work-experience__position">
           Associate Engineering Manager

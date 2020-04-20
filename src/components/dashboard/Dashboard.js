@@ -6,6 +6,7 @@ import Achievements from '~/components/achievements/Achievements';
 import WorkExperience from '~/components/workexperience/WorkExperience';
 import ProjectsUndertaken from '~/components/projectsundertaken/ProjectsUndertaken';
 import PersonalInformation from '~/components/personalinformation/PersonalInformation';
+import AddWorkExperience from '~/components/form/workexperience/AddWordExperience';
 
 const Dashboard = () => {
 	return (
@@ -18,6 +19,7 @@ const Dashboard = () => {
 					<ProjectsUndertaken />
 					<Achievements />
 					<Certificate />
+					<AddWorkExperience />
 				</div>
 				<Sidenav />
 			</div>

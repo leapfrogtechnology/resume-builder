@@ -1,0 +1,103 @@
+.form-container{
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba($color: $black, $alpha: 0.7);
+  width: 100%;
+  height: 100vh;
+  z-index: 500;
+  overflow: auto;
+}
+
+.form{
+  width: 502px;
+  margin: 0 auto;
+  font: normal normal 12px/15px $font-primary;
+
+  @include e(header){
+    font: normal bold 24px/29px $font-primary;
+  }
+
+  .input-group{
+    margin-top: 18px;
+
+    @include m(short){
+      width: 50%;
+
+      &:first-child{
+        padding-right: 10px;
+      }
+
+      &:last-child{
+        padding-left: 10px;
+      }
+    }
+  }
+
+  .input-label{
+    margin-bottom: 4px;
+    color: $dusty-gray;
+    display: inline-block;
+
+    @include m(dark){
+      color: $dove-gray;
+    }
+  }
+
+  .input-text-field{
+    border: 1px solid $alto;
+    width: 100%;
+    border-radius: 2px;
+    padding: 8px 10px;
+  }
+
+  .input-date{
+    border: 1px solid $alto;
+    border-radius: 2px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 10px;
+  }
+
+  .input-date-field{
+    border: 0;
+  }
+
+  @include e(date-field){
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .input-checkbox-field{
+    margin: 8px;
+    border: 2px solid $nobel;
+  }
+
+  .input-textarea-field{
+    width: 100%;
+    border: 1px solid $alto;
+    border-radius: 2px;
+    padding: 8px 10px;
+  }
+
+  .form-button{
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @include e(right){
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .btn{
+    padding: 8px 16px;
+
+    @include m(cancel){
+      margin-left: 20px;
+    }
+  }
+}
