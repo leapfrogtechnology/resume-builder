@@ -1,17 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const CardHeader = props => {
-  const { title, icon = null } = props;
-
+const CardHeader = ({ title, icon = null }) => {
   return (
     <div className="card-header">
       <div className="card-header__l">
         <div className="title">{title}</div>
       </div>
-      {!icon ? (
-        ''
-      ) : (
+      {icon && (
         <div className="card-header__r">
           <img src={icon} alt="Edit" />
         </div>
@@ -24,4 +20,5 @@ CardHeader.propTypes = {
   title: PropTypes.string,
   icon: PropTypes.object | null,
 };
+
 export default CardHeader;
