@@ -1,11 +1,11 @@
 import React from 'react';
-import Skills from '../skills/Skills';
-import Sidenav from '../sidenav/Sidenav';
-import Certificate from '../certificate/Certificate';
-import Achievements from '../achievements/Achievements';
-import WorkExperience from '../workexperience/WorkExperience';
-import ProjectsUndertaken from '../projectsundertaken/ProjectsUndertaken';
-import PersonalInformation from '../personalinformation/PersonalInformation';
+import Skills from '~/components/skills/Skills';
+import Sidenav from '~/components/sidenav/Sidenav';
+import Certificate from '~/components/certificate/Certificate';
+import Achievements from '~/components/achievements/Achievements';
+import WorkExperience from '~/components/workexperience/WorkExperience';
+import ProjectsUndertaken from '~/components/projectsundertaken/ProjectsUndertaken';
+import PersonalInformation from '~/components/personalinformation/PersonalInformation';
 
 const Dashboard = () => {
 	return (

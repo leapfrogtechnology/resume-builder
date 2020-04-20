@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from '../../assets/image';
+import { View } from '~/assets/image';
 
 const Contact = ({ label, value }) => {
 	return (

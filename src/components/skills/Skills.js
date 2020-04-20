@@ -1,8 +1,8 @@
 import React from 'react';
-import { Add } from '../../assets/image';
-import CardHeader from '../cardheader/CardHeader';
-import CardFooter from '../cardfooter/CardFooter';
-import EditOptions from '../editoptions/EditOptions';
+import { Add } from '~/assets/image';
+import CardHeader from '~/components/cardheader/CardHeader';
+import CardFooter from '~/components/cardfooter/CardFooter';
+import EditOptions from '~/components/editoptions/EditOptions';
 
 const Skills = () => {
 	return (

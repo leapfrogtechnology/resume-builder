@@ -1,8 +1,8 @@
 import React from 'react';
-import Media from '../media/Media';
-import Button from '../button/Button';
-import { Image } from '../../assets/image';
-import { FAVORITE_ICON } from '../icons/icon';
+import Media from '~/components/media/Media';
+import Button from '~/components/button/Button';
+import { Image } from '~/assets/image';
+import { FAVORITE_ICON } from '~/components/icons/icon';
 
 const UserDetail = () => {
 	return (

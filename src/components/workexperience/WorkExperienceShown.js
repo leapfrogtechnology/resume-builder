@@ -1,5 +1,5 @@
 import React from 'react';
-import EditOptions from '../editoptions/EditOptions';
+import EditOptions from '~/components/editoptions/EditOptions';
 
 const WorkExperienceShown = () => {
   return (

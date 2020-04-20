@@ -1,8 +1,8 @@
 import React from 'react';
-import CardHeader from '../cardheader/CardHeader';
-import EditOptions from '../editoptions/EditOptions';
-import { Add } from '../../assets/image';
-import CardFooter from '../cardfooter/CardFooter';
+import CardHeader from '~/components/cardheader/CardHeader';
+import EditOptions from '~/components/editoptions/EditOptions';
+import { Add } from '~/assets/image';
+import CardFooter from '~/components/cardfooter/CardFooter';
 
 const Achievements = () => {
 	return (

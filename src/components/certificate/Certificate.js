@@ -1,8 +1,8 @@
 import React from 'react';
-import CardFooter from '../cardfooter/CardFooter';
-import CardHeader from '../cardheader/CardHeader';
-import EditOptions from '../editoptions/EditOptions';
-import { Add, UpRightArrow } from '../../assets/image';
+import CardFooter from '~/components/cardfooter/CardFooter';
+import CardHeader from '~/components/cardheader/CardHeader';
+import EditOptions from '~/components/editoptions/EditOptions';
+import { Add, UpRightArrow } from '~/assets/image';
 
 const Certificate = () => {
 	return (

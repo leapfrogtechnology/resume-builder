@@ -1,7 +1,7 @@
 import React from 'react';
-import { Add } from '../../assets/image';
-import CardHeader from '../cardheader/CardHeader';
-import CardFooter from '../cardfooter/CardFooter';
+import { Add } from '~/assets/image';
+import CardHeader from '~/components/cardheader/CardHeader';
+import CardFooter from '~/components/cardfooter/CardFooter';
 import WorkExperienceShown from './WorkExperienceShown';
 import WorkExperienceHidden from './WorkExperienceHidden';
 

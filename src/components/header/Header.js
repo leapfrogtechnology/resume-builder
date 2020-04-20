@@ -1,8 +1,8 @@
 import React from 'react';
-import '../../pages/_app';
-import {Logo} from '../../assets/image';
-import { DROPDOWN } from '../icons/icon';
-import UserDetail from '../userdetail/UserDetail';
+import '~/pages/_app';
+import {Logo} from '~/assets/image';
+import { DROPDOWN } from '~/components/icons/icon';
+import UserDetail from '~/components/userdetail/UserDetail';
 
 const Header = () => {
   return (

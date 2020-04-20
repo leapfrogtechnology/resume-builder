@@ -1,6 +1,6 @@
 import React from 'react';
-import { Edit, View } from '../../assets/image';
-import CardHeader from '../cardheader/CardHeader';
+import { Edit, View } from '~/assets/image';
+import CardHeader from '~/components/cardheader/CardHeader';
 
 const PersonalInformation = () => {
 	return (

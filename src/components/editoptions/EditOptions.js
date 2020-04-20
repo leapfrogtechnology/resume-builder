@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, EditGray, Trash, ViewHidden } from '../../assets/image';
+import { View, EditGray, Trash, ViewHidden } from '~/assets/image';
 
 const EditOptions = ({ isHidden }) => {
 	return (
