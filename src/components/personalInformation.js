@@ -22,10 +22,10 @@ const PersonalInformation = props => {
             name: '',
             role: '',
             introduction: '',
-            languages: '',
           }}
           onSubmit={values => {
-            console.log(values);
+            props.setData(prevState => ({ ...prevState, ...values }));
+            props.setIsOpen(false);
           }}
           validationSchema={validation}
         >

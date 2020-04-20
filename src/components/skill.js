@@ -22,7 +22,10 @@ const Skill = props => {
             skills: '',
             subSkills: [],
           }}
-          onSubmit={values => console.log(values)}
+          onSubmit={values => {
+            props.setData(prevState => ({ ...prevState, ...values }));
+            props.setIsOpen(false);
+          }}
           validationSchema={validation}
         >
           {formik => (
@@ -38,7 +41,7 @@ const Skill = props => {
               </Field>
 
               <Field
-                name="Sub Skills"
+                name="subSkills"
                 component={ChipInput}
                 label="Sub Skills"
                 disabled={formik.values.skills ? false : true}
