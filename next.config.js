@@ -5,5 +5,5 @@ module.exports = withImages({
   webpack: config => {
     config.resolve.alias['~'] = path.resolve('src');
     return config;
-  },
+  }
 });
