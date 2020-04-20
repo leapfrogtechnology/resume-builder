@@ -1,26 +1,26 @@
-.user-detail{
-    background: $deep-koamaru;
-    padding: 20px 0;
-    color: $white;
+.user-detail {
+  background: $deep-koamaru;
+  padding: 20px 0;
+  color: $white;
 
-    @include e(left-content){
-        display: flex;
-        align-items: center;
-    }
+  @include e(left-content) {
+    display: flex;
+    align-items: center;
+  }
 
-    @include e(right-content){
-        align-self: flex-end;
-    }
+  @include e(right-content) {
+    align-self: flex-end;
+  }
 
-    @include e(username){
-        font: normal normal 24px/29px $font-primary;
-    }
+  @include e(username) {
+    font: normal normal 24px/29px $font-primary;
+  }
 
-    @include e(image-wrapper){
-        width: 88px;
-        height: 88px;
-        border-radius: 50%;
-        background: $white;
-        margin-right: 24px;
-    }
+  @include e(image-wrapper) {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    background: $white;
+    margin-right: 24px;
+  }
 }

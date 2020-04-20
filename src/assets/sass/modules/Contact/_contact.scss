@@ -1,14 +1,14 @@
-.contact-content{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 26px 0 0;
+.contact-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 26px 0 0;
 
-    .key{
-        font: normal normal 16px/19px $font-primary;
-    }
+  .key {
+    font: normal normal 16px/19px $font-primary;
+  }
 
-    .value{
-        font: normal normal 16px/19px $font-primary;
-    }
+  .value {
+    font: normal normal 16px/19px $font-primary;
+  }
 }

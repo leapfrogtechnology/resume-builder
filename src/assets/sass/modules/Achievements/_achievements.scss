@@ -1,21 +1,21 @@
-.achievements-block{
-    margin-top: 25px;
+.achievements-block {
+  margin-top: 25px;
 }
 
-.achievements{
-    @include e(row){
-        padding: 28px 0 25px;
-        border-bottom: 1px solid $alto;
-    }
+.achievements {
+  @include e(row) {
+    padding: 28px 0 25px;
+    border-bottom: 1px solid $alto;
+  }
 
-    @include e(row-header){
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding-bottom: 4px;
-    }
+  @include e(row-header) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 4px;
+  }
 
-    @include e(period){
-        color: $mine-shaft;
-    }
+  @include e(period) {
+    color: $mine-shaft;
+  }
 }

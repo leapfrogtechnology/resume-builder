@@ -1,45 +1,45 @@
-@import '../../utilities/utilities';
-@import '../../utilities/config';
+@import "../../utilities/utilities";
+@import "../../utilities/config";
 
-.header{
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 100;
-    background: $white;
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: $white;
 
-    @include e(left-content){
-        display: flex;
-        align-items: center;
-    }
-
-    .logo-wrapper{
-        margin-right: 48px;
-    }
-
-    @include e(app-info){
-        font: normal 600 14px/17px $font-primary;
-        color: $dusty-gray;
-    }
-}
-
-.profile{
+  @include e(left-content) {
     display: flex;
     align-items: center;
+  }
 
-    @include e(name){
-        font: normal 600 14px/17px $font-primary;
-        color: $mine-shaft;
-    }
+  .logo-wrapper {
+    margin-right: 48px;
+  }
 
-    @include e(status){
-        font: normal normal 12px/15px $font-primary;
-        color: $dusty-gray;
-    }
+  @include e(app-info) {
+    font: normal 600 14px/17px $font-primary;
+    color: $dusty-gray;
+  }
+}
 
-    .dropdown{
-        margin-left: 8px;
-        cursor: pointer;
-    }
+.profile {
+  display: flex;
+  align-items: center;
+
+  @include e(name) {
+    font: normal 600 14px/17px $font-primary;
+    color: $mine-shaft;
+  }
+
+  @include e(status) {
+    font: normal normal 12px/15px $font-primary;
+    color: $dusty-gray;
+  }
+
+  .dropdown {
+    margin-left: 8px;
+    cursor: pointer;
+  }
 }

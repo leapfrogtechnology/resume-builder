@@ -1,58 +1,58 @@
-.header-container{
-    max-width: 1170px;
-    margin: 0 auto;
-    padding: 16px 0 18px;
-    display: flex;
-    justify-content: space-between;
+.header-container {
+  max-width: 1170px;
+  margin: 0 auto;
+  padding: 16px 0 18px;
+  display: flex;
+  justify-content: space-between;
 }
 
-.user-detail-container{
-    max-width: 1170px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
+.user-detail-container {
+  max-width: 1170px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
 }
 
-.main-container{
-    max-width: 1170px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
+.main-container {
+  max-width: 1170px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
 }
 
-.card{
-    background: $white;
-    box-shadow: 0px 2px 4px rgba(179, 179, 179, 0.25);
-    border-radius: 4px;
+.card {
+  background: $white;
+  box-shadow: 0px 2px 4px rgba(179, 179, 179, 0.25);
+  border-radius: 4px;
 }
 
-.title{
-    font: normal 600 20px/24px $font-primary;
+.title {
+  font: normal 600 20px/24px $font-primary;
 }
 
-.text-link{
-    color: $dodger-blue;
+.text-link {
+  color: $dodger-blue;
 
-    @include m(small){
-        font: normal 600 14px/17px $font-primary;
+  @include m(small) {
+    font: normal 600 14px/17px $font-primary;
+  }
+
+  @include m(danger) {
+    color: $pomegranate;
+  }
+}
+
+.sub-title {
+  font: normal bold 16px/19px $font-primary;
+}
+
+.edit-options {
+  @include e(item) {
+    padding-left: 16px;
+    cursor: pointer;
+
+    &:first-child {
+      padding-left: 0;
     }
-
-    @include m(danger){
-        color: $pomegranate;
-    }
-}
-
-.sub-title{
-    font: normal bold 16px/19px $font-primary;
-}
-
-.edit-options{
-    @include e(item){
-        padding-left: 16px;
-        cursor: pointer;
-
-        &:first-child{
-            padding-left: 0;
-        }
-    }
+  }
 }
