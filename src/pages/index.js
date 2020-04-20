@@ -11,7 +11,7 @@ const App = () => {
   // Data source
   const personalInfo = {
     name: { data: 'Ribby McFroggy', visibility: true },
-    summary: { data: 'Hlelo', visibility: true },
+    summary: { data: 'Hello', visibility: true },
   };
 
   const handleOnPreviewBtnClicked = e => {
