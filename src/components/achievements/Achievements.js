@@ -1,27 +1,34 @@
 import React from 'react';
-import CardHeader from '~/components/cardheader/CardHeader';
-import EditOptions from '~/components/editoptions/EditOptions';
+import PropTypes from 'prop-types';
 import { Add } from '~/assets/image';
+import AchievementItem from './AchievementItem';
+import CardHeader from '~/components/cardheader/CardHeader';
 import CardFooter from '~/components/cardfooter/CardFooter';
 
-const Achievements = () => {
+const Achievements = ({ achievements, preview }) => {
+  const achievementsList = achievements.map(achievement => (
+    <AchievementItem
+      key={achievement.title}
+      title={achievement.title}
+      date={achievement.date}
+      visibility={achievement.visibility}
+      preview={preview}
+    />
+  ));
+
   return (
     <div className="achievements-block">
       <div className="card">
         <CardHeader title="Achievements" />
-        <div className="achievements">
-          <div className="achievements__row">
-            <div className="achievements__row-header">
-              <div className="sub-title">Headhunt Award</div>
-              <EditOptions />
-            </div>
-            <div className="achievements__year">December 2012</div>
-          </div>
-        </div>
+        <div className="achievements">{achievementsList}</div>
         <CardFooter icon={Add} label="Add another achievement" />
       </div>
     </div>
   );
+};
+
+Achievements.propTypes = {
+  achievements: PropTypes.array,
 };
 
 export default Achievements;
