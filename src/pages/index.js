@@ -9,10 +9,19 @@ const App = () => {
   const [preview, setPreview] = useState(false);
 
   // Data source
-  const personalInfo = {
-    name: { data: 'Ribby McFroggy', visibility: true },
-    summary: { data: 'Hello', visibility: true },
+  const userProfile = {
+    personalInformation: {
+      name: { data: 'Ribby McFroggy', visibility: true, bold: true },
+      role: { data: 'Engineering Manager', visibility: true, bold: true },
+      summary: {
+        data:
+          'My name is Ribby and I am currently the Engineering Manager at Leapfrog. I love to challenge the normal and help build extraordinary product expeirences.',
+        visibility: true,
+      },
+    },
   };
+
+  const username = userProfile.personalInformation.name.data;
 
   const handleOnPreviewBtnClicked = e => {
     e.preventDefault();
@@ -22,12 +31,12 @@ const App = () => {
   return (
     <div className="page-container">
       <Header
-        name={personalInfo.name.data}
+        name={username}
         status="Employee"
         experience="5 years professional experience"
         onPreviewBtnClicked={handleOnPreviewBtnClicked}
       />
-      <Dashboard />
+      <Dashboard profile={userProfile} preview={preview} />
     </div>
   );
 };
