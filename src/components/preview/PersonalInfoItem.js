@@ -1,35 +1,34 @@
 import React from 'react';
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
 const PersonalInfoItem = ({ title, data, preview }) => {
   const [hidden, setHidden] = useState(0);
 
-  return data ? (
-    <li>
-      <div>
+  return (
+    data && (
+      <li>
         <div>
-          <span>Your {title.charAt(0).toUpperCase() + title.slice(1)}</span>
-          <p>{data.data}</p>
-          {hidden ? <span>Hidden</span> : <></>}
-        </div>
-        {preview ? (
-          <></>
-        ) : (
           <div>
-            <button
-              onClick={e => {
-                setHidden(!hidden);
-                onHiddenClicked(e, hidden);
-              }}
-            >
-              {hidden ? 'Show' : 'Hide'}
-            </button>
+            <span>Your {title.charAt(0).toUpperCase() + title.slice(1)}</span>
+            <p>{data.data}</p>
+            {hidden ? <span>Hidden</span> : <></>}
           </div>
-        )}
-      </div>
-    </li>
-  ) : (
-    <></>
+          {!preview && (
+            <div>
+              <button
+                onClick={e => {
+                  setHidden(!hidden);
+                  onHiddenClicked(e, hidden);
+                }}
+              >
+                {hidden ? 'Show' : 'Hide'}
+              </button>
+            </div>
+          )}
+        </div>
+      </li>
+    )
   );
 };
 
