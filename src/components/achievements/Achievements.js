@@ -6,14 +6,8 @@ import CardHeader from '~/components/cardheader/CardHeader';
 import CardFooter from '~/components/cardfooter/CardFooter';
 
 const Achievements = ({ achievements, preview }) => {
-  const achievementsList = achievements.map(achievement => (
-    <AchievementItem
-      key={achievement.title}
-      title={achievement.title}
-      date={achievement.date}
-      visibility={achievement.visibility}
-      preview={preview}
-    />
+  const achievementsList = achievements.map(({ title, date, visibility }) => (
+    <AchievementItem key={title} title={title} date={date} visibility={visibility} preview={preview} />
   ));
 
   return (
