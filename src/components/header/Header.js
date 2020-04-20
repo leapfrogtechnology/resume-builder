@@ -6,9 +6,7 @@ import UserDetail from '../userdetail/UserDetail';
 import { DROPDOWN } from '../icons/icon';
 import { Logo } from '../../assets/image';
 
-const Header = props => {
-  const { name, status, experience, onPreviewBtnClicked } = props;
-
+const Header = ({ name, status, experience, onPreviewBtnClicked }) => {
   return (
     <header className="header">
       <div className="header-container">

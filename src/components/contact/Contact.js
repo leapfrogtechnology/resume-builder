@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 
 import { View } from '../../assets/image';
 
-const Contact = props => {
-  const { label, value } = props;
-
+const Contact = ({ label, value }) => {
   return (
     <div className="contact-content">
       <div className="contact-content__l">

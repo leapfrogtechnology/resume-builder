@@ -6,9 +6,7 @@ import { FAVORITE_ICON } from '../icons/icon';
 import Button from '../button/Button';
 import { Image } from '../../assets/image';
 
-const UserDetail = props => {
-  const { name, experience, onPreviewBtnClicked } = props;
-
+const UserDetail = ({ name, experience, onPreviewBtnClicked }) => {
   return (
     <section className="user-detail">
       <div className="user-detail-container">
