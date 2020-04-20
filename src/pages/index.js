@@ -19,6 +19,18 @@ const App = () => {
         visibility: true,
       },
     },
+    achievements: [
+      {
+        title: 'Headhunt Award',
+        date: 'December 2012',
+        visibility: false,
+      },
+      {
+        title: 'Golden Jublee Award',
+        date: 'December 2015',
+        visibility: true,
+      },
+    ],
   };
 
   const username = userProfile.personalInformation.name.data;
