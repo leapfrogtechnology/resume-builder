@@ -41,3 +41,18 @@
         color: $pomegranate;
     }
 }
+
+.sub-title{
+    font: normal bold 16px/19px $font-primary;
+}
+
+.edit-options{
+    @include e(item){
+        padding-left: 16px;
+        cursor: pointer;
+
+        &:first-child{
+            padding-left: 0;
+        }
+    }
+}

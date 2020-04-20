@@ -1,0 +1,40 @@
+.personal-info{
+    padding-top: 26px;
+}
+
+.personal-info-row{
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 20px;
+    font: normal normal 16px/19px $font-primary;
+
+    &:last-child{
+        padding-bottom: 0;
+
+        .personal-info-row__label{
+            align-self: flex-start;
+        }
+    }
+
+    @include e(item){
+        display: flex;
+        align-items: center;
+    }
+
+    @include e(label){
+        width: 132px;
+        margin-right: 90px;
+    }
+
+    @include e(icon){
+        width: 24px;
+    }
+
+    @include e(value){
+        width: 456px;
+
+        @include m(strong){
+            font-weight: 600;
+        }
+    }
+}
