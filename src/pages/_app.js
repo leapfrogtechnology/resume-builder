@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import '~/assets/sass/style.scss';
 
 export default function MyApp({ Component, pageProps }) {
