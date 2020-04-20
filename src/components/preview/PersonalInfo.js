@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import PersonalInfoItem from './PersonalInfoItem';
 
 const PersonalInfo = ({ personalInfo, preview }) => {
   const personalInfoList = Object.keys(personalInfo).map(key => (
