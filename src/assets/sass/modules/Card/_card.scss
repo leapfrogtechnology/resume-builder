@@ -3,3 +3,17 @@
   justify-content: space-between;
   align-items: center;
 }
+
+.card {
+  @include e(footer) {
+    display: flex;
+    align-items: center;
+    margin-top: 25px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  @include e(footer-icon) {
+    margin-right: 12px;
+  }
+}

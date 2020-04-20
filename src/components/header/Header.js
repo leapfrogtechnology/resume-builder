@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import '../../pages/_app';
-import UserDetail from '../userdetail/UserDetail';
-import { DROPDOWN } from '../icons/icon';
-import { Logo } from '../../assets/image';
+import '~/pages/_app';
+import { Logo } from '~/assets/image';
+import { DROPDOWN } from '~/components/icons/icon';
+import UserDetail from '~/components/userdetail/UserDetail';
 
 const Header = ({ name, status, experience, onPreviewBtnClicked }) => {
   return (

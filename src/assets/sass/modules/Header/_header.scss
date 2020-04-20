@@ -1,6 +1,3 @@
-@import '../../utilities/utilities';
-@import '../../utilities/config';
-
 .header {
   position: fixed;
   top: 0;
@@ -14,6 +11,10 @@
     align-items: center;
   }
 
+  .logo-wrapper {
+    margin-right: 48px;
+  }
+
   @include e(app-info) {
     font: normal 600 14px/17px $font-primary;
     color: $dusty-gray;
@@ -23,11 +24,6 @@
 .profile {
   display: flex;
   align-items: center;
-
-  @include e(name) {
-    font: normal 600 14px/17px $font-primary;
-    color: $mine-shaft;
-  }
 
   @include e(name) {
     font: normal 600 14px/17px $font-primary;

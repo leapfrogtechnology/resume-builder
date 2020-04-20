@@ -1,8 +1,7 @@
 import React from 'react';
-// import Dashboard from '../dashboard/Dashboard';
-import Contact from '../contact/Contact';
-import CardHeader from '../cardheader/CardHeader';
-import { Edit, ProfileImage, Trash, Download, Copy, Email, Check, Delete } from '../../assets/image';
+import Contact from '~/components/contact/Contact';
+import CardHeader from '~/components/cardheader/CardHeader';
+import { Edit, ProfileImage, Trash, Download, Copy, Email, Check, Delete } from '~/assets/image';
 
 const Sidenav = () => {
   return (

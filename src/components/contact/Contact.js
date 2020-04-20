@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { View } from '../../assets/image';
+import { View } from '~/assets/image';
 
 const Contact = ({ label, value }) => {
   return (

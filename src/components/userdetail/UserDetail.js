@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Media from '../media/Media';
-import { FAVORITE_ICON } from '../icons/icon';
-import Button from '../button/Button';
-import { Image } from '../../assets/image';
+import Media from '~/components/media/Media';
+import Button from '~/components/button/Button';
+import { Image } from '~/assets/image';
+import { FAVORITE_ICON } from '~/components/icons/icon';
 
 const UserDetail = ({ name, experience, onPreviewBtnClicked }) => {
   return (
