@@ -1,56 +1,28 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import SkillItem from './SkillItem';
 import { Add } from '~/assets/image';
 import CardHeader from '~/components/cardheader/CardHeader';
 import CardFooter from '~/components/cardfooter/CardFooter';
-import EditOptions from '~/components/editoptions/EditOptions';
 
-const Skills = () => {
+const Skills = ({ skills, preview }) => {
+  const skillsList = skills.map(({ skill, subSkills, visibility }) => (
+    <SkillItem title={skill} values={subSkills} visibility={visibility} preview={preview} />
+  ));
+
   return (
     <div className="skills-block">
       <div className="card">
         <CardHeader title="Skills" />
-        <div className="skills">
-          <div className="skills__row">
-            <div className="skills__row-header">
-              <div className="skils__row-header-left sub-title">PHP</div>
-              <div className="skills__row-header-right">
-                <EditOptions />
-              </div>
-            </div>
-            <div className="chip-input-value">
-              <span className="chip-input-tag">Zend</span>
-              <span className="chip-input-tag">Zend</span>
-            </div>
-          </div>
-          <div className="skills__row">
-            <div className="skills__row-header">
-              <div className="skils__row-header-left sub-title">Python</div>
-              <div className="skills__row-header-right">
-                <EditOptions />
-              </div>
-            </div>
-            <div className="chip-input-value">
-              <span className="chip-input-tag">Zend</span>
-              <span className="chip-input-tag">Zend</span>
-            </div>
-          </div>
-          <div className="skills__row">
-            <div className="skills__row-header">
-              <div className="skils__row-header-left sub-title">Javascript</div>
-              <div className="skills__row-header-right">
-                <EditOptions />
-              </div>
-            </div>
-            <div className="chip-input-value">
-              <span className="chip-input-tag">Javascript</span>
-              <span className="chip-input-tag">Zend</span>
-            </div>
-          </div>
-        </div>
+        <div className="skills">{skillsList}</div>
         <CardFooter icon={Add} label="Add another skill" />
       </div>
     </div>
   );
+};
+
+Skills.propTypes = {
+  skills: PropTypes.array,
 };
 
 export default Skills;
