@@ -17,7 +17,7 @@ const Dashboard = ({ profile, preview }) => {
           <PersonalInformation personalInformation={profile.personalInformation} preview={preview} />
           <Skills skills={profile.skills} preview={preview} />
           <WorkExperience workExperience={profile.workExperience} />
-          <ProjectsUndertaken />
+          <ProjectsUndertaken projects={profile.projects} />
           <Achievements achievements={profile.achievements} preview={preview} />
           <Certificate />
         </div>
