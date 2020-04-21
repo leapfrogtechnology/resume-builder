@@ -1,5 +1,6 @@
 import React from 'react';
 import EditOptions from '~/components/editoptions/EditOptions';
+import AddWorkExperience from '~/components/form/workexperience/AddWordExperience';
 
 const WorkExperienceShown = () => {
   return (

@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Button = ({ content }) => {
+const Button = ({ content, isCancel }) => {
 	return (
-		<button className="btn">{content}</button>
+		<button className={isCancel ? "btn--cancel" : "btn"}>{content}</button>
 	)
 }
 
