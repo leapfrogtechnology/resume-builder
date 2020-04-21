@@ -31,7 +31,7 @@ const Dashboard = () => {
 					{/* <AddPersonalInformation /> */}
 					{/* <AddContactInformation /> */}
 					{/* <AddSkill /> */}
-					{/* <AddProject /> */}
+					<AddProject />
 				</div>
 				<Sidenav />
 			</div>
