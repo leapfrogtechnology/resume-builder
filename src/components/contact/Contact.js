@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-
 import { View, ViewHidden } from '~/assets/image';
 
 const Contact = ({ label, value }) => {

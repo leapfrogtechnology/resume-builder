@@ -3,21 +3,24 @@ import React, { useState } from 'react';
 import Head from 'next/head';
 import Header from '~/components/header/Header';
 import Dashboard from '~/components/dashboard/Dashboard';
+import { date } from 'yup';
 
 const App = () => {
   // App state
   const [preview, setPreview] = useState(false);
 
   // Data source
-  const userProfile = {
-    personalInformation: {
-      name: { data: 'Ribby McFroggy', visibility: true, bold: true },
-      role: { data: 'Engineering Manager', visibility: true, bold: true },
-      summary: {
-        data:
-          'My name is Ribby and I am currently the Engineering Manager at Leapfrog. I love to challenge the normal and help build extraordinary product expeirences.',
-        visibility: true,
-      },
+  const data = {
+    name: 'Ribby McFroggy',
+    role: {
+      name: 'Engineering Manager',
+      label: 'Engineering Manager',
+      hidden: false,
+    },
+    introduction: {
+      hidden: false,
+      value:
+        'My name is Ribby and I am currently the Engineering Manager at Leapfrog. I love to challenge the normal and help build extraordinary product experiences.',
     },
     contacts: [
       {
@@ -109,7 +112,7 @@ const App = () => {
     ],
   };
 
-  const username = userProfile.personalInformation.name.data;
+  const username = data.name;
 
   const handleOnPreviewBtnClicked = e => {
     e.preventDefault();
@@ -130,7 +133,7 @@ const App = () => {
         experience="5 years professional experience"
         onPreviewBtnClicked={handleOnPreviewBtnClicked}
       />
-      <Dashboard profile={userProfile} preview={preview} />
+      <Dashboard profile={data} preview={preview} />
     </div>
   );
 };
