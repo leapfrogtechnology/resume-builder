@@ -45,7 +45,7 @@ const DATA = {
     {
       name: 'JS',
       label: 'Javascript',
-      hidden: 'false',
+      hidden: false,
       isDeleted: 'false',
       deletedOn: '1970-01-01T00:00:00.000Z',
       subSkills: [
@@ -62,7 +62,7 @@ const DATA = {
     {
       name: 'python',
       label: 'Python',
-      hidden: 'false',
+      hidden: false,
       isDeleted: 'false',
       deletedOn: '1970-01-01T00:00:00.000Z',
       subSkills: [
@@ -79,7 +79,7 @@ const DATA = {
     {
       name: 'PHP',
       label: 'PHP',
-      hidden: 'false',
+      hidden: false,
       isDeleted: 'false',
       deletedOn: '1970-01-01T00:00:00.000Z',
       subSkills: [
