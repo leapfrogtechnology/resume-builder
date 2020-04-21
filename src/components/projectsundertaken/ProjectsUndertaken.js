@@ -7,7 +7,13 @@ import ProjectsUndertakenItem from './ProjectsUndertakenItem';
 
 const ProjectsUndertaken = ({ projects }) => {
   const projectsList = projects.map(({ title, startDate, endDate, description }) => (
-    <ProjectsUndertakenItem title={title} startDate={startDate} endDate={endDate} description={description} />
+    <ProjectsUndertakenItem
+      key={title}
+      title={title}
+      startDate={startDate}
+      endDate={endDate}
+      description={description}
+    />
   ));
 
   return (

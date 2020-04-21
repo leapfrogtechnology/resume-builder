@@ -14,7 +14,7 @@ const Achievements = ({ achievements, preview }) => {
     <div className="achievements-block">
       <div className="card">
         <CardHeader title="Achievements" />
-        <div className="achievements">{achievementsList}</div>
+        {achievementsList}
         <CardFooter icon={Add} label="Add another achievement" />
       </div>
     </div>

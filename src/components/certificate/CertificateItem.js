@@ -7,6 +7,7 @@ const CertificateItem = ({ title, year, description }) => {
   const [hidden, setHidden] = useState(false);
 
   const onHiddenBtnClicked = e => {
+    e.preventDefault();
     setHidden(!hidden);
   };
 

@@ -1,14 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Add } from '~/assets/image';
+import WorkExperienceShown from './WorkExperienceShown';
 import CardHeader from '~/components/cardheader/CardHeader';
 import CardFooter from '~/components/cardfooter/CardFooter';
-import WorkExperienceShown from './WorkExperienceShown';
-import WorkExperienceHidden from './WorkExperienceHidden';
 
 const WorkExperience = ({ workExperience }) => {
   const workExperienceList = workExperience.map(
-    ({ company, position, startDate, endDate, roles, achievements, referee, visibility }, index) => (
+    ({ company, position, startDate, endDate, roles, achievements, referee }, index) => (
       <WorkExperienceShown
+        key={index}
         subTitle={company}
         position={position}
         startDate={startDate}
@@ -24,11 +25,15 @@ const WorkExperience = ({ workExperience }) => {
     <div className="work-experience-block">
       <div className="card">
         <CardHeader title="Work Experience" />
-        <div className="work-experience">{workExperienceList}</div>
+        {workExperienceList}
         <CardFooter icon={Add} label="Add another work experience" />
       </div>
     </div>
   );
+};
+
+WorkExperience.propTypes = {
+  workExperience: PropTypes.object,
 };
 
 export default WorkExperience;

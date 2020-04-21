@@ -18,7 +18,7 @@ const CardHeader = ({ title, icon = null }) => {
 
 CardHeader.propTypes = {
   title: PropTypes.string,
-  icon: PropTypes.object | null,
+  icon: PropTypes.func | null,
 };
 
 export default CardHeader;

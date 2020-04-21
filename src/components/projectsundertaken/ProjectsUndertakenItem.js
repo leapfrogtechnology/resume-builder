@@ -6,6 +6,7 @@ const ProjectsUndertakenItem = ({ title, startDate, endDate, description }) => {
   const [hidden, setHidden] = useState(false);
 
   const onHiddenBtnClicked = e => {
+    e.preventDefault();
     setHidden(!hidden);
   };
 

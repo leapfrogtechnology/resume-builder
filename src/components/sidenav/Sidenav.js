@@ -5,7 +5,7 @@ import CardHeader from '~/components/cardheader/CardHeader';
 import { Edit, ProfileImage, Trash, Download, Copy, Email, Check, Delete } from '~/assets/image';
 
 const Sidenav = ({ contacts }) => {
-  const contactsList = contacts.map(({ type, value }) => <Contact label={type} value={value} />);
+  const contactsList = contacts.map(({ type, value }) => <Contact key={type} label={type} value={value} />);
 
   return (
     <div className="sidenav">
@@ -71,6 +71,10 @@ const Sidenav = ({ contacts }) => {
       </div>
     </div>
   );
+};
+
+Sidenav.propTypes = {
+  contacts: PropTypes.array,
 };
 
 export default Sidenav;
