@@ -7,16 +7,17 @@ import CardFooter from '~/components/cardfooter/CardFooter';
 
 const WorkExperience = ({ workExperience }) => {
   const workExperienceList = workExperience.map(
-    ({ company, position, startDate, endDate, roles, achievements, referee }, index) => (
+    ({ name, position, startDate, endDate, responsibilities, achievements, refereeName, refereeContact }, index) => (
       <WorkExperienceShown
         key={index}
-        subTitle={company}
+        subTitle={name}
         position={position}
         startDate={startDate}
         endDate={endDate}
-        roles={roles}
+        roles={responsibilities}
         achievements={achievements}
-        referee={referee}
+        refereeName={refereeName}
+        refereeContact={refereeContact}
       />
     )
   );

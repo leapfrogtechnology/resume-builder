@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import EditOptions from '~/components/editoptions/EditOptions';
 
 const SkillItem = ({ title, values, visibility, preview }) => {
-  const subSkillsList = values.map(subSkill => (
-    <span key={subSkill} className="chip-input-tag">
-      {subSkill}
+  const subSkillsList = values.map(({ name, label }) => (
+    <span key={name} className="chip-input-tag">
+      {label}
     </span>
   ));
 

@@ -6,8 +6,8 @@ import CardHeader from '~/components/cardheader/CardHeader';
 import CardFooter from '~/components/cardfooter/CardFooter';
 
 const Skills = ({ skills, preview }) => {
-  const skillsList = skills.map(({ skill, subSkills, visibility }) => (
-    <SkillItem key={skill} title={skill} values={subSkills} visibility={visibility} preview={preview} />
+  const skillsList = skills.map(({ name, label, subSkills, hidden }) => (
+    <SkillItem key={name} title={label} values={subSkills} visibility={hidden} preview={preview} />
   ));
 
   return (
