@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import EditOptions from '~/components/editoptions/EditOptions';
+import AddWorkExperience from '~/components/form/workexperience/AddWordExperience';
 
 const WorkExperienceShown = ({
   subTitle,

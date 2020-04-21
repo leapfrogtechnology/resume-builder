@@ -1,16 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Button = ({ content, onclick }) => {
-  return (
-    <button className="btn" onClick={e => onclick(e)}>
-      {content}
-    </button>
-  );
+const Button = ({ content, isCancel }) => {
+  return <button className={isCancel ? 'btn--cancel' : 'btn'}>{content}</button>;
 };
 
 Button.propTypes = {
   content: PropTypes.string,
+  isCancel: PropTypes.bool,
   onclick: PropTypes.func,
 };
 
