@@ -8,7 +8,7 @@ const WorkExperienceShown = () => {
       <div className="work-experience__row">
         <div className="work-experience__row-header">
           <div className="sub-title">Hewlett Packard Enterprise</div>
-          <EditOptions component={AddWorkExperience}/>
+          <EditOptions />
         </div>
         <div className="work-experience__position">
           Associate Engineering Manager
