@@ -19,6 +19,24 @@ const App = () => {
         visibility: true,
       },
     },
+    contacts: [
+      {
+        type: 'Email Address',
+        value: 'ribby@lftechnology.com',
+      },
+      {
+        type: 'Phone Number',
+        value: '983345698',
+      },
+      {
+        type: 'GitHub',
+        value: 'https://github.com/user/ribbyX',
+      },
+      {
+        type: 'LinkedIn',
+        value: 'https://linkedin.com/user/ribbyX',
+      },
+    ],
     achievements: [
       {
         title: 'Headhunt Award',
@@ -72,6 +90,21 @@ const App = () => {
           'Changed the first obstacle to become a solution.Was able to convert the thousand line of codes into fifteen lines',
         referee: { name: 'Mr. Andre Pistaolava', email: 'andre@gmail.com' },
         visibility: true,
+      },
+    ],
+    projects: [
+      {
+        title: 'AI Thoughtbot',
+        startDate: 'September 2016',
+        endDate: 'August 2019',
+        description: 'I built an aI thoughtbot that gave relationship advice to couples in distress.',
+      },
+    ],
+    certificates: [
+      {
+        title: 'Coursera Advanced React',
+        date: 'August 2015',
+        description: 'Advanced react course completed with React under the hood',
       },
     ],
   };
