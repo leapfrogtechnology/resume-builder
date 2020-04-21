@@ -7,7 +7,7 @@ import CardFooter from '~/components/cardfooter/CardFooter';
 
 const Skills = ({ skills, preview }) => {
   const skillsList = skills.map(({ skill, subSkills, visibility }) => (
-    <SkillItem title={skill} values={subSkills} visibility={visibility} preview={preview} />
+    <SkillItem key={skill} title={skill} values={subSkills} visibility={visibility} preview={preview} />
   ));
 
   return (
@@ -23,6 +23,7 @@ const Skills = ({ skills, preview }) => {
 
 Skills.propTypes = {
   skills: PropTypes.array,
+  preview: PropTypes.bool,
 };
 
 export default Skills;

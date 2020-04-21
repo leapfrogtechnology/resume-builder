@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 import EditOptions from '~/components/editoptions/EditOptions';
 
 const SkillItem = ({ title, values, visibility, preview }) => {
-  const subSkillsList = values.map(subSkill => <span className="chip-input-tag">{subSkill}</span>);
+  const subSkillsList = values.map(subSkill => (
+    <span key={subSkill} className="chip-input-tag">
+      {subSkill}
+    </span>
+  ));
 
   return (
     <div className={visibility ? 'skills__row' : 'skills__row skills--hidden'}>
@@ -22,6 +26,8 @@ const SkillItem = ({ title, values, visibility, preview }) => {
 SkillItem.propTypes = {
   title: PropTypes.string,
   values: PropTypes.array,
+  visibility: PropTypes.bool,
+  preview: PropTypes.bool,
 };
 
 export default SkillItem;
