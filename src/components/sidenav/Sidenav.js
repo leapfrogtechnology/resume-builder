@@ -1,9 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Contact from '~/components/contact/Contact';
 import CardHeader from '~/components/cardheader/CardHeader';
 import { Edit, ProfileImage, Trash, Download, Copy, Email, Check, Delete } from '~/assets/image';
 
-const Sidenav = () => {
+const Sidenav = ({ contacts }) => {
+  const contactsList = contacts.map(({ type, value }) => <Contact label={type} value={value} />);
+
   return (
     <div className="sidenav">
       <div className="sidenav-top">
@@ -24,10 +27,7 @@ const Sidenav = () => {
           </div>
           <div className="sidenav__contact-block">
             <CardHeader title="Contact Information" icon={Edit} />
-            <Contact label="Email Address" value="ribby@lftechnology.com" />
-            <Contact label="Phone Number" value="983345698" />
-            <Contact label="GitHub" value="https://github.com/user/ribbyX" />
-            <Contact label="LinkedIn" value="https://linkedin.com/user/ribbyX" />
+            {contactsList}
           </div>
         </div>
       </div>

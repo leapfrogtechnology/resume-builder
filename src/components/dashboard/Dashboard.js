@@ -21,7 +21,7 @@ const Dashboard = ({ profile, preview }) => {
           <Achievements achievements={profile.achievements} preview={preview} />
           <Certificate certificates={profile.certificates} />
         </div>
-        <Sidenav />
+        <Sidenav contacts={profile.contacts} />
       </div>
     </section>
   );
