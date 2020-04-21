@@ -30,7 +30,7 @@ const Dashboard = () => {
 					{/* <AddCertificate /> */}
 					{/* <AddPersonalInformation /> */}
 					{/* <AddContactInformation /> */}
-					<AddSkill />
+					{/* <AddSkill /> */}
 					{/* <AddProject /> */}
 				</div>
 				<Sidenav />

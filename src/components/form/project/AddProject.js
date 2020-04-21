@@ -28,7 +28,7 @@ const AddProject = () => {
               <CheckboxInput value="This project is currently ongoing" />
             </div>
             <div className="form__radio-field">
-              <label className="input-label">What Type of Project was This?</label>
+              <label className="input__label">What Type of Project was This?</label>
               <div className="form__radio-field-content">
                 <InputRadio value="Professional" placeholder="Professional" />
                 <InputRadio value="Personal" placeholder="Personal" />

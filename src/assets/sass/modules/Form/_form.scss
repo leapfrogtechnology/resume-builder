@@ -31,7 +31,7 @@
     align-items: center;
   }
 
-  .input-group {
+  .input {
     margin-top: 18px;
 
     @include m(short) {
@@ -45,60 +45,86 @@
         padding-left: 10px;
       }
     }
+
+    @include e(label) {
+      margin-bottom: 4px;
+      color: $dusty-gray;
+      display: inline-block;
+
+      @include m(dark) {
+        color: $dove-gray-light;
+      }
+    }
+
+    @include e(textarea) {
+      width: 100%;
+      border: 1px solid $alto;
+      border-radius: 2px;
+      padding: 8px 10px;
+    }
+
+    @include e(text-field) {
+      border: 1px solid $alto;
+      width: 100%;
+      border-radius: 2px;
+      padding: 8px 10px;
+    }
+
+    @include e(date) {
+      border: 1px solid $alto;
+      border-radius: 2px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 10px;
+    }
+
+    @include e(date-field) {
+      border: 0;
+    }
+
+    @include e(checkbox) {
+      margin-right: 8px;
+      border: 2px solid $nobel;
+    }
+
+    @include e(select) {
+      border: 1px solid $alto;
+      border-radius: 2px;
+      display: block;
+      width: 100%;
+      padding: 8px 10px;
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      appearance: none;
+      background: url("../../../images/dropdown.png") no-repeat right;
+    }
+
+    @include e(radio-label) {
+      color: $dove-gray-light;
+      margin-left: 6px;
+    }
+
+    @include e(label-container) {
+      padding: 16px 0 10px;
+      margin-right: 30px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
   }
 
   @include e(checkbox-field) {
-    .input-group {
+    .input {
       margin-top: 12px;
     }
-  }
-
-  .input-label {
-    margin-bottom: 4px;
-    color: $dusty-gray;
-    display: inline-block;
-
-    @include m(dark) {
-      color: $dove-gray-light;
-    }
-  }
-
-  .input-text-field {
-    border: 1px solid $alto;
-    width: 100%;
-    border-radius: 2px;
-    padding: 8px 10px;
-  }
-
-  .input-date {
-    border: 1px solid $alto;
-    border-radius: 2px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px 10px;
-  }
-
-  .input-date-field {
-    border: 0;
   }
 
   @include e(date-field) {
     display: flex;
     justify-content: space-between;
     margin-top: 18px;
-  }
-
-  .input-checkbox-field {
-    margin-right: 8px;
-    border: 2px solid $nobel;
-  }
-
-  .input-textarea-field {
-    width: 100%;
-    border: 1px solid $alto;
-    border-radius: 2px;
-    padding: 8px 10px;
   }
 
   .form-button {
@@ -120,35 +146,9 @@
       margin-left: 20px;
     }
   }
-
-  .input-select-field {
-    border: 1px solid $alto;
-    border-radius: 2px;
-    display: block;
-    width: 100%;
-    padding: 8px 10px;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    appearance: none;
-    background: url('../../../images/dropdown.png') no-repeat right;
-  }
-
-  .input-radio-label {
-    color: $dove-gray-light;
-    margin-left: 6px;
-  }
-
-  .input-label-container {
-    padding: 16px 0 10px;
-    margin-right: 30px;
-
-    &:last-child {
-      margin-right: 0;
-    }
-  }
 }
 
-@include keyframes(animate){
+@include keyframes(animate) {
   from {
     opacity: 0;
   }
