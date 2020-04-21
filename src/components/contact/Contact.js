@@ -12,7 +12,13 @@ const Contact = ({ label, value }) => {
         <div className="key">{label}</div>
         <div className="value text-link">{value}</div>
       </div>
-      <div className="contact-content__r" onClick={e => setHidden(!hidden)}>
+      <div
+        className="contact-content__r"
+        onClick={e => {
+          e.preventDefault();
+          setHidden(!hidden);
+        }}
+      >
         <img src={!hidden ? View : ViewHidden} alt="Edit" />
       </div>
     </div>
