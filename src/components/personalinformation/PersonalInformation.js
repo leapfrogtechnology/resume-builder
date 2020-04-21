@@ -36,7 +36,7 @@ const PersonalInformation = ({ name, role, introduction, preview }) => {
 };
 
 PersonalInformation.propTypes = {
-  name: PropTypes.object,
+  name: PropTypes.string,
   role: PropTypes.object,
   introduction: PropTypes.object,
   preview: PropTypes.bool,
