@@ -6,7 +6,7 @@ import { Logo } from '~/assets/image';
 import { DROPDOWN } from '~/components/icons/icon';
 import UserDetail from '~/components/userdetail/UserDetail';
 
-const Header = ({ name, status, experience, onPreviewBtnClicked }) => {
+const Header = ({ name, status, experience, preview, onPreviewBtnClicked }) => {
   return (
     <header className="header">
       <div className="header-container">
@@ -26,7 +26,7 @@ const Header = ({ name, status, experience, onPreviewBtnClicked }) => {
           </div>
         </div>
       </div>
-      <UserDetail name={name} experience={experience} onPreviewBtnClicked={onPreviewBtnClicked} />
+      <UserDetail name={name} experience={experience} preview={preview} onPreviewBtnClicked={onPreviewBtnClicked} />
     </header>
   );
 };

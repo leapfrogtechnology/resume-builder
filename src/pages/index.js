@@ -27,6 +27,7 @@ const App = () => {
       <Header
         name={username}
         status="Employee"
+        preview={preview}
         experience="5 years professional experience"
         onPreviewBtnClicked={handleOnPreviewBtnClicked}
       />

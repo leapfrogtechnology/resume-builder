@@ -6,7 +6,7 @@ import Button from '~/components/button/Button';
 import { Image } from '~/assets/image';
 import { FAVORITE_ICON } from '~/components/icons/icon';
 
-const UserDetail = ({ name, experience, onPreviewBtnClicked }) => {
+const UserDetail = ({ name, experience, preview, onPreviewBtnClicked }) => {
   return (
     <section className="user-detail">
       <div className="user-detail-container">
@@ -22,7 +22,7 @@ const UserDetail = ({ name, experience, onPreviewBtnClicked }) => {
           </div>
         </div>
         <div className="user-detail__right-content">
-          <Button content="Preview" onclick={onPreviewBtnClicked} />
+          <Button content={!preview ? 'Preview' : 'Go Back'} onclick={onPreviewBtnClicked} />
         </div>
       </div>
     </section>
@@ -32,6 +32,7 @@ const UserDetail = ({ name, experience, onPreviewBtnClicked }) => {
 UserDetail.propTypes = {
   name: PropTypes.string,
   experience: PropTypes.string,
+  preview: PropTypes.bool,
   onPreviewBtnClicked: PropTypes.func,
 };
 

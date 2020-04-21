@@ -34,7 +34,7 @@ const WorkExperience = ({ workExperience }) => {
 };
 
 WorkExperience.propTypes = {
-  workExperience: PropTypes.object,
+  workExperience: PropTypes.array,
 };
 
 export default WorkExperience;
