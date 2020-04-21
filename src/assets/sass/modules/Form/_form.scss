@@ -1,4 +1,4 @@
-.form-container{
+.form-container {
   position: absolute;
   top: 0;
   left: 0;
@@ -7,51 +7,70 @@
   height: 100vh;
   z-index: 500;
   overflow: auto;
+  display: flex;
+  align-items: center;
+  animation-name: animate;
+  animation-duration: 1s;
 }
 
-.form{
+.form {
   width: 502px;
-  margin: 0 auto;
+  margin: auto;
   font: normal normal 12px/15px $font-primary;
 
-  @include e(header){
+  @include e(header) {
     font: normal bold 24px/29px $font-primary;
   }
 
-  .input-group{
+  @include e(radio-field) {
+    margin-top: 18px;
+  }
+
+  @include e(radio-field-content) {
+    display: flex;
+    align-items: center;
+  }
+
+  .input-group {
     margin-top: 18px;
 
-    @include m(short){
+    @include m(short) {
       width: 50%;
 
-      &:first-child{
+      &:first-child {
         padding-right: 10px;
       }
 
-      &:last-child{
+      &:last-child {
         padding-left: 10px;
       }
     }
   }
 
-  .input-label{
+  @include e(checkbox-field) {
+    .input-group {
+      margin-top: 12px;
+    }
+  }
+
+  .input-label {
     margin-bottom: 4px;
     color: $dusty-gray;
     display: inline-block;
 
-    @include m(dark){
-      color: $dove-gray;
+    @include m(dark) {
+      color: $dove-gray-light;
     }
   }
 
-  .input-text-field{
+  .input-text-field {
     border: 1px solid $alto;
     width: 100%;
     border-radius: 2px;
     padding: 8px 10px;
   }
 
-  .input-date{
+  .input-date {
     border: 1px solid $alto;
     border-radius: 2px;
     display: flex;
@@ -60,44 +79,80 @@
     padding: 8px 10px;
   }
 
-  .input-date-field{
+  .input-date-field {
     border: 0;
   }
 
-  @include e(date-field){
+  @include e(date-field) {
     display: flex;
     justify-content: space-between;
+    margin-top: 18px;
   }
 
-  .input-checkbox-field{
-    margin: 8px;
+  .input-checkbox-field {
+    margin-right: 8px;
     border: 2px solid $nobel;
   }
 
-  .input-textarea-field{
+  .input-textarea-field {
     width: 100%;
     border: 1px solid $alto;
     border-radius: 2px;
     padding: 8px 10px;
   }
 
-  .form-button{
+  .form-button {
     margin-top: 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    @include e(right){
+    @include e(right) {
       display: flex;
       align-items: center;
     }
   }
 
-  .btn{
+  .btn {
     padding: 8px 16px;
 
-    @include m(cancel){
+    @include m(cancel) {
       margin-left: 20px;
     }
+  }
+
+  .input-select-field {
+    border: 1px solid $alto;
+    border-radius: 2px;
+    display: block;
+    width: 100%;
+    padding: 8px 10px;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background: url('../../../images/dropdown.png') no-repeat right;
+  }
+
+  .input-radio-label {
+    color: $dove-gray-light;
+    margin-left: 6px;
+  }
+
+  .input-label-container {
+    padding: 16px 0 10px;
+    margin-right: 30px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+@include keyframes(animate){
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

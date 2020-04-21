@@ -21,8 +21,8 @@ const AddWorkExperience = () => {
             <InputText label="Name of the organization" placeholder="eg. Apple" />
             <InputText label="Your Title or Position" placeholder="eg. Software Engineer" />
             <div className="form__date-field">
-              <InputDate label="Start Date" placeholder="Select date" />
-              <InputDate label="End Date" placeholder="Select date" />
+              <InputDate label="Start Date" placeholder="Select date" modifier={true}/>
+              <InputDate label="End Date" placeholder="Select date" modifier={true}/>
             </div>
             <CheckboxInput value="I currently work here" />
             <InputTextArea label="Describe Your Roles and Responsibilities" placeholder="eg. I am responsible for..." />
