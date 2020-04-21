@@ -1,7 +1,7 @@
 import React from 'react';
 import EditOptions from '~/components/editoptions/EditOptions';
 
-const WorkExperienceHidden = () => {
+const WorkExperienceHidden = ({ subTitle, position, startDate, endDate }) => {
   return (
     <div className="work-experience work-experience--hidden">
       <div className="work-experience__row">

@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 
-// import { BrowserRouter } from 'react-router-dom';
+import Head from 'next/head';
 import Header from '~/components/header/Header';
 import Dashboard from '~/components/dashboard/Dashboard';
-import Head from 'next/head';
 
 const App = () => {
   // App state
@@ -29,6 +28,49 @@ const App = () => {
       {
         title: 'Golden Jublee Award',
         date: 'December 2015',
+        visibility: true,
+      },
+    ],
+    skills: [
+      {
+        skill: 'PHP',
+        subSkills: ['Zend', 'Zend'],
+        visibility: true,
+      },
+      {
+        skill: 'Python',
+        subSkills: ['Zend', 'Zend'],
+        visibility: true,
+      },
+      {
+        skill: 'Javascript',
+        subSkills: ['Javascript', 'Zend'],
+        visibility: false,
+      },
+    ],
+    workExperience: [
+      {
+        company: 'Hewlett Packard Enterprise',
+        position: 'Associate Engineering Manager',
+        startDate: 'September 2016',
+        endDate: 'August 19',
+        roles:
+          'Involved in developing and implementation of the web application using R framework.Contributed in database design and development of Project “Teamed-Up”.Designed applications using oriented concepts',
+        achievements:
+          'Changed the first obstacle to become a solution.Was able to convert the thousand line of codes into fifteen lines',
+        referee: { name: 'Mr. Andre Pistaolava', email: 'andre@gmail.com' },
+        visibility: true,
+      },
+      {
+        company: 'Hewlett Packard Enterprise',
+        position: 'Associate Engineering Manager',
+        startDate: 'September 2016',
+        endDate: 'August 19',
+        roles:
+          'Involved in developing and implementation of the web application using R framework.Contributed in database design and development of Project “Teamed-Up”.Designed applications using oriented concepts',
+        achievements:
+          'Changed the first obstacle to become a solution.Was able to convert the thousand line of codes into fifteen lines',
+        referee: { name: 'Mr. Andre Pistaolava', email: 'andre@gmail.com' },
         visibility: true,
       },
     ],

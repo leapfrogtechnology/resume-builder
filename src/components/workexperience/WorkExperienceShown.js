@@ -1,39 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import EditOptions from '~/components/editoptions/EditOptions';
 
-const WorkExperienceShown = () => {
+const WorkExperienceShown = ({ subTitle, position, startDate, endDate, roles, achievements, referee }) => {
+  const [hidden, setHidden] = useState(false);
+
+  const rolesList = roles.split('.').map(role => <li>{role}</li>);
+  const achievementsList = achievements.split('.').map(achievement => <li>{achievement}</li>);
+
+  const onHiddenBtnClicked = e => {
+    setHidden(!hidden);
+  };
+
   return (
-    <div className="work-experience">
+    <div className={!hidden ? 'work-experience' : 'work-experience work-experience--hidden'}>
       <div className="work-experience__row">
         <div className="work-experience__row-header">
-          <div className="sub-title">Hewlett Packard Enterprise</div>
-          <EditOptions />
+          <div className="sub-title">{subTitle}</div>
+          <EditOptions isHidden={hidden} onHiddenIconClicked={onHiddenBtnClicked} />
         </div>
-        <div className="work-experience__position">Associate Engineering Manager</div>
+        <div className="work-experience__position">{position}</div>
         <div className="work-experience__exp-year">
-          <span className="start-date">September 2016</span> - <span className="end-date">August 2019</span>(3 years and
-          3 months)
+          <span className="start-date">{startDate}</span> - <span className="end-date">{endDate}</span>(3 years and 3
+          months)
         </div>
       </div>
-      <div className="work-experience__row">
-        Roles and Responsibilities
-        <ul className="work-experience__row-item">
-          <li>Involved in developing and implementation of the web application using R framework.</li>
-          <li>Contributed in database design and development of Project “Teamed-Up”</li>
-          <li>Designed applications using oriented concepts.</li>
-        </ul>
-      </div>
-      <div className="work-experience__row">
-        Achievements
-        <ul className="work-experience__row-item">
-          <li>Changed the first obstacle to become a solution</li>
-          <li>Was able to convert the thousand line of codes into fifteen lines.</li>
-        </ul>
-      </div>
-      <div className="work-experience__row">
-        Referee <span className="referee-name">Mr. Andre Pistaolava</span> (
-        <span className="referee-email text-link">andre@gmail.com</span>)
-      </div>
+      {!hidden && (
+        <div>
+          <div className="work-experience__row">
+            Roles and Responsibilities
+            <ul className="work-experience__row-item">{rolesList}</ul>
+          </div>
+          <div className="work-experience__row">
+            Achievements
+            <ul className="work-experience__row-item">{achievementsList}</ul>
+          </div>
+          <div className="work-experience__row">
+            Referee <span className="referee-name">{referee.name}</span>
+            <span className="referee-email text-link">{referee.email}</span>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
