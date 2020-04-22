@@ -1,12 +1,13 @@
 import React from 'react';
 import { Edit, View } from '~/assets/image';
 import CardHeader from '~/components/cardheader/CardHeader';
+import AddPersonalInformation from '~/components/form/personalinformation/AddPersonalInformation';
 
 const PersonalInformation = () => {
 	return (
 		<div className="personal-info-block">
 			<div className="card">
-				<CardHeader title="Personal Information" icon={Edit} />
+				<CardHeader title="Personal Information" icon={Edit} component={AddPersonalInformation}/>
 				<div className="personal-info">
 					<div className="personal-info-row">
 						<div className="personal-info-row__item">

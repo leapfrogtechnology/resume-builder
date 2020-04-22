@@ -3,6 +3,7 @@ import { Add } from '~/assets/image';
 import CardHeader from '~/components/cardheader/CardHeader';
 import CardFooter from '~/components/cardfooter/CardFooter';
 import EditOptions from '~/components/editoptions/EditOptions';
+import AddSkill from '~/components/form/skill/AddSkill';
 
 const Skills = () => {
 	return (
@@ -16,7 +17,7 @@ const Skills = () => {
 								PHP
                             </div>
 							<div className="skills__row-header-right">
-								<EditOptions />
+								<EditOptions component={AddSkill}/>
 							</div>
 						</div>
 						<div className="chip-input-value">
@@ -34,7 +35,7 @@ const Skills = () => {
 								Python
                             </div>
 							<div className="skills__row-header-right">
-								<EditOptions />
+								<EditOptions component={AddSkill}/>
 							</div>
 						</div>
 						<div className="chip-input-value">
@@ -52,7 +53,7 @@ const Skills = () => {
 								Javascript
                             </div>
 							<div className="skills__row-header-right">
-								<EditOptions />
+								<EditOptions component={AddSkill}/>
 							</div>
 						</div>
 						<div className="chip-input-value">
