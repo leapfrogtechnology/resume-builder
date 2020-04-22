@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+
 import PropTypes from 'prop-types';
 import EditOptions from '~/components/editoptions/EditOptions';
 import AddWorkExperience from '~/components/form/workexperience/AddWordExperience';
@@ -12,15 +13,22 @@ const WorkExperienceShown = ({
   achievements,
   refereeName,
   refereeContact,
+  preview,
+  onHiddenIconClicked,
 }) => {
   const [hidden, setHidden] = useState(false);
 
   const rolesList = roles.split('.').map(role => <li key={role}>{role}</li>);
   const achievementsList = achievements.split('.').map(achievement => <li key={achievement}>{achievement}</li>);
 
-  const onHiddenBtnClicked = e => {
+  if (hidden && preview) {
+    return <></>;
+  }
+
+  const onHiddenIconClickedHandler = e => {
     e.preventDefault();
     setHidden(!hidden);
+    onHiddenIconClicked(e, subTitle);
   };
 
   return (
@@ -31,7 +39,7 @@ const WorkExperienceShown = ({
             {subTitle}
             {hidden && <span className="hidden-tag">Hidden</span>}
           </div>
-          <EditOptions isHidden={hidden} onHiddenIconClicked={onHiddenBtnClicked} />
+          {!preview && <EditOptions isHidden={hidden} onHiddenIconClicked={onHiddenIconClickedHandler} />}
         </div>
         <div className="work-experience__position">{position}</div>
         <div className="work-experience__exp-year">
@@ -66,6 +74,8 @@ WorkExperienceShown.propTypes = {
   roles: PropTypes.string,
   achievements: PropTypes.string,
   refereeName: PropTypes.string,
+  preview: PropTypes.bool,
   refereeContact: PropTypes.string,
 };
+
 export default WorkExperienceShown;

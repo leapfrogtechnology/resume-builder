@@ -1,13 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ProptTypes from 'prop-types';
 import EditOptions from '~/components/editoptions/EditOptions';
 
-const AchievementItem = ({ title, date, visibility, preview }) => {
+const AchievementItem = ({ title, date, preview, onHiddenIconClicked }) => {
+  const [hidden, setHidden] = useState(false);
+
+  if (hidden && preview) {
+    return <></>;
+  }
+
+  const onHiddenBtnClicked = e => {
+    e.preventDefault();
+    setHidden(!hidden);
+    onHiddenIconClicked(e, title);
+  };
+
   return (
     <div className="achievements__row">
       <div className="achievements__row-header">
-        <div className="sub-title">{title}</div>
-        {!preview && <EditOptions isHidden={!visibility} />}
+        <div className="sub-title">
+          {title}
+          {hidden && <span className="hidden-tag">Hidden</span>}
+        </div>
+        {!preview && <EditOptions isHidden={hidden} onHiddenIconClicked={onHiddenBtnClicked} />}
       </div>
       <div className="achievements__year">{date}</div>
     </div>
@@ -17,8 +32,8 @@ const AchievementItem = ({ title, date, visibility, preview }) => {
 AchievementItem.propTypes = {
   title: ProptTypes.string,
   date: ProptTypes.string,
-  visibility: ProptTypes.bool,
   preview: ProptTypes.bool,
+  onHiddenIconClicked: ProptTypes.func,
 };
 
 export default AchievementItem;

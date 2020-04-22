@@ -1,13 +1,47 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
+
+import { AppContext } from '~/pages';
 import { Add } from '~/assets/image';
 import CertificateItem from './CertificateItem';
 import CardFooter from '~/components/cardfooter/CardFooter';
 import CardHeader from '~/components/cardheader/CardHeader';
 
-const Certificate = ({ certificates }) => {
-  const certificatesList = certificates.map(({ title, date, description }) => (
-    <CertificateItem key={title} title={title} year={date} description={description} />
+const Certificate = () => {
+  const context = useContext(AppContext);
+  const certificates = context.data.get.certificates;
+  const preview = context.preview.get;
+
+  /**
+   * Update the hidden state of skill
+   * @param {React.MouseEvent} e [ on click event ]
+   * @param {string} key [ name of a particular certificate]
+   */
+  const updateHiddenStateCertificates = (e, key) => {
+    e.preventDefault();
+
+    let data = context.data.get;
+
+    data['certificates'].find(({ name, hidden }, index) => {
+      if (name === key) {
+        let newState = !hidden;
+
+        data['certificates'][index].hidden = newState;
+        context.data.set(data); // new state of data
+      }
+    });
+    console.log(context.data.get);
+  };
+
+  const certificatesList = certificates.map(({ name, link, date, description }) => (
+    <CertificateItem
+      key={name}
+      title={name}
+      link={link}
+      year={date}
+      description={description}
+      preview={preview}
+      onHiddenIconClicked={updateHiddenStateCertificates}
+    />
   ));
 
   return (
@@ -15,14 +49,10 @@ const Certificate = ({ certificates }) => {
       <div className="card">
         <CardHeader title="Certificates" />
         <div className="certificate">{certificatesList}</div>
-        <CardFooter icon={Add} label="Add another certificate" />
+        <CardFooter icon={Add} hide={preview} label="Add another certificate" />
       </div>
     </div>
   );
-};
-
-Certificate.propTypes = {
-  certificates: PropTypes.array,
 };
 
 export default Certificate;
