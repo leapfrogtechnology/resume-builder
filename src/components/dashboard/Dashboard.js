@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import Skills from '~/components/skills/Skills';
@@ -14,17 +14,12 @@ const Dashboard = ({ profile, preview }) => {
     <section className="container">
       <div className="main-container">
         <div className="main-content">
-          <PersonalInformation
-            name={profile.name}
-            role={profile.role}
-            introduction={profile.introduction}
-            preview={preview}
-          />
-          <Skills skills={profile.skills} preview={preview} />
-          <WorkExperience workExperience={profile.workExperience} />
-          <ProjectsUndertaken projects={profile.projects} />
-          <Achievements achievements={profile.achievements} preview={preview} />
-          <Certificate certificates={profile.certificates} />
+          <PersonalInformation preview={preview} />
+          <Skills />
+          <WorkExperience />
+          <ProjectsUndertaken />
+          <Achievements />
+          <Certificate />
         </div>
         <Sidenav contacts={profile.contacts} />
       </div>
