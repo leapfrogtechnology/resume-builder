@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { View, ViewHidden } from '~/assets/image';
 
-const PersonalInfoItem = ({ label, value, hidden = false, bold, preview }) => {
+const PersonalInfoItem = ({ label, value, bold, preview, onclick, showIcon = false }) => {
+  const [hidden, setHidden] = useState(false);
+
   if (preview && hidden) {
     return null;
   }
+
+  const onHiddenIconClicked = e => {
+    e.preventDefault();
+    onclick(e, label);
+    setHidden(!hidden);
+  };
+
   return (
     <div className="personal-info-row">
       <div className="personal-info-row__item">
@@ -15,8 +24,8 @@ const PersonalInfoItem = ({ label, value, hidden = false, bold, preview }) => {
           {hidden && <span className="hidden-tag">Hidden</span>}
         </p>
       </div>
-      {!preview && (
-        <div className="personal-info-row__icon">
+      {!preview && showIcon && (
+        <div className="personal-info-row__icon" onClick={e => onHiddenIconClicked(e)}>
           <img src={!hidden ? View : ViewHidden} alt="View" />
         </div>
       )}
@@ -27,9 +36,10 @@ const PersonalInfoItem = ({ label, value, hidden = false, bold, preview }) => {
 PersonalInfoItem.propTypes = {
   label: PropTypes.string,
   value: PropTypes.string,
-  visibility: PropTypes.bool,
   preview: PropTypes.bool,
   bold: PropTypes.bool,
+  showIcon: PropTypes.bool,
+  onclick: PropTypes.func,
 };
 
 export default PersonalInfoItem;
