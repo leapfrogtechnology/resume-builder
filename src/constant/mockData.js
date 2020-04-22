@@ -31,14 +31,20 @@ const DATA = {
   ],
   achievements: [
     {
-      title: 'Headhunt Award',
-      date: 'December 2012',
-      visibility: false,
+      name: 'Headhunt Award',
+      date: '1970-01-01T00:00:00.000Z',
+      description: 'Some random text',
+      hidden: false,
+      isDeleted: false,
+      deletedOn: '1970-01-01T00:00:00.000Z',
     },
     {
-      title: 'Golden Jublee Award',
-      date: 'December 2015',
-      visibility: true,
+      name: 'Premium Janitor Award',
+      date: '1970-01-01T00:00:00.000Z',
+      description: 'Some random text',
+      hidden: false,
+      isDeleted: false,
+      deletedOn: '1970-01-01T00:00:00.000Z',
     },
   ],
   skills: [
@@ -128,17 +134,26 @@ const DATA = {
   ],
   projects: [
     {
-      title: 'AI Thoughtbot',
-      startDate: 'September 2016',
-      endDate: 'August 2019',
+      name: 'AI Thoughtbot',
+      startDate: '1970-01-01T00:00:00.000Z',
+      endDate: '1970-01-01T00:00:00.000Z',
+      ongoing: false,
+      type: 'Personal',
       description: 'I built an aI thoughtbot that gave relationship advice to couples in distress.',
+      hidden: false,
+      isDeleted: false,
+      deletedOn: '1970-01-01T00:00:00.000Z',
     },
   ],
   certificates: [
     {
-      title: 'Coursera Advanced React',
-      date: 'August 2015',
+      name: 'Coursera Advanced React',
+      link: 'https://dontcontact.me/404',
+      date: '1970-01-01T00:00:00.000Z',
       description: 'Advanced react course completed with React under the hood',
+      hidden: false,
+      isDeleted: false,
+      deletedOn: '1970-01-01T00:00:00.000Z',
     },
   ],
 };
