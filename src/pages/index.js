@@ -5,9 +5,17 @@ import DATA from '../constant/mockData';
 import Header from '~/components/header/Header';
 import Dashboard from '~/components/dashboard/Dashboard';
 
+export const AppContext = React.createContext({});
+
 const App = () => {
   // App state
   const [preview, setPreview] = useState(false);
+  const [data, updateData] = useState(DATA);
+
+  const store = {
+    preview: { get: preview, set: setPreview },
+    data: { get: data, set: updateData },
+  };
 
   const username = DATA.name;
 
@@ -24,14 +32,16 @@ const App = () => {
         <meta httpEquiv="X-UA-Compatible" content="ie=edge" />
         <title>ResumeBuilder</title>
       </Head>
-      <Header
-        name={username}
-        status="Employee"
-        preview={preview}
-        experience="5 years professional experience"
-        onPreviewBtnClicked={handleOnPreviewBtnClicked}
-      />
-      <Dashboard profile={DATA} preview={preview} />
+      <AppContext.Provider value={store}>
+        <Header
+          name={username}
+          status="Employee"
+          preview={preview}
+          experience="5 years professional experience"
+          onPreviewBtnClicked={handleOnPreviewBtnClicked}
+        />
+        <Dashboard profile={DATA} preview={preview} />
+      </AppContext.Provider>
     </div>
   );
 };
