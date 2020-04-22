@@ -6,27 +6,16 @@ import FormHeader from '~/components/formheader/FormHeader';
 import InputSelect from '~/components/inputselect/InputSelect';
 
 class AddSkill extends Component {
-  constructor() {
+  constructor({ onClose }) {
     super();
-
-    this.state = {
-      showModal: true
-    }
-  }
-
-  closeModal = () => {
-    this.setState({
-      showModal: false
-    })
   }
 
   render(){
     return (
-      this.state.showModal && 
       <div className="form-container">
         <div className="form">
           <div className="card">
-            <div className="close-option" onClick={this.closeModal}>
+            <div className="close-option" onClick={this.props.onClose}>
               <img src={Close} alt="close" />
             </div>
             <FormHeader title="Add Skill" />

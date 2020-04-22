@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Add } from '~/assets/image';
 import CardHeader from '~/components/cardheader/CardHeader';
 import CardFooter from '~/components/cardfooter/CardFooter';
@@ -6,6 +6,18 @@ import EditOptions from '~/components/editoptions/EditOptions';
 import AddSkill from '~/components/form/skill/AddSkill';
 
 const Skills = () => {
+	const [showModel, setModal] = useState(false);
+
+	const editBtnHandler = e => {
+		e.preventDefault();
+		setModal(!showModel);
+	};
+
+	const closeBtnHandler = e => {
+		e.preventDefault();
+		setModal(!showModel);
+	};
+
 	return (
 		<div className="skills-block">
 			<div className="card">
@@ -17,7 +29,11 @@ const Skills = () => {
 								PHP
                             </div>
 							<div className="skills__row-header-right">
-								<EditOptions component={AddSkill}/>
+								<EditOptions
+									component={AddSkill}
+									onEdit={editBtnHandler}
+									onClose={closeBtnHandler}
+									showModal={showModel} />
 							</div>
 						</div>
 						<div className="chip-input-value">
@@ -35,7 +51,11 @@ const Skills = () => {
 								Python
                             </div>
 							<div className="skills__row-header-right">
-								<EditOptions component={AddSkill}/>
+								<EditOptions
+									component={AddSkill}
+									onEdit={editBtnHandler}
+									onClose={closeBtnHandler}
+									showModal={showModel} />
 							</div>
 						</div>
 						<div className="chip-input-value">
@@ -53,7 +73,11 @@ const Skills = () => {
 								Javascript
                             </div>
 							<div className="skills__row-header-right">
-								<EditOptions component={AddSkill}/>
+								<EditOptions
+									component={AddSkill}
+									onEdit={editBtnHandler}
+									onClose={closeBtnHandler}
+									showModal={showModel} />
 							</div>
 						</div>
 						<div className="chip-input-value">
