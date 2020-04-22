@@ -10,7 +10,7 @@ import InputTextArea from '~/components/inputtextarea/InputTextArea';
 
 const AddWorkExperience = () => {
   return (
-    <div className="form-container">
+    <div className="modal">
       <div className="form">
         <div className="card">
           <div className="close-option">
