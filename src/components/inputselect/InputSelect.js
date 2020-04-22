@@ -1,15 +1,22 @@
 import React from 'react';
+import { useField } from 'formik';
+import { SKILLS as skills } from '~/common/constants';
 
-const InputSelect = ({label}) => {
-  return(
+const InputSelect = ({ label, ...props }) => {
+  const [field, meta] = useField(props);
+
+  return (
     <div className="input">
       <label className="input__label">{label}</label>
-      <select name="" id="" className="input__select">
-        <option value="">Skill1</option>
-        <option value="">Skill2</option>
+      <select id="" className="input__select" {...field}>
+        <option value="" label="Select a skill" />
+        {skills.map(skill => {
+          return <option key={skill} value={skill} label={skill} />;
+        })}
+        {meta.touched && meta.error ? <div className="error">{meta.error}</div> : null}
       </select>
     </div>
-  )
-}
+  );
+};
 
 export default InputSelect;
