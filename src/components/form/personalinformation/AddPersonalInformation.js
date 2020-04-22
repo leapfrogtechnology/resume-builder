@@ -6,28 +6,16 @@ import FormHeader from '~/components/formheader/FormHeader';
 import InputTextArea from '~/components/inputtextarea/InputTextArea';
 
 class AddPersonalInformation extends Component {
-  constructor() {
+  constructor({ onClose }) {
     super();
-
-    this.state = {
-      showModal: true
-    }
-  }
-
-  closeModal = () => {
-    this.setState({
-      showModal: false
-    })
   }
 
   render() {
-    console.log(this.state)
     return (
-      this.state.showModal ?
       <div className="form-container">
         <div className="form">
           <div className="card">
-            <div className="close-option" onClick={this.closeModal}>
+            <div className="close-option" onClick={this.props.onClose}>
               <img src={Close} alt="close" />
             </div>
             <FormHeader title="Personal Information" />
@@ -47,9 +35,7 @@ class AddPersonalInformation extends Component {
           </div>
         </div>
       </div>
-      :
-      ''
-    )
+    );
   }
 }
 

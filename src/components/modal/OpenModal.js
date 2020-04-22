@@ -1,10 +1,8 @@
 import React from 'react';
 
-const OpenModal = ({component}) => {
+const OpenModal = ({ component, onClose }) => {
   const Component = component;
-  return(
-    <Component />
-  )
-}
+  return <Component onClose={onClose} />;
+};
 
 export default OpenModal;
