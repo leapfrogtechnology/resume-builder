@@ -7,17 +7,10 @@ const InputText = ({ label, placeholder, ...props }) => {
   const [field, meta] = useField(props);
 
   const textArea = (
-    <textarea
-      className="input__textarea"
-      cols="30"
-      rows="10"
-      placeholder={placeholder}
-      {...field}
-      {...props}
-    ></textarea>
+    <textarea className="input__textarea" cols="30" rows="10" placeholder={placeholder} {...field}></textarea>
   );
 
-  const inputField = <input className="input__text-field" placeholder={placeholder} {...field} {...props} />;
+  const inputField = <input className="input__text-field" placeholder={placeholder} {...field} />;
 
   return (
     <div className="input">
