@@ -3,13 +3,18 @@ import React, { useState } from 'react';
 
 import { View, ViewHidden } from '~/assets/image';
 
-const Contact = ({ label, value, preview }) => {
+const Contact = ({ id, label, value, preview, onHiddenIconClicked }) => {
   const [hidden, setHidden] = useState(false);
 
   const onHiddenBtnClicked = e => {
     e.preventDefault();
     setHidden(!hidden);
+    onHiddenIconClicked(e, id);
   };
+
+  if (!value || (preview && hidden)) {
+    return <></>;
+  }
 
   return (
     <div className="contact-content">
@@ -30,9 +35,11 @@ const Contact = ({ label, value, preview }) => {
 };
 
 Contact.propTypes = {
+  id: PropTypes.string,
   label: PropTypes.string,
   value: PropTypes.string,
   preview: PropTypes.bool,
+  onHiddenIconClicked: PropTypes.func,
 };
 
 export default Contact;

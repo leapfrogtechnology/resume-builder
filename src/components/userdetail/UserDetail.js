@@ -22,7 +22,7 @@ const UserDetail = ({ name, experience, preview, onPreviewBtnClicked }) => {
           </div>
         </div>
         <div className="user-detail__right-content">
-          <Button content={!preview ? 'Preview' : 'Go Back'} onclick={onPreviewBtnClicked} />
+          <Button content={!preview ? 'Preview' : 'Back To Edit'} onclick={onPreviewBtnClicked} />
         </div>
       </div>
     </section>

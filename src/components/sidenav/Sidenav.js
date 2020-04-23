@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 
 import { AppContext } from '~/pages';
@@ -6,12 +5,31 @@ import Contact from '~/components/contact/Contact';
 import CardHeader from '~/components/cardheader/CardHeader';
 import { Edit, ProfileImage, Trash, Download, Copy, Email, Check, Delete } from '~/assets/image';
 
-const Sidenav = ({ contacts }) => {
-  const preview = useContext(AppContext).preview.get;
+const Sidenav = () => {
+  const context = useContext(AppContext);
+  const preview = context.preview.get;
+  const email = context.data.get.email;
+  const phone = context.data.get.phone;
+  const github = context.data.get.github;
+  const linkedIn = context.data.get.linkedIn;
 
-  const contactsList = contacts.map(({ type, value }) => (
-    <Contact key={type} label={type} value={value} preview={preview} />
-  ));
+  /**
+   * Update the hidden state of contact detail.
+   *
+   * @param {React.MouseEvent} e [ on click event ].
+   * @param {string} key [ label of a particular contact type].
+   */
+  const updateHiddenStateContact = (e, key) => {
+    e.preventDefault();
+
+    const data = context.data.get;
+    const previousState = data[key].hidden;
+    const newState = !previousState;
+
+    data[key].hidden = newState;
+    context.data.set(data);
+    console.log(context.data.get);
+  };
 
   return (
     <div className="sidenav">
@@ -35,7 +53,34 @@ const Sidenav = ({ contacts }) => {
           </div>
           <div className="sidenav__contact-block">
             <CardHeader title="Contact Information" icon={Edit} hideIcon={preview} />
-            {contactsList}
+            <Contact
+              id="email"
+              label="Email Address"
+              value={email.value}
+              preview={preview}
+              onHiddenIconClicked={updateHiddenStateContact}
+            />
+            <Contact
+              id="phone"
+              label="Phone Number"
+              value={phone.value}
+              preview={preview}
+              onHiddenIconClicked={updateHiddenStateContact}
+            />
+            <Contact
+              id="github"
+              label="GitHub"
+              value={github.value}
+              preview={preview}
+              onHiddenIconClicked={updateHiddenStateContact}
+            />
+            <Contact
+              id="linkedIn"
+              label="LinkedIn"
+              value={linkedIn.value}
+              preview={preview}
+              onHiddenIconClicked={updateHiddenStateContact}
+            />
           </div>
         </div>
       </div>
@@ -81,10 +126,6 @@ const Sidenav = ({ contacts }) => {
       )}
     </div>
   );
-};
-
-Sidenav.propTypes = {
-  contacts: PropTypes.array,
 };
 
 export default Sidenav;
