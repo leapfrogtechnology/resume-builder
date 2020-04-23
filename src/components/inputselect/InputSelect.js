@@ -1,6 +1,6 @@
 import React from 'react';
 import { useField } from 'formik';
-import { SKILLS as skills } from '~/common/constants';
+import { skills } from '~/common/constants';
 
 const InputSelect = ({ label, ...props }) => {
   const [field, meta] = useField(props);
