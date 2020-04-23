@@ -1,20 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import EditOptions from '~/components/editoptions/EditOptions';
-import AddWorkExperience from '~/components/form/workexperience/AddWordExperience';
+import AddWorkExperience from '~/components/form/workexperience/AddWorkExperience';
 
 const WorkExperienceShown = () => {
+  const [showModel, setModal] = useState(false);
+
+  const editBtnHandler = e => {
+    e.preventDefault();
+    setModal(!showModel);
+  };
+
+  const closeBtnHandler = e => {
+    e.preventDefault();
+    setModal(!showModel);
+  };
+
   return (
     <div className="work-experience">
       <div className="work-experience__row">
         <div className="work-experience__row-header">
           <div className="sub-title">Hewlett Packard Enterprise</div>
-          <EditOptions />
+          <EditOptions
+            component={AddWorkExperience}
+            onEdit={editBtnHandler}
+            onClose={closeBtnHandler}
+            showModal={showModel}
+          />
         </div>
-        <div className="work-experience__position">
-          Associate Engineering Manager
-        </div>
+        <div className="work-experience__position">Associate Engineering Manager</div>
         <div className="work-experience__exp-year">
-          <span className="start-date">September 2016</span>  - <span className="end-date">August 2019</span>(3 years and 3 months)
+          <span className="start-date">September 2016</span> - <span className="end-date">August 2019</span>(3 years and
+          3 months)
         </div>
       </div>
       <div className="work-experience__row">
@@ -33,10 +49,11 @@ const WorkExperienceShown = () => {
         </ul>
       </div>
       <div className="work-experience__row">
-        Referee <span className="referee-name">Mr. Andre Pistaolava</span> (<span className="referee-email text-link">andre@gmail.com</span>)
+        Referee <span className="referee-name">Mr. Andre Pistaolava</span> (
+        <span className="referee-email text-link">andre@gmail.com</span>)
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default WorkExperienceShown;
