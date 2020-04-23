@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Calendar } from '~/assets/image';
 
 const InputDate = ({ label, placeholder, modifier }) => {
@@ -11,6 +12,12 @@ const InputDate = ({ label, placeholder, modifier }) => {
       </div>
     </div>
   );
+};
+
+InputDate.propTypes = {
+  label: PropTypes.string,
+  placeholder: PropTypes.string,
+  modifier: PropTypes.bool,
 };
 
 export default InputDate;

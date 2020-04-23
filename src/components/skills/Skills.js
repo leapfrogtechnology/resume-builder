@@ -14,18 +14,19 @@ const Skills = () => {
   const skills = context.data.get.skills;
 
   /**
-   * Update the hidden state of skill
-   * @param {React.MouseEvent} e [ on click event ]
-   * @param {string} key [ label of a particular skill]
+   * Update the hidden state of skill.
+   *
+   * @param {React.MouseEvent} e [ on click event ].
+   * @param {string} key [ label of a particular skill].
    */
   const updateHiddenStateSkill = (e, key) => {
     e.preventDefault();
 
-    let data = context.data.get;
+    const data = context.data.get;
 
     data['skills'].find(({ label, hidden }, index) => {
       if (label === key) {
-        let newState = !hidden;
+        const newState = !hidden;
 
         data['skills'][index].hidden = newState;
         context.data.set(data); // new state of data

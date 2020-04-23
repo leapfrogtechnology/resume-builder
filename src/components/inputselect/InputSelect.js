@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const InputSelect = ({ label }) => {
   return (
@@ -10,6 +11,10 @@ const InputSelect = ({ label }) => {
       </select>
     </div>
   );
+};
+
+InputSelect.propTypes = {
+  label: PropTypes.string,
 };
 
 export default InputSelect;

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
 import ProptTypes from 'prop-types';
+import React, { useState } from 'react';
 import EditOptions from '~/components/editoptions/EditOptions';
 
 const AchievementItem = ({ title, date, preview, onHiddenIconClicked }) => {

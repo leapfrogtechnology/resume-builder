@@ -13,18 +13,19 @@ const ProjectsUndertaken = () => {
   const projects = context.data.get.projects;
 
   /**
-   * Update the hidden state of skill
-   * @param {React.MouseEvent} e [ on click event ]
-   * @param {string} key [ name of a particular project]
+   * Update the hidden state of project.
+   *
+   * @param {React.MouseEvent} e [ on click event ].
+   * @param {string} key [ name of a particular project].
    */
   const updateHiddenStateProject = (e, key) => {
     e.preventDefault();
 
-    let data = context.data.get;
+    const data = context.data.get;
 
     data['projects'].find(({ name, hidden }, index) => {
       if (name === key) {
-        let newState = !hidden;
+        const newState = !hidden;
 
         data['projects'][index].hidden = newState;
         context.data.set(data); // new state of data

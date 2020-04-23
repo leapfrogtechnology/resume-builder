@@ -1,9 +1,10 @@
-import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
+
 import { Edit } from '~/assets/image';
+import { AppContext } from '../../pages';
 import PersonalInfoItem from './PersonalInfoItem';
 import CardHeader from '~/components/cardheader/CardHeader';
-import { AppContext } from '../../pages';
 
 const PersonalInformation = ({ preview }) => {
   const bold = true;
@@ -15,11 +16,19 @@ const PersonalInformation = ({ preview }) => {
   const role = previousData.role;
   const introduction = previousData.introduction;
 
+  /**
+   * Update the hidden state of personal information.
+   *
+   * @param {React.MouseEvent} e [ on click event ].
+   * @param {string} key [ name of a particular info].
+   */
   const updateHiddenState = (e, key) => {
     e.preventDefault();
-    let data = context.data.get;
-    let currentState = data[key].hidden;
-    let newState = !currentState;
+
+    const data = context.data.get;
+    const currentState = data[key].hidden;
+    const newState = !currentState;
+
     data[key].hidden = newState;
     context.data.set(data);
   };

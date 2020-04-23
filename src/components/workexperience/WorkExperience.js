@@ -12,18 +12,19 @@ const WorkExperience = () => {
   const workExperience = context.data.get.workExperience;
 
   /**
-   * Update the hidden state of skill
-   * @param {React.MouseEvent} e [ on click event ]
-   * @param {string} key [ name of a particular work experience]
+   * Update the hidden state of work.
+   *
+   * @param {React.MouseEvent} e [ on click event ].
+   * @param {string} key [ name of a particular work experience].
    */
   const updateHiddenStateWork = (e, key) => {
     e.preventDefault();
 
-    let data = context.data.get;
+    const data = context.data.get;
 
     data['workExperience'].find(({ name, hidden }, index) => {
       if (name === key) {
-        let newState = !hidden;
+        const newState = !hidden;
 
         data['workExperience'][index].hidden = newState;
         context.data.set(data); // new state of data

@@ -35,6 +35,7 @@ Header.propTypes = {
   name: PropTypes.string,
   status: PropTypes.string,
   experience: PropTypes.string,
+  preview: PropTypes.bool,
   onPreviewBtnClicked: PropTypes.func,
 };
 

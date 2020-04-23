@@ -12,24 +12,24 @@ const Certificate = () => {
   const preview = context.preview.get;
 
   /**
-   * Update the hidden state of skill
-   * @param {React.MouseEvent} e [ on click event ]
-   * @param {string} key [ name of a particular certificate]
+   * Update the hidden state of skill.
+   *
+   * @param {React.MouseEvent} e [ on click event ].
+   * @param {string} key [ name of a particular certificate].
    */
   const updateHiddenStateCertificates = (e, key) => {
     e.preventDefault();
 
-    let data = context.data.get;
+    const data = context.data.get;
 
     data['certificates'].find(({ name, hidden }, index) => {
       if (name === key) {
-        let newState = !hidden;
+        const newState = !hidden;
 
         data['certificates'][index].hidden = newState;
         context.data.set(data); // new state of data
       }
     });
-    console.log(context.data.get);
   };
 
   const certificatesList = certificates.map(({ name, link, date, description }) => (

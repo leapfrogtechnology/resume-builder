@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 import { View, ViewHidden } from '~/assets/image';
 
 const PersonalInfoItem = ({ label, value, bold, preview, onclick, showIcon = false }) => {

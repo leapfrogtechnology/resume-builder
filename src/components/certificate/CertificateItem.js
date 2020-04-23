@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
+
 import { UpRightArrow } from '~/assets/image';
 import EditOptions from '~/components/editoptions/EditOptions';
 
@@ -40,6 +41,8 @@ CertificateItem.propTypes = {
   title: PropTypes.string,
   year: PropTypes.string,
   description: PropTypes.string,
+  link: PropTypes.string,
+  preview: PropTypes.bool,
   onHiddenIconClicked: PropTypes.func,
 };
 

@@ -1,8 +1,6 @@
-import React, { useState, useContext } from 'react';
-
 import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 import EditOptions from '~/components/editoptions/EditOptions';
-import AddWorkExperience from '~/components/form/workexperience/AddWordExperience';
 
 const WorkExperienceShown = ({
   subTitle,
@@ -76,6 +74,7 @@ WorkExperienceShown.propTypes = {
   refereeName: PropTypes.string,
   preview: PropTypes.bool,
   refereeContact: PropTypes.string,
+  onHiddenIconClicked: PropTypes.func,
 };
 
 export default WorkExperienceShown;

@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { Image } from '~/assets/image';
 import Media from '~/components/media/Media';
 import Button from '~/components/button/Button';
-import { Image } from '~/assets/image';
 import { FAVORITE_ICON } from '~/components/icons/icon';
 
 const UserDetail = ({ name, experience, preview, onPreviewBtnClicked }) => {

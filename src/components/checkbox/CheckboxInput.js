@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const CheckboxInput = ({ value }) => {
   return (
@@ -7,6 +8,10 @@ const CheckboxInput = ({ value }) => {
       <label className="input__label input__label--dark">{value}</label>
     </div>
   );
+};
+
+CheckboxInput.propTypes = {
+  value: PropTypes.string,
 };
 
 export default CheckboxInput;
