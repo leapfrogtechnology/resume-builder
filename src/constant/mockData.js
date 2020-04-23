@@ -11,24 +11,13 @@ const DATA = {
     value:
       'My name is Ribby and I am currently the Engineering Manager at Leapfrog. I love to challenge the normal and help build extraordinary product experiences.',
   },
-  contacts: [
-    {
-      type: 'Email Address',
-      value: 'ribby@lftechnology.com',
-    },
-    {
-      type: 'Phone Number',
-      value: '983345698',
-    },
-    {
-      type: 'GitHub',
-      value: 'https://github.com/user/ribbyX',
-    },
-    {
-      type: 'LinkedIn',
-      value: 'https://linkedin.com/user/ribbyX',
-    },
-  ],
+  // Contact Information
+  email: { value: 'ribby@lftechnology.com', hidden: false },
+  phone: { value: 9841000000, hidden: false },
+  github: { value: 'ribbyX', hidden: false },
+  stackOverflow: { value: 'https://github.com/ribbX', hidden: false },
+  linkedIn: { value: 'https://linkedIn.com/ribbX', hidden: false },
+
   achievements: [
     {
       name: 'Headhunt Award',
