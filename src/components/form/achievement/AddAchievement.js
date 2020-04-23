@@ -18,7 +18,11 @@ const AddAchievement = () => {
           <div className="form__content">
             <InputText label="Title of your Achievement" />
             <InputDate label="Date of the Achievement" />
-            <InputTextArea label="Describe your Achievements (optional)" placeholder="eg. I was awarded ..." />
+            <InputText
+              label="Describe your Achievements (optional)"
+              placeholder="eg. I was awarded ..."
+              type="text-area"
+            />
             <div className="form-button">
               <div className="form-button__left">
                 <Button content="Add Achievement" />
@@ -31,7 +35,7 @@ const AddAchievement = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default AddAchievement;

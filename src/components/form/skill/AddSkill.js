@@ -1,5 +1,6 @@
 /* eslint-disable require-jsdoc */
 /* eslint-disable react/prop-types */
+import * as Yup from 'yup';
 import React, { useContext } from 'react';
 import { Formik, Form } from 'formik';
 
@@ -13,6 +14,10 @@ import { FormContext } from '../../FormContext';
 const AddSkill = ({ onClose }) => {
   const { data, setData } = useContext(FormContext);
 
+  const validateSkill = Yup.object().shape({
+    skill: Yup.string().required(),
+  });
+
   return (
     <div className="form-container">
       <div className="form">
@@ -24,11 +29,12 @@ const AddSkill = ({ onClose }) => {
           <Formik
             initialValues={{
               skill: '',
-              subSkills: [],
+              subSkills: '',
             }}
             onSubmit={values => {
               setData(prevState => ({ ...prevState, ...values }));
             }}
+            validationSchema={validateSkill}
           >
             <Form>
               <div className="form__content">

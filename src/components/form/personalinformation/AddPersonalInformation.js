@@ -13,9 +13,9 @@ const AddPersonalInformation = ({ onClose }) => {
   const { data, setData } = useContext(FormContext);
 
   const validatePersonalInformation = Yup.object().shape({
-    name: Yup.string().min(15, 'Above 15 characters.').max(35, 'Limit 35 characters').required(),
-    role: Yup.string().max(40, 'Limit 40 characters').required(),
-    introduction: Yup.string().max(200, 'Limit 200 characters').required(),
+    name: Yup.string().label('Name').min(10).max(35, 'Limit 35 characters').required(),
+    role: Yup.string().label('Role').max(40, 'Limit 40 characters').required(),
+    introduction: Yup.string().label('Introduction').max(200, 'Limit 200 characters').required(),
   });
 
   return (
