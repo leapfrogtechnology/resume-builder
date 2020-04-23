@@ -8,7 +8,6 @@ import CheckboxInput from '~/components/checkbox/CheckboxInput';
 import InputTextArea from '~/components/inputtextarea/InputTextArea';
 import InputRadio from '~/components/inputradio/InputRadio';
 
-
 const AddProject = () => {
   return (
     <div className="form-container">
@@ -35,7 +34,7 @@ const AddProject = () => {
                 <InputRadio value="Social" placeholder="Social" />
               </div>
             </div>
-            <InputTextArea label="Describe this Project (optional)" placeholder="eg. I helped create..." />
+            <InputText label="Describe this Project (optional)" placeholder="eg. I helped create..." type="text-area" />
             <div className="form-button">
               <div className="form-button__left">
                 <Button content="Add Project" />
@@ -48,7 +47,7 @@ const AddProject = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default AddProject;

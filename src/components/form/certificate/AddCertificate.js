@@ -17,9 +17,13 @@ const AddCertificate = () => {
           <FormHeader title="Add Certificate" />
           <div className="form__content">
             <InputText label="Title of your Certificate" />
-            <InputText label="Link to this Certificate" placeholder="https://"/>
+            <InputText label="Link to this Certificate" placeholder="https://" />
             <InputDate label="Date you received the Certificate" />
-            <InputTextArea label="Describe this Certificate (optional)" placeholder="eg. I was awarded ..." />
+            <InputText
+              label="Describe this Certificate (optional)"
+              placeholder="eg. I was awarded ..."
+              type="text-area"
+            />
             <div className="form-button">
               <div className="form-button__left">
                 <Button content="Add Certificate" />
@@ -32,7 +36,7 @@ const AddCertificate = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default AddCertificate;
