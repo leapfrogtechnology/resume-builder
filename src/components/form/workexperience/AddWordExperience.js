@@ -5,8 +5,6 @@ import InputText from '~/components/inputtext/InputText';
 import InputDate from '~/components/inputdate/InputDate';
 import FormHeader from '~/components/formheader/FormHeader';
 import CheckboxInput from '~/components/checkbox/CheckboxInput';
-import InputTextArea from '~/components/inputtextarea/InputTextArea';
-
 
 const AddWorkExperience = () => {
   return (
@@ -25,8 +23,8 @@ const AddWorkExperience = () => {
               <InputDate label="End Date" placeholder="Select date" modifier={true}/>
             </div>
             <CheckboxInput value="I currently work here" />
-            <InputTextArea label="Describe Your Roles and Responsibilities" placeholder="eg. I am responsible for..." />
-            <InputTextArea label="List out your Achievements and Tasks (optional)" placeholder="eg. I was awarded with..." />
+            <InputText type="text-area" label="Describe Your Roles and Responsibilities" placeholder="eg. I am responsible for..." />
+            <InputText type="text-area" label="List out your Achievements and Tasks (optional)" placeholder="eg. I was awarded with..." />
             <InputText label="Name of your Referee (optional)" placeholder="eg. someone we can reach out for more info if needed" />
             <InputText label="Contact number or phone (optional)" placeholder="eg. how we can contact your referee" />
             <div className="form-button">

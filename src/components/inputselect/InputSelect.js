@@ -8,7 +8,7 @@ const InputSelect = ({ label, ...props }) => {
   return (
     <div className="input">
       <label className="input__label">{label}</label>
-      <select id="" className="input__select" {...field}>
+      <select id="" className={meta.touched && meta.error ? 'input__select field-error' : 'input__select'} {...field}>
         <option value="" label="Select a skill" />
         {skills.map(skill => {
           return <option key={skill} value={skill} label={skill} />;
