@@ -17,4 +17,22 @@ import ViewHidden from '~/assets/images/eye-hidden.png';
 import ProfileImage from '~/assets/images/image-small.png';
 import UpRightArrow from '~/assets/images/up-right-arrow.png';
 
-export {Logo, Image, Edit, View, ProfileImage, Trash, Download, Copy, Email, Check, Delete, EditGray, Add, ViewHidden, UpRightArrow, Close, Calendar, Warning};
+export {
+  Logo,
+  Image,
+  Edit,
+  View,
+  ProfileImage,
+  Trash,
+  Download,
+  Copy,
+  Email,
+  Check,
+  Delete,
+  EditGray,
+  Add,
+  ViewHidden,
+  UpRightArrow,
+  Close,
+  Calendar,
+};

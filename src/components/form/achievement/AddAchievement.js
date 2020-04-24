@@ -31,7 +31,7 @@ const AddAchievement = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default AddAchievement;

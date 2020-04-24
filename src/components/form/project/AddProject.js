@@ -8,7 +8,6 @@ import CheckboxInput from '~/components/checkbox/CheckboxInput';
 import InputTextArea from '~/components/inputtextarea/InputTextArea';
 import InputRadio from '~/components/inputradio/InputRadio';
 
-
 const AddProject = () => {
   return (
     <div className="modal">
@@ -48,7 +47,7 @@ const AddProject = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default AddProject;

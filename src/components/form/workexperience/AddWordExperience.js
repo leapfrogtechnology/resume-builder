@@ -7,7 +7,6 @@ import FormHeader from '~/components/formheader/FormHeader';
 import CheckboxInput from '~/components/checkbox/CheckboxInput';
 import InputTextArea from '~/components/inputtextarea/InputTextArea';
 
-
 const AddWorkExperience = () => {
   return (
     <div className="modal">
@@ -21,13 +20,19 @@ const AddWorkExperience = () => {
             <InputText label="Name of the organization" placeholder="eg. Apple" />
             <InputText label="Your Title or Position" placeholder="eg. Software Engineer" />
             <div className="form__date-field">
-              <InputDate label="Start Date" placeholder="Select date" modifier={true}/>
-              <InputDate label="End Date" placeholder="Select date" modifier={true}/>
+              <InputDate label="Start Date" placeholder="Select date" modifier={true} />
+              <InputDate label="End Date" placeholder="Select date" modifier={true} />
             </div>
             <CheckboxInput value="I currently work here" />
             <InputTextArea label="Describe Your Roles and Responsibilities" placeholder="eg. I am responsible for..." />
-            <InputTextArea label="List out your Achievements and Tasks (optional)" placeholder="eg. I was awarded with..." />
-            <InputText label="Name of your Referee (optional)" placeholder="eg. someone we can reach out for more info if needed" />
+            <InputTextArea
+              label="List out your Achievements and Tasks (optional)"
+              placeholder="eg. I was awarded with..."
+            />
+            <InputText
+              label="Name of your Referee (optional)"
+              placeholder="eg. someone we can reach out for more info if needed"
+            />
             <InputText label="Contact number or phone (optional)" placeholder="eg. how we can contact your referee" />
             <div className="form-button">
               <div className="form-button__left">
@@ -42,7 +47,7 @@ const AddWorkExperience = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default AddWorkExperience;
