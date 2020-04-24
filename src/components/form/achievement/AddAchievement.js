@@ -1,10 +1,9 @@
 import React from 'react';
-import { Close, Trash } from '~/assets/image';
+import { Close } from '~/assets/image';
 import Button from '~/components/button/Button';
 import InputText from '~/components/inputtext/InputText';
 import InputDate from '~/components/inputdate/InputDate';
 import FormHeader from '~/components/formheader/FormHeader';
-import InputTextArea from '~/components/inputtextarea/InputTextArea';
 
 const AddAchievement = () => {
   return (

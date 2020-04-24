@@ -5,7 +5,7 @@ import AddWorkExperience from '~/components/form/workexperience/AddWorkExperienc
 const WorkExperienceShown = () => {
   const [showModel, setModal] = useState(false);
 
-  const editBtnHandler = e => {
+  const modalBtnHandler = e => {
     e.preventDefault();
     setModal(!showModel);
   };
@@ -22,7 +22,8 @@ const WorkExperienceShown = () => {
           <div className="sub-title">Hewlett Packard Enterprise</div>
           <EditOptions
             component={AddWorkExperience}
-            onEdit={editBtnHandler}
+            onEdit={modalBtnHandler}
+            onDelete={modalBtnHandler}
             onClose={closeBtnHandler}
             showModal={showModel}
           />

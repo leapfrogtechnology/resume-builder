@@ -8,7 +8,7 @@ import EditOptions from '~/components/editoptions/EditOptions';
 const ProjectsUndertaken = () => {
   const [showModel, setModel] = useState(false);
 
-  const editBtnHandler = e => {
+  const modalBtnHandler = e => {
     e.preventDefault();
     setModel(!showModel);
   };
@@ -26,12 +26,7 @@ const ProjectsUndertaken = () => {
           <div className="projects-undertaken__row">
             <div className="projects-undertaken__row-header">
               <div className="sub-title">AI Thoughtbot</div>
-              <EditOptions
-                component={AddProject}
-                onEdit={editBtnHandler}
-                onClose={closeBtnHandler}
-                showModal={showModel}
-              />
+              <EditOptions />
             </div>
             <div className="projects-undertaken__period">
               <span className="start-date">September 2016</span> - <span className="end-date">August 2019</span>(3 years
@@ -42,7 +37,7 @@ const ProjectsUndertaken = () => {
             </p>
           </div>
         </div>
-        <CardFooter icon={Add} label="Add another project" />
+        <CardFooter icon={Add} label="Add another project" showModal={showModel} onAdd={modalBtnHandler} component={AddProject} onClose={closeBtnHandler}/>
       </div>
     </div>
   );

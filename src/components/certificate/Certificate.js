@@ -1,10 +1,23 @@
-import React from 'react';
+import React,{useState} from 'react';
 import CardFooter from '~/components/cardfooter/CardFooter';
 import CardHeader from '~/components/cardheader/CardHeader';
 import EditOptions from '~/components/editoptions/EditOptions';
+import AddCertificate from '~/components/form/certificate/AddCertificate';
 import { Add, UpRightArrow } from '~/assets/image';
 
 const Certificate = () => {
+	const [showModel, setModal] = useState(false);
+
+	const modalBtnHandler = e => {
+		e.preventDefault();
+		setModal(!showModel);
+	};
+
+	const closeBtnHandler = e => {
+		e.preventDefault();
+		setModal(!showModel);
+	};
+
 	return (
 		<div className="certificate-block">
 			<div className="card">
@@ -24,7 +37,7 @@ const Certificate = () => {
             </p>
 					</div>
 				</div>
-				<CardFooter icon={Add} label="Add another certificate" />
+				<CardFooter icon={Add} label="Add another certificate" showModal={showModel} onAdd={modalBtnHandler} component={AddCertificate} onClose={closeBtnHandler} />
 			</div>
 		</div>
 	)

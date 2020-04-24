@@ -8,7 +8,7 @@ import AddSkill from '~/components/form/skill/AddSkill';
 const Skills = () => {
 	const [showModel, setModal] = useState(false);
 
-	const editBtnHandler = e => {
+	const modalBtnHandler = e => {
 		e.preventDefault();
 		setModal(!showModel);
 	};
@@ -29,11 +29,7 @@ const Skills = () => {
 								PHP
                             </div>
 							<div className="skills__row-header-right">
-								<EditOptions
-									component={AddSkill}
-									onEdit={editBtnHandler}
-									onClose={closeBtnHandler}
-									showModal={showModel} />
+								<EditOptions />
 							</div>
 						</div>
 						<div className="chip-input-value">
@@ -51,11 +47,7 @@ const Skills = () => {
 								Python
                             </div>
 							<div className="skills__row-header-right">
-								<EditOptions
-									component={AddSkill}
-									onEdit={editBtnHandler}
-									onClose={closeBtnHandler}
-									showModal={showModel} />
+								<EditOptions />
 							</div>
 						</div>
 						<div className="chip-input-value">
@@ -73,11 +65,7 @@ const Skills = () => {
 								Javascript
                             </div>
 							<div className="skills__row-header-right">
-								<EditOptions
-									component={AddSkill}
-									onEdit={editBtnHandler}
-									onClose={closeBtnHandler}
-									showModal={showModel} />
+								<EditOptions />
 							</div>
 						</div>
 						<div className="chip-input-value">
@@ -90,7 +78,7 @@ const Skills = () => {
 						</div>
 					</div>
 				</div>
-				<CardFooter icon={Add} label="Add another skill" />
+				<CardFooter icon={Add} label="Add another skill" showModal={showModel} onAdd={modalBtnHandler} component={AddSkill} onClose={closeBtnHandler}/>
 			</div>
 		</div>
 	)
