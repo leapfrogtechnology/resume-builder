@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 import { Add, UpRightArrow } from '~/assets/image';
 import CardFooter from '~/components/cardfooter/CardFooter';
 import CardHeader from '~/components/cardheader/CardHeader';
@@ -43,7 +42,14 @@ const Certificate = () => {
             <p className="certificate__description">Advanced react course completed with React under the hood</p>
           </div>
         </div>
-        <CardFooter icon={Add} label="Add another certificate" />
+        <CardFooter
+          icon={Add}
+          label="Add another certificate"
+          showModal={showModel}
+          onAdd={editBtnHandler}
+          component={AddCertificate}
+          onClose={closeBtnHandler}
+        />
       </div>
     </div>
   );

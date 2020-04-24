@@ -6,7 +6,7 @@ import AddPersonalInformation from '~/components/form/personalinformation/AddPer
 const PersonalInformation = () => {
   const [showModel, setModal] = useState(false);
 
-  const editBtnHandler = e => {
+  const modalBtnHandler = e => {
     e.preventDefault();
     setModal(!showModel);
   };
@@ -23,7 +23,7 @@ const PersonalInformation = () => {
           title="Personal Information"
           icon={Edit}
           component={AddPersonalInformation}
-          onEdit={editBtnHandler}
+          onEdit={modalBtnHandler}
           onClose={closeBtnHandler}
           showModal={showModel}
         />

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import { Add } from '~/assets/image';
 import CardHeader from '~/components/cardheader/CardHeader';
 import CardFooter from '~/components/cardfooter/CardFooter';
@@ -42,7 +43,14 @@ const ProjectsUndertaken = () => {
             </p>
           </div>
         </div>
-        <CardFooter icon={Add} label="Add another project" />
+        <CardFooter
+          icon={Add}
+          label="Add another project"
+          showModal={showModel}
+          onAdd={editBtnHandler}
+          component={AddProject}
+          onClose={closeBtnHandler}
+        />
       </div>
     </div>
   );

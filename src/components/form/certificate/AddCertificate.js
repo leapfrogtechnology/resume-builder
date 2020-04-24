@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { Formik, Form } from 'formik';
 import React, { useContext } from 'react';
 
-import { Close, Trash } from '~/assets/image';
+import { Close } from '~/assets/image';
 import { FormContext } from '../../FormContext';
 import Button from '~/components/button/Button';
 import InputText from '~/components/inputtext/InputText';

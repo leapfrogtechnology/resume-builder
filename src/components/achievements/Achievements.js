@@ -37,7 +37,14 @@ const Achievements = () => {
             <div className="achievements__year">December 2012</div>
           </div>
         </div>
-        <CardFooter icon={Add} label="Add another achievement" />
+        <CardFooter
+          icon={Add}
+          label="Add another achievement"
+          showModal={showModel}
+          onAdd={editBtnHandler}
+          component={AddAchievement}
+          onClose={closeBtnHandler}
+        />
       </div>
     </div>
   );

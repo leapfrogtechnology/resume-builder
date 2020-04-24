@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
+
 import { Add } from '~/assets/image';
+import AddSkill from '~/components/form/skill/AddSkill';
 import CardHeader from '~/components/cardheader/CardHeader';
 import CardFooter from '~/components/cardfooter/CardFooter';
 import EditOptions from '~/components/editoptions/EditOptions';
-import AddSkill from '~/components/form/skill/AddSkill';
 
 const Skills = () => {
   const [showModel, setModal] = useState(false);
 
   const editBtnHandler = e => {
+    e.preventDefault();
+    setModal(!showModel);
+  };
+  const modalBtnHandler = e => {
     e.preventDefault();
     setModal(!showModel);
   };
@@ -75,7 +80,14 @@ const Skills = () => {
             </div>
           </div>
         </div>
-        <CardFooter icon={Add} label="Add another skill" />
+        <CardFooter
+          icon={Add}
+          label="Add another skill"
+          showModal={showModel}
+          onAdd={editBtnHandler}
+          component={AddSkill}
+          onClose={closeBtnHandler}
+        />
       </div>
     </div>
   );
