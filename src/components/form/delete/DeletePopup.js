@@ -3,7 +3,7 @@ import { Warning } from '~/assets/image';
 import Button from '~/components/button/Button';
 import CardHeader from '~/components/cardheader/CardHeader';
 
-const DeletePopup = (item, entry_title) => {
+const DeletePopup = ({item, entry_title}) => {
   return (
     <div className="modal">
       <div className="delete-popup">

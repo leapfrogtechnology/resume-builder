@@ -35,4 +35,5 @@ export {
   UpRightArrow,
   Close,
   Calendar,
+  Warning
 };
