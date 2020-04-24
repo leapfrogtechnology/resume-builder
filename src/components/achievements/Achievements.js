@@ -6,12 +6,12 @@ import CardFooter from '~/components/cardfooter/CardFooter';
 import EditOptions from '~/components/editoptions/EditOptions';
 
 const Achievements = () => {
-	const [isDataAvailabel, setData] = useState(true);
+	const [isDataAvailable, setData] = useState(true);
 	
 	return (
 		// make error check for class if the data exists
 		<div className="achievements-block">
-			<div className={isDataAvailabel ? 'card' : 'card card--empty'}>
+			<div className={isDataAvailable ? 'card' : 'card card--empty'}>
 				<CardHeader title="Achievements" />
 				<div className="achievements">
 					<div className="achievements__row">
