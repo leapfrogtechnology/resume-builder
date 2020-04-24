@@ -1,9 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
+
 import Contact from '~/components/contact/Contact';
 import CardHeader from '~/components/cardheader/CardHeader';
+import AddContact from '~/components/form/contact/AddContact';
 import { Edit, ProfileImage, Trash, Download, Copy, Email, Check, Delete } from '~/assets/image';
 
 const Sidenav = () => {
+  const [showModal, setModal] = useState(false);
+
+  const editBtnHandler = e => {
+    e.preventDefault();
+    setModal(!showModal);
+  };
+
+  const closeBtnHandler = e => {
+    e.preventDefault();
+    setModal(!showModal);
+  };
+
   return (
     <div className="sidenav">
       <div className="sidenav-top">
@@ -23,7 +37,14 @@ const Sidenav = () => {
             </div>
           </div>
           <div className="sidenav__contact-block">
-            <CardHeader title="Contact Information" icon={Edit} />
+            <CardHeader
+              title="Contact Information"
+              icon={Edit}
+              component={AddContact}
+              onEdit={editBtnHandler}
+              onClose={closeBtnHandler}
+              showModal={showModal}
+            />
             <Contact label="Email Address" value="ribby@lftechnology.com" />
             <Contact label="Phone Number" value="983345698" />
             <Contact label="GitHub" value="https://github.com/user/ribbyX" />
