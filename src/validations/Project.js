@@ -6,10 +6,10 @@ const validateProjectInformation = Yup.object().shape({
   startDate: Yup.date().label('Start date').required(),
   endDate: Yup.date()
     .label('End Date')
-    .when('ongoing', { is: true, otherwise: Yup.date().required('This is required') })
+    .when('ongoing', { is: true, otherwise: Yup.date().required('End Date is required') })
     .when('startDate', (startDate, schema) => startDate && schema.min(startDate)),
   type: Yup.string().required(),
-  description: Yup.string().label('Roles and Responsibilities').min(60).max(200).required(),
+  description: Yup.string().label('Roles and Responsibilities').min(60).max(200),
 });
 
 export default validateProjectInformation;

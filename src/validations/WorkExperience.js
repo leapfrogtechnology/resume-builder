@@ -8,7 +8,7 @@ const validateWorkExperience = Yup.object().shape({
   startDate: Yup.date().label('Start date').required(),
   endDate: Yup.date()
     .label('End Date')
-    .when('currentWork', { is: true, otherwise: Yup.date().required('This is required') })
+    .when('currentWork', { is: true, otherwise: Yup.date().required('End Date is required') })
     .when('startDate', (startDate, schema) => startDate && schema.min(startDate)),
   roles: Yup.string().label('Roles and Responsibilities').min(60).max(200).required(),
   achievements: Yup.string().label('Achievements and Tasks').max(150),
