@@ -1,34 +1,31 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import OpenModal from '~/components/modal/OpenModal';
 import { View, EditGray, Trash, ViewHidden } from '~/assets/image';
 
-class EditOptions extends Component {
-  constructor({ isHidden, component, onEdit, onClose, showModal }) {
-    super();
+const EditOptions = ({ isHidden = false, showModal, onEdit, onClose, component }) => {
+  return (
+    <div className="edit-options">
+      <span className="edit-options__item">
+        <img src={isHidden ? ViewHidden : View} alt="View" />
+      </span>
+      <span className="edit-options__item" onClick={e => onEdit(e)}>
+        <img src={EditGray} alt="Edit" />
+      </span>
+      <span className="edit-options__item">
+        <img src={Trash} alt="Trash" />
+      </span>
+      {showModal && <OpenModal component={component} onClose={onClose} />}
+    </div>
+  );
+};
 
-    this.state = {
-      isHidden: isHidden,
-      showModal: false,
-      component: component,
-    };
-  }
-
-  render() {
-    return (
-      <div className="edit-options">
-        <span className="edit-options__item">
-          <img src={this.state.isHidden ? ViewHidden : View} alt="View" />
-        </span>
-        <span className="edit-options__item" onClick={e => this.props.onEdit(e)}>
-          <img src={EditGray} alt="Edit" />
-        </span>
-        <span className="edit-options__item">
-          <img src={Trash} alt="Trash" />
-        </span>
-        {this.props.showModal ? <OpenModal component={this.state.component} onClose={this.props.onClose} /> : ''}
-      </div>
-    );
-  }
-}
+EditOptions.propTypes = {
+  isHidden: PropTypes.bool,
+  showModal: PropTypes.bool,
+  onEdit: PropTypes.func,
+  onClose: PropTypes.func,
+  component: PropTypes.object,
+};
 
 export default EditOptions;
