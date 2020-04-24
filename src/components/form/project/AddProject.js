@@ -10,7 +10,7 @@ import InputRadio from '~/components/inputradio/InputRadio';
 
 const AddProject = () => {
   return (
-    <div className="form-container">
+    <div className="modal">
       <div className="form">
         <div className="card">
           <div className="close-option">
