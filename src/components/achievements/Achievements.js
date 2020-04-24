@@ -1,27 +1,56 @@
-import React from 'react';
-import CardHeader from '~/components/cardheader/CardHeader';
-import EditOptions from '~/components/editoptions/EditOptions';
+import React, { useContext } from 'react';
+
+import { AppContext } from '~/pages';
 import { Add } from '~/assets/image';
+import AchievementItem from './AchievementItem';
+import CardHeader from '~/components/cardheader/CardHeader';
 import CardFooter from '~/components/cardfooter/CardFooter';
 
 const Achievements = () => {
-	return (
-		<div className="achievements-block">
-			<div className="card">
-				<CardHeader title="Achievements" />
-				<div className="achievements">
-					<div className="achievements__row">
-						<div className="achievements__row-header">
-							<div className="sub-title">Headhunt Award</div>
-							<EditOptions />
-						</div>
-						<div className="achievements__year">December 2012</div>
-					</div>
-				</div>
-				<CardFooter icon={Add} label="Add another achievement" />
-			</div>
-		</div>
-	)
-}
+  const context = useContext(AppContext);
+  const preview = context.preview.get;
+  const achievements = context.data.get.achievements;
+
+  /**
+   * Update the hidden state of skill.
+   *
+   * @param {React.MouseEvent} e [ on click event ].
+   * @param {string} key [ name of a particular achievements].
+   */
+  const updateHiddenStateAchievement = (e, key) => {
+    e.preventDefault();
+
+    const data = context.data.get;
+
+    data['achievements'].find(({ name, hidden }, index) => {
+      if (name === key) {
+        const newState = !hidden;
+
+        data['achievements'][index].hidden = newState;
+        context.data.set(data); // new state of data
+      }
+    });
+  };
+
+  const achievementsList = achievements.map(({ name, date }) => (
+    <AchievementItem
+      key={name}
+      title={name}
+      date={date}
+      preview={preview}
+      onHiddenIconClicked={updateHiddenStateAchievement}
+    />
+  ));
+
+  return (
+    <div className="achievements-block">
+      <div className="card">
+        <CardHeader title="Achievements" />
+        {achievementsList}
+        <CardFooter icon={Add} hide={preview} label="Add another achievement" />
+      </div>
+    </div>
+  );
+};
 
 export default Achievements;

@@ -38,29 +38,29 @@
 
 // Media queries -- please use this one
 @mixin for-size($break) {
-  @if $break== "small" {
+  @if $break== 'small' {
     @media (min-width: $small) {
       // browser width >= 600px
       @content;
     }
-  } @else if $break== "medium" {
+  } @else if $break== 'medium' {
     @media (min-width: $medium) {
       // 800 px > browser width >= 600 px
       @content;
     }
-  } @else if $break== "large" {
+  } @else if $break== 'large' {
     @media (min-width: $large) {
       // browser width >= 800px
       @content;
     }
-  } @else if $break== "extra-large" {
+  } @else if $break== 'extra-large' {
     @media (min-width: $extra-large) {
       // browser width >= 800px
       @content;
     }
   } @else {
-    @if (type-of($break) == "number") {
-      @media (min-width: $break + "px") {
+    @if (type-of($break) == 'number') {
+      @media (min-width: $break + 'px') {
         // browser width >= given breakpoint in number
         @content;
       }
@@ -72,8 +72,8 @@
 
 // Media queries for both min-width and min-height
 @mixin for-sizes($width, $height) {
-  @if (type-of($width) == "number" and type-of($height) == "number") {
-    @media (min-width: $width + "px") and (min-height: $height + "px") {
+  @if (type-of($width) == 'number' and type-of($height) == 'number') {
+    @media (min-width: $width + 'px') and (min-height: $height + 'px') {
       // browser width >= given breakpoint in number and
       // browser height >= given breakpoint in number
       @content;
@@ -109,7 +109,7 @@
 
 //Pseudo-elements
 @mixin psuedo-el($el, $el-width: null, $el-height: null) {
-  @if $el== ":before" or $el== "after" {
+  @if $el== ':before' or $el== 'after' {
     &:#{$el} {
       @extend %pseudos;
       width: $el-width;
@@ -123,7 +123,7 @@
 
 //Set Background
 @mixin bg($img, $repeat: no-repeat, $position: 0 0, $size: cover) {
-  background-image: url("#{$path--rel}/#{$img}");
+  background-image: url('#{$path--rel}/#{$img}');
   background-repeat: $repeat;
   background-position: $position;
   background-size: $size;

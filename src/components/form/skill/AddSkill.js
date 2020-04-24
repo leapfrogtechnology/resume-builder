@@ -15,7 +15,7 @@ const AddContactInformation = () => {
           </div>
           <FormHeader title="Add Skill" />
           <div className="form__content">
-            <InputSelect label="Select your skill"/>
+            <InputSelect label="Select your skill" />
             <InputText label="Add Sub Skill" />
             <div className="form-button">
               <div className="form-button__left">
@@ -29,7 +29,7 @@ const AddContactInformation = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default AddContactInformation;
