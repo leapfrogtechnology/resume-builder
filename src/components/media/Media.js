@@ -6,7 +6,7 @@ const Media = ({ icon, label }) => {
       <span className="media__icon">{icon}</span>
       <span className="media__body">{label}</span>
     </div>
-  )
-}
+  );
+};
 
 export default Media;

@@ -1,6 +1,6 @@
 import React from 'react';
 import '~/pages/_app';
-import {Logo} from '~/assets/image';
+import { Logo } from '~/assets/image';
 import { DROPDOWN } from '~/components/icons/icon';
 import UserDetail from '~/components/userdetail/UserDetail';
 
@@ -12,9 +12,7 @@ const Header = () => {
           <div className="logo-wrapper">
             <img src={Logo} alt="Leapfrog" />
           </div>
-          <div className="header__app-info">
-            CV Builder
-          </div>
+          <div className="header__app-info">CV Builder</div>
         </div>
         <div className="header__right-content">
           <div className="profile">
@@ -22,9 +20,7 @@ const Header = () => {
               <div className="profile__name">Ribby Frog</div>
               <div className="profile__status">Employee</div>
             </div>
-            <div className="dropdown">
-              {DROPDOWN}
-            </div>
+            <div className="dropdown">{DROPDOWN}</div>
           </div>
         </div>
       </div>

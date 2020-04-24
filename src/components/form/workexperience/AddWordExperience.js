@@ -19,13 +19,24 @@ const AddWorkExperience = () => {
             <InputText label="Name of the organization" placeholder="eg. Apple" />
             <InputText label="Your Title or Position" placeholder="eg. Software Engineer" />
             <div className="form__date-field">
-              <InputDate label="Start Date" placeholder="Select date" modifier={true}/>
-              <InputDate label="End Date" placeholder="Select date" modifier={true}/>
+              <InputDate label="Start Date" placeholder="Select date" modifier={true} />
+              <InputDate label="End Date" placeholder="Select date" modifier={true} />
             </div>
             <CheckboxInput value="I currently work here" />
-            <InputText type="text-area" label="Describe Your Roles and Responsibilities" placeholder="eg. I am responsible for..." />
-            <InputText type="text-area" label="List out your Achievements and Tasks (optional)" placeholder="eg. I was awarded with..." />
-            <InputText label="Name of your Referee (optional)" placeholder="eg. someone we can reach out for more info if needed" />
+            <InputText
+              type="text-area"
+              label="Describe Your Roles and Responsibilities"
+              placeholder="eg. I am responsible for..."
+            />
+            <InputText
+              type="text-area"
+              label="List out your Achievements and Tasks (optional)"
+              placeholder="eg. I was awarded with..."
+            />
+            <InputText
+              label="Name of your Referee (optional)"
+              placeholder="eg. someone we can reach out for more info if needed"
+            />
             <InputText label="Contact number or phone (optional)" placeholder="eg. how we can contact your referee" />
             <div className="form-button">
               <div className="form-button__left">
@@ -40,7 +51,7 @@ const AddWorkExperience = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default AddWorkExperience;
