@@ -13,10 +13,6 @@ const Skills = () => {
     e.preventDefault();
     setModal(!showModel);
   };
-  const modalBtnHandler = e => {
-    e.preventDefault();
-    setModal(!showModel);
-  };
 
   const closeBtnHandler = e => {
     e.preventDefault();
