@@ -25,7 +25,7 @@ EditOptions.propTypes = {
   showModal: PropTypes.bool,
   onEdit: PropTypes.func,
   onClose: PropTypes.func,
-  component: PropTypes.object,
+  component: PropTypes.func,
 };
 
 export default EditOptions;
