@@ -2,13 +2,13 @@ import React from 'react';
 
 const CardHeader = ({ title, icon = null }) => {
 	return (
-		<div className="card-header">
-			<div className="card-header__l">
+		<div className="card__header">
+			<div className="card__header_l">
 				<div className="title">{title}</div>
 			</div>
 			{!icon ? ''
 				:
-				<div className="card-header__r">
+				<div className="card__header_r">
 					<img src={icon} alt="Edit" />
 				</div>
 			}

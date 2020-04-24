@@ -1,10 +1,10 @@
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .card {
+  @include e(header) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   @include e(footer) {
     display: flex;
     align-items: center;
@@ -17,11 +17,11 @@
     margin-right: 12px;
   }
 
-  @include m(empty){
+  @include m(empty) {
     text-align: center;
     padding: 68px 0;
 
-    .card__footer{
+    .card__footer {
       justify-content: center;
     }
   }
