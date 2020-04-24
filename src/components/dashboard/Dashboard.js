@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+
+import { FormContext } from '../FormContext';
 import Skills from '~/components/skills/Skills';
 import Sidenav from '~/components/sidenav/Sidenav';
 import Certificate from '~/components/certificate/Certificate';
@@ -7,8 +9,6 @@ import WorkExperience from '~/components/workexperience/WorkExperience';
 import ProjectsUndertaken from '~/components/projectsundertaken/ProjectsUndertaken';
 import PersonalInformation from '~/components/personalinformation/PersonalInformation';
 
-import { FormContext } from '../FormContext';
-
 const Dashboard = () => {
   const [data, setData] = useState({});
 
@@ -16,17 +16,17 @@ const Dashboard = () => {
     <section className="container">
       <pre>{JSON.stringify(data, null, 2)}</pre>
       <div className="main-container">
-        <div className="main-content">
-          <FormContext.Provider value={{ data, setData }}>
+        <FormContext.Provider value={{ data, setData }}>
+          <div className="main-content">
             <PersonalInformation />
             <Skills />
             <WorkExperience />
             <ProjectsUndertaken />
             <Achievements />
             <Certificate />
-          </FormContext.Provider>
-        </div>
-        <Sidenav />
+          </div>
+          <Sidenav />
+        </FormContext.Provider>
       </div>
     </section>
   );
