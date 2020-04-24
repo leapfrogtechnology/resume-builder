@@ -16,4 +16,13 @@
   @include e(footer-icon) {
     margin-right: 12px;
   }
+
+  @include m(empty){
+    text-align: center;
+    padding: 68px 0;
+
+    .card__footer{
+      justify-content: center;
+    }
+  }
 }
