@@ -9,9 +9,23 @@ import InputDate from '~/components/inputdate/InputDate';
 import FormHeader from '~/components/formheader/FormHeader';
 import CheckboxInput from '~/components/checkbox/CheckboxInput';
 import { validateWorkExperience } from '~/validations/WorkExperience';
+import * as workExperienceUtils from '../../../utilities/objects/WorkExperience';
 
 const AddWorkExperience = () => {
   const { data, setData } = useContext(FormContext);
+
+  const handleSubmit = values => {
+    const workExperienceObj = workExperienceUtils.getWorkExperienceObject({ ...values });
+
+    if (data.workExperience) {
+      data['workExperience'].push(workExperienceObj);
+    } else {
+      data['workExperience'] = [];
+      data['workExperience'].push(workExperienceObj);
+    }
+
+    setData(prevState => ({ ...prevState, ...data }));
+  };
 
   return (
     <>
@@ -29,7 +43,7 @@ const AddWorkExperience = () => {
           contactReferee: '',
         }}
         onSubmit={values => {
-          setData(prevState => ({ ...prevState, ...values }));
+          handleSubmit(values);
         }}
         validationSchema={validateWorkExperience}
       >
