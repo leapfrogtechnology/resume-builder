@@ -1,6 +1,7 @@
 import React from 'react';
 import { useField } from 'formik';
 
+import PropTypes from 'prop-types';
 import { Calendar } from '~/assets/image';
 
 const InputDate = ({ label, placeholder, modifier, setFieldValue, ...props }) => {
@@ -16,6 +17,12 @@ const InputDate = ({ label, placeholder, modifier, setFieldValue, ...props }) =>
       {meta.touched && meta.error ? <div className="error">{meta.error}</div> : null}
     </div>
   );
+};
+
+InputDate.propTypes = {
+  label: PropTypes.string,
+  placeholder: PropTypes.string,
+  modifier: PropTypes.bool,
 };
 
 export default InputDate;

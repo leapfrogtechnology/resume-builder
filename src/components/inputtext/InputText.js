@@ -2,6 +2,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { useField } from 'formik';
+import PropTypes from 'prop-types';
 
 const InputText = ({ label, placeholder, ...props }) => {
   const [field, meta] = useField(props);
@@ -25,6 +26,11 @@ const InputText = ({ label, placeholder, ...props }) => {
       {meta.touched && meta.error ? <div className="error">{meta.error}</div> : null}
     </div>
   );
+};
+
+InputText.propTypes = {
+  label: PropTypes.string,
+  placeholder: PropTypes.string,
 };
 
 export default InputText;

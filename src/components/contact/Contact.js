@@ -1,33 +1,46 @@
+import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import { View } from '~/assets/image';
-import AddContactInformation from '../form/contact/AddContact';
-import OpenModal from '../modal/OpenModal';
 
-const Contact = ({ label, value }) => {
-  const [showModel, setModal] = useState(false);
+import { View, ViewHidden } from '~/assets/image';
 
-  const editBtnHandler = e => {
+const Contact = ({ id, label, value, preview, onHiddenIconClicked }) => {
+  const [hidden, setHidden] = useState(false);
+
+  const onHiddenBtnClicked = e => {
     e.preventDefault();
-    setModal(!showModel);
+    setHidden(!hidden);
+    onHiddenIconClicked(e, id);
   };
 
-  const closeBtnHandler = e => {
-    e.preventDefault();
-    setModal(!showModel);
-  };
+  if (!value || (preview && hidden)) {
+    return <></>;
+  }
 
   return (
     <div className="contact-content">
       <div className="contact-content__l">
-        <div className="key">{label}</div>
+        <div className="key">
+          {label}
+          {hidden && !preview && <span className="hidden-tag">Hidden</span>}
+        </div>
         <div className="value text-link">{value}</div>
       </div>
-      <div className="contact-content__r" onClick={editBtnHandler}>
-        <img src={View} alt="Edit" />
-      </div>
-      {showModel && <OpenModal component={AddContactInformation} onClose={closeBtnHandler} />}
+      {!preview && (
+        <div className="contact-content__r" onClick={e => onHiddenBtnClicked(e)}>
+          <img src={!hidden ? View : ViewHidden} alt="Edit" />
+        </div>
+      )}
+      
     </div>
   );
+};
+
+Contact.propTypes = {
+  id: PropTypes.string,
+  label: PropTypes.string,
+  value: PropTypes.string,
+  preview: PropTypes.bool,
+  onHiddenIconClicked: PropTypes.func,
 };
 
 export default Contact;
