@@ -10,7 +10,7 @@ import FormHeader from '~/components/formheader/FormHeader';
 import * as personalInfoUtils from '~/utilities/objects/PersonalInformation';
 
 const AddPersonalInformation = () => {
-  const { data, setData } = useContext(FormContext);
+  const { preview, data } = useContext(FormContext);
 
   const validatePersonalInformation = Yup.object().shape({
     name: Yup.string().label('Name').min(10).max(35, 'Limit 35 characters').required(),
@@ -20,7 +20,7 @@ const AddPersonalInformation = () => {
 
   const handleSubmit = values => {
     const personalInfoObj = personalInfoUtils.getPersonalInfoObject({ ...values });
-    setData(prevState => ({ ...prevState, ...personalInfoObj }));
+    data.set(prevState => ({ ...prevState, ...personalInfoObj }));
   };
 
   return (

@@ -12,19 +12,19 @@ import { validateWorkExperience } from '~/validations/WorkExperience';
 import * as workExperienceUtils from '../../../utilities/objects/WorkExperience';
 
 const AddWorkExperience = () => {
-  const { data, setData } = useContext(FormContext);
+  const { preview, data } = useContext(FormContext);
 
   const handleSubmit = values => {
     const workExperienceObj = workExperienceUtils.getWorkExperienceObject({ ...values });
 
-    if (data.workExperience) {
-      data['workExperience'].push(workExperienceObj);
+    if (data.get.workExperience) {
+      data.get['workExperience'].push(workExperienceObj);
     } else {
-      data['workExperience'] = [];
-      data['workExperience'].push(workExperienceObj);
+      data.get['workExperience'] = [];
+      data.get['workExperience'].push(workExperienceObj);
     }
 
-    setData(prevState => ({ ...prevState, ...data }));
+    data.set(prevState => ({ ...prevState, ...data }));
   };
 
   return (

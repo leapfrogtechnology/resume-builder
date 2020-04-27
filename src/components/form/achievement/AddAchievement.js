@@ -10,19 +10,19 @@ import * as achievementUtils from '~/utilities/objects/Achievement';
 import validateAchievementInformation from '~/validations/Achievement';
 
 const AddAchievement = () => {
-  const { data, setData } = useContext(FormContext);
+  const { preview, data } = useContext(FormContext);
 
   const handleSubmit = values => {
     const achievementObj = achievementUtils.getAchievementObject({ ...values });
 
-    if (data.achievements) {
-      data['achievements'].push(achievementObj);
+    if (data.get.achievements) {
+      data.get['achievements'].push(achievementObj);
     } else {
-      data['achievements'] = [];
-      data['achievements'].push(achievementObj);
+      data.get['achievements'] = [];
+      data.get['achievements'].push(achievementObj);
     }
 
-    setData(prevState => ({ ...prevState, ...data }));
+    data.set(prevState => ({ ...prevState, ...data }));
   };
 
   return (

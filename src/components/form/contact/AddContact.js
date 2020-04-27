@@ -9,7 +9,7 @@ import * as contactUtils from '~/utilities/objects/Contact';
 import validateContactInformation from '~/validations/Contact';
 
 const AddContactInformation = () => {
-  const { data, setData } = useContext(FormContext);
+  const { preview, data } = useContext(FormContext);
 
   const handleSubmit = values => {
     console.log(values);

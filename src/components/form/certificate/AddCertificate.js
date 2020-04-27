@@ -11,19 +11,19 @@ import * as certificateUtils from '~/utilities/objects/Certificate';
 import validateCertificateInformation from '~/validations/Certificate';
 
 const AddCertificate = () => {
-  const { data, setData } = useContext(FormContext);
+  const { preview, data } = useContext(FormContext);
 
   const handleSubmit = values => {
     const certificateObj = certificateUtils.getCertificateObject({ ...values });
 
-    if (data.certificates) {
-      data['certificates'].push(certificateObj);
+    if (data.get.certificates) {
+      data.get['certificates'].push(certificateObj);
     } else {
-      data['certificates'] = [];
-      data['certificates'].push(certificateObj);
+      data.get['certificates'] = [];
+      data.get['certificates'].push(certificateObj);
     }
 
-    setData(prevState => ({ ...prevState, ...data }));
+    data.set(prevState => ({ ...prevState, ...data }));
   };
 
   return (

@@ -12,7 +12,7 @@ import InputSelect from '~/components/inputselect/InputSelect';
 import * as skillUtils from '../../../utilities/objects/Skill';
 
 const AddSkill = () => {
-  const { data, setData } = useContext(FormContext);
+  const { preview, data } = useContext(FormContext);
 
   const validateSkill = Yup.object().shape({
     skill: Yup.string().required(),
@@ -21,14 +21,14 @@ const AddSkill = () => {
   const submitHandler = values => {
     const skillObj = skillUtils.getSkillObject({ ...values });
 
-    if (data.skills) {
-      data['skills'].push(skillObj);
+    if (data.get.skills) {
+      data.get['skills'].push(skillObj);
     } else {
-      data['skills'] = [];
-      data['skills'].push(skillObj);
+      data.get['skills'] = [];
+      data.get['skills'].push(skillObj);
     }
 
-    setData(prevState => ({ ...prevState, ...data }));
+    data.set(prevState => ({ ...prevState, ...data }));
   };
 
   return (

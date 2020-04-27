@@ -13,16 +13,16 @@ import validateProjectInformation from '~/validations/Project';
 import CheckboxInput from '~/components/checkbox/CheckboxInput';
 
 const AddProject = () => {
-  const { data, setData } = useContext(FormContext);
+  const { preview, data } = useContext(FormContext);
 
   const handleSubmit = values => {
     const projectObj = projectUtils.getProjectObject({ ...values });
 
-    if (data.projects) {
-      data['projects'].push(projectObj);
+    if (data.get.projects) {
+      data.get['projects'].push(projectObj);
     } else {
-      data['projects'] = [];
-      data['projects'].push(projectObj);
+      data.get['projects'] = [];
+      data.get['projects'].push(projectObj);
     }
 
     setData(prevState => ({ ...prevState, ...data }));
