@@ -3,9 +3,9 @@ import React, { useContext, useState } from 'react';
 import SkillItem from './SkillItem';
 import { Add } from '~/assets/image';
 import { AppContext } from '~/pages';
+import AddSkill from '../form/skill/AddSkill';
 import CardHeader from '~/components/cardheader/CardHeader';
 import CardFooter from '~/components/cardfooter/CardFooter';
-import AddSkill from '../form/skill/AddSkill';
 
 const Skills = () => {
   const context = useContext(AppContext);
@@ -54,6 +54,8 @@ const Skills = () => {
       values={subSkills}
       preview={preview}
       onHiddenIconClicked={updateHiddenStateSkill}
+      onEdit={editBtnHandler}
+      onClose={closeBtnHandler}
     />
   ));
 
