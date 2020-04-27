@@ -40,7 +40,6 @@ const Sidenav = () => {
 
     data[key].hidden = newState;
     context.data.set(data);
-    console.log(context.data.get);
   };
 
   return (

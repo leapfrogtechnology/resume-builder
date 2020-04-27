@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { Warning } from '~/assets/image';
 import Button from '~/components/button/Button';
 import CardHeader from '~/components/cardheader/CardHeader';
@@ -31,6 +33,11 @@ const DeletePopup = ({ item, entry_title }) => {
       </div>
     </div>
   );
+};
+
+DeletePopup.propTypes = {
+  item: PropTypes.object,
+  entry_title: PropTypes.object,
 };
 
 export default DeletePopup;

@@ -17,6 +17,7 @@ const AddProject = () => {
 
   const handleSubmit = values => {
     const projectObj = projectUtils.getProjectObject({ ...values });
+
     if (data.projects) {
       data['projects'].push(projectObj);
     } else {

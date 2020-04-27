@@ -5,10 +5,18 @@ import Button from '~/components/button/Button';
 import { FormContext } from '../../FormContext';
 import InputText from '~/components/inputtext/InputText';
 import FormHeader from '~/components/formheader/FormHeader';
+import * as contactUtils from '~/utilities/objects/Contact';
 import validateContactInformation from '~/validations/Contact';
 
 const AddContactInformation = () => {
   const { data, setData } = useContext(FormContext);
+
+  const handleSubmit = values => {
+    console.log(values);
+    // const contactObj = contactUtils.getContactObject({ ...values });
+    // setData(prevState => ({ ...prevState, ...contactObj }));
+    // console.log(data);
+  };
 
   return (
     <>
@@ -22,7 +30,8 @@ const AddContactInformation = () => {
           linkedIn: '',
         }}
         onSubmit={values => {
-          setData(prevState => ({ ...prevState, ...values }));
+          console.log('inside submit');
+          handleSubmit(values);
         }}
         validationSchema={validateContactInformation}
       >

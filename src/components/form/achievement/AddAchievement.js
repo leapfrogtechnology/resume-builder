@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { Formik, Form } from 'formik';
 import React, { useContext } from 'react';
 
@@ -15,6 +14,7 @@ const AddAchievement = () => {
 
   const handleSubmit = values => {
     const achievementObj = achievementUtils.getAchievementObject({ ...values });
+
     if (data.achievements) {
       data['achievements'].push(achievementObj);
     } else {

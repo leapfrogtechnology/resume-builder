@@ -15,6 +15,7 @@ const AddCertificate = () => {
 
   const handleSubmit = values => {
     const certificateObj = certificateUtils.getCertificateObject({ ...values });
+
     if (data.certificates) {
       data['certificates'].push(certificateObj);
     } else {

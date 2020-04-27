@@ -27,6 +27,7 @@ EditOptions.propTypes = {
   showModal: PropTypes.bool,
   onEdit: PropTypes.func,
   onClose: PropTypes.func,
+  onDelete: PropTypes.func,
   component: PropTypes.func,
   onHiddenIconClicked: PropTypes.func,
 };

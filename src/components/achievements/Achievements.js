@@ -12,13 +12,11 @@ const Achievements = () => {
 
   const editBtnHandler = e => {
     e.preventDefault();
-    console.log('ppp');
     setModel(!showModel);
   };
 
   const closeBtnHandler = e => {
     e.preventDefault();
-    console.log('hello');
     setModel(!showModel);
   };
 

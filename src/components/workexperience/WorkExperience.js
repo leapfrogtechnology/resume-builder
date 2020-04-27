@@ -64,7 +64,7 @@ const WorkExperience = () => {
   );
 
   return (
-    <>
+    <div className="content-block">
       <CardHeader title="Work Experience" />
       {workExperienceList}
       <CardFooter
@@ -76,7 +76,7 @@ const WorkExperience = () => {
         component={AddWorkExperience}
         onClose={closeBtnHandler}
       />
-    </>
+    </div>
   );
 };
 

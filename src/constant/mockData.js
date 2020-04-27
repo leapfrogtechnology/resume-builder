@@ -13,7 +13,7 @@ const DATA = {
   },
   // Contact Information
   email: { value: 'ribby@lftechnology.com', hidden: false },
-  phone: { value: 9841000000, hidden: false },
+  phone: { value: '9841000000', hidden: false },
   github: { value: 'ribbyX', hidden: false },
   stackOverflow: { value: 'https://github.com/ribbX', hidden: false },
   linkedIn: { value: 'https://linkedIn.com/ribbX', hidden: false },

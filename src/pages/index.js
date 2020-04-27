@@ -40,7 +40,7 @@ const App = () => {
           experience="5 years professional experience"
           onPreviewBtnClicked={handleOnPreviewBtnClicked}
         />
-        <Dashboard profile={DATA} preview={preview} />
+        <Dashboard />
       </AppContext.Provider>
     </div>
   );

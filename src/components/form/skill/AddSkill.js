@@ -1,7 +1,7 @@
 /* eslint-disable require-jsdoc */
 /* eslint-disable react/prop-types */
 import * as Yup from 'yup';
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Formik, Form } from 'formik';
 
 import Button from '~/components/button/Button';

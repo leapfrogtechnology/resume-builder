@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React, { useContext, useState } from 'react';
 
 import { Edit } from '~/assets/image';
@@ -88,10 +87,6 @@ const PersonalInformation = () => {
       )}
     </>
   );
-};
-
-PersonalInformation.propTypes = {
-  preview: PropTypes.bool,
 };
 
 export default PersonalInformation;
