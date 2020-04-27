@@ -7,11 +7,12 @@ import PersonalInfoItem from './PersonalInfoItem';
 import CardHeader from '~/components/cardheader/CardHeader';
 import AddPersonalInformation from '~/components/form/personalinformation/AddPersonalInformation';
 
-const PersonalInformation = ({ preview }) => {
+const PersonalInformation = () => {
   const bold = true;
   const context = useContext(AppContext);
 
   const previousData = context.data.get;
+  const preview = context.preview.get;
 
   const name = previousData.name;
   const role = previousData.role;
