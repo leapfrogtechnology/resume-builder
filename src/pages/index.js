@@ -4,13 +4,14 @@ import Head from 'next/head';
 import DATA from '../constant/mockData';
 import Header from '~/components/header/Header';
 import Dashboard from '~/components/dashboard/Dashboard';
+import { FormContext } from '../components/FormContext';
 
 export const AppContext = React.createContext({});
 
 const App = () => {
   // App state
   const [preview, setPreview] = useState(false);
-  const [data, updateData] = useState(DATA);
+  const [data, updateData] = useState({ name: 'Ribby McFroggy' });
 
   const store = {
     preview: { get: preview, set: setPreview },
@@ -32,7 +33,7 @@ const App = () => {
         <meta httpEquiv="X-UA-Compatible" content="ie=edge" />
         <title>ResumeBuilder</title>
       </Head>
-      <AppContext.Provider value={store}>
+      <FormContext.Provider value={store}>
         <Header
           name={username}
           status="Employee"
@@ -41,7 +42,7 @@ const App = () => {
           onPreviewBtnClicked={handleOnPreviewBtnClicked}
         />
         <Dashboard />
-      </AppContext.Provider>
+      </FormContext.Provider>
     </div>
   );
 };
