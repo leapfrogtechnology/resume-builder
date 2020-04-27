@@ -15,15 +15,6 @@
     padding-bottom: 4px;
   }
 
-  @include e(year) {
-    color: $mine-shaft;
-  }
-
-  @include e(description) {
-    padding-top: 6px;
-    color: $dusty-gray;
-  }
-
   .arrow-icon {
     margin-left: 6px;
     display: inline-block;

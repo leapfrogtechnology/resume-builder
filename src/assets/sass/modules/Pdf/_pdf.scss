@@ -14,17 +14,50 @@
     box-shadow: unset;
   }
 
-  .card__footer{
+  .card__footer {
     display: none;
   }
 
-  .edit-options{
+  .edit-options {
     display: none;
   }
 
-  .work-experience{
-    &:first-child{
-      padding-top: 0;
+  .arrow-icon {
+    display: none;
+  }
+
+  .year, .year--dark {
+    color: $black;
+  }
+  
+  .sub-title {
+    font: normal bold 12px/14px $font-primary;
+  }
+
+  .description{
+    color: $black;
+  }
+
+  .text-link{
+    color: $black;
+  }
+
+  .work-experience,
+  .projects-undertaken,
+  .achievements,
+  .certificate {
+    padding-top: 15px;
+    font: normal normal 12px/14px $font-primary;
+  }
+
+  .work-experience__row,
+  .projects-undertaken__row,
+  .achievements__row,
+  .certificate__row {
+    border-bottom: 0;
+    padding-top: 0;
+    &:last-child {
+      padding: 0;
     }
   }
 }

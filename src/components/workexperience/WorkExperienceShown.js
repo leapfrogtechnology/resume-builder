@@ -40,7 +40,7 @@ const WorkExperienceShown = ({
           {!preview && <EditOptions isHidden={hidden} onHiddenIconClicked={onHiddenIconClickedHandler} />}
         </div>
         <div className="work-experience__position">{position}</div>
-        <div className="work-experience__exp-year">
+        <div className="year">
           <span className="start-date">{startDate}</span> - <span className="end-date">{endDate}</span>(3 years and 3
           months)
         </div>

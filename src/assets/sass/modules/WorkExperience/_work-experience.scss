@@ -14,8 +14,7 @@
     padding-bottom: 4px;
   }
 
-  @include e(exp-year) {
-    color: $dusty-gray;
+  .year{
     padding: 6px 0 12px;
   }
 

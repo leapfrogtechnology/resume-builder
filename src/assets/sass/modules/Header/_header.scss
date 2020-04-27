@@ -32,6 +32,10 @@
     @include m(large){
       font: normal bold 24px/28px $font-primary;
     }
+
+    @include m(dark){
+      color: $black;
+    }
   }
 
   @include e(status) {

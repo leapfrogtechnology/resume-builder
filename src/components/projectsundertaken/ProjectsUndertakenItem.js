@@ -24,11 +24,11 @@ const ProjectsUndertakenItem = ({ title, startDate, endDate, description, previe
         </div>
         {!preview && <EditOptions isHidden={hidden} onHiddenIconClicked={onHiddenBtnClicked} />}
       </div>
-      <div className="projects-undertaken__period">
+      <div className="year year--dark">
         <span className="start-date">{startDate}</span> - <span className="end-date">{endDate}</span>(3 years and 3
         months)
       </div>
-      <p className="projects-undertaken__description">{description}</p>
+      <p className="description">{description}</p>
     </div>
   );
 };
