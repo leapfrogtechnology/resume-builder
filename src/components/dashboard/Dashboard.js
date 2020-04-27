@@ -12,23 +12,18 @@ import ProjectsUndertaken from '~/components/projectsundertaken/ProjectsUndertak
 import PersonalInformation from '~/components/personalinformation/PersonalInformation';
 
 const Dashboard = () => {
-  const [data, setData] = useState({});
-
   return (
     <section className="container">
-      <pre>{JSON.stringify(data, null, 2)}</pre>
       <div className="main-container">
-        <FormContext.Provider value={{ data, setData }}>
-          <div className="main-content">
-            <ContentBlock children={PersonalInformation} />
-            <ContentBlock children={Skills} />
-            <ContentBlock children={WorkExperience} />
-            <ContentBlock children={ProjectsUndertaken} />
-            <ContentBlock children={Achievements} />
-            <ContentBlock children={Certificate} />
-          </div>
-          <Sidenav />
-        </FormContext.Provider>
+        <div className="main-content">
+          <ContentBlock children={PersonalInformation} />
+          <ContentBlock children={Skills} />
+          <ContentBlock children={WorkExperience} />
+          <ContentBlock children={ProjectsUndertaken} />
+          <ContentBlock children={Achievements} />
+          <ContentBlock children={Certificate} />
+        </div>
+        <Sidenav />
       </div>
     </section>
   );
