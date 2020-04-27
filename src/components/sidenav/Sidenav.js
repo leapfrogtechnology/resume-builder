@@ -3,6 +3,7 @@ import React, { useContext } from 'react';
 import { AppContext } from '~/pages';
 import Contact from '~/components/contact/Contact';
 import CardHeader from '~/components/cardheader/CardHeader';
+import * as pdfGenerator from '~/utilities/resume/PdfGenerator.js';
 import { Edit, ProfileImage, Trash, Download, Copy, Email, Check, Delete } from '~/assets/image';
 
 const Sidenav = () => {
@@ -94,7 +95,9 @@ const Sidenav = () => {
                 <span className="sidenav__cv-action-icon">
                   <img src={Download} alt="Edit" />
                 </span>
-                <span className="sidenav__cv-action-label text-link">Download PDF</span>
+                <span className="sidenav__cv-action-label text-link" onClick={e => pdfGenerator.downloadPDF(e)}>
+                  Download PDF
+                </span>
               </li>
               <li className="sidenav__cv-action">
                 <span className="sidenav__cv-action-icon">
