@@ -7,6 +7,7 @@ import Button from '~/components/button/Button';
 import { FormContext } from '../../FormContext';
 import InputText from '~/components/inputtext/InputText';
 import FormHeader from '~/components/formheader/FormHeader';
+import * as personalInfoUtils from '~/utilities/objects/PersonalInformation';
 
 const AddPersonalInformation = () => {
   const { data, setData } = useContext(FormContext);
@@ -16,6 +17,11 @@ const AddPersonalInformation = () => {
     role: Yup.string().label('Role').max(40, 'Limit 40 characters').required(),
     introduction: Yup.string().label('Introduction').max(200, 'Limit 200 characters').required(),
   });
+
+  const handleSubmit = values => {
+    const personalInfoObj = personalInfoUtils.getPersonalInfoObject({ ...values });
+    setData(prevState => ({ ...prevState, ...personalInfoObj }));
+  };
 
   return (
     <>
@@ -27,7 +33,7 @@ const AddPersonalInformation = () => {
           introduction: '',
         }}
         onSubmit={values => {
-          setData(prevState => ({ ...prevState, ...values }));
+          handleSubmit(values);
         }}
         validationSchema={validatePersonalInformation}
       >
