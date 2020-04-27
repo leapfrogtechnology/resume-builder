@@ -8,6 +8,7 @@ import Achievements from '~/components/achievements/Achievements';
 import WorkExperience from '~/components/workexperience/WorkExperience';
 import ProjectsUndertaken from '~/components/projectsundertaken/ProjectsUndertaken';
 import PersonalInformation from '~/components/personalinformation/PersonalInformation';
+import Pdf from '../pdf/Pdf';
 
 const Dashboard = ({ profile, preview }) => {
   return (
@@ -20,6 +21,7 @@ const Dashboard = ({ profile, preview }) => {
           <ProjectsUndertaken />
           <Achievements />
           <Certificate />
+          <Pdf />
         </div>
         <Sidenav />
       </div>
