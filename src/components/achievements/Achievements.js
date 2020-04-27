@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 
-import { AppContext } from '~/pages';
 import { Add } from '~/assets/image';
+import { FormContext } from '../FormContext';
 import AchievementItem from './AchievementItem';
 import CardHeader from '~/components/cardheader/CardHeader';
 import CardFooter from '~/components/cardfooter/CardFooter';
@@ -20,7 +20,7 @@ const Achievements = () => {
     setModel(!showModel);
   };
 
-  const context = useContext(AppContext);
+  const context = useContext(FormContext);
   const preview = context.preview.get;
   const achievements = context.data.get.achievements;
 
@@ -44,6 +44,10 @@ const Achievements = () => {
       }
     });
   };
+
+  if (!achievements) {
+    return <></>;
+  }
 
   const achievementsList = achievements.map(({ name, date }) => (
     <AchievementItem

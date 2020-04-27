@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 
-import { AppContext } from '~/pages';
+import { FormContext } from '../FormContext';
 import Contact from '~/components/contact/Contact';
 import CardHeader from '~/components/cardheader/CardHeader';
 import AddContact from '~/components/form/contact/AddContact';
@@ -18,7 +18,8 @@ const Sidenav = () => {
     e.preventDefault();
     setModal(!showModal);
   };
-  const context = useContext(AppContext);
+
+  const context = useContext(FormContext);
   const preview = context.preview.get;
   const email = context.data.get.email;
   const phone = context.data.get.phone;
@@ -72,34 +73,42 @@ const Sidenav = () => {
               onClose={closeBtnHandler}
               showModal={showModal}
             />
-            <Contact
-              id="email"
-              label="Email Address"
-              value={email.value}
-              preview={preview}
-              onHiddenIconClicked={updateHiddenStateContact}
-            />
-            <Contact
-              id="phone"
-              label="Phone Number"
-              value={phone.value}
-              preview={preview}
-              onHiddenIconClicked={updateHiddenStateContact}
-            />
-            <Contact
-              id="github"
-              label="GitHub"
-              value={github.value}
-              preview={preview}
-              onHiddenIconClicked={updateHiddenStateContact}
-            />
-            <Contact
-              id="linkedIn"
-              label="LinkedIn"
-              value={linkedIn.value}
-              preview={preview}
-              onHiddenIconClicked={updateHiddenStateContact}
-            />
+            {email && (
+              <Contact
+                id="email"
+                label="Email Address"
+                value={email.value}
+                preview={preview}
+                onHiddenIconClicked={updateHiddenStateContact}
+              />
+            )}
+            {phone && (
+              <Contact
+                id="phone"
+                label="Phone Number"
+                value={phone.value}
+                preview={preview}
+                onHiddenIconClicked={updateHiddenStateContact}
+              />
+            )}
+            {github && (
+              <Contact
+                id="github"
+                label="GitHub"
+                value={github.value}
+                preview={preview}
+                onHiddenIconClicked={updateHiddenStateContact}
+              />
+            )}
+            {linkedIn && (
+              <Contact
+                id="linkedIn"
+                label="LinkedIn"
+                value={linkedIn.value}
+                preview={preview}
+                onHiddenIconClicked={updateHiddenStateContact}
+              />
+            )}
           </div>
         </div>
       </div>

@@ -2,13 +2,13 @@ import React, { useContext, useState } from 'react';
 
 import SkillItem from './SkillItem';
 import { Add } from '~/assets/image';
-import { AppContext } from '~/pages';
+import { FormContext } from '../FormContext';
 import AddSkill from '../form/skill/AddSkill';
 import CardHeader from '~/components/cardheader/CardHeader';
 import CardFooter from '~/components/cardfooter/CardFooter';
 
 const Skills = () => {
-  const context = useContext(AppContext);
+  const context = useContext(FormContext);
 
   const preview = context.preview.get;
   // previous state of data
@@ -46,6 +46,10 @@ const Skills = () => {
       }
     });
   };
+
+  if (!skills) {
+    return <></>;
+  }
 
   const skillsList = skills.map(({ name, label, subSkills }) => (
     <SkillItem

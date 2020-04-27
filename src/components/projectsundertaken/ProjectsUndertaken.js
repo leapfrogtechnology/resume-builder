@@ -1,14 +1,14 @@
 import React, { useContext, useState } from 'react';
 
-import { AppContext } from '~/pages';
 import { Add } from '~/assets/image';
+import { FormContext } from '../FormContext';
+import AddProject from '../form/project/AddProject';
 import CardHeader from '~/components/cardheader/CardHeader';
 import CardFooter from '~/components/cardfooter/CardFooter';
 import ProjectsUndertakenItem from './ProjectsUndertakenItem';
-import AddProject from '../form/project/AddProject';
 
 const ProjectsUndertaken = () => {
-  const context = useContext(AppContext);
+  const context = useContext(FormContext);
 
   const preview = context.preview.get;
   const projects = context.data.get.projects;
@@ -45,6 +45,10 @@ const ProjectsUndertaken = () => {
       }
     });
   };
+
+  if (!projects) {
+    return <></>;
+  }
 
   const projectsList = projects.map(({ name, startDate, endDate, description }) => (
     <ProjectsUndertakenItem

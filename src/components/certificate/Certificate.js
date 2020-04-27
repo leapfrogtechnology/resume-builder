@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 
-import { AppContext } from '~/pages';
 import { Add } from '~/assets/image';
+import { FormContext } from '../FormContext';
 import CertificateItem from './CertificateItem';
 import CardFooter from '~/components/cardfooter/CardFooter';
 import CardHeader from '~/components/cardheader/CardHeader';
@@ -20,7 +20,7 @@ const Certificate = () => {
     setModel(!showModel);
   };
 
-  const context = useContext(AppContext);
+  const context = useContext(FormContext);
   const certificates = context.data.get.certificates;
   const preview = context.preview.get;
 
@@ -44,6 +44,10 @@ const Certificate = () => {
       }
     });
   };
+
+  if (!certificates) {
+    return <></>;
+  }
 
   const certificatesList = certificates.map(({ name, link, date, description }) => (
     <CertificateItem

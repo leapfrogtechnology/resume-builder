@@ -1,14 +1,14 @@
 import React, { useContext, useState } from 'react';
 
-import { AppContext } from '~/pages';
 import { Add } from '~/assets/image';
+import { FormContext } from '../FormContext';
 import WorkExperienceShown from './WorkExperienceShown';
 import CardHeader from '~/components/cardheader/CardHeader';
 import CardFooter from '~/components/cardfooter/CardFooter';
 import AddWorkExperience from '../form/workexperience/AddWorkExperience';
 
 const WorkExperience = () => {
-  const context = useContext(AppContext);
+  const context = useContext(FormContext);
   const preview = context.preview.get;
   const workExperience = context.data.get.workExperience;
 
@@ -44,6 +44,10 @@ const WorkExperience = () => {
       }
     });
   };
+
+  if (!workExperience) {
+    return <></>;
+  }
 
   const workExperienceList = workExperience.map(
     ({ name, position, startDate, endDate, responsibilities, achievements, refereeName, refereeContact }, index) => (

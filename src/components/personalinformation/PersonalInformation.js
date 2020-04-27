@@ -1,14 +1,14 @@
 import React, { useContext, useState } from 'react';
 
 import { Edit } from '~/assets/image';
-import { AppContext } from '../../pages';
+import { FormContext } from '../FormContext';
 import PersonalInfoItem from './PersonalInfoItem';
 import CardHeader from '~/components/cardheader/CardHeader';
 import AddPersonalInformation from '~/components/form/personalinformation/AddPersonalInformation';
 
 const PersonalInformation = () => {
   const bold = true;
-  const context = useContext(AppContext);
+  const context = useContext(FormContext);
 
   const previousData = context.data.get;
   const preview = context.preview.get;
