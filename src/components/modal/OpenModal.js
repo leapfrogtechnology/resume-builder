@@ -6,10 +6,10 @@ const OpenModal = ({ component, onClose, showModal }) => {
   return (
     <div className="modal-container">
       <div className="form">
-        <Card children={Component} onClose={onClose} showModal={showModal}/>
+        <Card children={Component} onClose={onClose} showModal={showModal} />
       </div>
     </div>
-  )
+  );
 };
 
 export default OpenModal;

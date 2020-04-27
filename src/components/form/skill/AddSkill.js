@@ -1,14 +1,15 @@
 /* eslint-disable require-jsdoc */
 /* eslint-disable react/prop-types */
 import * as Yup from 'yup';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Formik, Form } from 'formik';
 
 import Button from '~/components/button/Button';
+import { FormContext } from '../../FormContext';
 import InputText from '~/components/inputtext/InputText';
 import FormHeader from '~/components/formheader/FormHeader';
 import InputSelect from '~/components/inputselect/InputSelect';
-import { FormContext } from '../../FormContext';
+import * as skillUtils from '../../../utilities/objects/Skill';
 
 const AddSkill = () => {
   const { data, setData } = useContext(FormContext);
@@ -16,6 +17,20 @@ const AddSkill = () => {
   const validateSkill = Yup.object().shape({
     skill: Yup.string().required(),
   });
+
+  const submitHandler = values => {
+    const { skill, subSkills } = values;
+    const skillObj = skillUtils.getSkillObject(skill, subSkills);
+
+    if (data.skills) {
+      data['skills'].push(skillObj);
+    } else {
+      data['skills'] = [];
+      data['skills'].push(skillObj);
+    }
+
+    setData(prevState => ({ ...prevState, ...data }));
+  };
 
   return (
     <>
@@ -26,24 +41,27 @@ const AddSkill = () => {
           subSkills: '',
         }}
         onSubmit={values => {
-          setData(prevState => ({ ...prevState, ...values }));
+          submitHandler(values);
         }}
         validationSchema={validateSkill}
       >
-        <Form>
-          <div className="form__content">
-            <InputSelect name="skill" label="Select your skill" />
-            <InputText name="subSkills" label="Add Sub Skill" />
-            <div className="form-button">
-              <div className="form-button__left">
-                <Button content="Add Skill" />
-              </div>
-              <div className="form-button__right">
-                <Button content="Cancel" isCancel={true} />
+        {({ values }) => (
+          <Form>
+            <pre>{JSON.stringify(values, null, 2)}</pre>
+            <div className="form__content">
+              <InputSelect name="skill" label="Select your skill" />
+              <InputText name="subSkills" label="Add Sub Skill" />
+              <div className="form-button">
+                <div className="form-button__left">
+                  <Button content="Add Skill" />
+                </div>
+                <div className="form-button__right">
+                  <Button content="Cancel" isCancel={true} />
+                </div>
               </div>
             </div>
-          </div>
-        </Form>
+          </Form>
+        )}
       </Formik>
     </>
   );
