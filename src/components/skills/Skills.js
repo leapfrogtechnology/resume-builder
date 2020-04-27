@@ -1,12 +1,19 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 
+import SkillItem from './SkillItem';
 import { Add } from '~/assets/image';
-import AddSkill from '~/components/form/skill/AddSkill';
+import { AppContext } from '~/pages';
 import CardHeader from '~/components/cardheader/CardHeader';
 import CardFooter from '~/components/cardfooter/CardFooter';
-import EditOptions from '~/components/editoptions/EditOptions';
+import AddSkill from '../form/skill/AddSkill';
 
 const Skills = () => {
+  const context = useContext(AppContext);
+
+  const preview = context.preview.get;
+  // previous state of data
+  const skills = context.data.get.skills;
+
   const [showModel, setModal] = useState(false);
 
   const editBtnHandler = e => {
@@ -19,64 +26,44 @@ const Skills = () => {
     setModal(!showModel);
   };
 
+  /**
+   * Update the hidden state of skill.
+   *
+   * @param {React.MouseEvent} e [ on click event ].
+   * @param {string} key [ label of a particular skill].
+   */
+  const updateHiddenStateSkill = (e, key) => {
+    e.preventDefault();
+
+    const data = context.data.get;
+
+    data['skills'].find(({ label, hidden }, index) => {
+      if (label === key) {
+        const newState = !hidden;
+
+        data['skills'][index].hidden = newState;
+        context.data.set(data); // new state of data
+      }
+    });
+  };
+
+  const skillsList = skills.map(({ name, label, subSkills }) => (
+    <SkillItem
+      key={name}
+      title={label}
+      values={subSkills}
+      preview={preview}
+      onHiddenIconClicked={updateHiddenStateSkill}
+    />
+  ));
+
   return (
     <>
       <CardHeader title="Skills" />
-      <div className="skills">
-        <div className="skills__row">
-          <div className="skills__row-header">
-            <div className="skils__row-header-left sub-title">PHP</div>
-            <div className="skills__row-header-right">
-              <EditOptions
-                component={AddSkill}
-                onEdit={editBtnHandler}
-                onClose={closeBtnHandler}
-                showModal={showModel}
-              />
-            </div>
-          </div>
-          <div className="chip-input-value">
-            <span className="chip-input-tag">Zend</span>
-            <span className="chip-input-tag">Zend</span>
-          </div>
-        </div>
-        <div className="skills__row">
-          <div className="skills__row-header">
-            <div className="skils__row-header-left sub-title">Python</div>
-            <div className="skills__row-header-right">
-              <EditOptions
-                component={AddSkill}
-                onEdit={editBtnHandler}
-                onClose={closeBtnHandler}
-                showModal={showModel}
-              />
-            </div>
-          </div>
-          <div className="chip-input-value">
-            <span className="chip-input-tag">Zend</span>
-            <span className="chip-input-tag">Zend</span>
-          </div>
-        </div>
-        <div className="skills__row">
-          <div className="skills__row-header">
-            <div className="skils__row-header-left sub-title">Javascript</div>
-            <div className="skills__row-header-right">
-              <EditOptions
-                component={AddSkill}
-                onEdit={editBtnHandler}
-                onClose={closeBtnHandler}
-                showModal={showModel}
-              />
-            </div>
-          </div>
-          <div className="chip-input-value">
-            <span className="chip-input-tag">Javascript</span>
-            <span className="chip-input-tag">Zend</span>
-          </div>
-        </div>
-      </div>
+      <div className="skills">{skillsList}</div>
       <CardFooter
         icon={Add}
+        hide={preview}
         label="Add another skill"
         showModal={showModel}
         onAdd={editBtnHandler}

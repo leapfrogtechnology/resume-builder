@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 
+import { AppContext } from '~/pages';
 import Contact from '~/components/contact/Contact';
 import CardHeader from '~/components/cardheader/CardHeader';
 import AddContact from '~/components/form/contact/AddContact';
@@ -17,6 +18,30 @@ const Sidenav = () => {
     e.preventDefault();
     setModal(!showModal);
   };
+  const context = useContext(AppContext);
+  const preview = context.preview.get;
+  const email = context.data.get.email;
+  const phone = context.data.get.phone;
+  const github = context.data.get.github;
+  const linkedIn = context.data.get.linkedIn;
+
+  /**
+   * Update the hidden state of contact detail.
+   *
+   * @param {React.MouseEvent} e [ on click event ].
+   * @param {string} key [ label of a particular contact type].
+   */
+  const updateHiddenStateContact = (e, key) => {
+    e.preventDefault();
+
+    const data = context.data.get;
+    const previousState = data[key].hidden;
+    const newState = !previousState;
+
+    data[key].hidden = newState;
+    context.data.set(data);
+    console.log(context.data.get);
+  };
 
   return (
     <div className="sidenav">
@@ -28,68 +53,97 @@ const Sidenav = () => {
               <div className="profile-image-wrapper">
                 <img src={ProfileImage} alt="Image" />
               </div>
-              <span className="text-link text-link--small">Upload new version</span>
+              {!preview && <span className="text-link text-link--small">Upload new version</span>}
             </div>
-            <div className="sidenav__upload-block-r">
-              <div className="icon">
-                <img src={Trash} alt="Trash" />
+            {!preview && (
+              <div className="sidenav__upload-block-r">
+                <div className="icon">
+                  <img src={Trash} alt="Trash" />
+                </div>
               </div>
-            </div>
+            )}
           </div>
           <div className="sidenav__contact-block">
             <CardHeader
               title="Contact Information"
               icon={Edit}
+              hideIcon={preview}
               component={AddContact}
               onEdit={editBtnHandler}
               onClose={closeBtnHandler}
               showModal={showModal}
             />
-            <Contact label="Email Address" value="ribby@lftechnology.com" />
-            <Contact label="Phone Number" value="983345698" />
-            <Contact label="GitHub" value="https://github.com/user/ribbyX" />
-            <Contact label="LinkedIn" value="https://linkedin.com/user/ribbyX" />
+            <Contact
+              id="email"
+              label="Email Address"
+              value={email.value}
+              preview={preview}
+              onHiddenIconClicked={updateHiddenStateContact}
+            />
+            <Contact
+              id="phone"
+              label="Phone Number"
+              value={phone.value}
+              preview={preview}
+              onHiddenIconClicked={updateHiddenStateContact}
+            />
+            <Contact
+              id="github"
+              label="GitHub"
+              value={github.value}
+              preview={preview}
+              onHiddenIconClicked={updateHiddenStateContact}
+            />
+            <Contact
+              id="linkedIn"
+              label="LinkedIn"
+              value={linkedIn.value}
+              preview={preview}
+              onHiddenIconClicked={updateHiddenStateContact}
+            />
           </div>
         </div>
       </div>
 
-      <div className="sidenav-bottom">
-        <div className="card">
-          <CardHeader title="CV Actions" />
-          <ul>
-            <li className="sidenav__cv-action">
-              <span className="sidenav__cv-action-icon">
-                <img src={Download} alt="Edit" />
-              </span>
-              <span className="sidenav__cv-action-label text-link">Download PDF</span>
-            </li>
-            <li className="sidenav__cv-action">
-              <span className="sidenav__cv-action-icon">
-                <img src={Copy} alt="Edit" />
-              </span>
-              <span className="sidenav__cv-action-label text-link">Copy Shareable Link</span>
-            </li>
-            <li className="sidenav__cv-action">
-              <span className="sidenav__cv-action-icon">
-                <img src={Email} alt="Edit" />
-              </span>
-              <span className="sidenav__cv-action-label text-link">Email CV as Attachment</span>
-            </li>
-            <li className="sidenav__cv-action">
-              <span className="sidenav__cv-action-icon">
-                <img src={Check} alt="Edit" />
-              </span>
-              <span className="sidenav__cv-action-label text-link">Request Professional Review</span>
-            </li>
-            <li className="sidenav__cv-action">
-              <span className="sidenav__cv-action-icon">
-                <img src={Delete} alt="Edit" />
-              </span>
-              <span className="sidenav__cv-action-label text-link text-link--danger">Delete CV</span>
-            </li>
-          </ul>
+      {!preview && (
+        <div className="sidenav-bottom">
+          <div className="card">
+            <CardHeader title="CV Actions" />
+            <ul>
+              <li className="sidenav__cv-action">
+                <span className="sidenav__cv-action-icon">
+                  <img src={Download} alt="Edit" />
+                </span>
+                <span className="sidenav__cv-action-label text-link">Download PDF</span>
+              </li>
+              <li className="sidenav__cv-action">
+                <span className="sidenav__cv-action-icon">
+                  <img src={Copy} alt="Edit" />
+                </span>
+                <span className="sidenav__cv-action-label text-link">Copy Shareable Link</span>
+              </li>
+              <li className="sidenav__cv-action">
+                <span className="sidenav__cv-action-icon">
+                  <img src={Email} alt="Edit" />
+                </span>
+                <span className="sidenav__cv-action-label text-link">Email CV as Attachment</span>
+              </li>
+              <li className="sidenav__cv-action">
+                <span className="sidenav__cv-action-icon">
+                  <img src={Check} alt="Edit" />
+                </span>
+                <span className="sidenav__cv-action-label text-link">Request Professional Review</span>
+              </li>
+              <li className="sidenav__cv-action">
+                <span className="sidenav__cv-action-icon">
+                  <img src={Delete} alt="Edit" />
+                </span>
+                <span className="sidenav__cv-action-label text-link text-link--danger">Delete CV</span>
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

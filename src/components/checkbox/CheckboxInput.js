@@ -1,5 +1,6 @@
 import React from 'react';
 import { useField } from 'formik';
+import PropTypes from 'prop-types';
 
 const CheckboxInput = ({ value, ...props }) => {
   const [field, meta] = useField(props);
@@ -11,6 +12,10 @@ const CheckboxInput = ({ value, ...props }) => {
       {meta.touched && meta.error ? <div className="error">{meta.error}</div> : null}
     </div>
   );
+};
+
+CheckboxInput.propTypes = {
+  value: PropTypes.string,
 };
 
 export default CheckboxInput;

@@ -1,0 +1,27 @@
+.delete-popup {
+  width: 503px;
+  margin: auto;
+
+  @include e(content) {
+    display: flex;
+  }
+
+  @include e(icon) {
+    margin-right: 16px;
+  }
+
+  @include e(message) {
+    font: normal normal 16px/19px $font-primary;
+    padding-top: 18px;
+  }
+
+  .title {
+    color: $pomegranate;
+  }
+
+  .btn {
+    background: $pomegranate;
+    padding: 8px 16px;
+    font: normal normal 14px/17px $font-primary;
+  }
+}

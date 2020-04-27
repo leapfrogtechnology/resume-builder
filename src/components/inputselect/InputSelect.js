@@ -2,6 +2,8 @@ import React from 'react';
 import { useField } from 'formik';
 import { skills } from '~/common/constants';
 
+import PropTypes from 'prop-types';
+
 const InputSelect = ({ label, ...props }) => {
   const [field, meta] = useField(props);
 
@@ -17,6 +19,10 @@ const InputSelect = ({ label, ...props }) => {
       </select>
     </div>
   );
+};
+
+InputSelect.propTypes = {
+  label: PropTypes.string,
 };
 
 export default InputSelect;

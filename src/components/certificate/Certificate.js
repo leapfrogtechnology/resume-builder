@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
-import { Add, UpRightArrow } from '~/assets/image';
+import React, { useContext, useState } from 'react';
+
+import { AppContext } from '~/pages';
+import { Add } from '~/assets/image';
+import CertificateItem from './CertificateItem';
 import CardFooter from '~/components/cardfooter/CardFooter';
 import CardHeader from '~/components/cardheader/CardHeader';
-import EditOptions from '~/components/editoptions/EditOptions';
-import AddCertificate from '~/components/form/certificate/AddCertificate';
+import AddCertificate from '../form/certificate/AddCertificate';
 
 const Certificate = () => {
   const [showModel, setModel] = useState(false);
@@ -18,31 +20,50 @@ const Certificate = () => {
     setModel(!showModel);
   };
 
+  const context = useContext(AppContext);
+  const certificates = context.data.get.certificates;
+  const preview = context.preview.get;
+
+  /**
+   * Update the hidden state of skill.
+   *
+   * @param {React.MouseEvent} e [ on click event ].
+   * @param {string} key [ name of a particular certificate].
+   */
+  const updateHiddenStateCertificates = (e, key) => {
+    e.preventDefault();
+
+    const data = context.data.get;
+
+    data['certificates'].find(({ name, hidden }, index) => {
+      if (name === key) {
+        const newState = !hidden;
+
+        data['certificates'][index].hidden = newState;
+        context.data.set(data); // new state of data
+      }
+    });
+  };
+
+  const certificatesList = certificates.map(({ name, link, date, description }) => (
+    <CertificateItem
+      key={name}
+      title={name}
+      link={link}
+      year={date}
+      description={description}
+      preview={preview}
+      onHiddenIconClicked={updateHiddenStateCertificates}
+    />
+  ));
+
   return (
     <>
       <CardHeader title="Certificates" />
-      <div className="certificate">
-        <div className="certificate__row">
-          <div className="certificate__row-header">
-            <div className="sub-title text-link">
-              Coursera Advanced React
-                <span className="arrow-icon">
-                <img src={UpRightArrow} alt="Arrow" />
-              </span>
-            </div>
-            <EditOptions
-              component={AddCertificate}
-              onEdit={editBtnHandler}
-              onClose={closeBtnHandler}
-              showModal={showModel}
-            />
-          </div>
-          <div className="certificate__year">December 2012</div>
-          <p className="certificate__description">Advanced react course completed with React under the hood</p>
-        </div>
-      </div>
+      <div className="certificate">{certificatesList}</div>
       <CardFooter
         icon={Add}
+        hide={preview}
         label="Add another certificate"
         showModal={showModel}
         onAdd={editBtnHandler}

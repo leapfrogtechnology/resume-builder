@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import PropTypes from 'prop-types';
 import { FormContext } from '../FormContext';
 import Skills from '~/components/skills/Skills';
 import Sidenav from '~/components/sidenav/Sidenav';
@@ -31,6 +32,11 @@ const Dashboard = () => {
       </div>
     </section>
   );
+};
+
+Dashboard.propTypes = {
+  profile: PropTypes.object,
+  preview: PropTypes.bool,
 };
 
 export default Dashboard;

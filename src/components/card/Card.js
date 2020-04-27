@@ -1,14 +1,14 @@
 import React from 'react';
 import CloseModal from '../modalclose/CloseModal';
 
-const Card = ({children, className='', onClose, showModal}) => {
+const Card = ({ children, className = '', onClose, showModal }) => {
   const Component = children;
-  return ( 
+  return (
     <div className={`card ${className}`}>
-      {showModal && <CloseModal onClose={onClose}/>}
+      {showModal && <CloseModal onClose={onClose} />}
       <Component />
     </div>
-   );
-}
- 
+  );
+};
+
 export default Card;

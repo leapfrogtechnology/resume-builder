@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import OpenModal from '~/components/modal/OpenModal';
 import { View, EditGray, Trash, ViewHidden } from '~/assets/image';
 
-const EditOptions = ({ isHidden = false, showModal, onEdit, onClose, onDelete, component }) => {
+const EditOptions = ({ isHidden = false, onHiddenIconClicked, showModal, onEdit, onClose, onDelete, component }) => {
   return (
     <>
       <div className="edit-options">
-        <span className="edit-options__item">
+        <span className="edit-options__item" onClick={e => onHiddenIconClicked(e)}>
           <img src={isHidden ? ViewHidden : View} alt="View" />
         </span>
         <span className="edit-options__item" onClick={e => onEdit(e)}>
@@ -28,6 +28,7 @@ EditOptions.propTypes = {
   onEdit: PropTypes.func,
   onClose: PropTypes.func,
   component: PropTypes.func,
+  onHiddenIconClicked: PropTypes.func,
 };
 
 export default EditOptions;

@@ -20,7 +20,7 @@
   justify-content: space-between;
 }
 
-.content-block{
+.content-block {
   margin-bottom: 25px;
 }
 
@@ -61,7 +61,7 @@
   }
 }
 
-.hidden-tag{
+.hidden-tag {
   border-radius: 95px;
   background: $nobel;
   color: $white;
@@ -70,13 +70,12 @@
   margin-left: 10px;
 }
 
-.close-option{
+.close-option {
   text-align: right;
 }
 
-.error{
+.error {
   color: $pomegranate;
   padding: 4px;
   font: normal normal 10px/12px $font-primary;
 }
-
