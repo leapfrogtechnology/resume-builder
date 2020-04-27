@@ -21,21 +21,19 @@ const WorkExperience = () => {
   };
 
   return (
-    <div className="work-experience-block">
-      <div className="card">
-        <CardHeader title="Work Experience" />
-        <WorkExperienceShown />
-        <WorkExperienceHidden />
-        <CardFooter
-          icon={Add}
-          label="Add another work experience"
-          showModal={showModel}
-          onAdd={modalBtnHandler}
-          component={AddWorkExperience}
-          onClose={closeBtnHandler}
-        />
-      </div>
-    </div>
+    <>
+      <CardHeader title="Work Experience" />
+      <WorkExperienceShown />
+      <WorkExperienceHidden />
+      <CardFooter
+        icon={Add}
+        label="Add another work experience"
+        showModal={showModel}
+        onAdd={modalBtnHandler}
+        component={AddWorkExperience}
+        onClose={closeBtnHandler}
+      />
+    </>
   );
 };
 
