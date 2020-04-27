@@ -7,10 +7,23 @@ import Button from '~/components/button/Button';
 import InputText from '~/components/inputtext/InputText';
 import InputDate from '~/components/inputdate/InputDate';
 import FormHeader from '~/components/formheader/FormHeader';
+import * as certificateUtils from '~/utilities/objects/Certificate';
 import validateCertificateInformation from '~/validations/Certificate';
 
 const AddCertificate = () => {
   const { data, setData } = useContext(FormContext);
+
+  const handleSubmit = values => {
+    const certificateObj = certificateUtils.getCertificateObject({ ...values });
+    if (data.certificates) {
+      data['certificates'].push(certificateObj);
+    } else {
+      data['certificates'] = [];
+      data['certificates'].push(certificateObj);
+    }
+
+    setData(prevState => ({ ...prevState, ...data }));
+  };
 
   return (
     <>
@@ -23,7 +36,7 @@ const AddCertificate = () => {
           description: '',
         }}
         onSubmit={values => {
-          setData(prevState => ({ ...prevState, ...values }));
+          handleSubmit(values);
         }}
         validationSchema={validateCertificateInformation}
       >
