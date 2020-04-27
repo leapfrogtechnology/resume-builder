@@ -19,8 +19,7 @@ const AddSkill = () => {
   });
 
   const submitHandler = values => {
-    const { skill, subSkills } = values;
-    const skillObj = skillUtils.getSkillObject(skill, subSkills);
+    const skillObj = skillUtils.getSkillObject({ ...values });
 
     if (data.skills) {
       data['skills'].push(skillObj);
