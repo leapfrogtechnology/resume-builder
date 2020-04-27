@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import EditOptions from '~/components/editoptions/EditOptions';
 
-const SkillItem = ({ title, values, preview, onHiddenIconClicked }) => {
+const SkillItem = ({ title, values, preview, onHiddenIconClicked, onEdit, onClose }) => {
   const [hidden, setHidden] = useState(false);
 
   if (hidden && preview) {
@@ -29,7 +29,14 @@ const SkillItem = ({ title, values, preview, onHiddenIconClicked }) => {
           {hidden && !preview && <span className="hidden-tag">Hidden</span>}
         </div>
         <div className="skills__row-header-right">
-          {!preview && <EditOptions isHidden={hidden} onHiddenIconClicked={hiddenIconClickedHandler} />}
+          {!preview && (
+            <EditOptions
+              isHidden={hidden}
+              onHiddenIconClicked={hiddenIconClickedHandler}
+              onEdit={onEdit}
+              onClose={onClose}
+            />
+          )}
         </div>
       </div>
       <div className="chip-input-value">{subSkillsList}</div>
@@ -42,6 +49,8 @@ SkillItem.propTypes = {
   values: PropTypes.array,
   preview: PropTypes.bool,
   onHiddenIconClicked: PropTypes.func,
+  onEdit: PropTypes.func,
+  onClose: PropTypes.func,
 };
 
 export default SkillItem;
