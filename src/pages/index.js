@@ -4,6 +4,7 @@ import Head from 'next/head';
 import DATA from '../constant/mockData';
 import Header from '~/components/header/Header';
 import Dashboard from '~/components/dashboard/Dashboard';
+import Pdf from '../components/pdf/Pdf';
 
 export const AppContext = React.createContext({});
 
@@ -31,6 +32,11 @@ const App = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta httpEquiv="X-UA-Compatible" content="ie=edge" />
         <title>ResumeBuilder</title>
+        {/* <!-- jQuery library --> */}
+        <script src="js/jquery.min.js"></script>
+
+        {/* <!-- jsPDF library --> */}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
       </Head>
       <AppContext.Provider value={store}>
         <Header
@@ -41,6 +47,7 @@ const App = () => {
           onPreviewBtnClicked={handleOnPreviewBtnClicked}
         />
         <Dashboard profile={DATA} preview={preview} />
+        <Pdf></Pdf>
       </AppContext.Provider>
     </div>
   );
