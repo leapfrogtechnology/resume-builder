@@ -7,10 +7,23 @@ import { FormContext } from '../../FormContext';
 import InputText from '~/components/inputtext/InputText';
 import InputDate from '~/components/inputdate/InputDate';
 import FormHeader from '~/components/formheader/FormHeader';
+import * as achievementUtils from '~/utilities/objects/Achievement';
 import validateAchievementInformation from '~/validations/Achievement';
 
 const AddAchievement = () => {
   const { data, setData } = useContext(FormContext);
+
+  const handleSubmit = values => {
+    const achievementObj = achievementUtils.getAchievementObject({ ...values });
+    if (data.achievements) {
+      data['achievements'].push(achievementObj);
+    } else {
+      data['achievements'] = [];
+      data['achievements'].push(achievementObj);
+    }
+
+    setData(prevState => ({ ...prevState, ...data }));
+  };
 
   return (
     <>
@@ -22,7 +35,7 @@ const AddAchievement = () => {
           description: '',
         }}
         onSubmit={values => {
-          setData(prevState => ({ ...prevState, ...values }));
+          handleSubmit(values);
         }}
         validationSchema={validateAchievementInformation}
       >
