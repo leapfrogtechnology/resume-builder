@@ -1,15 +1,8 @@
 // Data source
 const EMPTY_DATA = {
   name: '',
-  role: {
-    name: '',
-    label: '',
-    hidden: false,
-  },
-  introduction: {
-    hidden: false,
-    value: '',
-  },
+  role: {},
+  introduction: {},
   // Contact Information
   email: { value: '', hidden: false },
   phone: { value: '', hidden: false },
