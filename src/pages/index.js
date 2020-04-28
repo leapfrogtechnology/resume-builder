@@ -5,6 +5,8 @@ import DATA from '../constant/mockData';
 import Header from '~/components/header/Header';
 import Dashboard from '~/components/dashboard/Dashboard';
 import { FormContext } from '../components/FormContext';
+import Pdf from '../components/pdf/Pdf';
+import * as pdfGenerator from '~/utilities/resume/PdfGenerator.js';
 
 export const AppContext = React.createContext({});
 
@@ -37,6 +39,11 @@ const App = () => {
         <title>ResumeBuilder</title>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
+        {/* <!-- jQuery library --> */}
+        <script src="js/jquery.min.js"></script>
+
+        {/* <!-- jsPDF library --> */}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
       </Head>
       <FormContext.Provider value={store}>
         <Header

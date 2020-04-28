@@ -10,6 +10,7 @@ import Achievements from '~/components/achievements/Achievements';
 import WorkExperience from '~/components/workexperience/WorkExperience';
 import ProjectsUndertaken from '~/components/projectsundertaken/ProjectsUndertaken';
 import PersonalInformation from '~/components/personalinformation/PersonalInformation';
+import Pdf from '../pdf/Pdf';
 
 const Dashboard = () => {
   return (
@@ -22,6 +23,7 @@ const Dashboard = () => {
           <ContentBlock children={ProjectsUndertaken} />
           <ContentBlock children={Achievements} />
           <ContentBlock children={Certificate} />
+          <Pdf />
         </div>
         <Sidenav />
       </div>
