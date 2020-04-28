@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 
 const CardHeader = ({ title, icon = null, hideIcon = false }) => {
   return (
-    <div className="card-header">
-      <div className="card-header__l">
+    <div className="card__header">
+      <div className="card__header_l">
         <div className="title">{title}</div>
       </div>
       {icon && !hideIcon && (
-        <div className="card-header__r">
+        <div className="card__header_r">
           <img src={icon} alt="Edit" />
         </div>
       )}
