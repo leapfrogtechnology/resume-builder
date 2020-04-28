@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-
+import React from 'react';
 import PropTypes from 'prop-types';
-import { FormContext } from '../FormContext';
+
+import Pdf from '../pdf/Pdf';
 import Skills from '~/components/skills/Skills';
 import Sidenav from '~/components/sidenav/Sidenav';
 import ContentBlock from '~/components/content/ContentBlock';
@@ -10,7 +10,6 @@ import Achievements from '~/components/achievements/Achievements';
 import WorkExperience from '~/components/workexperience/WorkExperience';
 import ProjectsUndertaken from '~/components/projectsundertaken/ProjectsUndertaken';
 import PersonalInformation from '~/components/personalinformation/PersonalInformation';
-import Pdf from '../pdf/Pdf';
 
 const Dashboard = () => {
   return (
