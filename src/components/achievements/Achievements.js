@@ -3,6 +3,7 @@ import React, { useState, useContext } from 'react';
 import { Add } from '~/assets/image';
 import { FormContext } from '../FormContext';
 import AchievementItem from './AchievementItem';
+import EmptyCard from '~/components/emptycard/EmptyCard';
 import CardHeader from '~/components/cardheader/CardHeader';
 import CardFooter from '~/components/cardfooter/CardFooter';
 import AddAchievement from '~/components/form/achievement/AddAchievement';
@@ -46,7 +47,7 @@ const Achievements = () => {
   };
 
   if (!achievements) {
-    return <></>;
+    return <EmptyCard emptyMessage="You do not have any achievement yet."></EmptyCard>;
   }
 
   const achievementsList = achievements.map(({ name, date }) => (
