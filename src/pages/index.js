@@ -5,6 +5,7 @@ import DATA from '../constant/mockData';
 import Header from '~/components/header/Header';
 import Dashboard from '~/components/dashboard/Dashboard';
 import Pdf from '../components/pdf/Pdf';
+import * as pdfGenerator from '~/utilities/resume/PdfGenerator.js';
 
 export const AppContext = React.createContext({});
 

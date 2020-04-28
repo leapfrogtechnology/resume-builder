@@ -1,8 +1,9 @@
 export const downloadPDF = e => {
-  var doc = new jsPDF();
   var elementHTML = document.getElementById('pdf');
-  doc.fromHTML(elementHTML, 15, 15);
-  // Save the PDF
-  doc.save('sample-document.pdf');
-  // ReactPDF.render(<Pdf />, document.getElementById('pdf'));
+  html2canvas(elementHTML).then(canvas => {
+    const imgData = canvas.toDataURL('image/png');
+    const pdf = new jsPDF();
+    pdf.addImage(imgData, 'JPEG', 0, 0);
+    pdf.save('resume.pdf');
+  });
 };
