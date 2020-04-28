@@ -7,7 +7,7 @@ const Card = ({ children, className = '', onClose, showModal }) => {
   return (
     <div className={`card ${className}`}>
       {showModal && <CloseModal onClose={onClose} />}
-      <Component />
+      <Component onClose={onClose} />
     </div>
   );
 };
