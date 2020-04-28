@@ -94,7 +94,7 @@ const DATA = {
       name: 'Hewlett Packard Enterprise',
       position: 'Associate Engineering Manager',
       startDate: '1970-01-01T00:00:00.000Z',
-      endDate: '1970-01-01T00:00:00.000Z',
+      endDate: '1971-04-01T00:00:00.000Z',
       currentlyWorking: false,
       responsibilities:
         'Involved in developing and implementation of the web application using R framework.Contributed in database design and development of Project “Teamed-Up”.Designed applications using oriented concepts',
