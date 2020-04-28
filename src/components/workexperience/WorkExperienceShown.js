@@ -16,20 +16,8 @@ const WorkExperienceShown = ({
 }) => {
   const [hidden, setHidden] = useState(false);
 
-  const rolesList = roles.split('.').map(role => <li key={role}>{role}</li>);
-  const achievementsList = achievements.split('.').map(achievement => <li key={achievement}>{achievement}</li>);
-
-  const [showModel, setModal] = useState(false);
-
-  const editBtnHandler = e => {
-    e.preventDefault();
-    setModal(!showModel);
-  };
-
-  const closeBtnHandler = e => {
-    e.preventDefault();
-    setModal(!showModel);
-  };
+  const rolesList = roles.split('\n\n').map(role => <li key={role}>{role}</li>);
+  const achievementsList = achievements.split('\n\n').map(achievement => <li key={achievement}>{achievement}</li>);
 
   if (hidden && preview) {
     return <></>;
