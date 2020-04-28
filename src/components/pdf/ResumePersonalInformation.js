@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
+import { FormContext } from '../FormContext';
 import { ProfileImage } from '~/assets/image';
-
 import ResumePersonalInformationItem from '~/components/pdf/ResumePersonalInformationItem';
 
 const ResumePersonalInformation = () => {
+  const context = useContext(FormContext);
+
+  const name = context.data.get.name;
+  const role = context.data.get.role;
+  const introduction = context.data.get.introduction;
+  const email = context.data.get.email;
+  const phone = context.data.get.phone;
+  const github = context.data.get.github;
+  const linkedIn = context.data.get.linkedIn;
+
   return (
     <div className="personal-information">
       <div className="personal-information__left">
@@ -14,21 +24,18 @@ const ResumePersonalInformation = () => {
       </div>
       <div className="personal-information__right">
         <div className="profile-detail">
-          <div className="profile__name profile__name--large profile__name--dark">Ribby</div>
-          <div className="profile__status profile__status--dark">Executive Manager</div>
+          <div className="profile__name profile__name--large profile__name--dark">{name}</div>
+          {role && <div className="profile__status profile__status--dark">{role.label}</div>}
         </div>
         <div className="personal-information__content">
           <ul className="personal-information__content-row">
-            <ResumePersonalInformationItem label="Email" value="ribby@lftechnology.com" />
-            <ResumePersonalInformationItem label="Phone" value="4589632" />
-            <ResumePersonalInformationItem label="Github" value="ribby@github.com" />
-            <ResumePersonalInformationItem label="LinkedIn" value="ribby@linkedin.com" />
+            {email && <ResumePersonalInformationItem label="Email" value={email.value} />}
+            {phone && <ResumePersonalInformationItem label="Phone" value={phone.value} />}
+            {github && <ResumePersonalInformationItem label="Github" value={github.value} />}
+            {linkedIn && <ResumePersonalInformationItem label="LinkedIn" value={linkedIn.value} />}
           </ul>
         </div>
-        <p className="personal-information__detail">
-          My name is Ribby and I am currently the Engineering Manager at Leapfrog. I love to challenge the normal and
-          help build extraordinary product expeirences.
-        </p>
+        {introduction && <p className="personal-information__detail">{introduction.value}</p>}
       </div>
     </div>
   );
