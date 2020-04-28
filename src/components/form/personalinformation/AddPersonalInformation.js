@@ -9,7 +9,7 @@ import InputText from '~/components/inputtext/InputText';
 import FormHeader from '~/components/formheader/FormHeader';
 import * as personalInfoUtils from '~/utilities/objects/PersonalInformation';
 
-const AddPersonalInformation = () => {
+const AddPersonalInformation = ({ onClose }) => {
   const { preview, data } = useContext(FormContext);
 
   const validatePersonalInformation = Yup.object().shape({
@@ -47,7 +47,7 @@ const AddPersonalInformation = () => {
                 <Button content="Save Info" type="submit" />
               </div>
               <div className="form-button__right">
-                <Button content="Cancel" isCancel={true} type="button" />
+                <Button content="Cancel" isCancel={true} type="button" onclick={onClose} />
               </div>
             </div>
           </div>

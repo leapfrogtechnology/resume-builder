@@ -11,7 +11,7 @@ import CheckboxInput from '~/components/checkbox/CheckboxInput';
 import { validateWorkExperience } from '~/validations/WorkExperience';
 import * as workExperienceUtils from '../../../utilities/objects/WorkExperience';
 
-const AddWorkExperience = () => {
+const AddWorkExperience = ({ onClose }) => {
   const { preview, data } = useContext(FormContext);
 
   const handleSubmit = values => {
@@ -86,7 +86,7 @@ const AddWorkExperience = () => {
                 </div>
                 <div className="form-button__right">
                   <img src={Trash} alt="Delete" />
-                  <Button content="Cancel" isCancel={true} type="button" />
+                  <Button content="Cancel" isCancel={true} type="button" onclick={onClose} />
                 </div>
               </div>
             </div>

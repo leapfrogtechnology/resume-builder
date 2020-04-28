@@ -12,7 +12,7 @@ import * as projectUtils from '~/utilities/objects/Project';
 import validateProjectInformation from '~/validations/Project';
 import CheckboxInput from '~/components/checkbox/CheckboxInput';
 
-const AddProject = () => {
+const AddProject = ({ onClose }) => {
   const { preview, data } = useContext(FormContext);
 
   const handleSubmit = values => {
@@ -76,7 +76,7 @@ const AddProject = () => {
                   <Button content="Add Project" type="submit" />
                 </div>
                 <div className="form-button__right">
-                  <Button content="Cancel" isCancel={true} type="button" />
+                  <Button content="Cancel" isCancel={true} type="button" onclick={onClose} />
                 </div>
               </div>
             </div>

@@ -10,7 +10,7 @@ import FormHeader from '~/components/formheader/FormHeader';
 import * as certificateUtils from '~/utilities/objects/Certificate';
 import validateCertificateInformation from '~/validations/Certificate';
 
-const AddCertificate = () => {
+const AddCertificate = ({ onClose }) => {
   const { preview, data } = useContext(FormContext);
 
   const handleSubmit = values => {
@@ -59,7 +59,7 @@ const AddCertificate = () => {
                   <Button content="Add Certificate" type="submit" />
                 </div>
                 <div className="form-button__right">
-                  <Button content="Cancel" isCancel={true} type="button" />
+                  <Button content="Cancel" isCancel={true} type="button" onclick={onClose} />
                 </div>
               </div>
             </div>

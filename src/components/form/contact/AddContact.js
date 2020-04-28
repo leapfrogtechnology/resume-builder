@@ -8,7 +8,7 @@ import FormHeader from '~/components/formheader/FormHeader';
 import * as contactUtils from '~/utilities/objects/Contact';
 import validateContactInformation from '~/validations/Contact';
 
-const AddContactInformation = () => {
+const AddContactInformation = ({ onClose }) => {
   const { preview, data } = useContext(FormContext);
 
   const handleSubmit = values => {
@@ -49,7 +49,7 @@ const AddContactInformation = () => {
                   <Button content="Save Info" type="submit" />
                 </div>
                 <div className="form-button__right">
-                  <Button content="Cancel" isCancel={true} type="button" />
+                  <Button content="Cancel" isCancel={true} type="button" onclick={onClose} />
                 </div>
               </div>
             </div>

@@ -11,7 +11,7 @@ import FormHeader from '~/components/formheader/FormHeader';
 import InputSelect from '~/components/inputselect/InputSelect';
 import * as skillUtils from '../../../utilities/objects/Skill';
 
-const AddSkill = () => {
+const AddSkill = ({ onClose }) => {
   const { preview, data } = useContext(FormContext);
 
   const validateSkill = Yup.object().shape({
@@ -55,7 +55,7 @@ const AddSkill = () => {
                   <Button content="Add Skill" type="submit" />
                 </div>
                 <div className="form-button__right">
-                  <Button content="Cancel" isCancel={true} type="button" />
+                  <Button content="Cancel" isCancel={true} type="button" onclick={onClose} />
                 </div>
               </div>
             </div>

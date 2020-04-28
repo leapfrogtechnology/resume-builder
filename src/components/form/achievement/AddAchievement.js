@@ -9,7 +9,7 @@ import FormHeader from '~/components/formheader/FormHeader';
 import * as achievementUtils from '~/utilities/objects/Achievement';
 import validateAchievementInformation from '~/validations/Achievement';
 
-const AddAchievement = () => {
+const AddAchievement = ({ onClose }) => {
   const { preview, data } = useContext(FormContext);
 
   const handleSubmit = values => {
@@ -56,7 +56,7 @@ const AddAchievement = () => {
                   <Button content="Add Achievement" type="submit" />
                 </div>
                 <div className="form-button__right">
-                  <Button content="Cancel" isCancel={true} type="button" />
+                  <Button content="Cancel" isCancel={true} type="button" onclick={onClose} />
                 </div>
               </div>
             </div>
