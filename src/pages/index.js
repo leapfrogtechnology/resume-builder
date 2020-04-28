@@ -3,20 +3,13 @@ import React, { useState } from 'react';
 import Head from 'next/head';
 import DATA from '../constant/mockData';
 import Header from '~/components/header/Header';
-import Dashboard from '~/components/dashboard/Dashboard';
 import { FormContext } from '../components/FormContext';
-import Pdf from '../components/pdf/Pdf';
-import * as pdfGenerator from '~/utilities/resume/PdfGenerator.js';
-
-export const AppContext = React.createContext({});
+import Dashboard from '~/components/dashboard/Dashboard';
 
 const App = () => {
   // App state
   const [preview, setPreview] = useState(false);
-  const [data, updateData] = useState({
-    name: 'Ribby McFroggy',
-    email: { value: 'ribby@lftechnology.com', hidden: false },
-  });
+  const [data, updateData] = useState(DATA);
 
   const store = {
     preview: { get: preview, set: setPreview },
