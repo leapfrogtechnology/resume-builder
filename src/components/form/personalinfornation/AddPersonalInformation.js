@@ -2,13 +2,12 @@ import React from 'react';
 import { Close, Trash } from '~/assets/image';
 import Button from '~/components/button/Button';
 import InputText from '~/components/inputtext/InputText';
-import InputDate from '~/components/inputdate/InputDate';
 import FormHeader from '~/components/formheader/FormHeader';
 import InputTextArea from '~/components/inputtextarea/InputTextArea';
 
 const AddPersonalInformation = () => {
   return (
-    <div className="form-container">
+    <div className="modal">
       <div className="form">
         <div className="card">
           <div className="close-option">
@@ -31,7 +30,7 @@ const AddPersonalInformation = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default AddPersonalInformation;

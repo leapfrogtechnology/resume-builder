@@ -6,7 +6,7 @@ import FormHeader from '~/components/formheader/FormHeader';
 
 const AddContactInformation = () => {
   return (
-    <div className="form-container">
+    <div className="modal">
       <div className="form">
         <div className="card">
           <div className="close-option">
@@ -31,7 +31,7 @@ const AddContactInformation = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default AddContactInformation;

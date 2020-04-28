@@ -8,7 +8,7 @@ import InputTextArea from '~/components/inputtextarea/InputTextArea';
 
 const AddAchievement = () => {
   return (
-    <div className="form-container">
+    <div className="modal">
       <div className="form">
         <div className="card">
           <div className="close-option">
@@ -31,7 +31,7 @@ const AddAchievement = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default AddAchievement;

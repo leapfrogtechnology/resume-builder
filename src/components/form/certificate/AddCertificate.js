@@ -8,7 +8,7 @@ import InputTextArea from '~/components/inputtextarea/InputTextArea';
 
 const AddCertificate = () => {
   return (
-    <div className="form-container">
+    <div className="modal">
       <div className="form">
         <div className="card">
           <div className="close-option">
@@ -17,7 +17,7 @@ const AddCertificate = () => {
           <FormHeader title="Add Certificate" />
           <div className="form__content">
             <InputText label="Title of your Certificate" />
-            <InputText label="Link to this Certificate" placeholder="https://"/>
+            <InputText label="Link to this Certificate" placeholder="https://" />
             <InputDate label="Date you received the Certificate" />
             <InputTextArea label="Describe this Certificate (optional)" placeholder="eg. I was awarded ..." />
             <div className="form-button">
@@ -32,7 +32,7 @@ const AddCertificate = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default AddCertificate;
