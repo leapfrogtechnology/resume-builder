@@ -5,6 +5,7 @@ import { FormContext } from '../FormContext';
 import WorkExperienceShown from './WorkExperienceShown';
 import CardHeader from '~/components/cardheader/CardHeader';
 import CardFooter from '~/components/cardfooter/CardFooter';
+import EmptyCard from '~/components/emptycard/EmptyCard';
 import AddWorkExperience from '../form/workexperience/AddWorkExperience';
 
 const WorkExperience = () => {
@@ -46,7 +47,20 @@ const WorkExperience = () => {
   };
 
   if (!workExperience) {
-    return <></>;
+    return (
+      <>
+        <EmptyCard emptyMessage="You do not have any work experience yet."></EmptyCard>
+        <CardFooter
+          icon={Add}
+          hide={preview}
+          label="Add another work experience"
+          showModal={showModel}
+          onAdd={modalBtnHandler}
+          component={AddWorkExperience}
+          onClose={closeBtnHandler}
+        />
+      </>
+    );
   }
 
   const workExperienceList = workExperience.map(

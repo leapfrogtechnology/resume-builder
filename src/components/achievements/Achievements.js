@@ -47,7 +47,20 @@ const Achievements = () => {
   };
 
   if (!achievements) {
-    return <EmptyCard emptyMessage="You do not have any achievement yet."></EmptyCard>;
+    return (
+      <>
+        <EmptyCard emptyMessage="You do not have any achievement yet."></EmptyCard>
+        <CardFooter
+          icon={Add}
+          hide={preview}
+          label="Add another achievement"
+          showModal={showModel}
+          onAdd={editBtnHandler}
+          component={AddAchievement}
+          onClose={closeBtnHandler}
+        />
+      </>
+    );
   }
 
   const achievementsList = achievements.map(({ name, date }) => (

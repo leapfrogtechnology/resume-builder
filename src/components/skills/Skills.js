@@ -4,6 +4,7 @@ import SkillItem from './SkillItem';
 import { Add } from '~/assets/image';
 import { FormContext } from '../FormContext';
 import AddSkill from '../form/skill/AddSkill';
+import EmptyCard from '~/components/emptycard/EmptyCard';
 import CardHeader from '~/components/cardheader/CardHeader';
 import CardFooter from '~/components/cardfooter/CardFooter';
 
@@ -48,7 +49,20 @@ const Skills = () => {
   };
 
   if (!skills) {
-    return <></>;
+    return (
+      <>
+        <EmptyCard emptyMessage="You do not have any skills yet."></EmptyCard>
+        <CardFooter
+          icon={Add}
+          hide={preview}
+          label="Add another skill"
+          showModal={showModel}
+          onAdd={editBtnHandler}
+          component={AddSkill}
+          onClose={closeBtnHandler}
+        />
+      </>
+    );
   }
 
   const skillsList = skills.map(({ name, label, subSkills }) => (

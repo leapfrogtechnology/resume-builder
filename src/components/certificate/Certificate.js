@@ -3,6 +3,7 @@ import React, { useContext, useState } from 'react';
 import { Add } from '~/assets/image';
 import { FormContext } from '../FormContext';
 import CertificateItem from './CertificateItem';
+import EmptyCard from '~/components/emptycard/EmptyCard';
 import CardFooter from '~/components/cardfooter/CardFooter';
 import CardHeader from '~/components/cardheader/CardHeader';
 import AddCertificate from '../form/certificate/AddCertificate';
@@ -46,7 +47,20 @@ const Certificate = () => {
   };
 
   if (!certificates) {
-    return <></>;
+    return (
+      <>
+        <EmptyCard emptyMessage="You do not have any certificates yet."></EmptyCard>
+        <CardFooter
+          icon={Add}
+          hide={preview}
+          label="Add another certificate"
+          showModal={showModel}
+          onAdd={editBtnHandler}
+          component={AddCertificate}
+          onClose={closeBtnHandler}
+        />
+      </>
+    );
   }
 
   const certificatesList = certificates.map(({ name, link, date, description }) => (

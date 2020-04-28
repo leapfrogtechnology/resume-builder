@@ -31,7 +31,7 @@ const CertificateItem = ({ title, link, year, description, preview, onHiddenIcon
         </div>
         {!preview && <EditOptions onHiddenIconClicked={onHiddenBtnClicked} isHidden={hidden} />}
       </div>
-      <div className="certificate__year">{year}</div>
+      <div className="certificate__year">{"moment(year).format('MMMM YYYY')"}</div>
       <p className="certificate__description">{description}</p>
     </div>
   );

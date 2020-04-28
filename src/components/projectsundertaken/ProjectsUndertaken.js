@@ -3,6 +3,7 @@ import React, { useContext, useState } from 'react';
 import { Add } from '~/assets/image';
 import { FormContext } from '../FormContext';
 import AddProject from '../form/project/AddProject';
+import EmptyCard from '~/components/emptycard/EmptyCard';
 import CardHeader from '~/components/cardheader/CardHeader';
 import CardFooter from '~/components/cardfooter/CardFooter';
 import ProjectsUndertakenItem from './ProjectsUndertakenItem';
@@ -47,7 +48,20 @@ const ProjectsUndertaken = () => {
   };
 
   if (!projects) {
-    return <></>;
+    return (
+      <>
+        <EmptyCard emptyMessage="You do not have any projects undertaken yet."></EmptyCard>
+        <CardFooter
+          icon={Add}
+          hide={preview}
+          label="Add another project"
+          showModal={showModel}
+          onAdd={editBtnHandler}
+          component={AddProject}
+          onClose={closeBtnHandler}
+        />
+      </>
+    );
   }
 
   const projectsList = projects.map(({ name, startDate, endDate, description }) => (
