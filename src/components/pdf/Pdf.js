@@ -9,25 +9,27 @@ import ResumePersonalInformation from './ResumePersonalInformation';
 
 const Pdf = () => {
   return (
-    <div className="card" id="pdf">
-      <div className="resume-content-block">
-        <ResumePersonalInformation />
-      </div>
-      <div className="resume-content-block">
-        <CardHeader title="Skills" />
-        <p>PHP (Zend, Laravel, CI), Python (Django, Flash Alembic), Javascript (ReactJS, ReactNative)</p>
-      </div>
-      <div className="resume-content-block">
-        <WorkExperience />
-      </div>
-      <div className="resume-content-block">
-        <ProjectsUndertaken />
-      </div>
-      <div className="resume-content-block">
-        <Achievements />
-      </div>
-      <div className="resume-content-block">
-        <Certificate />
+    <div className="modal">
+      <div className="card" id="pdf">
+        <div className="resume-content-block">
+          <ResumePersonalInformation />
+        </div>
+        <div className="resume-content-block">
+          <CardHeader title="Skills" />
+          <p>PHP (Zend, Laravel, CI), Python (Django, Flash Alembic), Javascript (ReactJS, ReactNative)</p>
+        </div>
+        <div className="resume-content-block">
+          <WorkExperience />
+        </div>
+        <div className="resume-content-block">
+          <ProjectsUndertaken />
+        </div>
+        <div className="resume-content-block">
+          <Achievements />
+        </div>
+        <div className="resume-content-block">
+          <Certificate />
+        </div>
       </div>
     </div>
   );

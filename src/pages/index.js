@@ -48,7 +48,6 @@ const App = () => {
           onPreviewBtnClicked={handleOnPreviewBtnClicked}
         />
         <Dashboard profile={DATA} preview={preview} />
-        <Pdf></Pdf>
       </AppContext.Provider>
     </div>
   );
