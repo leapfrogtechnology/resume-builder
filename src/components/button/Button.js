@@ -1,15 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Button = ({ content, isCancel, onclick = null }) => {
+const Button = ({ content, isCancel, type, onclick = null }) => {
   if (onclick) {
     return (
-      <button className={isCancel ? 'btn--cancel' : 'btn'} onClick={e => onclick(e)}>
+      <button className={isCancel ? 'btn--cancel' : 'btn'} type={type} onClick={e => onclick(e)}>
         {content}
       </button>
     );
   } else {
-    return <button className={isCancel ? 'btn--cancel' : 'btn'}>{content}</button>;
+    return (
+      <button className={isCancel ? 'btn--cancel' : 'btn'} type={type}>
+        {content}
+      </button>
+    );
   }
 };
 
