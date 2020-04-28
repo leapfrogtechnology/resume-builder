@@ -24,7 +24,7 @@ const AchievementItem = ({ title, date, preview, onHiddenIconClicked }) => {
         </div>
         {!preview && <EditOptions isHidden={hidden} onHiddenIconClicked={onHiddenBtnClicked} />}
       </div>
-      <div className="achievements__year">{"moment(date).format('MMMM YYYY')"}</div>
+      <div className="year year--dark">{date}</div>
     </div>
   );
 };

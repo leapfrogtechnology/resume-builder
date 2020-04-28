@@ -14,9 +14,4 @@
   @include e(period) {
     color: $mine-shaft;
   }
-
-  @include e(description) {
-    padding-top: 6px;
-    color: $dusty-gray;
-  }
 }
