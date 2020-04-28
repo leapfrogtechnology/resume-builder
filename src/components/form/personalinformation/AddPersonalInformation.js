@@ -44,10 +44,10 @@ const AddPersonalInformation = () => {
             <InputText name="introduction" label="Your Introduction" type="text-area" />
             <div className="form-button">
               <div className="form-button__left">
-                <Button content="Save Info" />
+                <Button content="Save Info" type="submit" />
               </div>
               <div className="form-button__right">
-                <Button content="Cancel" isCancel={true} />
+                <Button content="Cancel" isCancel={true} type="button" />
               </div>
             </div>
           </div>

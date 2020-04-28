@@ -53,10 +53,10 @@ const AddAchievement = () => {
               />
               <div className="form-button">
                 <div className="form-button__left">
-                  <Button content="Add Achievement" />
+                  <Button content="Add Achievement" type="submit" />
                 </div>
                 <div className="form-button__right">
-                  <Button content="Cancel" isCancel={true} />
+                  <Button content="Cancel" isCancel={true} type="button" />
                 </div>
               </div>
             </div>

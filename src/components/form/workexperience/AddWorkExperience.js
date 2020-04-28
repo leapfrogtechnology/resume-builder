@@ -82,11 +82,11 @@ const AddWorkExperience = () => {
               />
               <div className="form-button">
                 <div className="form-button__left">
-                  <Button content="Add Experience" />
+                  <Button content="Add Experience" type="submit" />
                 </div>
                 <div className="form-button__right">
                   <img src={Trash} alt="Delete" />
-                  <Button content="Cancel" isCancel={true} />
+                  <Button content="Cancel" isCancel={true} type="button" />
                 </div>
               </div>
             </div>
