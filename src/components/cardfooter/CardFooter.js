@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 
 import OpenModal from '~/components/modal/OpenModal';
 
-const CardFooter = ({ icon, label, hide, onAdd, showModal, component, onClose }) => {
+const CardFooter = ({ icon, label, hide, onAdd, showModal, component, onClose, modifier }) => {
   return (
     !hide && (
       <>
-        <div className="card__footer" onClick={e => onAdd(e)}>
+        <div className={modifier ? `card__footer card__footer--${modifier}` : "card__footer"} onClick={e => onAdd(e)}>
           <span className="card__footer-icon">
             <img src={icon} alt="Add" />
           </span>

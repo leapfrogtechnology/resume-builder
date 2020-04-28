@@ -58,6 +58,7 @@ const Certificate = () => {
           onAdd={editBtnHandler}
           component={AddCertificate}
           onClose={closeBtnHandler}
+          modifier="empty"
         />
       </>
     );

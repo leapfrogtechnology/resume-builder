@@ -58,6 +58,7 @@ const WorkExperience = () => {
           onAdd={modalBtnHandler}
           component={AddWorkExperience}
           onClose={closeBtnHandler}
+          modifier="empty"
         />
       </>
     );
