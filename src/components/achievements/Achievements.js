@@ -58,6 +58,7 @@ const Achievements = () => {
           onAdd={editBtnHandler}
           component={AddAchievement}
           onClose={closeBtnHandler}
+          modifier="empty"
         />
       </>
     );

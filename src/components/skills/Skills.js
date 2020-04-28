@@ -60,6 +60,7 @@ const Skills = () => {
           onAdd={editBtnHandler}
           component={AddSkill}
           onClose={closeBtnHandler}
+          modifier="empty"
         />
       </>
     );

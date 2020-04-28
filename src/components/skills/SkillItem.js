@@ -1,9 +1,13 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import EditOptions from '~/components/editoptions/EditOptions';
+import DeletePopup from '../form/delete/DeletePopup';
+import AddSkill from '~/components/form/skill/AddSkill';
 
 const SkillItem = ({ title, values, preview, onHiddenIconClicked, onEdit, onClose }) => {
   const [hidden, setHidden] = useState(false);
+  const [isDeleteClicked, setIsDelete] = useState(false);
+  const [isEditClicked, setIsEdit] = useState(false);
 
   if (hidden && preview) {
     return <></>;
@@ -13,6 +17,28 @@ const SkillItem = ({ title, values, preview, onHiddenIconClicked, onEdit, onClos
     e.preventDefault();
     setHidden(!hidden);
     onHiddenIconClicked(e, title);
+  };
+
+  const onDeleteButtonClicked = e => {
+    e.preventDefault();
+    setIsDelete(!isDeleteClicked);
+  };
+
+  const onConfirm = e => {
+    e.preventDefault();
+    console.log('Deleted');
+    setIsDelete(!isDeleteClicked);
+  };
+
+  const onCancel = e => {
+    e.preventDefault();
+    console.log('Cancelled');
+    setIsDelete(!isDeleteClicked);
+  };
+
+  const onEditButtonClicked = e => {
+    e.preventDefault();
+    setIsEdit(!isEditClicked);
   };
 
   const subSkillsList = values.map(({ name, label }) => (
@@ -33,8 +59,12 @@ const SkillItem = ({ title, values, preview, onHiddenIconClicked, onEdit, onClos
             <EditOptions
               isHidden={hidden}
               onHiddenIconClicked={hiddenIconClickedHandler}
-              onEdit={onEdit}
-              onClose={onClose}
+              onEditButtonClicked={onEditButtonClicked}
+              onDeleteButtonClicked={onDeleteButtonClicked}
+              isEditClicked={isEditClicked}
+              isDeleteClicked={isDeleteClicked}
+              onConfirm={onConfirm}
+              onCancel={onCancel}
             />
           )}
         </div>

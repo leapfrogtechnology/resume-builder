@@ -59,6 +59,7 @@ const ProjectsUndertaken = () => {
           onAdd={editBtnHandler}
           component={AddProject}
           onClose={closeBtnHandler}
+          modifier="empty"
         />
       </>
     );

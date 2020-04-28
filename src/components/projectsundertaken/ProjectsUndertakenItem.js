@@ -4,6 +4,8 @@ import EditOptions from '~/components/editoptions/EditOptions';
 
 const ProjectsUndertakenItem = ({ title, startDate, endDate, description, preview, onHiddenIconClicked }) => {
   const [hidden, setHidden] = useState(false);
+  const [isDeleteClicked, setIsDelete] = useState(false);
+  const [isEditClicked, setIsEdit] = useState(false);
 
   if (hidden && preview) {
     return <></>;
@@ -15,6 +17,28 @@ const ProjectsUndertakenItem = ({ title, startDate, endDate, description, previe
     onHiddenIconClicked(e, title);
   };
 
+  const onDeleteButtonClicked = e => {
+    e.preventDefault();
+    setIsDelete(!isDeleteClicked);
+  };
+
+  const onConfirm = e => {
+    e.preventDefault();
+    console.log('Deleted');
+    setIsDelete(!isDeleteClicked);
+  };
+
+  const onCancel = e => {
+    e.preventDefault();
+    console.log('Cancelled');
+    setIsDelete(!isDeleteClicked);
+  };
+
+  const onEditButtonClicked = e => {
+    e.preventDefault();
+    setIsEdit(!isEditClicked);
+  };
+
   return (
     <div className={!hidden ? 'projects-undertaken__row' : 'projects-undertaken__row projects-undertaken--hidden'}>
       <div className="projects-undertaken__row-header">
@@ -22,7 +46,18 @@ const ProjectsUndertakenItem = ({ title, startDate, endDate, description, previe
           {title}
           {hidden && <span className="hidden-tag">Hidden</span>}
         </div>
-        {!preview && <EditOptions isHidden={hidden} onHiddenIconClicked={onHiddenBtnClicked} />}
+        {!preview && (
+          <EditOptions
+            isHidden={hidden}
+            onHiddenIconClicked={onHiddenBtnClicked}
+            onEditButtonClicked={onEditButtonClicked}
+            onDeleteButtonClicked={onDeleteButtonClicked}
+            isEditClicked={isEditClicked}
+            isDeleteClicked={isDeleteClicked}
+            onConfirm={onConfirm}
+            onCancel={onCancel}
+          />
+        )}
       </div>
       <div className="year year--dark">
         <span className="start-date">{startDate}</span> - <span className="end-date">{endDate}</span>(3 years and 3

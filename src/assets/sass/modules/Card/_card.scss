@@ -11,6 +11,10 @@
     margin-top: 25px;
     font-weight: 600;
     cursor: pointer;
+
+    @include m(empty) {
+      justify-content: center;
+    }
   }
 
   @include e(footer-icon) {
@@ -20,9 +24,5 @@
   @include m(empty) {
     text-align: center;
     padding: 68px 0;
-
-    .card__footer {
-      justify-content: center;
-    }
   }
 }
