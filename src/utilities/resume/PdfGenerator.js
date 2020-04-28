@@ -5,7 +5,7 @@ export const downloadPDF = () => {
     const imgData = canvas.toDataURL('image/png');
     const pdf = new jsPDF();
 
-    pdf.addImage(imgData, 'JPEG', 0, 0);
+    pdf.addImage(imgData, 'png', 0, 0);
     pdf.save('resume.pdf');
   });
 };
