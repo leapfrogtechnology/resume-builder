@@ -1,10 +1,12 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 
 import { FormContext } from '../FormContext';
 import Contact from '~/components/contact/Contact';
+import { toBase64 } from '~/utilities/file/toBase64.js';
 import CardHeader from '~/components/cardheader/CardHeader';
 import AddContact from '~/components/form/contact/AddContact';
 import * as pdfGenerator from '~/utilities/resume/PdfGenerator.js';
+import * as profileImageUtils from '~/utilities/objects/ProfileImage.js';
 import { Edit, ProfileImage, Trash, Download, Copy, Email, Check, Delete } from '~/assets/image';
 
 const Sidenav = () => {
@@ -25,7 +27,9 @@ const Sidenav = () => {
   const email = context.data.get.email;
   const phone = context.data.get.phone;
   const github = context.data.get.github;
+  const stackOverflow = context.data.get.stackOverflow;
   const linkedIn = context.data.get.linkedIn;
+  const profileImg = context.data.get.profileImage;
 
   /**
    * Update the hidden state of contact detail.
@@ -56,6 +60,38 @@ const Sidenav = () => {
     window.open(url, '_blank').focus();
   };
 
+  const createFileUploader = e => {
+    e.preventDefault();
+    const fileSelector = document.createElement('input');
+    fileSelector.setAttribute('type', 'file');
+    fileSelector.click();
+    fileSelector.addEventListener(
+      'change',
+      e => {
+        handleImageUpload(e);
+      },
+      false
+    );
+  };
+
+  const handleImageUpload = async e => {
+    e.preventDefault();
+    const file = e.target.files[0];
+    if (!(file.type === ('image/png' || 'image/jpg' || 'image/jpeg'))) {
+      console.log('wrongs');
+    } else {
+      const result = await toBase64(file);
+      const prevData = context.data.get;
+      const profileImageObj = profileImageUtils.getProfileImageObject(result);
+
+      if (!profileImg) {
+        prevData['profileImage'] = profileImageObj;
+      } else {
+        prevData.profileImage.value = result;
+      }
+    }
+  };
+
   return (
     <div className="sidenav">
       <div className="sidenav-top">
@@ -64,9 +100,13 @@ const Sidenav = () => {
           <div className="sidenav__upload-block">
             <div className="sidenav__upload-block-l">
               <div className="profile-image-wrapper">
-                <img src={ProfileImage} alt="Image" />
+                <img src={profileImg ? profileImg.value : ProfileImage} alt="Image" />
               </div>
-              {!preview && <span className="text-link text-link--small">Upload new version</span>}
+              {!preview && (
+                <span className="text-link text-link--small" onClick={e => createFileUploader(e)}>
+                  Upload new version
+                </span>
+              )}
             </div>
             {!preview && (
               <div className="sidenav__upload-block-r">
@@ -111,6 +151,16 @@ const Sidenav = () => {
                 id="github"
                 label="GitHub"
                 value={github.value}
+                preview={preview}
+                onHiddenIconClicked={updateHiddenStateContact}
+                onLinkClicked={openLink}
+              />
+            )}
+            {stackOverflow && (
+              <Contact
+                id="stackOverflow"
+                label="StackOverFlow"
+                value={stackOverflow.value}
                 preview={preview}
                 onHiddenIconClicked={updateHiddenStateContact}
                 onLinkClicked={openLink}
