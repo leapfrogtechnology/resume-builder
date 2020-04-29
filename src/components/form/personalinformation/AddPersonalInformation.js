@@ -1,5 +1,6 @@
 /* eslint-disable require-jsdoc */
 import * as Yup from 'yup';
+import ProptTypes from 'prop-types';
 import { Formik, Form } from 'formik';
 import React, { useContext } from 'react';
 
@@ -9,7 +10,7 @@ import InputText from '~/components/inputtext/InputText';
 import FormHeader from '~/components/formheader/FormHeader';
 import * as personalInfoUtils from '~/utilities/objects/PersonalInformation';
 
-const AddPersonalInformation = ({ onClose }) => {
+const AddPersonalInformation = ({ onClose, isEdit }) => {
   const { preview, data } = useContext(FormContext);
 
   const validatePersonalInformation = Yup.object().shape({
@@ -23,15 +24,30 @@ const AddPersonalInformation = ({ onClose }) => {
     data.set(prevState => ({ ...prevState, ...personalInfoObj }));
   };
 
+  const getInitialState = () => {
+    let initialValues = {};
+
+    if (isEdit) {
+      initialValues = {
+        name: data.get.name,
+        role: data.get.role.label,
+        introduction: data.get.introduction.value,
+      };
+    } else {
+      initialValues = {
+        name: '',
+        role: '',
+        introduction: '',
+      };
+    }
+    return initialValues;
+  };
+
   return (
     <>
       <FormHeader title="Personal Information" />
       <Formik
-        initialValues={{
-          name: '',
-          role: '',
-          introduction: '',
-        }}
+        initialValues={getInitialState()}
         onSubmit={values => {
           handleSubmit(values);
         }}
@@ -55,6 +71,11 @@ const AddPersonalInformation = ({ onClose }) => {
       </Formik>
     </>
   );
+};
+
+AddPersonalInformation.propTypes = {
+  onClose: ProptTypes.func,
+  isEdit: ProptTypes.bool,
 };
 
 export default AddPersonalInformation;
