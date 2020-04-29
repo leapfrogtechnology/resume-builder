@@ -74,6 +74,7 @@ const ProjectsUndertaken = () => {
       description={description}
       preview={preview}
       onHiddenIconClicked={updateHiddenStateProject}
+      onEdit={editBtnHandler}
     />
   ));
 

@@ -2,10 +2,8 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import EditOptions from '~/components/editoptions/EditOptions';
 
-const ProjectsUndertakenItem = ({ title, startDate, endDate, description, preview, onHiddenIconClicked }) => {
+const ProjectsUndertakenItem = ({ title, startDate, endDate, description, preview, onHiddenIconClicked, onEdit }) => {
   const [hidden, setHidden] = useState(false);
-  const [isDeleteClicked, setIsDelete] = useState(false);
-  const [isEditClicked, setIsEdit] = useState(false);
 
   if (hidden && preview) {
     return <></>;
@@ -17,28 +15,6 @@ const ProjectsUndertakenItem = ({ title, startDate, endDate, description, previe
     onHiddenIconClicked(e, title);
   };
 
-  const onDeleteButtonClicked = e => {
-    e.preventDefault();
-    setIsDelete(!isDeleteClicked);
-  };
-
-  const onConfirm = e => {
-    e.preventDefault();
-    console.log('Deleted');
-    setIsDelete(!isDeleteClicked);
-  };
-
-  const onCancel = e => {
-    e.preventDefault();
-    console.log('Cancelled');
-    setIsDelete(!isDeleteClicked);
-  };
-
-  const onEditButtonClicked = e => {
-    e.preventDefault();
-    setIsEdit(!isEditClicked);
-  };
-
   return (
     <div className={!hidden ? 'projects-undertaken__row' : 'projects-undertaken__row projects-undertaken--hidden'}>
       <div className="projects-undertaken__row-header">
@@ -47,16 +23,7 @@ const ProjectsUndertakenItem = ({ title, startDate, endDate, description, previe
           {hidden && <span className="hidden-tag">Hidden</span>}
         </div>
         {!preview && (
-          <EditOptions
-            isHidden={hidden}
-            onHiddenIconClicked={onHiddenBtnClicked}
-            onEditButtonClicked={onEditButtonClicked}
-            onDeleteButtonClicked={onDeleteButtonClicked}
-            isEditClicked={isEditClicked}
-            isDeleteClicked={isDeleteClicked}
-            onConfirm={onConfirm}
-            onCancel={onCancel}
-          />
+          <EditOptions isHidden={hidden} onHiddenIconClicked={onHiddenBtnClicked} onEditButtonClicked={onEdit} />
         )}
       </div>
       <div className="year year--dark">
@@ -75,6 +42,7 @@ ProjectsUndertakenItem.propTypes = {
   description: PropTypes.string,
   preview: PropTypes.bool,
   onHiddenIconClicked: PropTypes.func,
+  onEdit: PropTypes.func,
 };
 
 export default ProjectsUndertakenItem;
