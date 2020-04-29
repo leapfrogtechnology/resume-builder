@@ -71,6 +71,7 @@ const Achievements = () => {
       date={date}
       preview={preview}
       onHiddenIconClicked={updateHiddenStateAchievement}
+      onEdit={editBtnHandler}
     />
   ));
 

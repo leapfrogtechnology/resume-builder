@@ -2,10 +2,8 @@ import ProptTypes from 'prop-types';
 import React, { useState } from 'react';
 import EditOptions from '~/components/editoptions/EditOptions';
 
-const AchievementItem = ({ title, date, preview, onHiddenIconClicked }) => {
+const AchievementItem = ({ title, date, preview, onHiddenIconClicked, onEdit }) => {
   const [hidden, setHidden] = useState(false);
-  const [isDeleteClicked, setIsDelete] = useState(false);
-  const [isEditClicked, setIsEdit] = useState(false);
 
   if (hidden && preview) {
     return <></>;
@@ -17,28 +15,6 @@ const AchievementItem = ({ title, date, preview, onHiddenIconClicked }) => {
     onHiddenIconClicked(e, title);
   };
 
-  const onDeleteButtonClicked = e => {
-    e.preventDefault();
-    setIsDelete(!isDeleteClicked);
-  };
-
-  const onConfirm = e => {
-    e.preventDefault();
-    console.log('Deleted');
-    setIsDelete(!isDeleteClicked);
-  };
-
-  const onCancel = e => {
-    e.preventDefault();
-    console.log('Cancelled');
-    setIsDelete(!isDeleteClicked);
-  };
-
-  const onEditButtonClicked = e => {
-    e.preventDefault();
-    setIsEdit(!isEditClicked);
-  };
-
   return (
     <div className="achievements__row">
       <div className="achievements__row-header">
@@ -47,16 +23,7 @@ const AchievementItem = ({ title, date, preview, onHiddenIconClicked }) => {
           {hidden && <span className="hidden-tag">Hidden</span>}
         </div>
         {!preview && (
-          <EditOptions
-            isHidden={hidden}
-            onHiddenIconClicked={onHiddenBtnClicked}
-            onEditButtonClicked={onEditButtonClicked}
-            onDeleteButtonClicked={onDeleteButtonClicked}
-            isEditClicked={isEditClicked}
-            isDeleteClicked={isDeleteClicked}
-            onConfirm={onConfirm}
-            onCancel={onCancel}
-          />
+          <EditOptions isHidden={hidden} onHiddenIconClicked={onHiddenBtnClicked} onEditButtonClicked={onEdit} />
         )}
       </div>
       <div className="year year--dark">{moment(date).format('MMMM YYYY')}</div>
@@ -69,6 +36,7 @@ AchievementItem.propTypes = {
   date: ProptTypes.string,
   preview: ProptTypes.bool,
   onHiddenIconClicked: ProptTypes.func,
+  onEdit: ProptTypes.func,
 };
 
 export default AchievementItem;
