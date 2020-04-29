@@ -13,6 +13,7 @@ const WorkExperienceShown = ({
   refereeContact,
   preview,
   onHiddenIconClicked,
+  onContactLinkClicked,
 }) => {
   const [hidden, setHidden] = useState(false);
 
@@ -57,7 +58,14 @@ const WorkExperienceShown = ({
         </div>
         <div className="work-experience__row">
           Referee <span className="referee-name">{refereeName}</span>
-          <span className="referee-email text-link">{' ' + refereeContact}</span>
+          <span
+            className="referee-email text-link"
+            onClick={e => {
+              onContactLinkClicked(e, refereeContact);
+            }}
+          >
+            {' ' + refereeContact}
+          </span>
         </div>
       </div>
     </div>
@@ -75,6 +83,7 @@ WorkExperienceShown.propTypes = {
   preview: PropTypes.bool,
   refereeContact: PropTypes.string,
   onHiddenIconClicked: PropTypes.func,
+  onContactLinkClicked: PropTypes.func,
 };
 
 export default WorkExperienceShown;
