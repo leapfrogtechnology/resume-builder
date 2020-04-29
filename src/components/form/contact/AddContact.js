@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Formik, Form } from 'formik';
 import React, { useContext } from 'react';
 
@@ -8,7 +9,7 @@ import FormHeader from '~/components/formheader/FormHeader';
 import * as contactUtils from '~/utilities/objects/Contact';
 import validateContactInformation from '~/validations/Contact';
 
-const AddContactInformation = ({ onClose }) => {
+const AddContactInformation = ({ onClose, isEdit }) => {
   const { preview, data } = useContext(FormContext);
 
   const handleSubmit = values => {
@@ -16,19 +17,35 @@ const AddContactInformation = ({ onClose }) => {
     data.set(prevState => ({ ...prevState, ...contactObj }));
   };
 
+  const getInitialValues = () => {
+    let initialValues = {};
+
+    if (isEdit) {
+      initialValues = {
+        email: data.get.email.value,
+        phone: data.get.phone ? data.get.phone.value : '',
+        gitHub: data.get.github ? data.get.github.value : '',
+        stackOverFlow: data.get.stackOverflow ? data.get.stackOverflow.value : '',
+        linkedIn: data.get.linkedIn ? data.get.linkedIn.value : '',
+      };
+    } else {
+      initialValues = {
+        email: '',
+        phone: '',
+        gitHub: '',
+        stackOverFlow: '',
+        linkedIn: '',
+      };
+    }
+    return initialValues;
+  };
+
   return (
     <>
       <FormHeader title="Contact Information" />
       <Formik
-        initialValues={{
-          email: '',
-          phone: '',
-          gitHub: '',
-          stackOverFlow: '',
-          linkedIn: '',
-        }}
+        initialValues={getInitialValues()}
         onSubmit={values => {
-          console.log('inside submit');
           handleSubmit(values);
         }}
         validationSchema={validateContactInformation}
@@ -56,6 +73,11 @@ const AddContactInformation = ({ onClose }) => {
       </Formik>
     </>
   );
+};
+
+AddContactInformation.propTypes = {
+  onClose: PropTypes.func,
+  isEdit: PropTypes.bool,
 };
 
 export default AddContactInformation;
