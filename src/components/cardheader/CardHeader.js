@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import OpenModal from '~/components/modal/OpenModal';
 
-const CardHeader = ({ title, icon = null, hideIcon = false, component, onEdit, onClose, showModal }) => {
+const CardHeader = ({ title, icon = null, hideIcon = false, component, onEdit, onClose, showModal, isEdit }) => {
   return (
     <>
       <div className="card-header">
@@ -16,7 +16,7 @@ const CardHeader = ({ title, icon = null, hideIcon = false, component, onEdit, o
           </div>
         )}
       </div>
-      {showModal && <OpenModal component={component} onClose={onClose} showModal={showModal} />}
+      {showModal && <OpenModal component={component} onClose={onClose} showModal={showModal} isEdit={isEdit} />}
     </>
   );
 };
@@ -25,6 +25,11 @@ CardHeader.propTypes = {
   title: PropTypes.string,
   icon: PropTypes.string,
   hideIcon: PropTypes.bool,
+  component: PropTypes.func,
+  onEdit: PropTypes.func,
+  onClose: PropTypes.func,
+  showModal: PropTypes.bool,
+  isEdit: PropTypes.bool,
 };
 
 export default CardHeader;
