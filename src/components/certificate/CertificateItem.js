@@ -4,10 +4,8 @@ import React, { useState } from 'react';
 import { UpRightArrow } from '~/assets/image';
 import EditOptions from '~/components/editoptions/EditOptions';
 
-const CertificateItem = ({ title, link, year, description, preview, onHiddenIconClicked }) => {
+const CertificateItem = ({ title, link, year, description, preview, onHiddenIconClicked, onEdit }) => {
   const [hidden, setHidden] = useState(false);
-  const [isDeleteClicked, setIsDelete] = useState(false);
-  const [isEditClicked, setIsEdit] = useState(false);
 
   if (hidden && preview) {
     return <></>;
@@ -17,28 +15,6 @@ const CertificateItem = ({ title, link, year, description, preview, onHiddenIcon
     e.preventDefault();
     setHidden(!hidden);
     onHiddenIconClicked(e, title);
-  };
-
-  const onDeleteButtonClicked = e => {
-    e.preventDefault();
-    setIsDelete(!isDeleteClicked);
-  };
-
-  const onConfirm = e => {
-    e.preventDefault();
-    console.log('Deleted');
-    setIsDelete(!isDeleteClicked);
-  };
-
-  const onCancel = e => {
-    e.preventDefault();
-    console.log('Cancelled');
-    setIsDelete(!isDeleteClicked);
-  };
-
-  const onEditButtonClicked = e => {
-    e.preventDefault();
-    setIsEdit(!isEditClicked);
   };
 
   return (
@@ -54,16 +30,7 @@ const CertificateItem = ({ title, link, year, description, preview, onHiddenIcon
           {hidden && <span className="hidden-tag">Hidden</span>}
         </div>
         {!preview && (
-          <EditOptions
-            onHiddenIconClicked={onHiddenBtnClicked}
-            isHidden={hidden}
-            onEditButtonClicked={onEditButtonClicked}
-            onDeleteButtonClicked={onDeleteButtonClicked}
-            isEditClicked={isEditClicked}
-            isDeleteClicked={isDeleteClicked}
-            onConfirm={onConfirm}
-            onCancel={onCancel}
-          />
+          <EditOptions onHiddenIconClicked={onHiddenBtnClicked} isHidden={hidden} onEditButtonClicked={onEdit} />
         )}
       </div>
       <div className="year year--dark">{moment(year).format('MMMM YYYY')}</div>
@@ -79,6 +46,7 @@ CertificateItem.propTypes = {
   link: PropTypes.string,
   preview: PropTypes.bool,
   onHiddenIconClicked: PropTypes.func,
+  onEdit: PropTypes.func,
 };
 
 export default CertificateItem;

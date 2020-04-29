@@ -22,6 +22,7 @@ const Certificate = () => {
   };
 
   const context = useContext(FormContext);
+
   const certificates = context.data.get.certificates;
   const preview = context.preview.get;
 
@@ -73,6 +74,7 @@ const Certificate = () => {
       description={description}
       preview={preview}
       onHiddenIconClicked={updateHiddenStateCertificates}
+      onEdit={editBtnHandler}
     />
   ));
 
