@@ -44,6 +44,18 @@ const Sidenav = () => {
     context.data.set(data);
   };
 
+  const openMailTo = (e, value) => {
+    window.open('mailto:' + value);
+  };
+
+  const openCallTo = (e, value) => {
+    window.open('tel:' + value);
+  };
+
+  const openLink = (e, url) => {
+    window.open(url, '_blank').focus();
+  };
+
   return (
     <div className="sidenav">
       <div className="sidenav-top">
@@ -81,6 +93,7 @@ const Sidenav = () => {
                 value={email.value}
                 preview={preview}
                 onHiddenIconClicked={updateHiddenStateContact}
+                onLinkClicked={openMailTo}
               />
             )}
             {phone && (
@@ -90,6 +103,7 @@ const Sidenav = () => {
                 value={phone.value}
                 preview={preview}
                 onHiddenIconClicked={updateHiddenStateContact}
+                onLinkClicked={openCallTo}
               />
             )}
             {github && (
@@ -99,6 +113,7 @@ const Sidenav = () => {
                 value={github.value}
                 preview={preview}
                 onHiddenIconClicked={updateHiddenStateContact}
+                onLinkClicked={openLink}
               />
             )}
             {linkedIn && (
@@ -108,6 +123,7 @@ const Sidenav = () => {
                 value={linkedIn.value}
                 preview={preview}
                 onHiddenIconClicked={updateHiddenStateContact}
+                onLinkClicked={openLink}
               />
             )}
           </div>
