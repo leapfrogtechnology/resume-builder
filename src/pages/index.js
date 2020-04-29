@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Head from 'next/head';
 import DATA from '../constant/mockData';
@@ -9,7 +9,7 @@ import Dashboard from '~/components/dashboard/Dashboard';
 const App = () => {
   // App state
   const [preview, setPreview] = useState(false);
-  const [data, updateData] = useState(DATA);
+  const [data, updateData] = useState({ experience: 0 });
 
   const store = {
     preview: { get: preview, set: setPreview },
@@ -39,13 +39,7 @@ const App = () => {
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
       </Head>
       <FormContext.Provider value={store}>
-        <Header
-          name={username}
-          status="Employee"
-          preview={preview}
-          experience="5 years professional experience"
-          onPreviewBtnClicked={handleOnPreviewBtnClicked}
-        />
+        <Header name={username} status="Employee" onPreviewBtnClicked={handleOnPreviewBtnClicked} />
         <Dashboard />
       </FormContext.Provider>
     </div>
