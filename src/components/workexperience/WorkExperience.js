@@ -86,6 +86,7 @@ const WorkExperience = () => {
         refereeContact={refereeContact}
         preview={preview}
         onHiddenIconClicked={updateHiddenStateWork}
+        onEdit={modalBtnHandler}
         onContactLinkClicked={contactLinkHandler}
       />
     )

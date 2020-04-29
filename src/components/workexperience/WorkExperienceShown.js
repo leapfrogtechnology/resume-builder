@@ -13,6 +13,7 @@ const WorkExperienceShown = ({
   refereeContact,
   preview,
   onHiddenIconClicked,
+  onEdit,
   onContactLinkClicked,
 }) => {
   const [hidden, setHidden] = useState(false);
@@ -38,7 +39,13 @@ const WorkExperienceShown = ({
             {subTitle}
             {hidden && <span className="hidden-tag">Hidden</span>}
           </div>
-          {!preview && <EditOptions isHidden={hidden} onHiddenIconClicked={onHiddenIconClickedHandler} />}
+          {!preview && (
+            <EditOptions
+              isHidden={hidden}
+              onHiddenIconClicked={onHiddenIconClickedHandler}
+              onEditButtonClicked={onEdit}
+            />
+          )}
         </div>
         <div className="work-experience__position">{position}</div>
         <div className="year">
