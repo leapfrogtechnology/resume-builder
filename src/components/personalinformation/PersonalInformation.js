@@ -18,15 +18,18 @@ const PersonalInformation = () => {
   const introduction = previousData.introduction;
 
   const [showModel, setModal] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
 
-  const modalBtnHandler = e => {
+  const editBtnHandler = e => {
     e.preventDefault();
     setModal(!showModel);
+    setIsEdit(!isEdit);
   };
 
   const closeBtnHandler = e => {
     e.preventDefault();
     setModal(!showModel);
+    setIsEdit(!isEdit);
   };
 
   /**
@@ -52,9 +55,10 @@ const PersonalInformation = () => {
         title="Personal Information"
         icon={!preview ? Edit : ''}
         component={AddPersonalInformation}
-        onEdit={modalBtnHandler}
+        onEdit={editBtnHandler}
         onClose={closeBtnHandler}
         showModal={showModel}
+        isEdit={isEdit}
       />
       {name && (
         <PersonalInfoItem
