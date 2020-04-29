@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import Head from 'next/head';
 import DATA from '../constant/mockData';
+import * as storage from '~/storage/LocalStorage';
 import Header from '~/components/header/Header';
 import { FormContext } from '../components/FormContext';
 import Dashboard from '~/components/dashboard/Dashboard';
@@ -9,18 +10,21 @@ import Dashboard from '~/components/dashboard/Dashboard';
 const App = () => {
   // App state
   const [preview, setPreview] = useState(false);
-  const [data, updateData] = useState({ experience: 0 });
-
-  const store = {
-    preview: { get: preview, set: setPreview },
-    data: { get: data, set: updateData },
-  };
+  const [data, updateData] = useState({
+    name: 'Ribby McFroggy',
+    email: { value: 'ribby@lftechnology.com', hidden: false },
+  });
 
   const username = DATA.name;
 
   const handleOnPreviewBtnClicked = e => {
     e.preventDefault();
     setPreview(!preview);
+  };
+
+  const store = {
+    preview: { get: preview, set: setPreview },
+    data: { get: data, set: updateData },
   };
 
   return (
