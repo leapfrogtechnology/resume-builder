@@ -11,6 +11,7 @@ const DATA = {
     value:
       'My name is Ribby and I am currently the Engineering Manager at Leapfrog. I love to challenge the normal and help build extraordinary product experiences.',
   },
+  overallExperience: '4',
   // Contact Information
   email: { value: 'ribby@lftechnology.com', hidden: false },
   phone: { value: '9841000000', hidden: false },
