@@ -15,7 +15,7 @@ const validateContactInformation = Yup.object().shape({
 
       return true;
     }),
-  contact: Yup.date()
+  phone: Yup.number()
     .label('Phone Number')
     .test('test-name', 'Enter a valid Phone Number', function (value) {
       const phoneRegex = phoneNumberCheck;
