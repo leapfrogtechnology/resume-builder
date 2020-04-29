@@ -12,10 +12,8 @@ const AddContactInformation = ({ onClose }) => {
   const { preview, data } = useContext(FormContext);
 
   const handleSubmit = values => {
-    console.log(values);
-    // const contactObj = contactUtils.getContactObject({ ...values });
-    // setData(prevState => ({ ...prevState, ...contactObj }));
-    // console.log(data);
+    const contactObj = contactUtils.getContactObject({ ...values });
+    data.set(prevState => ({ ...prevState, ...contactObj }));
   };
 
   return (
