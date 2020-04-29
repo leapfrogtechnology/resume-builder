@@ -46,6 +46,14 @@ const WorkExperience = () => {
     });
   };
 
+  const contactLinkHandler = (e, value) => {
+    if (isNaN(value)) {
+      window.open('mailto:' + value);
+    } else {
+      window.open('tel:' + value);
+    }
+  };
+
   if (!workExperience) {
     return (
       <>
@@ -78,6 +86,7 @@ const WorkExperience = () => {
         refereeContact={refereeContact}
         preview={preview}
         onHiddenIconClicked={updateHiddenStateWork}
+        onContactLinkClicked={contactLinkHandler}
       />
     )
   );
