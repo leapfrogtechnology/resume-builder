@@ -2,7 +2,9 @@ export const getSkillObject = ({ skill, subSkills }) => {
   const subSkillsList = [];
 
   subSkills.split(',').forEach(subSkill => {
-    subSkillsList.push({ name: subSkill, label: subSkill });
+    if (subSkill !== '') {
+      subSkillsList.push({ name: subSkill, label: subSkill });
+    }
   });
 
   return {
