@@ -1,12 +1,27 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import '~/pages/_app';
 import { Logo } from '~/assets/image';
+import { FormContext } from '../FormContext';
 import { DROPDOWN } from '~/components/icons/icon';
 import UserDetail from '~/components/userdetail/UserDetail';
 
-const Header = ({ name, status, experience, preview, onPreviewBtnClicked }) => {
+const Header = ({ name, status, onPreviewBtnClicked }) => {
+  const context = useContext(FormContext);
+  const experience = context.data.get.experience;
+  const preview = context.preview.get;
+
+  let experienceLabel = 'You do not have any proffessional experience yet';
+
+  if (experience) {
+    if (experience === 1) {
+      experienceLabel = experience + ' year of proffessional experience';
+    } else {
+      experienceLabel = experience + ' years of proffessional experience';
+    }
+  }
+
   return (
     <header className="header">
       <div className="header-container">
@@ -26,7 +41,12 @@ const Header = ({ name, status, experience, preview, onPreviewBtnClicked }) => {
           </div>
         </div>
       </div>
-      <UserDetail name={name} experience={experience} preview={preview} onPreviewBtnClicked={onPreviewBtnClicked} />
+      <UserDetail
+        name={name}
+        experience={experienceLabel}
+        preview={preview}
+        onPreviewBtnClicked={onPreviewBtnClicked}
+      />
     </header>
   );
 };
@@ -34,8 +54,6 @@ const Header = ({ name, status, experience, preview, onPreviewBtnClicked }) => {
 Header.propTypes = {
   name: PropTypes.string,
   status: PropTypes.string,
-  experience: PropTypes.string,
-  preview: PropTypes.bool,
   onPreviewBtnClicked: PropTypes.func,
 };
 

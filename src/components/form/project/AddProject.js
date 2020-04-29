@@ -25,7 +25,7 @@ const AddProject = ({ onClose }) => {
       data.get['projects'].push(projectObj);
     }
 
-    setData(prevState => ({ ...prevState, ...data }));
+    data.set(prevState => ({ ...prevState, ...data }));
   };
 
   return (
