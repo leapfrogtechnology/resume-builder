@@ -1,12 +1,27 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 
+import { Edit } from '~/assets/image';
 import { Image } from '~/assets/image';
+import OpenModal from '../modal/OpenModal';
 import Media from '~/components/media/Media';
 import Button from '~/components/button/Button';
 import { FAVORITE_ICON } from '~/components/icons/icon';
+import AddExperience from '../form/experience/AddExperience';
 
 const UserDetail = ({ name, experience, preview, onPreviewBtnClicked }) => {
+  const [showModal, setModal] = useState(false);
+
+  const editBtnHandler = e => {
+    e.preventDefault();
+    setModal(!showModal);
+  };
+
+  const closeBtnHandler = e => {
+    e.preventDefault();
+    setModal(!showModal);
+  };
+
   return (
     <section className="user-detail">
       <div className="user-detail-container">
@@ -18,6 +33,12 @@ const UserDetail = ({ name, experience, preview, onPreviewBtnClicked }) => {
             <div className="user-detail__username">{name}</div>
             <div className="user-detail__activity">
               <Media icon={FAVORITE_ICON} label={experience} />
+              <div className="card-header__r" onClick={editBtnHandler}>
+                <img src={Edit} alt="Edit" />
+              </div>
+              {showModal && (
+                <OpenModal component={AddExperience} onClose={closeBtnHandler} showModal={showModal}></OpenModal>
+              )}
             </div>
           </div>
         </div>
