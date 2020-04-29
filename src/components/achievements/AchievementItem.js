@@ -59,7 +59,7 @@ const AchievementItem = ({ title, date, preview, onHiddenIconClicked }) => {
           />
         )}
       </div>
-      <div className="year year--dark">{date}</div>
+      <div className="year year--dark">{moment(date).format('MMMM YYYY')}</div>
     </div>
   );
 };

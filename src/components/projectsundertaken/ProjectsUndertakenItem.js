@@ -60,8 +60,8 @@ const ProjectsUndertakenItem = ({ title, startDate, endDate, description, previe
         )}
       </div>
       <div className="year year--dark">
-        <span className="start-date">{startDate}</span> - <span className="end-date">{endDate}</span>(3 years and 3
-        months)
+        <span className="start-date">{moment(startDate).format('MMMM YYYY')}</span> -{' '}
+        <span className="end-date">{moment(endDate).format('MMMM YYYY')}</span>(3 years and 3 months)
       </div>
       <p className="description">{description}</p>
     </div>

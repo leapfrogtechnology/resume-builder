@@ -66,7 +66,7 @@ const CertificateItem = ({ title, link, year, description, preview, onHiddenIcon
           />
         )}
       </div>
-      <div className="year year--dark">{year}</div>
+      <div className="year year--dark">{moment(year).format('MMMM YYYY')}</div>
       <p className="description">{description}</p>
     </div>
   );
