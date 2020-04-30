@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Formik, Form } from 'formik';
 import React, { useContext } from 'react';
 
@@ -11,11 +12,24 @@ import CheckboxInput from '~/components/checkbox/CheckboxInput';
 import { validateWorkExperience } from '~/validations/WorkExperience';
 import * as workExperienceUtils from '../../../utilities/objects/WorkExperience';
 
-const AddWorkExperience = ({ onClose }) => {
+const AddWorkExperience = ({ onClose, isEdit, values }) => {
   const { preview, data } = useContext(FormContext);
 
-  const handleSubmit = values => {
-    const workExperienceObj = workExperienceUtils.getWorkExperienceObject({ ...values });
+  let workIndex = -1;
+  let initialValues = {};
+
+  const handleSubmit = formValues => {
+    if (isEdit) {
+      handleSubmitOnEdit(formValues);
+    } else {
+      handleSubmitOnAdd(formValues);
+    }
+
+    data.set(prevState => ({ ...prevState, ...data }));
+  };
+
+  const handleSubmitOnAdd = formValues => {
+    const workExperienceObj = workExperienceUtils.getWorkExperienceObject({ ...formValues });
 
     if (data.get.workExperience) {
       data.get['workExperience'].push(workExperienceObj);
@@ -23,25 +37,60 @@ const AddWorkExperience = ({ onClose }) => {
       data.get['workExperience'] = [];
       data.get['workExperience'].push(workExperienceObj);
     }
+  };
 
-    data.set(prevState => ({ ...prevState, ...data }));
+  const handleSubmitOnEdit = formValues => {
+    const isEqual = _.isEqual(formValues, initialValues);
+
+    if (isEqual) {
+      return;
+    } else {
+      const workObj = workExperienceUtils.getWorkExperienceObject({ ...formValues });
+
+      data.get['workExperience'][workIndex] = workObj;
+    }
+  };
+
+  const getInitialValues = () => {
+    if (isEdit) {
+      const works = data.get['workExperience'];
+
+      workIndex = works.findIndex(work => {
+        return work.name === values.name && work.position === values.position;
+      });
+
+      initialValues = {
+        nameOrganization: works[workIndex].name,
+        position: works[workIndex].position,
+        startDate: works[workIndex].startDate,
+        endDate: works[workIndex].endDate,
+        currentWork: works[workIndex].currentlyWorking,
+        roles: works[workIndex].responsibilities,
+        achievements: works[workIndex].achievements,
+        nameReferee: works[workIndex].refereeName,
+        contactReferee: works[workIndex].refereeContact,
+      };
+    } else {
+      initialValues = {
+        nameOrganization: '',
+        position: '',
+        startDate: '',
+        endDate: '',
+        currentWork: false,
+        roles: '',
+        achievements: '',
+        nameReferee: '',
+        contactReferee: '',
+      };
+    }
+    return initialValues;
   };
 
   return (
     <>
-      <FormHeader title="Add Work Experience" />
+      <FormHeader title={!isEdit ? 'Add Work Experience' : 'Edit Work Experience'} />
       <Formik
-        initialValues={{
-          nameOrganization: '',
-          position: '',
-          startDate: '',
-          endDate: '',
-          currentWork: false,
-          roles: '',
-          achievements: '',
-          nameReferee: '',
-          contactReferee: '',
-        }}
+        initialValues={getInitialValues()}
         onSubmit={values => {
           handleSubmit(values);
         }}
@@ -95,6 +144,12 @@ const AddWorkExperience = ({ onClose }) => {
       </Formik>
     </>
   );
+};
+
+AddWorkExperience.propTypes = {
+  onClose: PropTypes.func,
+  isEdit: PropTypes.bool,
+  values: PropTypes.object || PropTypes.string,
 };
 
 export default AddWorkExperience;
