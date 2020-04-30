@@ -1,6 +1,8 @@
+import PropTypes from 'prop-types';
 import { Formik, Form } from 'formik';
 import React, { useContext } from 'react';
 
+import _ from 'lodash';
 import Button from '~/components/button/Button';
 import { FormContext } from '../../FormContext';
 import InputText from '~/components/inputtext/InputText';
@@ -9,11 +11,21 @@ import FormHeader from '~/components/formheader/FormHeader';
 import * as achievementUtils from '~/utilities/objects/Achievement';
 import validateAchievementInformation from '~/validations/Achievement';
 
-const AddAchievement = ({ onClose }) => {
+const AddAchievement = ({ onClose, isEdit, values }) => {
   const { preview, data } = useContext(FormContext);
 
-  const handleSubmit = values => {
-    const achievementObj = achievementUtils.getAchievementObject({ ...values });
+  const handleSubmit = formValues => {
+    if (isEdit) {
+      handleSubmitOnEdit(formValues);
+    } else {
+      handleSubmitOnAdd(formValues);
+    }
+    data.set(prevState => ({ ...prevState, ...data }));
+    console.log(data);
+  };
+
+  const handleSubmitOnAdd = formValues => {
+    const achievementObj = achievementUtils.getAchievementObject({ ...formValues });
 
     if (data.get.achievements) {
       data.get['achievements'].push(achievementObj);
@@ -21,22 +33,52 @@ const AddAchievement = ({ onClose }) => {
       data.get['achievements'] = [];
       data.get['achievements'].push(achievementObj);
     }
+  };
 
-    data.set(prevState => ({ ...prevState, ...data }));
+  const handleSubmitOnEdit = formValues => {
+    const isEqual = _.isEqual(formValues, values);
+
+    if (isEqual) {
+      return;
+    } else {
+      const achievementObj = achievementUtils.getAchievementObject({ ...formValues });
+
+      const achievements = data.get.achievements;
+
+      const index = achievements.findIndex(achievement => {
+        return achievement.name === values.name && achievement.date === values.date;
+      });
+      data.get['achievements'][index] = achievementObj;
+    }
+  };
+
+  const getInitialValues = () => {
+    let initialValues = {};
+
+    if (isEdit) {
+      initialValues = { ...values };
+    } else {
+      initialValues = {
+        name: '',
+        date: '',
+        description: '',
+      };
+    }
+    return initialValues;
   };
 
   return (
     <>
       <FormHeader title="Add Achievement" />
       <Formik
-        initialValues={{
-          name: '',
-          date: '',
-          description: '',
-        }}
+        initialValues={getInitialValues()}
         onSubmit={values => {
           handleSubmit(values);
         }}
+        onChange={values => {
+          console.log(values);
+        }}
+        validateOnChange={validateAchievementInformation}
         validationSchema={validateAchievementInformation}
       >
         {({ values }) => (
@@ -65,6 +107,12 @@ const AddAchievement = ({ onClose }) => {
       </Formik>
     </>
   );
+};
+
+AddAchievement.propTypes = {
+  onClose: PropTypes.func,
+  isEdit: PropTypes.bool,
+  values: PropTypes.object || PropTypes.string,
 };
 
 export default AddAchievement;
