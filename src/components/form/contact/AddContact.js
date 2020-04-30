@@ -4,6 +4,7 @@ import React, { useContext } from 'react';
 
 import Button from '~/components/button/Button';
 import { FormContext } from '../../FormContext';
+import * as storage from '~/storage/LocalStorage';
 import InputText from '~/components/inputtext/InputText';
 import FormHeader from '~/components/formheader/FormHeader';
 import * as contactUtils from '~/utilities/objects/Contact';
@@ -14,7 +15,10 @@ const AddContactInformation = ({ onClose, isEdit }) => {
 
   const handleSubmit = values => {
     const contactObj = contactUtils.getContactObject({ ...values });
+
     data.set(prevState => ({ ...prevState, ...contactObj }));
+
+    storage.saveResume(localStorage, data.get);
   };
 
   const getInitialValues = () => {
@@ -22,7 +26,7 @@ const AddContactInformation = ({ onClose, isEdit }) => {
 
     if (isEdit) {
       initialValues = {
-        email: data.get.email.value,
+        email: data.get.email ? data.get.email.value : '',
         phone: data.get.phone ? data.get.phone.value : '',
         gitHub: data.get.github ? data.get.github.value : '',
         stackOverFlow: data.get.stackOverflow ? data.get.stackOverflow.value : '',
@@ -50,9 +54,8 @@ const AddContactInformation = ({ onClose, isEdit }) => {
         }}
         validationSchema={validateContactInformation}
       >
-        {({ values }) => (
+        {() => (
           <Form>
-            <pre>{JSON.stringify(values, null, 2)}</pre>
             <div className="form__content">
               <InputText name="email" label="Your Email" />
               <InputText name="phone" label="Phone Number (optional)" />
