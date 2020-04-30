@@ -9,16 +9,25 @@ import CardFooter from '~/components/cardfooter/CardFooter';
 import AddAchievement from '~/components/form/achievement/AddAchievement';
 
 const Achievements = () => {
-  const [showModel, setModel] = useState(false);
+  const [addAchievement, setAdd] = useState(false);
+  const [editAchievement, setEdit] = useState(false);
 
   const editBtnHandler = e => {
     e.preventDefault();
-    setModel(!showModel);
+    setEdit(!editAchievement);
   };
 
-  const closeBtnHandler = e => {
+  const addBtnHandler = e => {
+    setAdd(!addAchievement);
+  };
+
+  const addBtnCloseHandler = e => {
+    setAdd(!addAchievement);
+  };
+
+  const editBtnCloseHandler = e => {
     e.preventDefault();
-    setModel(!showModel);
+    setEdit(!editAchievement);
   };
 
   const context = useContext(FormContext);
@@ -54,24 +63,27 @@ const Achievements = () => {
           icon={Add}
           hide={preview}
           label="Add another achievement"
-          showModal={showModel}
-          onAdd={editBtnHandler}
+          showModal={addAchievement}
+          onAdd={addBtnHandler}
           component={AddAchievement}
-          onClose={closeBtnHandler}
+          onClose={addBtnCloseHandler}
           modifier="empty"
         />
       </>
     );
   }
 
-  const achievementsList = achievements.map(({ name, date }) => (
+  const achievementsList = achievements.map(({ name, date, description }, index) => (
     <AchievementItem
-      key={name}
+      key={index}
       title={name}
       date={date}
+      description={description}
       preview={preview}
+      isEdit={editAchievement}
       onHiddenIconClicked={updateHiddenStateAchievement}
       onEdit={editBtnHandler}
+      onClose={editBtnCloseHandler}
     />
   ));
 
@@ -83,10 +95,10 @@ const Achievements = () => {
         icon={Add}
         hide={preview}
         label="Add another achievement"
-        showModal={showModel}
-        onAdd={editBtnHandler}
+        showModal={addAchievement}
+        onAdd={addBtnHandler}
         component={AddAchievement}
-        onClose={closeBtnHandler}
+        onClose={addBtnCloseHandler}
       />
     </>
   );
