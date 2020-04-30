@@ -3,6 +3,7 @@ import React, { useContext, useState } from 'react';
 import { Add } from '~/assets/image';
 import { FormContext } from '../FormContext';
 import CertificateItem from './CertificateItem';
+import * as storage from '~/storage/LocalStorage';
 import EmptyCard from '~/components/emptycard/EmptyCard';
 import CardFooter from '~/components/cardfooter/CardFooter';
 import CardHeader from '~/components/cardheader/CardHeader';
@@ -56,7 +57,23 @@ const Certificate = () => {
     });
   };
 
-  if (!certificates) {
+  const deleteCertificate = (e, name, link) => {
+    e.preventDefault();
+
+    const data = context.data.get;
+
+    const filteredCertificates = data['certificates'].filter(certificate => {
+      return certificate.name !== name && certificate.link !== link;
+    });
+
+    data['certificates'] = filteredCertificates;
+
+    context.data.set(prevState => ({ ...prevState, ...data }));
+
+    storage.saveResume(localStorage, context.data.get);
+  };
+
+  if (!certificates || certificates.length < 1) {
     return (
       <>
         <EmptyCard emptyMessage="You do not have any certificates yet."></EmptyCard>
@@ -86,6 +103,7 @@ const Certificate = () => {
       onHiddenIconClicked={updateHiddenStateCertificates}
       onEdit={editBtnHandler}
       onClose={editBtnCloseHandler}
+      onDelete={deleteCertificate}
     />
   ));
 

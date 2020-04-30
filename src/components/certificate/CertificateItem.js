@@ -6,7 +6,18 @@ import { UpRightArrow } from '~/assets/image';
 import EditOptions from '~/components/editoptions/EditOptions';
 import AddCertificate from '../form/certificate/AddCertificate';
 
-const CertificateItem = ({ title, link, year, description, preview, isEdit, onHiddenIconClicked, onEdit, onClose }) => {
+const CertificateItem = ({
+  title,
+  link,
+  year,
+  description,
+  preview,
+  isEdit,
+  onHiddenIconClicked,
+  onEdit,
+  onClose,
+  onDelete,
+}) => {
   const [hidden, setHidden] = useState(false);
 
   if (hidden && preview) {
@@ -17,6 +28,11 @@ const CertificateItem = ({ title, link, year, description, preview, isEdit, onHi
     e.preventDefault();
     setHidden(!hidden);
     onHiddenIconClicked(e, title);
+  };
+
+  const deleteIconClickedHandler = e => {
+    e.preventDefault();
+    onDelete(e, title, link);
   };
 
   return (
@@ -32,7 +48,12 @@ const CertificateItem = ({ title, link, year, description, preview, isEdit, onHi
           {hidden && <span className="hidden-tag">Hidden</span>}
         </div>
         {!preview && (
-          <EditOptions onHiddenIconClicked={onHiddenBtnClicked} isHidden={hidden} onEditButtonClicked={onEdit} />
+          <EditOptions
+            onHiddenIconClicked={onHiddenBtnClicked}
+            isHidden={hidden}
+            onEditButtonClicked={onEdit}
+            onDeleteButtonClicked={deleteIconClickedHandler}
+          />
         )}
         {isEdit && (
           <OpenModal
@@ -58,6 +79,7 @@ CertificateItem.propTypes = {
   preview: PropTypes.bool,
   onHiddenIconClicked: PropTypes.func,
   onEdit: PropTypes.func,
+  onDelete: PropTypes.func,
 };
 
 export default CertificateItem;
