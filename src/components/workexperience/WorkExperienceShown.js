@@ -1,6 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
+
+import OpenModal from '../modal/OpenModal';
 import EditOptions from '~/components/editoptions/EditOptions';
+import AddWorkExperience from '../form/workexperience/AddWorkExperience';
 
 const WorkExperienceShown = ({
   subTitle,
@@ -11,15 +14,24 @@ const WorkExperienceShown = ({
   achievements,
   refereeName,
   refereeContact,
+  currentlyWorking,
   preview,
+  isEdit,
   onHiddenIconClicked,
   onEdit,
+  onClose,
+  onDelete,
   onContactLinkClicked,
 }) => {
   const [hidden, setHidden] = useState(false);
 
-  const rolesList = roles.split('\n\n').map(role => <li key={role}>{role}</li>);
-  const achievementsList = achievements.split('\n\n').map(achievement => <li key={achievement}>{achievement}</li>);
+  const rolesList = roles.split('.').map(role => <li key={role}>{role}</li>);
+
+  let achievementsList = null;
+
+  if (achievements.length > 1) {
+    achievementsList = achievements.split('.').map(achievement => <li key={achievement}>{achievement}</li>);
+  }
 
   if (hidden && preview) {
     return <></>;
@@ -29,6 +41,11 @@ const WorkExperienceShown = ({
     e.preventDefault();
     setHidden(!hidden);
     onHiddenIconClicked(e, subTitle);
+  };
+
+  const onDeleteIconClickedHanlder = e => {
+    e.preventDefault();
+    onDelete(e, subTitle, position);
   };
 
   return (
@@ -44,13 +61,24 @@ const WorkExperienceShown = ({
               isHidden={hidden}
               onHiddenIconClicked={onHiddenIconClickedHandler}
               onEditButtonClicked={onEdit}
+              onDeleteButtonClicked={onDeleteIconClickedHanlder}
             />
+          )}
+          {isEdit && (
+            <OpenModal
+              component={AddWorkExperience}
+              onClose={onClose}
+              showModal={isEdit}
+              isEdit={isEdit}
+              data={isEdit ? { name: subTitle, position: position } : ''}
+            ></OpenModal>
           )}
         </div>
         <div className="work-experience__position">{position}</div>
         <div className="year">
           <span className="start-date">{moment(startDate).format('MMMM YYYY')}</span> -{' '}
-          <span className="end-date">{moment(endDate).format('MMMM YYYY')}</span>(3 years and 3 months)
+          <span className="end-date">{currentlyWorking ? 'Employee since' : moment(endDate).format('MMMM YYYY')}</span>{' '}
+          (3 years and 3 months)
         </div>
       </div>
 
@@ -59,21 +87,25 @@ const WorkExperienceShown = ({
           Roles and Responsibilities
           <ul className="work-experience__row-item">{rolesList}</ul>
         </div>
-        <div className="work-experience__row">
-          Achievements
-          <ul className="work-experience__row-item">{achievementsList}</ul>
-        </div>
-        <div className="work-experience__row">
-          Referee <span className="referee-name">{refereeName}</span>
-          <span
-            className="referee-email text-link"
-            onClick={e => {
-              onContactLinkClicked(e, refereeContact);
-            }}
-          >
-            {' ' + refereeContact}
-          </span>
-        </div>
+        {achievements && (
+          <div className="work-experience__row">
+            Achievements
+            <ul className="work-experience__row-item">{achievementsList}</ul>
+          </div>
+        )}
+        {(refereeName || refereeContact) && (
+          <div className="work-experience__row">
+            Referee <span className="referee-name">{refereeName}</span>
+            <span
+              className="referee-email text-link"
+              onClick={e => {
+                onContactLinkClicked(e, refereeContact);
+              }}
+            >
+              {' ' + refereeContact}
+            </span>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -87,9 +119,14 @@ WorkExperienceShown.propTypes = {
   roles: PropTypes.string,
   achievements: PropTypes.string,
   refereeName: PropTypes.string,
+  currentlyWorking: PropTypes.bool,
   preview: PropTypes.bool,
+  isEdit: PropTypes.bool,
   refereeContact: PropTypes.string,
   onHiddenIconClicked: PropTypes.func,
+  onEdit: PropTypes.func,
+  onClose: PropTypes.func,
+  onDelete: PropTypes.func,
   onContactLinkClicked: PropTypes.func,
 };
 
