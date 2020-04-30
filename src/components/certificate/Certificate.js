@@ -9,16 +9,25 @@ import CardHeader from '~/components/cardheader/CardHeader';
 import AddCertificate from '../form/certificate/AddCertificate';
 
 const Certificate = () => {
-  const [showModel, setModel] = useState(false);
+  const [addCertificate, setAdd] = useState(false);
+  const [editCertificate, setEdit] = useState(false);
 
   const editBtnHandler = e => {
     e.preventDefault();
-    setModel(!showModel);
+    setEdit(!editCertificate);
   };
 
-  const closeBtnHandler = e => {
+  const addBtnHandler = e => {
+    setAdd(!addCertificate);
+  };
+
+  const addBtnCloseHandler = e => {
+    setAdd(!addCertificate);
+  };
+
+  const editBtnCloseHandler = e => {
     e.preventDefault();
-    setModel(!showModel);
+    setEdit(!editCertificate);
   };
 
   const context = useContext(FormContext);
@@ -55,10 +64,10 @@ const Certificate = () => {
           icon={Add}
           hide={preview}
           label="Add another certificate"
-          showModal={showModel}
-          onAdd={editBtnHandler}
+          showModal={addCertificate}
+          onAdd={addBtnHandler}
           component={AddCertificate}
-          onClose={closeBtnHandler}
+          onClose={addBtnCloseHandler}
           modifier="empty"
         />
       </>
@@ -73,8 +82,10 @@ const Certificate = () => {
       year={date}
       description={description}
       preview={preview}
+      isEdit={editCertificate}
       onHiddenIconClicked={updateHiddenStateCertificates}
       onEdit={editBtnHandler}
+      onClose={editBtnCloseHandler}
     />
   ));
 
@@ -86,10 +97,10 @@ const Certificate = () => {
         icon={Add}
         hide={preview}
         label="Add another certificate"
-        showModal={showModel}
-        onAdd={editBtnHandler}
+        showModal={addCertificate}
+        onAdd={addBtnHandler}
         component={AddCertificate}
-        onClose={closeBtnHandler}
+        onClose={addBtnCloseHandler}
       />
     </>
   );
