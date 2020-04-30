@@ -12,11 +12,24 @@ import * as projectUtils from '~/utilities/objects/Project';
 import validateProjectInformation from '~/validations/Project';
 import CheckboxInput from '~/components/checkbox/CheckboxInput';
 
-const AddProject = ({ onClose }) => {
+const AddProject = ({ onClose, isEdit, values }) => {
   const { preview, data } = useContext(FormContext);
 
-  const handleSubmit = values => {
-    const projectObj = projectUtils.getProjectObject({ ...values });
+  let projectIndex = -1;
+  let initialValues = {};
+
+  const handleSubmit = formValues => {
+    if (isEdit) {
+      handleSubmitOnEdit(formValues);
+    } else {
+      handleSubmitOnAdd(formValues);
+    }
+
+    data.set(prevState => ({ ...prevState, ...data }));
+  };
+
+  const handleSubmitOnAdd = formValues => {
+    const projectObj = projectUtils.getProjectObject({ ...formValues });
 
     if (data.get.projects) {
       data.get['projects'].push(projectObj);
@@ -24,26 +37,59 @@ const AddProject = ({ onClose }) => {
       data.get['projects'] = [];
       data.get['projects'].push(projectObj);
     }
+  };
 
-    data.set(prevState => ({ ...prevState, ...data }));
+  const handleSubmitOnEdit = formValues => {
+    const isEqual = _.isEqual(formValues, initialValues);
+
+    if (isEqual) {
+      return;
+    } else {
+      const projectObj = projectUtils.getProjectObject({ ...formValues });
+
+      data.get['projects'][projectIndex] = projectObj;
+    }
+  };
+
+  const getInitialValues = () => {
+    if (isEdit) {
+      const projects = data.get['projects'];
+
+      projectIndex = projects.findIndex(project => {
+        return project.name === values.name && project.startDate === values.date;
+      });
+
+      initialValues = {
+        name: projects[projectIndex].name,
+        startDate: projects[projectIndex].startDate,
+        endDate: projects[projectIndex].endDate,
+        ongoing: projects[projectIndex].ongoing,
+        type: projects[projectIndex].type,
+        description: projects[projectIndex].description,
+      };
+    } else {
+      initialValues = {
+        name: '',
+        startDate: '',
+        endDate: '',
+        ongoing: '',
+        type: '',
+        description: '',
+      };
+    }
+    return initialValues;
   };
 
   return (
     <>
-      <FormHeader title="Add Project" />
+      <FormHeader title={!isEdit ? 'Add Project' : 'Edit Project'} />
       <Formik
-        initialValues={{
-          name: '',
-          startDate: '',
-          endDate: '',
-          ongoing: '',
-          type: '',
-          description: '',
-        }}
+        initialValues={getInitialValues()}
         onSubmit={values => {
           handleSubmit(values);
         }}
         validationSchema={validateProjectInformation}
+        validateOnChange={validateProjectInformation}
       >
         {({ values }) => (
           <Form>
