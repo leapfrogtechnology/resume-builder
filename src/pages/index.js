@@ -10,10 +10,7 @@ import Dashboard from '~/components/dashboard/Dashboard';
 const App = () => {
   // App state
   const [preview, setPreview] = useState(false);
-  const [data, updateData] = useState({
-    name: 'Ribby McFroggy',
-    email: { value: 'ribby@lftechnology.com', hidden: false },
-  });
+  const [data, updateData] = useState({});
 
   const username = DATA.name;
 
@@ -26,6 +23,13 @@ const App = () => {
     preview: { get: preview, set: setPreview },
     data: { get: data, set: updateData },
   };
+
+  useEffect(() => {
+    if (localStorage.getItem('resume')) {
+      const resume = JSON.parse(localStorage.getItem('resume'));
+      updateData(prevState => ({ ...prevState, ...resume }));
+    }
+  }, []);
 
   return (
     <div className="page-container">
