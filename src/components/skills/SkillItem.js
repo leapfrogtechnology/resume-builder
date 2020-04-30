@@ -1,9 +1,11 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
+import OpenModal from '../modal/OpenModal';
+import AddSkill from '../form/skill/AddSkill';
 import EditOptions from '~/components/editoptions/EditOptions';
 
-const SkillItem = ({ title, values, preview, onHiddenIconClicked, onEdit, onClose }) => {
+const SkillItem = ({ title, values, preview, isEdit, onHiddenIconClicked, onEdit, onClose }) => {
   const [hidden, setHidden] = useState(false);
 
   if (hidden && preview) {
@@ -36,6 +38,15 @@ const SkillItem = ({ title, values, preview, onHiddenIconClicked, onEdit, onClos
               onHiddenIconClicked={hiddenIconClickedHandler}
               onEditButtonClicked={onEdit}
             />
+          )}
+          {isEdit && (
+            <OpenModal
+              component={AddSkill}
+              onClose={onClose}
+              showModal={isEdit}
+              isEdit={isEdit}
+              data={isEdit ? { name: title, subSkills: values } : ''}
+            ></OpenModal>
           )}
         </div>
       </div>
