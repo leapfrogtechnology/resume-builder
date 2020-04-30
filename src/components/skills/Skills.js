@@ -11,20 +11,28 @@ import CardFooter from '~/components/cardfooter/CardFooter';
 const Skills = () => {
   const context = useContext(FormContext);
 
-  const preview = context.preview.get;
-  // previous state of data
-  const skills = context.data.get.skills;
+  const [addSkill, setAdd] = useState(false);
+  const [editSkill, setEdit] = useState(false);
 
-  const [showModel, setModal] = useState(false);
+  const preview = context.preview.get;
+  const skills = context.data.get.skills;
 
   const editBtnHandler = e => {
     e.preventDefault();
-    setModal(!showModel);
+    setEdit(!editSkill);
   };
 
-  const closeBtnHandler = e => {
+  const addBtnHandler = e => {
+    setAdd(!addSkill);
+  };
+
+  const addBtnCloseHandler = e => {
+    setAdd(!addSkill);
+  };
+
+  const editBtnCloseHandler = e => {
     e.preventDefault();
-    setModal(!showModel);
+    setEdit(!editSkill);
   };
 
   /**
@@ -56,25 +64,26 @@ const Skills = () => {
           icon={Add}
           hide={preview}
           label="Add another skill"
-          showModal={showModel}
-          onAdd={editBtnHandler}
+          showModal={addSkill}
+          onAdd={addBtnHandler}
           component={AddSkill}
-          onClose={closeBtnHandler}
+          onClose={addBtnCloseHandler}
           modifier="empty"
         />
       </>
     );
   }
 
-  const skillsList = skills.map(({ name, label, subSkills }) => (
+  const skillsList = skills.map(({ name, label, subSkills }, index) => (
     <SkillItem
-      key={name}
+      key={index}
       title={label}
       values={subSkills}
       preview={preview}
+      isEdit={editSkill}
       onHiddenIconClicked={updateHiddenStateSkill}
       onEdit={editBtnHandler}
-      onClose={closeBtnHandler}
+      onClose={editBtnCloseHandler}
     />
   ));
 
@@ -86,10 +95,10 @@ const Skills = () => {
         icon={Add}
         hide={preview}
         label="Add another skill"
-        showModal={showModel}
-        onAdd={editBtnHandler}
+        showModal={addSkill}
+        onAdd={addBtnHandler}
         component={AddSkill}
-        onClose={closeBtnHandler}
+        onClose={addBtnCloseHandler}
       />
     </>
   );
