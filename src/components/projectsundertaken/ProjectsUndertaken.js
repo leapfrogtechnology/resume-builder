@@ -11,19 +11,28 @@ import ProjectsUndertakenItem from './ProjectsUndertakenItem';
 const ProjectsUndertaken = () => {
   const context = useContext(FormContext);
 
+  const [addProject, setAdd] = useState(false);
+  const [editProject, setEdit] = useState(false);
+
   const preview = context.preview.get;
   const projects = context.data.get.projects;
 
-  const [showModel, setModel] = useState(false);
-
   const editBtnHandler = e => {
     e.preventDefault();
-    setModel(!showModel);
+    setEdit(!editProject);
   };
 
-  const closeBtnHandler = e => {
+  const addBtnHandler = e => {
+    setAdd(!addProject);
+  };
+
+  const addBtnCloseHandler = e => {
+    setAdd(!addProject);
+  };
+
+  const editBtnCloseHandler = e => {
     e.preventDefault();
-    setModel(!showModel);
+    setEdit(!editProject);
   };
 
   /**
@@ -55,26 +64,29 @@ const ProjectsUndertaken = () => {
           icon={Add}
           hide={preview}
           label="Add another project"
-          showModal={showModel}
-          onAdd={editBtnHandler}
+          showModal={addProject}
+          onAdd={addBtnHandler}
           component={AddProject}
-          onClose={closeBtnHandler}
+          onClose={addBtnCloseHandler}
           modifier="empty"
         />
       </>
     );
   }
 
-  const projectsList = projects.map(({ name, startDate, endDate, description }) => (
+  const projectsList = projects.map(({ name, startDate, endDate, description, ongoing }, index) => (
     <ProjectsUndertakenItem
-      key={name}
+      key={index}
       title={name}
       startDate={startDate}
       endDate={endDate}
+      ongoing={ongoing}
       description={description}
       preview={preview}
+      isEdit={editProject}
       onHiddenIconClicked={updateHiddenStateProject}
       onEdit={editBtnHandler}
+      onClose={editBtnCloseHandler}
     />
   ));
 
@@ -86,10 +98,10 @@ const ProjectsUndertaken = () => {
         icon={Add}
         hide={preview}
         label="Add another project"
-        showModal={showModel}
-        onAdd={editBtnHandler}
+        showModal={addProject}
+        onAdd={addBtnHandler}
         component={AddProject}
-        onClose={closeBtnHandler}
+        onClose={addBtnCloseHandler}
       />
     </>
   );
