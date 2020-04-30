@@ -15,10 +15,10 @@ const Header = ({ name, status, onPreviewBtnClicked }) => {
   let experienceLabel = 'You do not have any proffessional experience yet';
 
   if (experience) {
-    if (experience === 1) {
-      experienceLabel = experience + ' year of proffessional experience';
-    } else {
-      experienceLabel = experience + ' years of proffessional experience';
+    if (experience.value === 1) {
+      experienceLabel = experience.value + ' year of proffessional experience';
+    } else if (experience.value > 1) {
+      experienceLabel = experience.value + ' years of proffessional experience';
     }
   }
 
