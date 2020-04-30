@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 
 import CloseModal from '../modalclose/CloseModal';
 
-const Card = ({ children, className = '', onClose, showModal, isEdit }) => {
+const Card = ({ children, className = '', onClose, showModal, isEdit, data }) => {
   const Component = children;
 
   return (
     <div className={`card ${className}`}>
       {showModal && <CloseModal onClose={onClose} />}
-      <Component onClose={onClose} isEdit={isEdit} />
+      <Component onClose={onClose} isEdit={isEdit} values={data} />
     </div>
   );
 };
@@ -20,6 +20,7 @@ Card.propTypes = {
   onClose: PropTypes.func,
   showModal: PropTypes.bool,
   isEdit: PropTypes.bool,
+  data: PropTypes.object || PropTypes.string,
 };
 
 export default Card;
