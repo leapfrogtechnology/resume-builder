@@ -1,8 +1,22 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
+
+import OpenModal from '../modal/OpenModal';
+import AddProject from '../form/project/AddProject';
 import EditOptions from '~/components/editoptions/EditOptions';
 
-const ProjectsUndertakenItem = ({ title, startDate, endDate, description, preview, onHiddenIconClicked, onEdit }) => {
+const ProjectsUndertakenItem = ({
+  title,
+  startDate,
+  endDate,
+  description,
+  ongoing,
+  preview,
+  isEdit,
+  onHiddenIconClicked,
+  onEdit,
+  onClose,
+}) => {
   const [hidden, setHidden] = useState(false);
 
   if (hidden && preview) {
@@ -25,10 +39,20 @@ const ProjectsUndertakenItem = ({ title, startDate, endDate, description, previe
         {!preview && (
           <EditOptions isHidden={hidden} onHiddenIconClicked={onHiddenBtnClicked} onEditButtonClicked={onEdit} />
         )}
+        {isEdit && (
+          <OpenModal
+            component={AddProject}
+            onClose={onClose}
+            showModal={isEdit}
+            isEdit={isEdit}
+            data={isEdit ? { name: title, date: startDate, description: description } : ''}
+          ></OpenModal>
+        )}
       </div>
       <div className="year year--dark">
         <span className="start-date">{moment(startDate).format('MMMM YYYY')}</span> -{' '}
-        <span className="end-date">{moment(endDate).format('MMMM YYYY')}</span>(3 years and 3 months)
+        <span className="end-date">{ongoing ? 'Employee since' : moment(endDate).format('MMMM YYYY')}</span> (3 years
+        and 3 months)
       </div>
       <p className="description">{description}</p>
     </div>
@@ -40,9 +64,12 @@ ProjectsUndertakenItem.propTypes = {
   startDate: PropTypes.string,
   endDate: PropTypes.string,
   description: PropTypes.string,
+  ongoing: PropTypes.bool,
   preview: PropTypes.bool,
+  isEdit: PropTypes.bool,
   onHiddenIconClicked: PropTypes.func,
   onEdit: PropTypes.func,
+  onClose: PropTypes.func,
 };
 
 export default ProjectsUndertakenItem;
