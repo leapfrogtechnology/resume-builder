@@ -4,6 +4,7 @@ import SkillItem from './SkillItem';
 import { Add } from '~/assets/image';
 import { FormContext } from '../FormContext';
 import AddSkill from '../form/skill/AddSkill';
+import * as storage from '~/storage/LocalStorage';
 import EmptyCard from '~/components/emptycard/EmptyCard';
 import CardHeader from '~/components/cardheader/CardHeader';
 import CardFooter from '~/components/cardfooter/CardFooter';
@@ -56,7 +57,23 @@ const Skills = () => {
     });
   };
 
-  if (!skills) {
+  const deleteSkill = (e, name) => {
+    e.preventDefault();
+
+    const data = context.data.get;
+
+    const filteredSkills = data['skills'].filter(skill => {
+      return skill.label !== name;
+    });
+
+    data['skills'] = filteredSkills;
+
+    context.data.set(prevState => ({ ...prevState, ...data }));
+
+    storage.saveResume(localStorage, context.data.get);
+  };
+
+  if (!skills || skills.length < 1) {
     return (
       <>
         <EmptyCard emptyMessage="You do not have any skills yet."></EmptyCard>
@@ -84,6 +101,7 @@ const Skills = () => {
       onHiddenIconClicked={updateHiddenStateSkill}
       onEdit={editBtnHandler}
       onClose={editBtnCloseHandler}
+      onDelete={deleteSkill}
     />
   ));
 

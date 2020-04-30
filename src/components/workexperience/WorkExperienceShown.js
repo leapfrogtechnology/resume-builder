@@ -77,8 +77,8 @@ const WorkExperienceShown = ({
         <div className="work-experience__position">{position}</div>
         <div className="year">
           <span className="start-date">{moment(startDate).format('MMMM YYYY')}</span> -{' '}
-          <span className="end-date">{currentlyWorking ? 'Employee since' : moment(endDate).format('MMMM YYYY')}</span>{' '}
-          (3 years and 3 months)
+          <span className="end-date">{currentlyWorking ? 'Present' : moment(endDate).format('MMMM YYYY')}</span> (3
+          years and 3 months)
         </div>
       </div>
 

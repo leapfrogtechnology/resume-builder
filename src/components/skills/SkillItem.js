@@ -5,7 +5,7 @@ import OpenModal from '../modal/OpenModal';
 import AddSkill from '../form/skill/AddSkill';
 import EditOptions from '~/components/editoptions/EditOptions';
 
-const SkillItem = ({ title, values, preview, isEdit, onHiddenIconClicked, onEdit, onClose }) => {
+const SkillItem = ({ title, values, preview, isEdit, onHiddenIconClicked, onEdit, onClose, onDelete }) => {
   const [hidden, setHidden] = useState(false);
 
   if (hidden && preview) {
@@ -16,6 +16,11 @@ const SkillItem = ({ title, values, preview, isEdit, onHiddenIconClicked, onEdit
     e.preventDefault();
     setHidden(!hidden);
     onHiddenIconClicked(e, title);
+  };
+
+  const deleteIconClickedHandler = e => {
+    e.preventDefault();
+    onDelete(e, title);
   };
 
   const subSkillsList = values.map(({ name, label }) => (
@@ -37,6 +42,7 @@ const SkillItem = ({ title, values, preview, isEdit, onHiddenIconClicked, onEdit
               isHidden={hidden}
               onHiddenIconClicked={hiddenIconClickedHandler}
               onEditButtonClicked={onEdit}
+              onDeleteButtonClicked={deleteIconClickedHandler}
             />
           )}
           {isEdit && (
@@ -62,6 +68,7 @@ SkillItem.propTypes = {
   onHiddenIconClicked: PropTypes.func,
   onEdit: PropTypes.func,
   onClose: PropTypes.func,
+  onDelete: PropTypes.func,
 };
 
 export default SkillItem;

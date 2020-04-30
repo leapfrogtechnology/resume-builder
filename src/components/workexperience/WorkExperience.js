@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 
 import { Add } from '~/assets/image';
 import { FormContext } from '../FormContext';
+import * as storage from '~/storage/LocalStorage';
 import WorkExperienceShown from './WorkExperienceShown';
 import EmptyCard from '~/components/emptycard/EmptyCard';
 import CardHeader from '~/components/cardheader/CardHeader';
@@ -68,7 +69,8 @@ const WorkExperience = () => {
     data['workExperience'] = filteredWorkExperiences;
 
     context.data.set(prevState => ({ ...prevState, ...data }));
-    console.log(data);
+
+    storage.saveResume(localStorage, context.data.get);
   };
 
   const contactLinkHandler = (e, value) => {
@@ -79,7 +81,7 @@ const WorkExperience = () => {
     }
   };
 
-  if (!workExperience) {
+  if (!workExperience || workExperience.length < 1) {
     return (
       <>
         <EmptyCard emptyMessage="You do not have any work experience yet."></EmptyCard>
@@ -136,7 +138,7 @@ const WorkExperience = () => {
 
   return (
     <div className="content-block">
-      <CardHeader title="Work Experience" />
+      {!preview && workExperienceList.length > 1 && <CardHeader title="Work Experience" />}
       {workExperienceList}
       <CardFooter
         icon={Add}

@@ -8,6 +8,7 @@ import { Edit, ProfileImage, Trash } from '~/assets/image';
 import CardHeader from '~/components/cardheader/CardHeader';
 import AddContact from '~/components/form/contact/AddContact';
 import * as profileImageUtils from '~/utilities/objects/ProfileImage.js';
+import { COUNTRY_CODE, BASE_URL_LINKED_IN, BASE_URL_GITHUB } from '~/constant/contact.js';
 
 const Sidenav = () => {
   const [showModal, setModal] = useState(false);
@@ -92,6 +93,17 @@ const Sidenav = () => {
       } else {
         prevData.profileImage.value = result;
       }
+      prevData.profileImage.isDeleted = false;
+      context.data.set(prevState => ({ ...prevState, ...prevData }));
+    }
+  };
+
+  const handleImageDelete = e => {
+    e.preventDefault();
+    if (context.data.get.profileImage) {
+      context.data.get.profileImage.isDeleted = true;
+      context.data.get.profileImage.deletedOn = new Date();
+      context.data.set(prevState => ({ ...prevState, ...prevData }));
     }
   };
 
@@ -113,7 +125,7 @@ const Sidenav = () => {
             </div>
             {!preview && (
               <div className="sidenav__upload-block-r">
-                <div className="icon">
+                <div className="icon" onClick={handleImageDelete}>
                   <img src={Trash} alt="Trash" />
                 </div>
               </div>
@@ -144,7 +156,7 @@ const Sidenav = () => {
               <Contact
                 id="phone"
                 label="Phone Number"
-                value={phone.value}
+                value={phone.value ? COUNTRY_CODE + '-' + phone.value : ''}
                 preview={preview}
                 onHiddenIconClicked={updateHiddenStateContact}
                 onLinkClicked={openCallTo}
@@ -154,7 +166,7 @@ const Sidenav = () => {
               <Contact
                 id="github"
                 label="GitHub"
-                value={github.value}
+                value={github.value ? BASE_URL_GITHUB + github.value : ''}
                 preview={preview}
                 onHiddenIconClicked={updateHiddenStateContact}
                 onLinkClicked={openLink}
@@ -174,7 +186,7 @@ const Sidenav = () => {
               <Contact
                 id="linkedIn"
                 label="LinkedIn"
-                value={linkedIn.value}
+                value={linkedIn.value ? BASE_URL_LINKED_IN + linkedIn.value : ''}
                 preview={preview}
                 onHiddenIconClicked={updateHiddenStateContact}
                 onLinkClicked={openLink}

@@ -16,6 +16,7 @@ const ProjectsUndertakenItem = ({
   onHiddenIconClicked,
   onEdit,
   onClose,
+  onDelete,
 }) => {
   const [hidden, setHidden] = useState(false);
 
@@ -29,6 +30,11 @@ const ProjectsUndertakenItem = ({
     onHiddenIconClicked(e, title);
   };
 
+  const deleteIconClickedHandler = e => {
+    e.preventDefault();
+    onDelete(e, title);
+  };
+
   return (
     <div className={!hidden ? 'projects-undertaken__row' : 'projects-undertaken__row projects-undertaken--hidden'}>
       <div className="projects-undertaken__row-header">
@@ -37,7 +43,12 @@ const ProjectsUndertakenItem = ({
           {hidden && <span className="hidden-tag">Hidden</span>}
         </div>
         {!preview && (
-          <EditOptions isHidden={hidden} onHiddenIconClicked={onHiddenBtnClicked} onEditButtonClicked={onEdit} />
+          <EditOptions
+            isHidden={hidden}
+            onHiddenIconClicked={onHiddenBtnClicked}
+            onEditButtonClicked={onEdit}
+            onDeleteButtonClicked={deleteIconClickedHandler}
+          />
         )}
         {isEdit && (
           <OpenModal
@@ -51,8 +62,8 @@ const ProjectsUndertakenItem = ({
       </div>
       <div className="year year--dark">
         <span className="start-date">{moment(startDate).format('MMMM YYYY')}</span> -{' '}
-        <span className="end-date">{ongoing ? 'Employee since' : moment(endDate).format('MMMM YYYY')}</span> (3 years
-        and 3 months)
+        <span className="end-date">{ongoing ? 'Working since' : moment(endDate).format('MMMM YYYY')}</span> (3 years and
+        3 months)
       </div>
       <p className="description">{description}</p>
     </div>
@@ -70,6 +81,7 @@ ProjectsUndertakenItem.propTypes = {
   onHiddenIconClicked: PropTypes.func,
   onEdit: PropTypes.func,
   onClose: PropTypes.func,
+  onDelete: PropTypes.func,
 };
 
 export default ProjectsUndertakenItem;

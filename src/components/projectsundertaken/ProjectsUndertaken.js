@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 
 import { Add } from '~/assets/image';
 import { FormContext } from '../FormContext';
+import * as storage from '~/storage/LocalStorage';
 import AddProject from '../form/project/AddProject';
 import EmptyCard from '~/components/emptycard/EmptyCard';
 import CardHeader from '~/components/cardheader/CardHeader';
@@ -56,7 +57,23 @@ const ProjectsUndertaken = () => {
     });
   };
 
-  if (!projects) {
+  const deleteProject = (e, name) => {
+    e.preventDefault();
+
+    const data = context.data.get;
+
+    const filteredProjects = data['projects'].filter(project => {
+      return project.name !== name;
+    });
+
+    data['projects'] = filteredProjects;
+
+    context.data.set(prevState => ({ ...prevState, ...data }));
+
+    storage.saveResume(localStorage, context.data.get);
+  };
+
+  if (!projects || projects.length < 1) {
     return (
       <>
         <EmptyCard emptyMessage="You do not have any projects undertaken yet."></EmptyCard>
@@ -87,6 +104,7 @@ const ProjectsUndertaken = () => {
       onHiddenIconClicked={updateHiddenStateProject}
       onEdit={editBtnHandler}
       onClose={editBtnCloseHandler}
+      onDelete={deleteProject}
     />
   ));
 
