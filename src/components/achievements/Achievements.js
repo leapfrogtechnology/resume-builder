@@ -3,6 +3,7 @@ import React, { useState, useContext } from 'react';
 import { Add } from '~/assets/image';
 import { FormContext } from '../FormContext';
 import AchievementItem from './AchievementItem';
+import * as storage from '~/storage/LocalStorage';
 import EmptyCard from '~/components/emptycard/EmptyCard';
 import CardHeader from '~/components/cardheader/CardHeader';
 import CardFooter from '~/components/cardfooter/CardFooter';
@@ -55,7 +56,23 @@ const Achievements = () => {
     });
   };
 
-  if (!achievements) {
+  const deleteAchievment = (e, name, date) => {
+    e.preventDefault();
+
+    const data = context.data.get;
+
+    const filteredAchievements = data['achievements'].filter(achievement => {
+      return achievement.name !== name && achievement.date !== date;
+    });
+
+    data['achievements'] = filteredAchievements;
+
+    context.data.set(prevState => ({ ...prevState, ...data }));
+
+    storage.saveResume(localStorage, context.data.get);
+  };
+
+  if (!achievements || achievements.length < 1) {
     return (
       <>
         <EmptyCard emptyMessage="You do not have any achievement yet."></EmptyCard>
@@ -84,6 +101,7 @@ const Achievements = () => {
       onHiddenIconClicked={updateHiddenStateAchievement}
       onEdit={editBtnHandler}
       onClose={editBtnCloseHandler}
+      onDelete={deleteAchievment}
     />
   ));
 

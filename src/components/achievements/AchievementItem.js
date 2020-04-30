@@ -5,7 +5,17 @@ import OpenModal from '../modal/OpenModal';
 import EditOptions from '~/components/editoptions/EditOptions';
 import AddAchievement from '~/components/form/achievement/AddAchievement';
 
-const AchievementItem = ({ title, date, description, preview, isEdit, onHiddenIconClicked, onEdit, onClose }) => {
+const AchievementItem = ({
+  title,
+  date,
+  description,
+  preview,
+  isEdit,
+  onHiddenIconClicked,
+  onEdit,
+  onClose,
+  onDelete,
+}) => {
   const [hidden, setHidden] = useState(false);
 
   if (hidden && preview) {
@@ -18,6 +28,11 @@ const AchievementItem = ({ title, date, description, preview, isEdit, onHiddenIc
     onHiddenIconClicked(e, title);
   };
 
+  const deleteIconClickedHandler = e => {
+    e.preventDefault();
+    onDelete(e, title, date);
+  };
+
   return (
     <div className="achievements__row">
       <div className="achievements__row-header">
@@ -26,7 +41,12 @@ const AchievementItem = ({ title, date, description, preview, isEdit, onHiddenIc
           {hidden && <span className="hidden-tag">Hidden</span>}
         </div>
         {!preview && (
-          <EditOptions isHidden={hidden} onHiddenIconClicked={onHiddenBtnClicked} onEditButtonClicked={onEdit} />
+          <EditOptions
+            isHidden={hidden}
+            onHiddenIconClicked={onHiddenBtnClicked}
+            onEditButtonClicked={onEdit}
+            onDeleteButtonClicked={deleteIconClickedHandler}
+          />
         )}
         {isEdit && (
           <OpenModal
@@ -52,6 +72,7 @@ AchievementItem.propTypes = {
   onHiddenIconClicked: ProptTypes.func,
   onEdit: ProptTypes.func,
   onClose: ProptTypes.func,
+  onDelete: ProptTypes.func,
 };
 
 export default AchievementItem;
