@@ -10,36 +10,74 @@ import FormHeader from '~/components/formheader/FormHeader';
 import * as certificateUtils from '~/utilities/objects/Certificate';
 import validateCertificateInformation from '~/validations/Certificate';
 
-const AddCertificate = ({ onClose }) => {
+const AddCertificate = ({ onClose, isEdit, values }) => {
   const { preview, data } = useContext(FormContext);
 
-  const handleSubmit = values => {
-    const certificateObj = certificateUtils.getCertificateObject({ ...values });
+  const handleSubmit = formValues => {
+    if (isEdit) {
+      handleSubmitOnEdit(formValues);
+    } else {
+      handleSubmitOnAdd(formValues);
+    }
+
+    data.set(prevState => ({ ...prevState, ...data }));
+  };
+
+  const handleSubmitOnAdd = formValues => {
+    const certificateObj = certificateUtils.getCertificateObject({ ...formValues });
 
     if (data.get.certificates) {
       data.get['certificates'].push(certificateObj);
     } else {
       data.get['certificates'] = [];
+
       data.get['certificates'].push(certificateObj);
     }
+  };
 
-    data.set(prevState => ({ ...prevState, ...data }));
+  const handleSubmitOnEdit = formValues => {
+    const isEqual = _.isEqual(formValues, values);
+
+    if (isEqual) {
+      return;
+    } else {
+      const certificateObj = certificateUtils.getCertificateObject({ ...formValues });
+      const certificates = data.get.certificates;
+
+      const index = certificates.findIndex(certificate => {
+        return certificate.name === values.name && certificate.link === values.link;
+      });
+
+      data.get['certificates'][index] = certificateObj;
+    }
+  };
+
+  const getInitialValues = () => {
+    let initialValues = {};
+
+    if (isEdit) {
+      initialValues = { ...values };
+    } else {
+      initialValues = {
+        name: '',
+        link: '',
+        date: '',
+        description: '',
+      };
+    }
+    return initialValues;
   };
 
   return (
     <>
       <FormHeader title="Add Certificate" />
       <Formik
-        initialValues={{
-          name: '',
-          link: '',
-          date: '',
-          description: '',
-        }}
+        initialValues={getInitialValues()}
         onSubmit={values => {
           handleSubmit(values);
         }}
         validationSchema={validateCertificateInformation}
+        validateOnChange={validateCertificateInformation}
       >
         {({ values }) => (
           <Form>
@@ -72,6 +110,8 @@ const AddCertificate = ({ onClose }) => {
 
 AddCertificate.propTypes = {
   onClose: PropTypes.func,
+  isEdit: PropTypes.bool,
+  values: PropTypes.object || PropTypes.string,
 };
 
 export default AddCertificate;
