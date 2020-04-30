@@ -20,8 +20,8 @@ const AddAchievement = ({ onClose, isEdit, values }) => {
     } else {
       handleSubmitOnAdd(formValues);
     }
+
     data.set(prevState => ({ ...prevState, ...data }));
-    console.log(data);
   };
 
   const handleSubmitOnAdd = formValues => {
@@ -31,6 +31,7 @@ const AddAchievement = ({ onClose, isEdit, values }) => {
       data.get['achievements'].push(achievementObj);
     } else {
       data.get['achievements'] = [];
+
       data.get['achievements'].push(achievementObj);
     }
   };
@@ -42,12 +43,12 @@ const AddAchievement = ({ onClose, isEdit, values }) => {
       return;
     } else {
       const achievementObj = achievementUtils.getAchievementObject({ ...formValues });
-
       const achievements = data.get.achievements;
 
       const index = achievements.findIndex(achievement => {
         return achievement.name === values.name && achievement.date === values.date;
       });
+
       data.get['achievements'][index] = achievementObj;
     }
   };
