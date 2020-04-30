@@ -1,11 +1,12 @@
 /* eslint-disable require-jsdoc */
 import * as Yup from 'yup';
-import ProptTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { Formik, Form } from 'formik';
 import React, { useContext } from 'react';
 
 import Button from '~/components/button/Button';
 import { FormContext } from '../../FormContext';
+import * as storage from '~/storage/LocalStorage';
 import InputText from '~/components/inputtext/InputText';
 import FormHeader from '~/components/formheader/FormHeader';
 import * as personalInfoUtils from '~/utilities/objects/PersonalInformation';
@@ -21,7 +22,10 @@ const AddPersonalInformation = ({ onClose, isEdit }) => {
 
   const handleSubmit = values => {
     const personalInfoObj = personalInfoUtils.getPersonalInfoObject({ ...values });
+
     data.set(prevState => ({ ...prevState, ...personalInfoObj }));
+
+    storage.saveResume(localStorage, data.get);
   };
 
   const getInitialState = () => {
@@ -29,9 +33,9 @@ const AddPersonalInformation = ({ onClose, isEdit }) => {
 
     if (isEdit) {
       initialValues = {
-        name: data.get.name,
-        role: data.get.role.label,
-        introduction: data.get.introduction.value,
+        name: data.get.name ? data.get.name : '',
+        role: data.get.role ? data.get.role.label : '',
+        introduction: data.get.introduction ? data.get.introduction.value : '',
       };
     } else {
       initialValues = {
@@ -74,8 +78,8 @@ const AddPersonalInformation = ({ onClose, isEdit }) => {
 };
 
 AddPersonalInformation.propTypes = {
-  onClose: ProptTypes.func,
-  isEdit: ProptTypes.bool,
+  onClose: PropTypes.func,
+  isEdit: PropTypes.bool,
 };
 
 export default AddPersonalInformation;

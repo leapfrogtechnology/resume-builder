@@ -7,6 +7,7 @@ import React, { useContext } from 'react';
 
 import Button from '~/components/button/Button';
 import { FormContext } from '../../FormContext';
+import * as storage from '~/storage/LocalStorage';
 import InputText from '~/components/inputtext/InputText';
 import FormHeader from '~/components/formheader/FormHeader';
 import InputSelect from '~/components/inputselect/InputSelect';
@@ -29,6 +30,8 @@ const AddSkill = ({ onClose, isEdit, values }) => {
     }
 
     data.set(prevState => ({ ...prevState, ...data }));
+
+    storage.saveResume(localStorage, data.get);
   };
 
   const handleSubmitOnAdd = formValues => {
@@ -89,23 +92,24 @@ const AddSkill = ({ onClose, isEdit, values }) => {
         validationSchema={validateSkill}
         validateOnChange={validateSkill}
       >
-        {({ values }) => (
-          <Form>
-            <pre>{JSON.stringify(values, null, 2)}</pre>
-            <div className="form__content">
+        <Form>
+          <div className="form__content">
+            {!isEdit ? (
               <InputSelect name="skill" label="Select your skill" />
-              <InputText name="subSkills" label="Add Sub Skill" />
-              <div className="form-button">
-                <div className="form-button__left">
-                  <Button content="Add Skill" type="submit" />
-                </div>
-                <div className="form-button__right">
-                  <Button content="Cancel" isCancel={true} type="button" onclick={onClose} />
-                </div>
+            ) : (
+              <InputText name="skill" label="Enter your skill" />
+            )}
+            <InputText name="subSkills" label="Add Sub Skill" placeholder="Add comma separated values" />
+            <div className="form-button">
+              <div className="form-button__left">
+                <Button content="Add Skill" type="submit" />
+              </div>
+              <div className="form-button__right">
+                <Button content="Cancel" isCancel={true} type="button" onclick={onClose} />
               </div>
             </div>
-          </Form>
-        )}
+          </div>
+        </Form>
       </Formik>
     </>
   );

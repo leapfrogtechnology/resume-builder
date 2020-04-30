@@ -4,6 +4,7 @@ import React, { useContext } from 'react';
 
 import { FormContext } from '../../FormContext';
 import Button from '~/components/button/Button';
+import * as storage from '~/storage/LocalStorage';
 import InputText from '~/components/inputtext/InputText';
 import InputDate from '~/components/inputdate/InputDate';
 import FormHeader from '~/components/formheader/FormHeader';
@@ -21,6 +22,8 @@ const AddCertificate = ({ onClose, isEdit, values }) => {
     }
 
     data.set(prevState => ({ ...prevState, ...data }));
+
+    storage.saveResume(localStorage, data.get);
   };
 
   const handleSubmitOnAdd = formValues => {
@@ -79,10 +82,9 @@ const AddCertificate = ({ onClose, isEdit, values }) => {
         validationSchema={validateCertificateInformation}
         validateOnChange={validateCertificateInformation}
       >
-        {({ values }) => (
+        {() => (
           <Form>
             <div className="form__content">
-              <pre>{JSON.stringify(values, null, 2)}</pre>
               <InputText name="name" label="Title of your Certificate" />
               <InputText name="link" label="Link to this Certificate" placeholder="https://" />
               <InputDate name="date" label="Date you received the Certificate" />

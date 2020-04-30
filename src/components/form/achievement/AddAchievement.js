@@ -5,6 +5,7 @@ import React, { useContext } from 'react';
 import _ from 'lodash';
 import Button from '~/components/button/Button';
 import { FormContext } from '../../FormContext';
+import * as storage from '~/storage/LocalStorage';
 import InputText from '~/components/inputtext/InputText';
 import InputDate from '~/components/inputdate/InputDate';
 import FormHeader from '~/components/formheader/FormHeader';
@@ -22,6 +23,8 @@ const AddAchievement = ({ onClose, isEdit, values }) => {
     }
 
     data.set(prevState => ({ ...prevState, ...data }));
+
+    storage.saveResume(localStorage, data.get);
   };
 
   const handleSubmitOnAdd = formValues => {
@@ -70,21 +73,17 @@ const AddAchievement = ({ onClose, isEdit, values }) => {
 
   return (
     <>
-      <FormHeader title="Add Achievement" />
+      <FormHeader title={!isEdit ? 'Add Achievement' : 'Edit Achievement'} />
       <Formik
         initialValues={getInitialValues()}
         onSubmit={values => {
           handleSubmit(values);
         }}
-        onChange={values => {
-          console.log(values);
-        }}
         validateOnChange={validateAchievementInformation}
         validationSchema={validateAchievementInformation}
       >
-        {({ values }) => (
+        {() => (
           <Form>
-            <pre>{JSON.stringify(values, null, 2)}</pre>
             <div className="form__content">
               <InputText name="name" label="Title of your Achievement" />
               <InputDate name="date" label="Date of the Achievement" />

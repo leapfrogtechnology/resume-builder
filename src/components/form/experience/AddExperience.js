@@ -1,30 +1,48 @@
 import * as Yup from 'yup';
-import { Formik, Form } from 'formik';
+import { Formik, Form, isInteger } from 'formik';
 import React, { useContext } from 'react';
 
 import Button from '~/components/button/Button';
 import { FormContext } from '../../FormContext';
+import * as storage from '~/storage/LocalStorage';
 import InputText from '~/components/inputtext/InputText';
 import FormHeader from '~/components/formheader/FormHeader';
+import InputRadio from '~/components/inputradio/InputRadio';
 
-const AddExperience = ({ onClose }) => {
+const AddExperience = ({ onClose, value }) => {
   const { preview, data } = useContext(FormContext);
 
   const validateExperience = Yup.object().shape({
-    experience: Yup.number().label('Your proffessional experience'),
+    value: Yup.number().label('Your proffessional experience').min(0).integer(),
+    type: Yup.string().required('This is required'),
   });
 
   const handleSubmit = values => {
-    data.set(prevState => ({ ...prevState, ...values }));
+    if (data.get.experience) {
+      data.get.experience = { ...values };
+    } else {
+      data.get['experience'] = { ...values };
+    }
+    data.set(prevState => ({ ...prevState, ...data.get }));
+    storage.saveResume(localStorage, data.get);
+  };
+
+  const getInitialValues = () => {
+    if (!data.get.experience) {
+      return {
+        value: 0,
+        type: '',
+      };
+    } else {
+      return data.get.experience;
+    }
   };
 
   return (
     <>
-      <FormHeader title="Proffessional Experience" />
+      <FormHeader title="Professional Experience" />
       <Formik
-        initialValues={{
-          experience: 0,
-        }}
+        initialValues={getInitialValues()}
         onSubmit={values => {
           handleSubmit(values);
         }}
@@ -32,7 +50,14 @@ const AddExperience = ({ onClose }) => {
       >
         <Form>
           <div className="form__content">
-            <InputText name="experience" label="Your proffessional experience (optional)" />
+            <InputText name="value" label="Your proffessional experience (optional)" />
+            <div className="form__radio-field">
+              <label className="input__label">In years or months?</label>
+              <div className="form__radio-field-content">
+                <InputRadio name="type" value="Year" placeholder="Years" />
+                <InputRadio name="type" value="Month" placeholder="Months" />
+              </div>
+            </div>
             <div className="form-button">
               <div className="form-button__left">
                 <Button content="Save Info" type="submit" />
