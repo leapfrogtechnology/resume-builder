@@ -38,6 +38,8 @@
   "dependencies": {
     "classnames": "^2.2.6",
     "formik": "^2.1.4",
+    "lodash": "^4.17.15",
+    "moment": "^2.24.0",
     "next": "^9.3.5",
     "next-images": "^1.4.0",
     "react": "^16.13.1",
