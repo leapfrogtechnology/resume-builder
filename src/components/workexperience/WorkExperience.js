@@ -3,26 +3,36 @@ import React, { useContext, useState } from 'react';
 import { Add } from '~/assets/image';
 import { FormContext } from '../FormContext';
 import WorkExperienceShown from './WorkExperienceShown';
+import EmptyCard from '~/components/emptycard/EmptyCard';
 import CardHeader from '~/components/cardheader/CardHeader';
 import CardFooter from '~/components/cardfooter/CardFooter';
-import EmptyCard from '~/components/emptycard/EmptyCard';
 import AddWorkExperience from '../form/workexperience/AddWorkExperience';
 
 const WorkExperience = () => {
   const context = useContext(FormContext);
+
+  const [addWork, setAdd] = useState(false);
+  const [editWork, setEdit] = useState(false);
+
   const preview = context.preview.get;
   const workExperience = context.data.get.workExperience;
 
-  const [showModel, setModal] = useState(false);
-
-  const modalBtnHandler = e => {
+  const editBtnHandler = e => {
     e.preventDefault();
-    setModal(!showModel);
+    setEdit(!editWork);
   };
 
-  const closeBtnHandler = e => {
+  const addBtnHandler = e => {
+    setAdd(!addWork);
+  };
+
+  const addBtnCloseHandler = e => {
+    setAdd(!addWork);
+  };
+
+  const editBtnCloseHandler = e => {
     e.preventDefault();
-    setModal(!showModel);
+    setEdit(!editWork);
   };
 
   /**
@@ -46,6 +56,21 @@ const WorkExperience = () => {
     });
   };
 
+  const deleteWorkExperience = (e, name, position) => {
+    e.preventDefault();
+
+    const data = context.data.get;
+
+    const filteredWorkExperiences = data['workExperience'].filter(work => {
+      return work.name !== name && work.position !== position;
+    });
+
+    data['workExperience'] = filteredWorkExperiences;
+
+    context.data.set(prevState => ({ ...prevState, ...data }));
+    console.log(data);
+  };
+
   const contactLinkHandler = (e, value) => {
     if (isNaN(value)) {
       window.open('mailto:' + value);
@@ -62,10 +87,10 @@ const WorkExperience = () => {
           icon={Add}
           hide={preview}
           label="Add another work experience"
-          showModal={showModel}
-          onAdd={modalBtnHandler}
+          showModal={addWork}
+          onAdd={addBtnHandler}
           component={AddWorkExperience}
-          onClose={closeBtnHandler}
+          onClose={addBtnCloseHandler}
           modifier="empty"
         />
       </>
@@ -73,7 +98,20 @@ const WorkExperience = () => {
   }
 
   const workExperienceList = workExperience.map(
-    ({ name, position, startDate, endDate, responsibilities, achievements, refereeName, refereeContact }, index) => (
+    (
+      {
+        name,
+        position,
+        startDate,
+        endDate,
+        currentlyWorking,
+        responsibilities,
+        achievements,
+        refereeName,
+        refereeContact,
+      },
+      index
+    ) => (
       <WorkExperienceShown
         key={index}
         subTitle={name}
@@ -84,9 +122,13 @@ const WorkExperience = () => {
         achievements={achievements}
         refereeName={refereeName}
         refereeContact={refereeContact}
+        currentlyWorking={currentlyWorking}
         preview={preview}
+        isEdit={editWork}
         onHiddenIconClicked={updateHiddenStateWork}
-        onEdit={modalBtnHandler}
+        onEdit={editBtnHandler}
+        onClose={editBtnCloseHandler}
+        onDelete={deleteWorkExperience}
         onContactLinkClicked={contactLinkHandler}
       />
     )
@@ -100,10 +142,10 @@ const WorkExperience = () => {
         icon={Add}
         hide={preview}
         label="Add another work experience"
-        showModal={showModel}
-        onAdd={modalBtnHandler}
+        showModal={addWork}
+        onAdd={addBtnHandler}
         component={AddWorkExperience}
-        onClose={closeBtnHandler}
+        onClose={addBtnCloseHandler}
       />
     </div>
   );
