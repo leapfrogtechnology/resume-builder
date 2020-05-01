@@ -25,7 +25,7 @@ const InputDate = ({ label, placeholder, modifier, setFieldValue, setFieldTouche
   return (
     <div className={modifier ? 'input--short' : 'input'}>
       <label className="input__label">{label}</label>
-      <div className={'input__date'}>
+      <div className="input__date">
         <DatePicker
           name={field.name}
           selected={startDate}

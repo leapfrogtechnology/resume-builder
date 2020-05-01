@@ -71,8 +71,16 @@
   margin-left: 10px;
 }
 
+.close-option-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .close-option {
-  text-align: right;
+  width: 24px;
+  height: 24px;
+  overflow: hidden;
+  object-fit: cover;
 }
 
 .error {

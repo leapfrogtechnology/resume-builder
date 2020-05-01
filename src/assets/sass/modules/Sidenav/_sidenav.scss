@@ -12,10 +12,6 @@
     border-bottom: 1px solid $alto;
   }
 
-  .profile-image-wrapper {
-    margin-right: 20px;
-  }
-
   @include e(upload-block-l) {
     display: flex;
     align-items: center;
@@ -39,4 +35,13 @@
 
 .sidenav-bottom {
   margin-top: 20px;
+}
+
+.profile-image-wrapper {
+  margin-right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+  object-fit: cover;
 }
