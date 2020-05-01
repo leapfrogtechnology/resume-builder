@@ -9,7 +9,7 @@ const validateProjectInformation = Yup.object().shape({
     .when('ongoing', { is: true, otherwise: Yup.date().required('End Date is required') })
     .when('startDate', (startDate, schema) => startDate && schema.min(startDate)),
   type: Yup.string().required(),
-  description: Yup.string().label('Roles and Responsibilities').min(60).max(200),
+  description: Yup.string().label('Roles and Responsibilities').notRequired().min(60).max(200),
 });
 
 export default validateProjectInformation;
