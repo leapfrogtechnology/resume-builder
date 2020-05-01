@@ -3,6 +3,7 @@ import React, { useContext, useState } from 'react';
 import SidenavBottom from './SidenavBottom';
 import { FormContext } from '../FormContext';
 import Contact from '~/components/contact/Contact';
+import * as storage from '~/storage/LocalStorage';
 import { toBase64 } from '~/utilities/file/toBase64.js';
 import { Edit, ProfileImage, Trash } from '~/assets/image';
 import CardHeader from '~/components/cardheader/CardHeader';
@@ -95,6 +96,7 @@ const Sidenav = () => {
       }
       prevData.profileImage.isDeleted = false;
       context.data.set(prevState => ({ ...prevState, ...prevData }));
+      storage.saveResume(localStorage, context.data.get);
     }
   };
 
@@ -105,6 +107,7 @@ const Sidenav = () => {
       context.data.get.profileImage.deletedOn = new Date();
       context.data.set(prevState => ({ ...prevState, ...context.data.get }));
     }
+    storage.saveResume(localStorage, context.data.get);
   };
 
   return (
