@@ -122,7 +122,12 @@ const AddWorkExperience = ({ onClose, isEdit, values }) => {
                   setFieldTouched={setFieldTouched}
                 />
               </div>
-              <CheckboxInput name="currentWork" value="I currently work here" />
+              <CheckboxInput
+                name="currentWork"
+                value="I currently work here"
+                setFieldValue={setFieldValue}
+                setFieldTouched={setFieldTouched}
+              />
               <InputText
                 name="roles"
                 label="Describe Your Roles and Responsibilities"
