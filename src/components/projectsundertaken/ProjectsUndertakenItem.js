@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 
 import OpenModal from '../modal/OpenModal';
 import AddProject from '../form/project/AddProject';
+import * as dateUtils from '~/utilities/date/FormatDate';
 import EditOptions from '~/components/editoptions/EditOptions';
 
 const ProjectsUndertakenItem = ({
@@ -22,6 +23,20 @@ const ProjectsUndertakenItem = ({
 
   if (hidden && preview) {
     return <></>;
+  }
+
+  let labelForDifference = '';
+  const diff = dateUtils.getDifferenceInYearMonth(startDate, ongoing ? new Date() : endDate);
+
+  if (diff.year != 0) {
+    labelForDifference = diff.year > 1 ? diff.year.toString() + ' years' : diff.year.toString() + ' year';
+    if (diff.month != 0) {
+      labelForDifference += 'and';
+    }
+  }
+
+  if (diff.month != 0) {
+    labelForDifference += diff.month > 1 ? diff.month.toString() + ' months' : diff.month.toString() + ' month';
   }
 
   const onHiddenBtnClicked = e => {
@@ -62,8 +77,8 @@ const ProjectsUndertakenItem = ({
       </div>
       <div className="year year--dark">
         <span className="start-date">{moment(startDate).format('MMMM YYYY')}</span> -{' '}
-        <span className="end-date">{ongoing ? 'Working since' : moment(endDate).format('MMMM YYYY')}</span> (3 years and
-        3 months)
+        <span className="end-date">{ongoing ? 'Working since' : moment(endDate).format('MMMM YYYY')}</span> (
+        {labelForDifference})
       </div>
       <p className="description">{description}</p>
     </div>
