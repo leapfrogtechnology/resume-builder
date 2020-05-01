@@ -46,7 +46,7 @@ const AddContactInformation = ({ onClose, isEdit }) => {
 
   return (
     <>
-      <FormHeader title="Contact Information" />
+      <FormHeader title="Edit Contact Information" />
       <Formik
         initialValues={getInitialValues()}
         onSubmit={values => {

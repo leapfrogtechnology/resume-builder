@@ -73,7 +73,7 @@ const AddCertificate = ({ onClose, isEdit, values }) => {
 
   return (
     <>
-      <FormHeader title="Add Certificate" />
+      <FormHeader title={!isEdit ? 'Add Certificate' : 'Edit Certificate'} />
       <Formik
         initialValues={getInitialValues()}
         onSubmit={values => {
@@ -82,12 +82,17 @@ const AddCertificate = ({ onClose, isEdit, values }) => {
         validationSchema={validateCertificateInformation}
         validateOnChange={validateCertificateInformation}
       >
-        {() => (
+        {({ setFieldValue, setFieldTouched }) => (
           <Form>
             <div className="form__content">
               <InputText name="name" label="Title of your Certificate" />
               <InputText name="link" label="Link to this Certificate" placeholder="https://" />
-              <InputDate name="date" label="Date you received the Certificate" />
+              <InputDate
+                name="date"
+                label="Date you received the Certificate"
+                setFieldValue={setFieldValue}
+                setFieldTouched={setFieldTouched}
+              />
               <InputText
                 name="description"
                 label="Describe this Certificate (optional)"

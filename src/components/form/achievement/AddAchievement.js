@@ -82,11 +82,17 @@ const AddAchievement = ({ onClose, isEdit, values }) => {
         validateOnChange={validateAchievementInformation}
         validationSchema={validateAchievementInformation}
       >
-        {() => (
+        {({ setFieldValue, setFieldTouched }) => (
           <Form>
             <div className="form__content">
               <InputText name="name" label="Title of your Achievement" />
-              <InputDate name="date" label="Date of the Achievement" />
+              <InputDate
+                name="date"
+                label="Date of the Achievement"
+                modifier={true}
+                setFieldValue={setFieldValue}
+                setFieldTouched={setFieldTouched}
+              />
               <InputText
                 name="description"
                 label="Describe your Achievements (optional)"

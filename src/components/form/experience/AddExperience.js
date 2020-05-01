@@ -48,26 +48,40 @@ const AddExperience = ({ onClose, value }) => {
         }}
         validationSchema={validateExperience}
       >
-        <Form>
-          <div className="form__content">
-            <InputText name="value" label="Your proffessional experience (optional)" />
-            <div className="form__radio-field">
-              <label className="input__label">In years or months?</label>
-              <div className="form__radio-field-content">
-                <InputRadio name="type" value="Year" placeholder="Years" />
-                <InputRadio name="type" value="Month" placeholder="Months" />
+        {({ setFieldValue, setFieldTouched }) => (
+          <Form>
+            <div className="form__content">
+              <InputText name="value" label="Your proffessional experience (optional)" />
+              <div className="form__radio-field">
+                <label className="input__label">In years or months?</label>
+                <div className="form__radio-field-content">
+                  <InputRadio
+                    name="type"
+                    value="Year"
+                    placeholder="Years"
+                    setFieldValue={setFieldValue}
+                    setFieldTouched={setFieldTouched}
+                  />
+                  <InputRadio
+                    name="type"
+                    value="Month"
+                    placeholder="Months"
+                    setFieldValue={setFieldValue}
+                    setFieldTouched={setFieldTouched}
+                  />
+                </div>
+              </div>
+              <div className="form-button">
+                <div className="form-button__left">
+                  <Button content="Save Info" type="submit" />
+                </div>
+                <div className="form-button__right">
+                  <Button content="Cancel" isCancel={true} type="button" onclick={onClose} />
+                </div>
               </div>
             </div>
-            <div className="form-button">
-              <div className="form-button__left">
-                <Button content="Save Info" type="submit" />
-              </div>
-              <div className="form-button__right">
-                <Button content="Cancel" isCancel={true} type="button" onclick={onClose} />
-              </div>
-            </div>
-          </div>
-        </Form>
+          </Form>
+        )}
       </Formik>
     </>
   );

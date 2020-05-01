@@ -49,7 +49,7 @@ const AddPersonalInformation = ({ onClose, isEdit }) => {
 
   return (
     <>
-      <FormHeader title="Personal Information" />
+      <FormHeader title="Edit Personal Information" />
       <Formik
         initialValues={getInitialState()}
         onSubmit={values => {
