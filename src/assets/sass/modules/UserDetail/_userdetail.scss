@@ -22,5 +22,7 @@
     border-radius: 50%;
     background: $white;
     margin-right: 24px;
+    overflow: hidden;
+    object-fit: cover;
   }
 }

@@ -46,6 +46,13 @@
     padding: 8px 10px;
   }
 
+  @include e(date-calendar){
+    width: 18px;
+    height: 18px;
+    overflow: hidden;
+    object-fit: cover;
+  }
+
   @include e(date-field) {
     border: 0;
   }

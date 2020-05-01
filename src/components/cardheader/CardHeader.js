@@ -6,12 +6,12 @@ import OpenModal from '~/components/modal/OpenModal';
 const CardHeader = ({ title, icon = null, hideIcon = false, component, onEdit, onClose, showModal, isEdit }) => {
   return (
     <>
-      <div className="card-header">
-        <div className="card-header__l">
+      <div className="card__header">
+        <div className="card__header_l">
           <div className="title">{title}</div>
         </div>
         {icon && !hideIcon && (
-          <div className="card-header__r" onClick={e => onEdit(e)}>
+          <div className="card__header_r" onClick={e => onEdit(e)}>
             <img src={icon} alt="Edit" />
           </div>
         )}

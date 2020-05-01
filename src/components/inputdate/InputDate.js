@@ -12,7 +12,9 @@ const InputDate = ({ label, placeholder, modifier, setFieldValue, ...props }) =>
       <label className="input__label">{label}</label>
       <div className={'input__date'}>
         <input type="date" className="input__date-field" placeholder={placeholder} {...field} />
-        <img src={Calendar} alt="Calendar" />
+        <div className="input__date-calendar">
+          <img src={Calendar} alt="Calendar" />
+        </div>
       </div>
       {meta.touched && meta.error ? <div className="error">{meta.error}</div> : null}
     </div>
