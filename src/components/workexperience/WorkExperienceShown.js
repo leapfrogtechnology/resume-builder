@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
 import OpenModal from '../modal/OpenModal';
+import * as dateUtils from '~/utilities/date/FormatDate';
 import EditOptions from '~/components/editoptions/EditOptions';
 import AddWorkExperience from '../form/workexperience/AddWorkExperience';
 
@@ -25,16 +26,44 @@ const WorkExperienceShown = ({
 }) => {
   const [hidden, setHidden] = useState(false);
 
-  const rolesList = roles.split('.').map(role => <li key={role}>{role}</li>);
+  if (hidden && preview) {
+    return <></>;
+  }
+
+  const rolesList = roles
+    .split('.')
+    .filter(role => {
+      if (role) {
+        return role;
+      }
+    })
+    .map((role, index) => <li key={index}>{role}</li>);
 
   let achievementsList = null;
 
   if (achievements.length > 1) {
-    achievementsList = achievements.split('.').map(achievement => <li key={achievement}>{achievement}</li>);
+    achievementsList = achievements
+      .split('.')
+      .filter(achievement => {
+        if (achievement) {
+          return achievement;
+        }
+      })
+      .map((achievement, index) => <li key={index}>{achievement}</li>);
   }
 
-  if (hidden && preview) {
-    return <></>;
+  let labelForDifference = '';
+  const diff = dateUtils.getDifferenceInYearMonth(startDate, ongoing ? new Date() : endDate);
+
+  if (diff.year != 0) {
+    labelForDifference = diff.year > 1 ? diff.year.toString() + ' years' : diff.year.toString() + ' year';
+    if (diff.month != 0) {
+      labelForDifference += 'and';
+    }
+  }
+
+  if (diff.month != 0) {
+    labelForDifference += diff.month > 1 ? diff.month.toString() + ' months' : diff.month.toString() + ' month';
   }
 
   const onHiddenIconClickedHandler = e => {
@@ -77,8 +106,8 @@ const WorkExperienceShown = ({
         <div className="work-experience__position">{position}</div>
         <div className="year">
           <span className="start-date">{moment(startDate).format('MMMM YYYY')}</span> -{' '}
-          <span className="end-date">{currentlyWorking ? 'Present' : moment(endDate).format('MMMM YYYY')}</span> (3
-          years and 3 months)
+          <span className="end-date">{currentlyWorking ? 'Present' : moment(endDate).format('MMMM YYYY')}</span> (
+          {labelForDifference})
         </div>
       </div>
 
