@@ -40,7 +40,7 @@ const AddExperience = ({ onClose, value }) => {
 
   return (
     <>
-      <FormHeader title="Professional Experience" modifier={'dark'}/>
+      <FormHeader title="Edit Professional Experience" modifier="dark" />
       <Formik
         initialValues={getInitialValues()}
         onSubmit={values => {
@@ -51,7 +51,7 @@ const AddExperience = ({ onClose, value }) => {
         {({ setFieldValue, setFieldTouched }) => (
           <Form>
             <div className="form__content">
-              <InputText name="value" label="Your proffessional experience (optional)" />
+              <InputText name="value" label="Your professional experience (optional)" />
               <div className="form__radio-field">
                 <label className="input__label">In years or months?</label>
                 <div className="form__radio-field-content">

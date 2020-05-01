@@ -7,7 +7,6 @@ import DatePicker from 'react-datepicker';
 
 const InputDate = ({ label, placeholder, modifier, setFieldValue, setFieldTouched, ...props }) => {
   const [field, meta] = useField(props);
-
   const [startDate, setDate] = useState();
   const [datePickerIsOpen, setDatePicker] = useState(false);
 
@@ -29,6 +28,7 @@ const InputDate = ({ label, placeholder, modifier, setFieldValue, setFieldTouche
         <DatePicker
           name={field.name}
           selected={startDate}
+          value={field.value}
           placeholderText={placeholder}
           shouldCloseOnSelect={true}
           className="input__date-picker"

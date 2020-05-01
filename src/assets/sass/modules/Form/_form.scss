@@ -21,7 +21,7 @@
   @include e(header) {
     font: normal bold 24px/29px $font-primary;
 
-    @include m(dark){
+    @include m(dark) {
       color: $black;
     }
   }
@@ -55,10 +55,9 @@
     }
   }
 
-  
-.field-error{
-  border: 1px solid $pomegranate;
-}
+  .field-error {
+    border: 1px solid $pomegranate;
+  }
 }
 
 .form-button {

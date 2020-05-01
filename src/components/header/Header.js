@@ -5,6 +5,7 @@ import '~/pages/_app';
 import { Logo } from '~/assets/image';
 import { FormContext } from '../FormContext';
 import { DROPDOWN } from '~/components/icons/icon';
+import * as dateUtils from '~/utilities/date/FormatDate';
 import UserDetail from '~/components/userdetail/UserDetail';
 
 const Header = ({ name, status, onPreviewBtnClicked }) => {
@@ -12,14 +13,29 @@ const Header = ({ name, status, onPreviewBtnClicked }) => {
   const experience = context.data.get.experience;
   const preview = context.preview.get;
 
-  let experienceLabel = 'You do not have any proffessional experience yet';
+  let experienceLabel = 'You do not have any professional experience yet';
 
   if (experience) {
-    if (experience.value === 1) {
-      experienceLabel = experience.value + ' year of proffessional experience';
-    } else if (experience.value > 1) {
-      experienceLabel = experience.value + ' years of proffessional experience';
+    const experienceInYearAndMonth = dateUtils.getExperienceFormat(experience);
+    experienceLabel = '';
+
+    if (experienceInYearAndMonth.year != 0) {
+      experienceLabel =
+        experienceInYearAndMonth.year > 1
+          ? experienceInYearAndMonth.year.toString() + ' years'
+          : experienceInYearAndMonth.year.toString() + ' year';
     }
+
+    if (experienceInYearAndMonth.month != 0) {
+      experienceLabel +=
+        experienceInYearAndMonth.month > 1
+          ? experienceInYearAndMonth.month.toString() + ' months'
+          : experienceInYearAndMonth.month.toString() + ' month';
+    }
+
+    experienceLabel += ' professional experience';
+  } else {
+    experienceLabel = 'You do not have any professional experience yet';
   }
 
   return (

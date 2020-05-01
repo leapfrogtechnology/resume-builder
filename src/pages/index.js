@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 
 import Head from 'next/head';
 import DATA from '../constant/mockData';
-import * as storage from '~/storage/LocalStorage';
 import Header from '~/components/header/Header';
 import { FormContext } from '../components/FormContext';
 import Dashboard from '~/components/dashboard/Dashboard';
@@ -10,6 +9,7 @@ import Dashboard from '~/components/dashboard/Dashboard';
 const App = () => {
   // App state
   const [preview, setPreview] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [data, updateData] = useState({});
 
   const username = DATA.name;
@@ -28,9 +28,13 @@ const App = () => {
     if (localStorage.getItem('resume')) {
       const resume = JSON.parse(localStorage.getItem('resume'));
       updateData(prevState => ({ ...prevState, ...resume }));
+      setLoading(!loading);
     }
   }, []);
 
+  if (loading) {
+    return null;
+  }
   return (
     <div className="page-container">
       <Head>
@@ -39,12 +43,8 @@ const App = () => {
         <meta httpEquiv="X-UA-Compatible" content="ie=edge" />
         <title>ResumeBuilder</title>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
-        {/* <!-- jQuery library --> */}
-        <script src="js/jquery.min.js"></script>
-
-        {/* <!-- jsPDF library --> */}
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
       </Head>
       <FormContext.Provider value={store}>
         <Header name={username} status="Employee" onPreviewBtnClicked={handleOnPreviewBtnClicked} />
