@@ -14,6 +14,15 @@ const Sidenav = () => {
   const [showModal, setModal] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
 
+  const context = useContext(FormContext);
+  const preview = context.preview.get;
+  const email = context.data.get.email;
+  const phone = context.data.get.phone;
+  const github = context.data.get.github;
+  const stackOverflow = context.data.get.stackOverflow;
+  const linkedIn = context.data.get.linkedIn;
+  const profileImg = context.data.get.profileImage;
+
   const editBtnHandler = e => {
     e.preventDefault();
     setModal(!showModal);
@@ -25,15 +34,6 @@ const Sidenav = () => {
     setModal(!showModal);
     setIsEdit(!isEdit);
   };
-
-  const context = useContext(FormContext);
-  const preview = context.preview.get;
-  const email = context.data.get.email;
-  const phone = context.data.get.phone;
-  const github = context.data.get.github;
-  const stackOverflow = context.data.get.stackOverflow;
-  const linkedIn = context.data.get.linkedIn;
-  const profileImg = context.data.get.profileImage;
 
   /**
    * Update the hidden state of contact detail.
@@ -103,7 +103,7 @@ const Sidenav = () => {
     if (context.data.get.profileImage) {
       context.data.get.profileImage.isDeleted = true;
       context.data.get.profileImage.deletedOn = new Date();
-      context.data.set(prevState => ({ ...prevState, ...prevData }));
+      context.data.set(prevState => ({ ...prevState, ...context.data.get }));
     }
   };
 
@@ -115,7 +115,7 @@ const Sidenav = () => {
           <div className="sidenav__upload-block">
             <div className="sidenav__upload-block-l">
               <div className="profile-image-wrapper">
-                <img src={profileImg ? profileImg.value : ProfileImage} alt="Image" />
+                <img src={profileImg && !profileImg.isDeleted ? profileImg.value : ProfileImage} alt="Image" />
               </div>
               {!preview && (
                 <span className="text-link text-link--small" onClick={e => createFileUploader(e)}>
