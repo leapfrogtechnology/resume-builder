@@ -1,15 +1,19 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
 import { Image } from '~/assets/image';
 import OpenModal from '../modal/OpenModal';
 import Media from '~/components/media/Media';
+import { FormContext } from '../FormContext';
 import Button from '~/components/button/Button';
 import { FAVORITE_ICON } from '~/components/icons/icon';
 import AddExperience from '../form/experience/AddExperience';
 
 const UserDetail = ({ name, experience, preview, onPreviewBtnClicked }) => {
   const [showModal, setModal] = useState(false);
+
+  const context = useContext(FormContext);
+  const profileImg = context.data.get.profileImage;
 
   const editBtnHandler = e => {
     e.preventDefault();
@@ -26,7 +30,7 @@ const UserDetail = ({ name, experience, preview, onPreviewBtnClicked }) => {
       <div className="user-detail-container">
         <div className="user-detail__left-content">
           <div className="user-detail__image-wrapper">
-            <img src={Image} alt="Profile Picture" />
+            <img src={profileImg && !profileImg.isDeleted ? profileImg.value : Image} alt="Profile Picture" />
           </div>
           <div className="user-detail__emp-attribute">
             <div className="user-detail__username">{name}</div>
