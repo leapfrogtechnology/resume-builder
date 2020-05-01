@@ -16,13 +16,15 @@ const validateWorkExperience = Yup.object().shape({
   contactReferee: Yup.string()
     .label('Email | Phone Number')
     .test('test-name', 'Enter Valid Phone number / Email', function (value) {
-      const emailRegex = emailCheck;
-      const phoneRegex = phoneNumberCheck;
-      const isValidEmail = emailRegex.test(value);
-      const isValidPhone = phoneRegex.test(value);
+      if (value) {
+        const emailRegex = emailCheck;
+        const phoneRegex = phoneNumberCheck;
+        const isValidEmail = emailRegex.test(value);
+        const isValidPhone = phoneRegex.test(value);
 
-      if (!isValidEmail && !isValidPhone) {
-        return false;
+        if (!isValidEmail && !isValidPhone) {
+          return false;
+        }
       }
 
       return true;
