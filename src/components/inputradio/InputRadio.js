@@ -18,6 +18,7 @@ const InputRadio = ({ label, value, placeholder, setFieldValue, setFieldTouched,
         type="radio"
         className="input__radio-field"
         value={value}
+        checked={field.value === value ? true : false}
         onChange={e => change(e, field.name, true)}
         {...props}
       />
