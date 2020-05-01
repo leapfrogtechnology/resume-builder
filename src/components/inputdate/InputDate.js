@@ -31,6 +31,7 @@ const InputDate = ({ label, placeholder, modifier, setFieldValue, setFieldTouche
           selected={startDate}
           placeholderText={placeholder}
           shouldCloseOnSelect={true}
+          className="input__date-picker"
           dateFormat="MM/dd/yyyy"
           onChange={handleChange}
           onInputClick={openDatePicker}
@@ -39,7 +40,9 @@ const InputDate = ({ label, placeholder, modifier, setFieldValue, setFieldTouche
           }}
           open={datePickerIsOpen}
         ></DatePicker>
-        <img src={Calendar} alt="Calendar" onClick={openDatePicker} />
+        <div className="input__date-calendar">
+          <img src={Calendar} alt="Calendar" onClick={openDatePicker} />
+        </div>
       </div>
       {meta.touched && meta.error ? <div className="error">{meta.error}</div> : null}
     </div>

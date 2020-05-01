@@ -53,6 +53,10 @@
     object-fit: cover;
   }
 
+  @include e(date-picker){
+    border: 0;
+  }
+
   @include e(date-field) {
     border: 0;
   }

@@ -20,6 +20,10 @@
 
   @include e(header) {
     font: normal bold 24px/29px $font-primary;
+
+    @include m(dark){
+      color: $black;
+    }
   }
 
   @include e(radio-field) {

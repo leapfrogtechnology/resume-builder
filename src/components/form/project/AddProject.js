@@ -102,7 +102,7 @@ const AddProject = ({ onClose, isEdit, values }) => {
                   name="startDate"
                   label="Start Date"
                   placeholder="Select date"
-                  modifier={false}
+                  modifier={true}
                   setFieldValue={setFieldValue}
                   setFieldTouched={setFieldTouched}
                 />
@@ -110,7 +110,7 @@ const AddProject = ({ onClose, isEdit, values }) => {
                   name="endDate"
                   label="End Date"
                   placeholder="Select date"
-                  modifier={false}
+                  modifier={true}
                   setFieldValue={setFieldValue}
                   setFieldTouched={setFieldTouched}
                 />

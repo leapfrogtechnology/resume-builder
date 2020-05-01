@@ -40,7 +40,7 @@ const AddExperience = ({ onClose, value }) => {
 
   return (
     <>
-      <FormHeader title="Professional Experience" />
+      <FormHeader title="Professional Experience" modifier={'dark'}/>
       <Formik
         initialValues={getInitialValues()}
         onSubmit={values => {

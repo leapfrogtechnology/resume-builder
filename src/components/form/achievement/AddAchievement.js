@@ -89,7 +89,7 @@ const AddAchievement = ({ onClose, isEdit, values }) => {
               <InputDate
                 name="date"
                 label="Date of the Achievement"
-                modifier={true}
+                modifier={false}
                 setFieldValue={setFieldValue}
                 setFieldTouched={setFieldTouched}
               />
