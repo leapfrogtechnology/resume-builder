@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Formik, Form } from 'formik';
+import { Formik, Form, useField } from 'formik';
 import React, { useContext } from 'react';
 
 import Button from '~/components/button/Button';
@@ -91,40 +91,76 @@ const AddProject = ({ onClose, isEdit, values }) => {
         validationSchema={validateProjectInformation}
         validateOnChange={validateProjectInformation}
       >
-        <Form>
-          <div className="form__content">
-            <InputText name="name" label="Title of your Project" />
-            <div className="form__date-field">
-              <InputDate name="startDate" label="Start Date" placeholder="Select date" modifier={true} />
-              <InputDate name="endDate" label="End Date" placeholder="Select date" modifier={true} />
-            </div>
-            <div className="form__checkbox-field">
-              <CheckboxInput name="ongoing" value="This project is currently ongoing" />
-            </div>
-            <div className="form__radio-field">
-              <label className="input__label">What Type of Project was This?</label>
-              <div className="form__radio-field-content">
-                <InputRadio name="type" value="Professional" placeholder="Professional" />
-                <InputRadio name="type" value="Personal" placeholder="Personal" />
-                <InputRadio name="type" value="Social" placeholder="Social" />
+        {({ values, setFieldValue, setFieldTouched }) => (
+          <Form>
+            <pre>{JSON.stringify(values, null, 2)}</pre>
+
+            <div className="form__content">
+              <InputText name="name" label="Title of your Project" />
+              <div className="form__date-field">
+                <InputDate
+                  name="startDate"
+                  label="Start Date"
+                  placeholder="Select date"
+                  modifier={false}
+                  setFieldValue={setFieldValue}
+                  setFieldTouched={setFieldTouched}
+                />
+                <InputDate
+                  name="endDate"
+                  label="End Date"
+                  placeholder="Select date"
+                  modifier={false}
+                  setFieldValue={setFieldValue}
+                  setFieldTouched={setFieldTouched}
+                />
+              </div>
+              <div className="form__checkbox-field">
+                <CheckboxInput name="ongoing" value="This project is currently ongoing" />
+              </div>
+              <div className="form__radio-field">
+                <label className="input__label">What Type of Project was This?</label>
+                <div className="form__radio-field-content">
+                  <InputRadio
+                    name="type"
+                    value="Professional"
+                    placeholder="Professional"
+                    setFieldValue={setFieldValue}
+                    setFieldTouched={setFieldTouched}
+                  />
+                  <InputRadio
+                    name="type"
+                    value="Personal"
+                    placeholder="Personal"
+                    setFieldValue={setFieldValue}
+                    setFieldTouched={setFieldTouched}
+                  />
+                  <InputRadio
+                    name="type"
+                    value="Social"
+                    placeholder="Social"
+                    setFieldValue={setFieldValue}
+                    setFieldTouched={setFieldTouched}
+                  />
+                </div>
+              </div>
+              <InputText
+                name="description"
+                label="Describe this Project (optional)"
+                placeholder="eg. I helped create..."
+                type="text-area"
+              />
+              <div className="form-button">
+                <div className="form-button__left">
+                  <Button content="Add Project" type="submit" />
+                </div>
+                <div className="form-button__right">
+                  <Button content="Cancel" isCancel={true} type="button" onclick={onClose} />
+                </div>
               </div>
             </div>
-            <InputText
-              name="description"
-              label="Describe this Project (optional)"
-              placeholder="eg. I helped create..."
-              type="text-area"
-            />
-            <div className="form-button">
-              <div className="form-button__left">
-                <Button content="Add Project" type="submit" />
-              </div>
-              <div className="form-button__right">
-                <Button content="Cancel" isCancel={true} type="button" onclick={onClose} />
-              </div>
-            </div>
-          </div>
-        </Form>
+          </Form>
+        )}
       </Formik>
     </>
   );
