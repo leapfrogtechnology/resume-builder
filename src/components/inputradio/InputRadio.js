@@ -2,13 +2,14 @@ import React from 'react';
 import { useField } from 'formik';
 import PropTypes from 'prop-types';
 
-const InputRadio = ({ label, value, placeholder, ...props }) => {
-  const [field, meta, form] = useField(props);
+const InputRadio = ({ label, value, placeholder, setFieldValue, setFieldTouched, ...props }) => {
+  const [field, meta] = useField(props);
 
   const change = (e, _name, _requireValidation) => {
     const inputValue = e.target.value;
 
-    form.setValue(inputValue);
+    setFieldTouched(field.name, true);
+    setFieldValue(field.name, inputValue, true);
   };
 
   return (
