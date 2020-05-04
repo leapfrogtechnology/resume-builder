@@ -1,3 +1,4 @@
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
@@ -5,6 +6,7 @@ import OpenModal from '../modal/OpenModal';
 import * as dateUtils from '~/utilities/date/FormatDate';
 import EditOptions from '~/components/editoptions/EditOptions';
 import AddWorkExperience from '../form/workexperience/AddWorkExperience';
+import { COUNTRY_CODE } from '../../constant/contact';
 
 const WorkExperienceShown = ({
   subTitle,
@@ -17,14 +19,12 @@ const WorkExperienceShown = ({
   refereeContact,
   currentlyWorking,
   preview,
-  isEdit,
   onHiddenIconClicked,
-  onEdit,
-  onClose,
   onDelete,
   onContactLinkClicked,
 }) => {
   const [hidden, setHidden] = useState(false);
+  const [editWork, setEdit] = useState(false);
 
   if (hidden && preview) {
     return <></>;
@@ -33,7 +33,7 @@ const WorkExperienceShown = ({
   const rolesList = roles
     .split('.')
     .filter(role => {
-      if (role) {
+      if (role.trim()) {
         return role;
       }
     })
@@ -45,7 +45,7 @@ const WorkExperienceShown = ({
     achievementsList = achievements
       .split('.')
       .filter(achievement => {
-        if (achievement) {
+        if (achievement.trim()) {
           return achievement;
         }
       })
@@ -53,16 +53,16 @@ const WorkExperienceShown = ({
   }
 
   let labelForDifference = '';
-  const diff = dateUtils.getDifferenceInYearMonth(startDate, ongoing ? new Date() : endDate);
+  const diff = dateUtils.getDifferenceInYearMonth(startDate, currentlyWorking ? new Date() : endDate);
 
-  if (diff.year != 0) {
+  if (diff.year !== 0) {
     labelForDifference = diff.year > 1 ? diff.year.toString() + ' years' : diff.year.toString() + ' year';
-    if (diff.month != 0) {
-      labelForDifference += 'and';
+    if (diff.month !== 0) {
+      labelForDifference += ' and ';
     }
   }
 
-  if (diff.month != 0) {
+  if (diff.month !== 0) {
     labelForDifference += diff.month > 1 ? diff.month.toString() + ' months' : diff.month.toString() + ' month';
   }
 
@@ -77,6 +77,15 @@ const WorkExperienceShown = ({
     onDelete(e, subTitle, position);
   };
 
+  const editBtnCloseHandler = () => {
+    setEdit(!editWork);
+  };
+
+  const editBtnHandler = e => {
+    e.preventDefault();
+    setEdit(!editWork);
+  };
+
   return (
     <div className="work-experience">
       <div className={!hidden ? 'work-experience__row' : 'work-experience__row work-experience--hidden'}>
@@ -89,25 +98,25 @@ const WorkExperienceShown = ({
             <EditOptions
               isHidden={hidden}
               onHiddenIconClicked={onHiddenIconClickedHandler}
-              onEditButtonClicked={onEdit}
+              onEditButtonClicked={editBtnHandler}
               onDeleteButtonClicked={onDeleteIconClickedHanlder}
             />
           )}
-          {isEdit && (
+          {editWork && (
             <OpenModal
               component={AddWorkExperience}
-              onClose={onClose}
-              showModal={isEdit}
-              isEdit={isEdit}
-              data={isEdit ? { name: subTitle, position: position } : ''}
+              onClose={editBtnCloseHandler}
+              showModal={editWork}
+              isEdit={editWork}
+              data={editWork ? { name: subTitle, position: position } : ''}
             ></OpenModal>
           )}
         </div>
         <div className="work-experience__position">{position}</div>
         <div className="year">
           <span className="start-date">{moment(startDate).format('MMMM YYYY')}</span> -{' '}
-          <span className="end-date">{currentlyWorking ? 'Present' : moment(endDate).format('MMMM YYYY')}</span> (
-          {labelForDifference})
+          <span className="end-date">{currentlyWorking ? 'Present' : moment(endDate).format('MMMM YYYY')}</span>{' '}
+          {labelForDifference ? '(' + labelForDifference + ' ) ' : ''}
         </div>
       </div>
 
@@ -131,7 +140,7 @@ const WorkExperienceShown = ({
                 onContactLinkClicked(e, refereeContact);
               }}
             >
-              {' ' + refereeContact}
+              {/^\d+$/.test(refereeContact) ? ' ' + COUNTRY_CODE + '-' + refereeContact : ' ' + refereeContact}
             </span>
           </div>
         )}
@@ -150,11 +159,8 @@ WorkExperienceShown.propTypes = {
   refereeName: PropTypes.string,
   currentlyWorking: PropTypes.bool,
   preview: PropTypes.bool,
-  isEdit: PropTypes.bool,
   refereeContact: PropTypes.string,
   onHiddenIconClicked: PropTypes.func,
-  onEdit: PropTypes.func,
-  onClose: PropTypes.func,
   onDelete: PropTypes.func,
   onContactLinkClicked: PropTypes.func,
 };
