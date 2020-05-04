@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import OpenModal from '~/components/modal/OpenModal';
 
-const CardFooter = ({ icon, label, hide, onAdd, showModal, component, onClose, modifier }) => {
+const CardFooter = ({ icon, label, modifier, onAdd, component, onClose, showModal, hide }) => {
   return (
     !hide && (
       <>
@@ -22,7 +22,12 @@ const CardFooter = ({ icon, label, hide, onAdd, showModal, component, onClose, m
 CardFooter.propTypes = {
   icon: PropTypes.string,
   label: PropTypes.string,
+  modifier: PropTypes.string,
+  onAdd: PropTypes.func,
+  component: PropTypes.func,
+  onClose: PropTypes.func,
   hide: PropTypes.bool,
+  showModal: PropTypes.bool,
 };
 
 export default CardFooter;
