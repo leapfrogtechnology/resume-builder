@@ -151,7 +151,7 @@ const Sidenav = () => {
               </div>
               {!preview && (
                 <span className="text-link text-link--small" onClick={e => createFileUploader(e)}>
-                  Upload new version
+                  Upload new photo
                 </span>
               )}
             </div>

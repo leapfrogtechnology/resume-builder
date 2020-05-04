@@ -21,26 +21,28 @@ const Contact = ({ id, label, value, preview, onHiddenIconClicked, onLinkClicked
   }
 
   return (
-    <div className="contact-content">
-      <div className="contact-content__l">
-        <div className="key">
-          {label}
-          {hidden && !preview && <span className="hidden-tag">Hidden</span>}
+    <div className="contact">
+      <div className="contact-content">
+        <div className="contact-content__l">
+          <div className="key">
+            {label}
+            {hidden && !preview && <span className="hidden-tag">Hidden</span>}
+          </div>
         </div>
-        <div
-          className="value text-link"
-          onClick={e => {
-            handleOnLinkClicked(e, value);
-          }}
-        >
-          {value}
-        </div>
+        {!preview && (
+          <div className="contact-content__r" onClick={e => onHiddenBtnClicked(e)}>
+            <img src={!hidden ? View : ViewHidden} alt="Edit" />
+          </div>
+        )}
       </div>
-      {!preview && (
-        <div className="contact-content__r" onClick={e => onHiddenBtnClicked(e)}>
-          <img src={!hidden ? View : ViewHidden} alt="Edit" />
-        </div>
-      )}
+      <div
+        className="contact__value text-link"
+        onClick={e => {
+          handleOnLinkClicked(e, value);
+        }}
+      >
+        {value}
+      </div>
     </div>
   );
 };

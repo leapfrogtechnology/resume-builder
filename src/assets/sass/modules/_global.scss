@@ -37,6 +37,7 @@
 
 .text-link {
   color: $dodger-blue;
+  cursor: pointer;
 
   @include m(small) {
     font: normal 600 14px/17px $font-primary;
