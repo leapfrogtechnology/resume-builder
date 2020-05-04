@@ -1,12 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Card from '~/components/card/Card';
 
-const ContentBlock = ({ children }) => {
+const ContentBlock = ({ childComponent }) => {
   return (
     <div className="content-block">
-      <Card children={children} showModal={false}/>
+      <Card children={childComponent} showModal={false} />
     </div>
   );
-}
+};
+
+ContentBlock.propTypes = {
+  childComponent: PropTypes.func,
+};
 
 export default ContentBlock;
