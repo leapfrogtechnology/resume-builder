@@ -7,8 +7,12 @@
   .key {
     font: normal normal 16px/19px $font-primary;
   }
+}
 
-  .value {
+.contact {
+  @include e(value) {
     font: normal normal 16px/19px $font-primary;
+    word-break: break-word;
+    width: calc(100% - 40px);
   }
 }
