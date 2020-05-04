@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 
 import SidenavBottom from './SidenavBottom';
 import { FormContext } from '../FormContext';
@@ -143,27 +143,28 @@ const Sidenav = () => {
     <div className="sidenav">
       <div className="sidenav-top">
         <div className="card">
-          <CardHeader title="Display Picture" />
-          <div className="sidenav__upload-block">
-            <div className="sidenav__upload-block-l">
-              <div className="profile-image-wrapper">
-                <img src={profileImg && !profileImg.isDeleted ? profileImg.value : ProfileImage} alt="Image" />
-              </div>
-              {!preview && (
-                <span className="text-link text-link--small" onClick={e => createFileUploader(e)}>
-                  Upload new version
-                </span>
-              )}
-            </div>
-            {!preview && (
-              <div className="sidenav__upload-block-r">
-                <div className="icon" onClick={handleImageDelete}>
-                  <img src={Trash} alt="Trash" />
+          {!preview && (
+            <>
+              <CardHeader title="Display Picture" />
+              <div className="sidenav__upload-block">
+                <div className="sidenav__upload-block-l">
+                  <div className="profile-image-wrapper">
+                    <img src={profileImg && !profileImg.isDeleted ? profileImg.value : ProfileImage} alt="Image" />
+                  </div>
+                  <span className="text-link text-link--small" onClick={e => createFileUploader(e)}>
+                    Upload new version
+                  </span>
                 </div>
+                <div className="sidenav__upload-block-r">
+                  <div className="icon" onClick={handleImageDelete}>
+                    <img src={Trash} alt="Trash" />
+                  </div>
+                </div>
+
+                {/* {profileImgUploadError && <span>{profileImgUploadErrorMsg}</span>} */}
               </div>
-            )}
-            {profileImgUploadError && <span>{profileImgUploadErrorMsg}</span>}
-          </div>
+            </>
+          )}
           <div className="sidenav__contact-block">
             <CardHeader
               title="Contact Information"
