@@ -160,8 +160,6 @@ const Sidenav = () => {
                     <img src={Trash} alt="Trash" />
                   </div>
                 </div>
-
-                {/* {profileImgUploadError && <span>{profileImgUploadErrorMsg}</span>} */}
               </div>
             </>
           )}
