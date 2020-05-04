@@ -30,7 +30,7 @@ const PersonalInfoItem = ({ label, value, bold, preview, onclick, showIcon = fal
         </div>
       </div>
       {!preview && showIcon && (
-        <div className="personal-info-row__icon" onClick={e => onHiddenIconClicked(e)}>
+        <div className="personal-info-row__icon icon" onClick={e => onHiddenIconClicked(e)}>
           <img src={!hidden ? View : ViewHidden} alt="View" />
         </div>
       )}

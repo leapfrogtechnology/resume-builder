@@ -7,7 +7,7 @@ const Media = ({ icon, label, onclick }) => {
     <div className="media">
       <span className="media__icon">{icon}</span>
       <span className="media__body">{label}</span>
-      <div className="media__body" onClick={onclick}>
+      <div className="media__body icon" onClick={onclick}>
         <img src={Edit} alt="Edit" />
       </div>
     </div>

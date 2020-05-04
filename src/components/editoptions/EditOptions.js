@@ -7,13 +7,13 @@ const EditOptions = ({ isHidden = false, onHiddenIconClicked, onEditButtonClicke
   return (
     <>
       <div className="edit-options">
-        <span className="edit-options__item" onClick={e => onHiddenIconClicked(e)}>
+        <span className="edit-options__item icon" onClick={e => onHiddenIconClicked(e)}>
           <img src={isHidden ? ViewHidden : View} alt="View" />
         </span>
-        <span className="edit-options__item" onClick={e => onEditButtonClicked(e)}>
+        <span className="edit-options__item icon" onClick={e => onEditButtonClicked(e)}>
           <img src={EditGray} alt="Edit" />
         </span>
-        <span className="edit-options__item" onClick={e => onDeleteButtonClicked(e)}>
+        <span className="edit-options__item icon" onClick={e => onDeleteButtonClicked(e)}>
           <img src={Trash} alt="Trash" />
         </span>
       </div>

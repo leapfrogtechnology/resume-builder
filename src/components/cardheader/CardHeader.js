@@ -11,7 +11,7 @@ const CardHeader = ({ title, icon = null, hideIcon = false, component, onEdit, o
           <div className="title">{title}</div>
         </div>
         {icon && !hideIcon && (
-          <div className="card__header_r" onClick={e => onEdit(e)}>
+          <div className="card__header_r icon" onClick={e => onEdit(e)}>
             <img src={icon} alt="Edit" />
           </div>
         )}

@@ -60,7 +60,6 @@
   @include e(item) {
     display: inline-block;
     padding-left: 16px;
-    cursor: pointer;
 
     &:first-child {
       padding-left: 0;
@@ -125,4 +124,8 @@
   height: 100%;
   width: 100%;
   outline: none;
+}
+
+.icon{
+  cursor: pointer;
 }
