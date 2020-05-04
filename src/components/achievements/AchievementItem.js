@@ -1,3 +1,4 @@
+import moment from 'moment';
 import ProptTypes from 'prop-types';
 import React, { useState } from 'react';
 
@@ -5,22 +6,22 @@ import OpenModal from '../modal/OpenModal';
 import EditOptions from '~/components/editoptions/EditOptions';
 import AddAchievement from '~/components/form/achievement/AddAchievement';
 
-const AchievementItem = ({
-  title,
-  date,
-  description,
-  preview,
-  isEdit,
-  onHiddenIconClicked,
-  onEdit,
-  onClose,
-  onDelete,
-}) => {
+const AchievementItem = ({ title, date, description, preview, onHiddenIconClicked, onDelete }) => {
   const [hidden, setHidden] = useState(false);
+  const [editAchievement, setEdit] = useState(false);
 
   if (hidden && preview) {
     return <></>;
   }
+
+  const editBtnHandler = e => {
+    e.preventDefault();
+    setEdit(!editAchievement);
+  };
+
+  const editBtnCloseHandler = () => {
+    setEdit(!editAchievement);
+  };
 
   const onHiddenBtnClicked = e => {
     e.preventDefault();
@@ -44,17 +45,17 @@ const AchievementItem = ({
           <EditOptions
             isHidden={hidden}
             onHiddenIconClicked={onHiddenBtnClicked}
-            onEditButtonClicked={onEdit}
+            onEditButtonClicked={editBtnHandler}
             onDeleteButtonClicked={deleteIconClickedHandler}
           />
         )}
-        {isEdit && (
+        {editAchievement && (
           <OpenModal
             component={AddAchievement}
-            onClose={onClose}
-            showModal={isEdit}
-            isEdit={isEdit}
-            data={isEdit ? { name: title, date: date, description: description } : ''}
+            onClose={editBtnCloseHandler}
+            showModal={editAchievement}
+            isEdit={editAchievement}
+            data={editAchievement ? { name: title, date: date, description: description } : ''}
           ></OpenModal>
         )}
       </div>
@@ -68,10 +69,7 @@ AchievementItem.propTypes = {
   date: ProptTypes.string,
   description: ProptTypes.string,
   preview: ProptTypes.bool,
-  isEdit: ProptTypes.bool,
   onHiddenIconClicked: ProptTypes.func,
-  onEdit: ProptTypes.func,
-  onClose: ProptTypes.func,
   onDelete: ProptTypes.func,
 };
 
