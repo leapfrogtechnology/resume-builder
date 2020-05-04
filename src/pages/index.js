@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import DATA from '../constant/mockData';
 import Header from '~/components/header/Header';
+import * as storage from '~/storage/LocalStorage';
 import { FormContext } from '../components/FormContext';
 import Dashboard from '~/components/dashboard/Dashboard';
 
@@ -19,22 +20,32 @@ const App = () => {
     setPreview(!preview);
   };
 
+  const deleteCVHandler = () => {
+    storage.deleteResume(localStorage);
+    updateData({});
+  };
+
   const store = {
     preview: { get: preview, set: setPreview },
     data: { get: data, set: updateData },
+    deleteCV: deleteCVHandler,
   };
 
   useEffect(() => {
     if (localStorage.getItem('resume')) {
       const resume = JSON.parse(localStorage.getItem('resume'));
+
       updateData(prevState => ({ ...prevState, ...resume }));
-      setLoading(!loading);
+    } else {
+      updateData({});
     }
+    setLoading(!loading);
   }, []);
 
   if (loading) {
     return null;
   }
+
   return (
     <div className="page-container">
       <Head>
