@@ -24,8 +24,8 @@ const Header = ({ name, status, onPreviewBtnClicked }) => {
     if (experienceInYearAndMonth.year !== 0) {
       experienceLabel =
         experienceInYearAndMonth.year > 1
-          ? experienceInYearAndMonth.year.toString() + ' years'
-          : experienceInYearAndMonth.year.toString() + ' year';
+          ? experienceInYearAndMonth.year.toString() + ' years '
+          : experienceInYearAndMonth.year.toString() + ' year ';
     }
 
     if (experienceInYearAndMonth.month !== 0) {
