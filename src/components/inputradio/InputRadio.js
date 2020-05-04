@@ -32,6 +32,8 @@ InputRadio.propTypes = {
   label: PropTypes.string,
   value: PropTypes.string,
   placeholder: PropTypes.string,
+  setFieldValue: PropTypes.func,
+  setFieldTouched: PropTypes.func,
 };
 
 export default InputRadio;
