@@ -13,27 +13,16 @@ const WorkExperience = () => {
   const context = useContext(FormContext);
 
   const [addWork, setAdd] = useState(false);
-  const [editWork, setEdit] = useState(false);
 
   const preview = context.preview.get;
   const workExperience = context.data.get.workExperience;
 
-  const editBtnHandler = e => {
-    e.preventDefault();
-    setEdit(!editWork);
-  };
-
-  const addBtnHandler = e => {
+  const addBtnHandler = () => {
     setAdd(!addWork);
   };
 
-  const addBtnCloseHandler = e => {
+  const addBtnCloseHandler = () => {
     setAdd(!addWork);
-  };
-
-  const editBtnCloseHandler = e => {
-    e.preventDefault();
-    setEdit(!editWork);
   };
 
   /**
@@ -126,10 +115,7 @@ const WorkExperience = () => {
         refereeContact={refereeContact}
         currentlyWorking={currentlyWorking}
         preview={preview}
-        isEdit={editWork}
         onHiddenIconClicked={updateHiddenStateWork}
-        onEdit={editBtnHandler}
-        onClose={editBtnCloseHandler}
         onDelete={deleteWorkExperience}
         onContactLinkClicked={contactLinkHandler}
       />
@@ -138,7 +124,7 @@ const WorkExperience = () => {
 
   return (
     <div className="content-block">
-      {!preview && workExperienceList.length > 1 && <CardHeader title="Work Experience" />}
+      {!preview && workExperienceList.length > 0 && <CardHeader title="Work Experience" />}
       {workExperienceList}
       <CardFooter
         icon={Add}

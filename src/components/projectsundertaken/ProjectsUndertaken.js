@@ -13,27 +13,16 @@ const ProjectsUndertaken = () => {
   const context = useContext(FormContext);
 
   const [addProject, setAdd] = useState(false);
-  const [editProject, setEdit] = useState(false);
 
   const preview = context.preview.get;
   const projects = context.data.get.projects;
 
-  const editBtnHandler = e => {
-    e.preventDefault();
-    setEdit(!editProject);
-  };
-
-  const addBtnHandler = e => {
+  const addBtnHandler = () => {
     setAdd(!addProject);
   };
 
-  const addBtnCloseHandler = e => {
+  const addBtnCloseHandler = () => {
     setAdd(!addProject);
-  };
-
-  const editBtnCloseHandler = e => {
-    e.preventDefault();
-    setEdit(!editProject);
   };
 
   /**
@@ -100,10 +89,7 @@ const ProjectsUndertaken = () => {
       ongoing={ongoing}
       description={description}
       preview={preview}
-      isEdit={editProject}
       onHiddenIconClicked={updateHiddenStateProject}
-      onEdit={editBtnHandler}
-      onClose={editBtnCloseHandler}
       onDelete={deleteProject}
     />
   ));

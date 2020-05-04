@@ -13,27 +13,16 @@ const Skills = () => {
   const context = useContext(FormContext);
 
   const [addSkill, setAdd] = useState(false);
-  const [editSkill, setEdit] = useState(false);
 
   const preview = context.preview.get;
   const skills = context.data.get.skills;
 
-  const editBtnHandler = e => {
-    e.preventDefault();
-    setEdit(!editSkill);
-  };
-
-  const addBtnHandler = e => {
+  const addBtnHandler = () => {
     setAdd(!addSkill);
   };
 
-  const addBtnCloseHandler = e => {
+  const addBtnCloseHandler = () => {
     setAdd(!addSkill);
-  };
-
-  const editBtnCloseHandler = e => {
-    e.preventDefault();
-    setEdit(!editSkill);
   };
 
   /**
@@ -52,6 +41,7 @@ const Skills = () => {
         const newState = !hidden;
 
         data['skills'][index].hidden = newState;
+
         context.data.set(data); // new state of data
       }
     });
@@ -68,9 +58,8 @@ const Skills = () => {
 
     data['skills'] = filteredSkills;
 
+    storage.saveResume(localStorage, data);
     context.data.set(prevState => ({ ...prevState, ...data }));
-
-    storage.saveResume(localStorage, context.data.get);
   };
 
   if (!skills || skills.length < 1) {
@@ -91,16 +80,13 @@ const Skills = () => {
     );
   }
 
-  const skillsList = skills.map(({ name, label, subSkills }, index) => (
+  const skillsList = skills.map(({ name, subSkills }, index) => (
     <SkillItem
       key={index}
-      title={label}
+      title={name}
       values={subSkills}
       preview={preview}
-      isEdit={editSkill}
       onHiddenIconClicked={updateHiddenStateSkill}
-      onEdit={editBtnHandler}
-      onClose={editBtnCloseHandler}
       onDelete={deleteSkill}
     />
   ));
