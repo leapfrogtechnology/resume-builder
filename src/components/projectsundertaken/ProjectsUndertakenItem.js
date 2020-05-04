@@ -1,3 +1,4 @@
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
@@ -13,13 +14,11 @@ const ProjectsUndertakenItem = ({
   description,
   ongoing,
   preview,
-  isEdit,
   onHiddenIconClicked,
-  onEdit,
-  onClose,
   onDelete,
 }) => {
   const [hidden, setHidden] = useState(false);
+  const [editProject, setEdit] = useState(false);
 
   if (hidden && preview) {
     return <></>;
@@ -28,16 +27,25 @@ const ProjectsUndertakenItem = ({
   let labelForDifference = '';
   const diff = dateUtils.getDifferenceInYearMonth(startDate, ongoing ? new Date() : endDate);
 
-  if (diff.year != 0) {
+  if (diff.year !== 0) {
     labelForDifference = diff.year > 1 ? diff.year.toString() + ' years' : diff.year.toString() + ' year';
-    if (diff.month != 0) {
-      labelForDifference += 'and';
+    if (diff.month !== 0) {
+      labelForDifference += ' and ';
     }
   }
 
-  if (diff.month != 0) {
+  if (diff.month !== 0) {
     labelForDifference += diff.month > 1 ? diff.month.toString() + ' months' : diff.month.toString() + ' month';
   }
+
+  const editBtnHandler = e => {
+    e.preventDefault();
+    setEdit(!editProject);
+  };
+
+  const editBtnCloseHandler = () => {
+    setEdit(!editProject);
+  };
 
   const onHiddenBtnClicked = e => {
     e.preventDefault();
@@ -61,24 +69,24 @@ const ProjectsUndertakenItem = ({
           <EditOptions
             isHidden={hidden}
             onHiddenIconClicked={onHiddenBtnClicked}
-            onEditButtonClicked={onEdit}
+            onEditButtonClicked={editBtnHandler}
             onDeleteButtonClicked={deleteIconClickedHandler}
           />
         )}
-        {isEdit && (
+        {editProject && (
           <OpenModal
             component={AddProject}
-            onClose={onClose}
-            showModal={isEdit}
-            isEdit={isEdit}
-            data={isEdit ? { name: title, date: startDate, description: description } : ''}
+            onClose={editBtnCloseHandler}
+            showModal={editProject}
+            isEdit={editProject}
+            data={editProject ? { name: title, date: startDate, description: description } : ''}
           ></OpenModal>
         )}
       </div>
       <div className="year year--dark">
         <span className="start-date">{moment(startDate).format('MMMM YYYY')}</span> -{' '}
-        <span className="end-date">{ongoing ? 'Working since' : moment(endDate).format('MMMM YYYY')}</span> (
-        {labelForDifference})
+        <span className="end-date">{ongoing ? 'Present' : moment(endDate).format('MMMM YYYY')}</span>{' '}
+        {labelForDifference ? '( ' + { labelForDifference } + ' )' : ''}
       </div>
       <p className="description">{description}</p>
     </div>
