@@ -14,4 +14,8 @@
   @include e(period) {
     color: $mine-shaft;
   }
+
+  @include m(hidden) {
+    color: $dusty-gray;
+  }
 }

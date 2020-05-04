@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 import moment from 'moment';
 
 const validateProjectInformation = Yup.object().shape({
-  name: Yup.string().label('Title of your Project').trim().min(10).max(30).required(),
+  name: Yup.string().label('Title of your Project').trim().required(),
   ongoing: Yup.boolean().label('Current work'),
   startDate: Yup.date()
     .label('Start date')
@@ -26,7 +26,7 @@ const validateProjectInformation = Yup.object().shape({
       }
     }),
   type: Yup.string().required(),
-  description: Yup.string().label('Roles and Responsibilities').notRequired().min(60).max(200),
+  description: Yup.string().label('Roles and Responsibilities'),
 });
 
 export default validateProjectInformation;

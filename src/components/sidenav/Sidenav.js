@@ -152,7 +152,7 @@ const Sidenav = () => {
                     <img src={profileImg && !profileImg.isDeleted ? profileImg.value : ProfileImage} alt="Image" />
                   </div>
                   <span className="text-link text-link--small" onClick={e => createFileUploader(e)}>
-                    Upload new version
+                    Upload new Photo
                   </span>
                 </div>
                 <div className="sidenav__upload-block-r">

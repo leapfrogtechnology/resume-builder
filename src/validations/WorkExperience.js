@@ -3,7 +3,7 @@ import { emailCheck, phoneNumberCheck } from '~/common/constants';
 import moment from 'moment';
 
 const validateWorkExperience = Yup.object().shape({
-  nameOrganization: Yup.string().label('Organization Name').trim().min(10).max(30).required(),
+  nameOrganization: Yup.string().label('Organization Name').trim().required(),
   position: Yup.string().label('Title/Position').max(40).required(),
   currentWork: Yup.boolean().label('Current work'),
   startDate: Yup.date()
@@ -29,7 +29,7 @@ const validateWorkExperience = Yup.object().shape({
     }),
   roles: Yup.string().label('Roles and Responsibilities').min(60).max(200).required(),
   achievements: Yup.string().label('Achievements and Tasks').max(150),
-  nameReferee: Yup.string().label('Name of your Referee').min(10).max(35),
+  nameReferee: Yup.string().label('Name of your Referee').trim(),
   contactReferee: Yup.string()
     .label('Email | Phone Number')
     .test('test-name', 'Enter Valid Phone number / Email', function (value) {

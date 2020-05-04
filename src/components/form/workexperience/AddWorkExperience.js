@@ -134,13 +134,13 @@ const AddWorkExperience = ({ onClose, isEdit, values }) => {
               />
               <InputText
                 name="roles"
-                label="Describe Your Roles and Responsibilities"
+                label="List down your roles and responsibilities. Separate each role with a period (.) to separate them in new lines."
                 placeholder="eg. I am responsible for..."
                 type="text-area"
               />
               <InputText
                 name="achievements"
-                label="List out your Achievements and Tasks (optional)"
+                label="List down your Achievements and Tasks (optional). Separate each achievement with a period (.) to separate them in new lines. "
                 placeholder="eg. I was awarded with..."
                 type="text-area"
               />
