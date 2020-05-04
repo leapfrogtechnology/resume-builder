@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Close } from '~/assets/image';
 
 const CloseModal = ({ onClose }) => {
@@ -14,6 +15,10 @@ const CloseModal = ({ onClose }) => {
       </div>
     </div>
   );
+};
+
+CloseModal.propTypes = {
+  onClose: PropTypes.func,
 };
 
 export default CloseModal;
