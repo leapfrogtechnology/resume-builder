@@ -272,7 +272,7 @@ const createSkills = (skills, heading) => {
           bottom: 20,
         },
         borders: BORDER_NONE,
-        children: [new Paragraph({ children: [new TextRun({ text: heading, bold: true, size: '16pt' })] })],
+        children: [new Paragraph({ children: [new TextRun({ text: heading, bold: true, size: '18pt' })] })],
       }),
     ],
   });
