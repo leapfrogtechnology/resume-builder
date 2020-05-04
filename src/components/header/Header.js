@@ -12,21 +12,23 @@ const Header = ({ name, status, onPreviewBtnClicked }) => {
   const context = useContext(FormContext);
   const experience = context.data.get.experience;
   const preview = context.preview.get;
+  const profileImage = context.data.get.profileImage;
 
   let experienceLabel = 'You do not have any professional experience yet';
 
   if (experience) {
     const experienceInYearAndMonth = dateUtils.getExperienceFormat(experience);
+
     experienceLabel = '';
 
-    if (experienceInYearAndMonth.year != 0) {
+    if (experienceInYearAndMonth.year !== 0) {
       experienceLabel =
         experienceInYearAndMonth.year > 1
           ? experienceInYearAndMonth.year.toString() + ' years'
           : experienceInYearAndMonth.year.toString() + ' year';
     }
 
-    if (experienceInYearAndMonth.month != 0) {
+    if (experienceInYearAndMonth.month !== 0) {
       experienceLabel +=
         experienceInYearAndMonth.month > 1
           ? experienceInYearAndMonth.month.toString() + ' months'
@@ -60,6 +62,7 @@ const Header = ({ name, status, onPreviewBtnClicked }) => {
       <UserDetail
         name={name}
         experience={experienceLabel}
+        profileImg={profileImage}
         preview={preview}
         onPreviewBtnClicked={onPreviewBtnClicked}
       />
