@@ -37,6 +37,7 @@
   "homepage": "https://github.com/leapfrogtechnology/resume-builder#readme",
   "dependencies": {
     "classnames": "^2.2.6",
+    "docx": "^5.0.2",
     "formik": "^2.1.4",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
