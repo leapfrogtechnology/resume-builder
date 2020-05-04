@@ -5,7 +5,7 @@ import { Warning } from '~/assets/image';
 import Button from '~/components/button/Button';
 import CardHeader from '~/components/cardheader/CardHeader';
 
-const DeletePopup = ({ item, entry_title, onConfirm, onCancel }) => {
+const DeletePopup = ({ onConfirm, onCancel }) => {
   return (
     <div className="modal-container">
       <div className="delete-popup">
@@ -16,9 +16,7 @@ const DeletePopup = ({ item, entry_title, onConfirm, onCancel }) => {
             </div>
             <div className="delete-popup__body">
               <CardHeader title="Are you sure?" />
-              <p className="delete-popup__message">
-                {`You are about to delete a ${item} for ${entry_title}. Do you want to proceed?`}
-              </p>
+              <p className="delete-popup__message">{`You are about to delete your resume. Do you want to proceed?`}</p>
               <div className="form-button">
                 <div className="form-button__left">
                   <Button content="Yes, Delete" onclick={onConfirm} />
@@ -36,8 +34,8 @@ const DeletePopup = ({ item, entry_title, onConfirm, onCancel }) => {
 };
 
 DeletePopup.propTypes = {
-  item: PropTypes.object,
-  entry_title: PropTypes.object,
+  onConfirm: PropTypes.func,
+  onCancel: PropTypes.func,
 };
 
 export default DeletePopup;
