@@ -1,7 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-import Pdf from '../pdf/Pdf';
 import Skills from '~/components/skills/Skills';
 import Sidenav from '~/components/sidenav/Sidenav';
 import ContentBlock from '~/components/content/ContentBlock';
@@ -16,23 +14,17 @@ const Dashboard = () => {
     <section className="container">
       <div className="main-container">
         <div className="main-content">
-          <ContentBlock children={PersonalInformation} />
-          <ContentBlock children={Skills} />
-          <ContentBlock children={WorkExperience} />
-          <ContentBlock children={ProjectsUndertaken} />
-          <ContentBlock children={Achievements} />
-          <ContentBlock children={Certificate} />
-          <Pdf />
+          <ContentBlock childComponent={PersonalInformation} />
+          <ContentBlock childComponent={Skills} />
+          <ContentBlock childComponent={WorkExperience} />
+          <ContentBlock childComponent={ProjectsUndertaken} />
+          <ContentBlock childComponent={Achievements} />
+          <ContentBlock childComponent={Certificate} />
         </div>
         <Sidenav />
       </div>
     </section>
   );
-};
-
-Dashboard.propTypes = {
-  profile: PropTypes.object,
-  preview: PropTypes.bool,
 };
 
 export default Dashboard;
