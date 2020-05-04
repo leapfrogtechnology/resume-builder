@@ -1,3 +1,4 @@
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
@@ -6,19 +7,9 @@ import { UpRightArrow } from '~/assets/image';
 import EditOptions from '~/components/editoptions/EditOptions';
 import AddCertificate from '../form/certificate/AddCertificate';
 
-const CertificateItem = ({
-  title,
-  link,
-  year,
-  description,
-  preview,
-  isEdit,
-  onHiddenIconClicked,
-  onEdit,
-  onClose,
-  onDelete,
-}) => {
+const CertificateItem = ({ title, link, year, description, preview, onHiddenIconClicked, onDelete }) => {
   const [hidden, setHidden] = useState(false);
+  const [editCertificate, setEdit] = useState(false);
 
   if (hidden && preview) {
     return <></>;
@@ -33,6 +24,15 @@ const CertificateItem = ({
   const deleteIconClickedHandler = e => {
     e.preventDefault();
     onDelete(e, title, link);
+  };
+
+  const editBtnHandler = e => {
+    e.preventDefault();
+    setEdit(!editCertificate);
+  };
+
+  const editBtnCloseHandler = () => {
+    setEdit(!editCertificate);
   };
 
   return (
@@ -51,17 +51,17 @@ const CertificateItem = ({
           <EditOptions
             onHiddenIconClicked={onHiddenBtnClicked}
             isHidden={hidden}
-            onEditButtonClicked={onEdit}
+            onEditButtonClicked={editBtnHandler}
             onDeleteButtonClicked={deleteIconClickedHandler}
           />
         )}
-        {isEdit && (
+        {editCertificate && (
           <OpenModal
             component={AddCertificate}
-            onClose={onClose}
-            showModal={isEdit}
-            isEdit={isEdit}
-            data={isEdit ? { name: title, link: link, date: year, description: description } : ''}
+            onClose={editBtnCloseHandler}
+            showModal={editCertificate}
+            isEdit={editCertificate}
+            data={editCertificate ? { name: title, link: link, date: year, description: description } : ''}
           ></OpenModal>
         )}
       </div>
@@ -78,7 +78,6 @@ CertificateItem.propTypes = {
   link: PropTypes.string,
   preview: PropTypes.bool,
   onHiddenIconClicked: PropTypes.func,
-  onEdit: PropTypes.func,
   onDelete: PropTypes.func,
 };
 
