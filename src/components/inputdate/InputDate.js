@@ -36,6 +36,7 @@ const InputDate = ({ label, placeholder, modifier, setFieldValue, setFieldTouche
           onChange={handleChange}
           onInputClick={openDatePicker}
           onClickOutside={e => {
+            e.preventDefault();
             setDatePicker(false);
           }}
           open={datePickerIsOpen}
