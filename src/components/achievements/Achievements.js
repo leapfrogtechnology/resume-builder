@@ -11,29 +11,18 @@ import AddAchievement from '~/components/form/achievement/AddAchievement';
 
 const Achievements = () => {
   const [addAchievement, setAdd] = useState(false);
-  const [editAchievement, setEdit] = useState(false);
-
-  const editBtnHandler = e => {
-    e.preventDefault();
-    setEdit(!editAchievement);
-  };
-
-  const addBtnHandler = e => {
-    setAdd(!addAchievement);
-  };
-
-  const addBtnCloseHandler = e => {
-    setAdd(!addAchievement);
-  };
-
-  const editBtnCloseHandler = e => {
-    e.preventDefault();
-    setEdit(!editAchievement);
-  };
-
   const context = useContext(FormContext);
+
   const preview = context.preview.get;
   const achievements = context.data.get.achievements;
+
+  const addBtnHandler = () => {
+    setAdd(!addAchievement);
+  };
+
+  const addBtnCloseHandler = () => {
+    setAdd(!addAchievement);
+  };
 
   /**
    * Update the hidden state of skill.
@@ -97,10 +86,7 @@ const Achievements = () => {
       date={date}
       description={description}
       preview={preview}
-      isEdit={editAchievement}
       onHiddenIconClicked={updateHiddenStateAchievement}
-      onEdit={editBtnHandler}
-      onClose={editBtnCloseHandler}
       onDelete={deleteAchievment}
     />
   ));
