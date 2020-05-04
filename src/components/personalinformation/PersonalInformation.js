@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 
 import { Edit } from '~/assets/image';
 import { FormContext } from '../FormContext';
+import * as storage from '~/storage/LocalStorage';
 import PersonalInfoItem from './PersonalInfoItem';
 import CardHeader from '~/components/cardheader/CardHeader';
 import AddPersonalInformation from '~/components/form/personalinformation/AddPersonalInformation';
@@ -26,8 +27,7 @@ const PersonalInformation = () => {
     setIsEdit(!isEdit);
   };
 
-  const closeBtnHandler = e => {
-    e.preventDefault();
+  const closeBtnHandler = () => {
     setModal(!showModel);
     setIsEdit(!isEdit);
   };
@@ -46,6 +46,7 @@ const PersonalInformation = () => {
     const newState = !currentState;
 
     data[key].hidden = newState;
+
     context.data.set(data);
   };
 
