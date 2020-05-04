@@ -38,7 +38,6 @@
 .text-link {
   color: $dodger-blue;
   cursor: pointer;
-  display: flex;
   @include m(small) {
     font: normal 600 14px/17px $font-primary;
   }
@@ -53,6 +52,7 @@
 }
 
 .sub-title {
+  width: calc(100% - 150px);
   font: normal bold 16px/19px $font-primary;
 }
 
