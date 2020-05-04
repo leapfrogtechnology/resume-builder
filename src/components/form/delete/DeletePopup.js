@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import { Warning } from '~/assets/image';
 import Button from '~/components/button/Button';
-import CardHeader from '~/components/cardheader/CardHeader';
 
 const DeletePopup = ({ onConfirm, onCancel }) => {
   return (
@@ -15,7 +14,7 @@ const DeletePopup = ({ onConfirm, onCancel }) => {
               <img src={Warning} alt="Warning" />
             </div>
             <div className="delete-popup__body">
-              <CardHeader title="Are you sure?" />
+              <div class="title">Are you sure?</div>
               <p className="delete-popup__message">{`You are about to delete your resume. Do you want to proceed?`}</p>
               <div className="form-button">
                 <div className="form-button__left">
