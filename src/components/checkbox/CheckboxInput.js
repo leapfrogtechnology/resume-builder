@@ -7,10 +7,12 @@ const CheckboxInput = ({ value, setFieldValue, setFieldTouched, ...props }) => {
   const [isChecked, setChecked] = useState(false);
 
   const change = (e, _name, _requireValidation) => {
+    e.preventDefault();
+
     const status = !isChecked;
+    setChecked(status);
     setFieldTouched(field.name, true);
     setFieldValue(field.name, status, true);
-    setChecked(status);
   };
 
   return (
@@ -18,7 +20,7 @@ const CheckboxInput = ({ value, setFieldValue, setFieldTouched, ...props }) => {
       <input
         type="checkbox"
         className="input__checkbox"
-        checked={field.value ? true : false}
+        checked={isChecked}
         onChange={e => change(e, field.name, true)}
         {...props}
       />
@@ -30,6 +32,8 @@ const CheckboxInput = ({ value, setFieldValue, setFieldTouched, ...props }) => {
 
 CheckboxInput.propTypes = {
   value: PropTypes.string,
+  setFieldValue: PropTypes.func,
+  setFieldTouched: PropTypes.func,
 };
 
 export default CheckboxInput;
