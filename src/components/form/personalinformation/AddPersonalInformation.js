@@ -22,6 +22,11 @@ const AddPersonalInformation = ({ onClose, isEdit }) => {
 
   const handleSubmit = values => {
     const personalInfoObj = personalInfoUtils.getPersonalInfoObject({ ...values });
+    const prevData = data.get;
+
+    Object.assign(prevData, personalInfoObj);
+
+    storage.saveResume(localStorage, prevData);
 
     data.set(prevState => ({ ...prevState, ...personalInfoObj }));
 

@@ -15,10 +15,13 @@ const AddContactInformation = ({ onClose, isEdit }) => {
 
   const handleSubmit = values => {
     const contactObj = contactUtils.getContactObject({ ...values });
+    const prevData = data.get;
+
+    Object.assign(prevData, contactObj);
+
+    storage.saveResume(localStorage, prevData);
 
     data.set(prevState => ({ ...prevState, ...contactObj }));
-
-    storage.saveResume(localStorage, data.get);
 
     onClose();
   };
