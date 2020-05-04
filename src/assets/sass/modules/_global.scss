@@ -112,3 +112,17 @@
   padding-top: 6px;
   color: $dusty-gray;
 }
+
+.react-datepicker-wrapper {
+  width: 90%;
+}
+
+.react-datepicker__input-container {
+  height: 32px;
+}
+
+.react-datepicker__input-container input {
+  height: 100%;
+  width: 100%;
+  outline: none;
+}
