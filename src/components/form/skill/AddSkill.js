@@ -1,6 +1,7 @@
 /* eslint-disable require-jsdoc */
 /* eslint-disable react/prop-types */
 import * as Yup from 'yup';
+import * as _ from 'lodash';
 import PropTypes from 'prop-types';
 import { Formik, Form } from 'formik';
 import React, { useContext } from 'react';
@@ -14,7 +15,7 @@ import InputSelect from '~/components/inputselect/InputSelect';
 import * as skillUtils from '../../../utilities/objects/Skill';
 
 const AddSkill = ({ onClose, isEdit, values }) => {
-  const { preview, data } = useContext(FormContext);
+  const { data } = useContext(FormContext);
 
   const validateSkill = Yup.object().shape({
     skill: Yup.string().required(),
@@ -32,6 +33,8 @@ const AddSkill = ({ onClose, isEdit, values }) => {
     data.set(prevState => ({ ...prevState, ...data }));
 
     storage.saveResume(localStorage, data.get);
+
+    onClose();
   };
 
   const handleSubmitOnAdd = formValues => {
@@ -78,6 +81,7 @@ const AddSkill = ({ onClose, isEdit, values }) => {
         subSkills: '',
       };
     }
+
     return initialValues;
   };
 

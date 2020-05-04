@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { Formik, Form } from 'formik';
 import React, { useContext } from 'react';
 
+import * as _ from 'lodash';
 import { FormContext } from '../../FormContext';
 import Button from '~/components/button/Button';
 import * as storage from '~/storage/LocalStorage';
@@ -12,7 +13,7 @@ import * as certificateUtils from '~/utilities/objects/Certificate';
 import validateCertificateInformation from '~/validations/Certificate';
 
 const AddCertificate = ({ onClose, isEdit, values }) => {
-  const { preview, data } = useContext(FormContext);
+  const { data } = useContext(FormContext);
 
   const handleSubmit = formValues => {
     if (isEdit) {
@@ -24,6 +25,8 @@ const AddCertificate = ({ onClose, isEdit, values }) => {
     data.set(prevState => ({ ...prevState, ...data }));
 
     storage.saveResume(localStorage, data.get);
+
+    onClose();
   };
 
   const handleSubmitOnAdd = formValues => {

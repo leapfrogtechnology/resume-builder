@@ -1,3 +1,4 @@
+import * as _ from 'lodash';
 import PropTypes from 'prop-types';
 import { Formik, Form } from 'formik';
 import React, { useContext } from 'react';
@@ -14,7 +15,7 @@ import { validateWorkExperience } from '~/validations/WorkExperience';
 import * as workExperienceUtils from '../../../utilities/objects/WorkExperience';
 
 const AddWorkExperience = ({ onClose, isEdit, values }) => {
-  const { preview, data } = useContext(FormContext);
+  const { data } = useContext(FormContext);
 
   let workIndex = -1;
   let initialValues = {};
@@ -29,6 +30,8 @@ const AddWorkExperience = ({ onClose, isEdit, values }) => {
     data.set(prevState => ({ ...prevState, ...data }));
 
     storage.saveResume(localStorage, data.get);
+
+    onClose();
   };
 
   const handleSubmitOnAdd = formValues => {
@@ -86,6 +89,7 @@ const AddWorkExperience = ({ onClose, isEdit, values }) => {
         contactReferee: '',
       };
     }
+
     return initialValues;
   };
 
@@ -155,7 +159,6 @@ const AddWorkExperience = ({ onClose, isEdit, values }) => {
                   <Button content="Add Experience" type="submit" />
                 </div>
                 <div className="form-button__right">
-                  <img src={Trash} alt="Delete" />
                   <Button content="Cancel" isCancel={true} type="button" onclick={onClose} />
                 </div>
               </div>

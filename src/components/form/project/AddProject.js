@@ -1,5 +1,6 @@
+import * as _ from 'lodash';
 import PropTypes from 'prop-types';
-import { Formik, Form, useField } from 'formik';
+import { Formik, Form } from 'formik';
 import React, { useContext } from 'react';
 
 import Button from '~/components/button/Button';
@@ -14,7 +15,7 @@ import validateProjectInformation from '~/validations/Project';
 import CheckboxInput from '~/components/checkbox/CheckboxInput';
 
 const AddProject = ({ onClose, isEdit, values }) => {
-  const { preview, data } = useContext(FormContext);
+  const { data } = useContext(FormContext);
 
   let projectIndex = -1;
   let initialValues = {};
@@ -29,6 +30,8 @@ const AddProject = ({ onClose, isEdit, values }) => {
     data.set(prevState => ({ ...prevState, ...data }));
 
     storage.saveResume(localStorage, data.get);
+
+    onClose();
   };
 
   const handleSubmitOnAdd = formValues => {
@@ -80,6 +83,7 @@ const AddProject = ({ onClose, isEdit, values }) => {
         description: '',
       };
     }
+
     return initialValues;
   };
 

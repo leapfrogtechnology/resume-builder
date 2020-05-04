@@ -13,7 +13,7 @@ import * as achievementUtils from '~/utilities/objects/Achievement';
 import validateAchievementInformation from '~/validations/Achievement';
 
 const AddAchievement = ({ onClose, isEdit, values }) => {
-  const { preview, data } = useContext(FormContext);
+  const data = useContext(FormContext).data;
 
   const handleSubmit = formValues => {
     if (isEdit) {
@@ -25,6 +25,8 @@ const AddAchievement = ({ onClose, isEdit, values }) => {
     data.set(prevState => ({ ...prevState, ...data }));
 
     storage.saveResume(localStorage, data.get);
+
+    onClose();
   };
 
   const handleSubmitOnAdd = formValues => {
@@ -68,6 +70,7 @@ const AddAchievement = ({ onClose, isEdit, values }) => {
         description: '',
       };
     }
+
     return initialValues;
   };
 

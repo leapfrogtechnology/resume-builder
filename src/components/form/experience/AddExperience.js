@@ -1,5 +1,6 @@
 import * as Yup from 'yup';
-import { Formik, Form, isInteger } from 'formik';
+import PropTypes from 'prop-types';
+import { Formik, Form } from 'formik';
 import React, { useContext } from 'react';
 
 import Button from '~/components/button/Button';
@@ -9,12 +10,12 @@ import InputText from '~/components/inputtext/InputText';
 import FormHeader from '~/components/formheader/FormHeader';
 import InputRadio from '~/components/inputradio/InputRadio';
 
-const AddExperience = ({ onClose, value }) => {
-  const { preview, data } = useContext(FormContext);
+const AddExperience = ({ onClose }) => {
+  const { data } = useContext(FormContext);
 
   const validateExperience = Yup.object().shape({
     value: Yup.number().label('Your proffessional experience').min(0).integer(),
-    type: Yup.string().required('This is required'),
+    type: Yup.string().required('It is required'),
   });
 
   const handleSubmit = values => {
@@ -23,8 +24,12 @@ const AddExperience = ({ onClose, value }) => {
     } else {
       data.get['experience'] = { ...values };
     }
+
     data.set(prevState => ({ ...prevState, ...data.get }));
+
     storage.saveResume(localStorage, data.get);
+
+    onClose();
   };
 
   const getInitialValues = () => {
@@ -85,6 +90,10 @@ const AddExperience = ({ onClose, value }) => {
       </Formik>
     </>
   );
+};
+
+AddExperience.propTypes = {
+  onClose: PropTypes.func,
 };
 
 export default AddExperience;

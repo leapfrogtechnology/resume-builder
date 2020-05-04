@@ -12,7 +12,7 @@ import FormHeader from '~/components/formheader/FormHeader';
 import * as personalInfoUtils from '~/utilities/objects/PersonalInformation';
 
 const AddPersonalInformation = ({ onClose, isEdit }) => {
-  const { preview, data } = useContext(FormContext);
+  const { data } = useContext(FormContext);
 
   const validatePersonalInformation = Yup.object().shape({
     name: Yup.string().label('Name').min(10).max(35, 'Limit 35 characters').required(),
@@ -26,6 +26,8 @@ const AddPersonalInformation = ({ onClose, isEdit }) => {
     data.set(prevState => ({ ...prevState, ...personalInfoObj }));
 
     storage.saveResume(localStorage, data.get);
+
+    onClose();
   };
 
   const getInitialState = () => {
@@ -44,6 +46,7 @@ const AddPersonalInformation = ({ onClose, isEdit }) => {
         introduction: '',
       };
     }
+
     return initialValues;
   };
 

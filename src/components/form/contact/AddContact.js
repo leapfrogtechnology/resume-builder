@@ -11,7 +11,7 @@ import * as contactUtils from '~/utilities/objects/Contact';
 import validateContactInformation from '~/validations/Contact';
 
 const AddContactInformation = ({ onClose, isEdit }) => {
-  const { preview, data } = useContext(FormContext);
+  const { data } = useContext(FormContext);
 
   const handleSubmit = values => {
     const contactObj = contactUtils.getContactObject({ ...values });
@@ -19,6 +19,8 @@ const AddContactInformation = ({ onClose, isEdit }) => {
     data.set(prevState => ({ ...prevState, ...contactObj }));
 
     storage.saveResume(localStorage, data.get);
+
+    onClose();
   };
 
   const getInitialValues = () => {
@@ -41,6 +43,7 @@ const AddContactInformation = ({ onClose, isEdit }) => {
         linkedIn: '',
       };
     }
+
     return initialValues;
   };
 
