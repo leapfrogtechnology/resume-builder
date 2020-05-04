@@ -11,30 +11,18 @@ import AddCertificate from '../form/certificate/AddCertificate';
 
 const Certificate = () => {
   const [addCertificate, setAdd] = useState(false);
-  const [editCertificate, setEdit] = useState(false);
-
-  const editBtnHandler = e => {
-    e.preventDefault();
-    setEdit(!editCertificate);
-  };
-
-  const addBtnHandler = e => {
-    setAdd(!addCertificate);
-  };
-
-  const addBtnCloseHandler = e => {
-    setAdd(!addCertificate);
-  };
-
-  const editBtnCloseHandler = e => {
-    e.preventDefault();
-    setEdit(!editCertificate);
-  };
-
   const context = useContext(FormContext);
 
   const certificates = context.data.get.certificates;
   const preview = context.preview.get;
+
+  const addBtnHandler = () => {
+    setAdd(!addCertificate);
+  };
+
+  const addBtnCloseHandler = () => {
+    setAdd(!addCertificate);
+  };
 
   /**
    * Update the hidden state of skill.
@@ -99,10 +87,7 @@ const Certificate = () => {
       year={date}
       description={description}
       preview={preview}
-      isEdit={editCertificate}
       onHiddenIconClicked={updateHiddenStateCertificates}
-      onEdit={editBtnHandler}
-      onClose={editBtnCloseHandler}
       onDelete={deleteCertificate}
     />
   ));
