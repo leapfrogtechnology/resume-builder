@@ -124,9 +124,9 @@ const WorkExperienceShown = ({
         {(refereeName || refereeContact) && (
           <div className="work-experience__row">
             Referee
-            <div className="work-experience__row-item">
+            <ul className="referee-name work-experience__row-item">
               <li>
-                <span className="referee-name">{refereeName}</span>
+                {refereeName}
                 <span
                   className="referee-email text-link"
                   onClick={e => {
@@ -136,7 +136,7 @@ const WorkExperienceShown = ({
                   {/^\d+$/.test(refereeContact) ? ' ' + COUNTRY_CODE + '-' + refereeContact : ' ' + refereeContact}
                 </span>
               </li>
-            </div>
+            </ul>
           </div>
         )}
       </div>
