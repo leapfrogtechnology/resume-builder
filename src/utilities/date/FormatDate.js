@@ -7,14 +7,14 @@ export const format = date => {
 };
 
 /**
- * Convert month to year and month
+ * Convert month to year and month .
  *
  * @param {integer} monthCount
  * @returns {Object}
  */
 export const getYearMonth = monthCount => {
-  let m = monthCount % TOTAL_MONTH;
-  let y = Math.floor(monthCount / TOTAL_MONTH);
+  const m = monthCount % TOTAL_MONTH;
+  const y = Math.floor(monthCount / TOTAL_MONTH);
 
   return { year: y, month: m };
 };
@@ -24,30 +24,61 @@ export const getExperienceFormat = experience => {
     return { year: Number(experience.value), month: 0 };
   } else {
     const result = getYearMonth(experience.value);
+
     return { ...result };
   }
 };
 
 /**
- * GEt difference between two dates in years and months
+ * Gett difference between two dates in years and months .
  *
- * @param {Date} startDate - start date
- * @param {Date} endDate  - end date
- * @returns {Object} difference
+ * @param {Date} startDate Start date.
+ * @param {Date} endDate  End date.
+ * @returns {Object} Difference.
  */
 export const getDifferenceInYearMonth = (startDate, endDate) => {
-  let a = moment(endDate);
-  let b = moment(startDate);
+  const a = moment(endDate);
+  const b = moment(startDate);
 
-  let years = a.diff(b, 'year');
+  const years = a.diff(b, 'year');
+
   b.add(years, 'years');
 
-  let months = a.diff(b, 'months');
+  const months = a.diff(b, 'months');
+
   b.add(months, 'months');
 
-  let difference = {
+  const difference = {
     year: years,
     month: months,
   };
+
   return difference;
+};
+
+/**
+ * Get Label for duration in years and months
+ *
+ * @param {Date} startDate Start date.
+ * @param {Date} endDate End date.
+ * @param {bool} currentlyWorking Status if currently engaged or not.
+ * @returns {string}
+ */
+export const getDifferenceYearMonth = (startDate, endDate, currentlyWorking) => {
+  let labelForDifference = '';
+
+  const diff = getDifferenceInYearMonth(startDate, currentlyWorking ? new Date() : endDate);
+
+  if (diff.year !== 0) {
+    labelForDifference = diff.year > 1 ? diff.year.toString() + ' years' : diff.year.toString() + ' year';
+    if (diff.month !== 0) {
+      labelForDifference += ' and ';
+    }
+  }
+
+  if (diff.month !== 0) {
+    labelForDifference += diff.month > 1 ? diff.month.toString() + ' months' : diff.month.toString() + ' month';
+  }
+
+  return labelForDifference;
 };
