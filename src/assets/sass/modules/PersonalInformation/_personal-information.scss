@@ -27,6 +27,7 @@
   }
 
   @include e(icon) {
+    cursor: pointer;
     width: 24px;
   }
 
