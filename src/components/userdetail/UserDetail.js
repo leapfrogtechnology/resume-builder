@@ -1,27 +1,21 @@
 import PropTypes from 'prop-types';
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 
 import { Image } from '~/assets/image';
 import OpenModal from '../modal/OpenModal';
 import Media from '~/components/media/Media';
-import { FormContext } from '../FormContext';
 import Button from '~/components/button/Button';
 import { FAVORITE_ICON } from '~/components/icons/icon';
 import AddExperience from '../form/experience/AddExperience';
 
-const UserDetail = ({ name, experience, preview, onPreviewBtnClicked }) => {
+const UserDetail = ({ name, experience, profileImg, preview, onPreviewBtnClicked }) => {
   const [showModal, setModal] = useState(false);
 
-  const context = useContext(FormContext);
-  const profileImg = context.data.get.profileImage;
-
-  const editBtnHandler = e => {
-    e.preventDefault();
+  const editBtnHandler = () => {
     setModal(!showModal);
   };
 
-  const closeBtnHandler = e => {
-    e.preventDefault();
+  const closeBtnHandler = () => {
     setModal(!showModal);
   };
 
@@ -53,6 +47,7 @@ const UserDetail = ({ name, experience, preview, onPreviewBtnClicked }) => {
 UserDetail.propTypes = {
   name: PropTypes.string,
   experience: PropTypes.string,
+  profileImg: PropTypes.object,
   preview: PropTypes.bool,
   onPreviewBtnClicked: PropTypes.func,
 };
