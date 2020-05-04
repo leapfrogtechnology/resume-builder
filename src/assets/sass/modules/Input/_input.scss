@@ -43,7 +43,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8px 10px;
+    padding: 0px 10px;
   }
 
   @include e(date-calendar) {
@@ -53,7 +53,7 @@
     object-fit: cover;
   }
 
-  @include e(date-picker){
+  @include e(date-picker) {
     border: 0;
   }
 
