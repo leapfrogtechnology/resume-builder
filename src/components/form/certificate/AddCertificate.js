@@ -93,6 +93,7 @@ const AddCertificate = ({ onClose, isEdit, values }) => {
               <InputDate
                 name="date"
                 label="Date you received the Certificate"
+                placeholder="Select date"
                 setFieldValue={setFieldValue}
                 setFieldTouched={setFieldTouched}
               />
