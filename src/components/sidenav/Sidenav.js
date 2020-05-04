@@ -1,19 +1,22 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 
 import SidenavBottom from './SidenavBottom';
 import { FormContext } from '../FormContext';
-import Contact from '~/components/contact/Contact';
 import * as storage from '~/storage/LocalStorage';
+import Contact from '~/components/contact/Contact';
+import { COUNTRY_CODE } from '~/constant/contact.js';
+import DeletePopup from '../form/delete/DeletePopup';
 import { toBase64 } from '~/utilities/file/toBase64.js';
 import { Edit, ProfileImage, Trash } from '~/assets/image';
 import CardHeader from '~/components/cardheader/CardHeader';
 import AddContact from '~/components/form/contact/AddContact';
 import * as profileImageUtils from '~/utilities/objects/ProfileImage.js';
-import { COUNTRY_CODE, BASE_URL_LINKED_IN, BASE_URL_GITHUB } from '~/constant/contact.js';
 
 const Sidenav = () => {
   const [showModal, setModal] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
+  const [showDeleteModal, setDeleteModal] = useState(false);
+  const [profileImgUploadError, setProfileImageUpload] = useState(false);
 
   const context = useContext(FormContext);
   const preview = context.preview.get;
@@ -24,14 +27,28 @@ const Sidenav = () => {
   const linkedIn = context.data.get.linkedIn;
   const profileImg = context.data.get.profileImage;
 
+  let profileImgUploadErrorMsg = 'Incorrect format. Upload image in ( png / jpg / jpeg ) format';
+
+  const deleteBtnClickedHandler = () => {
+    setDeleteModal(!showDeleteModal);
+  };
+
+  const confirmDeleteBtnHandler = () => {
+    context.deleteCV();
+    setDeleteModal(!showDeleteModal);
+  };
+
+  const cancelDeleteBtnHandler = () => {
+    setDeleteModal(!showDeleteModal);
+  };
+
   const editBtnHandler = e => {
     e.preventDefault();
     setModal(!showModal);
     setIsEdit(!isEdit);
   };
 
-  const closeBtnHandler = e => {
-    e.preventDefault();
+  const closeBtnHandler = () => {
     setModal(!showModal);
     setIsEdit(!isEdit);
   };
@@ -54,20 +71,26 @@ const Sidenav = () => {
   };
 
   const openMailTo = (e, value) => {
+    e.preventDefault();
     window.open('mailto:' + value);
   };
 
   const openCallTo = (e, value) => {
+    e.preventDefault();
     window.open('tel:' + value);
   };
 
   const openLink = (e, url) => {
+    e.preventDefault();
     window.open(url, '_blank').focus();
   };
 
   const createFileUploader = e => {
     e.preventDefault();
+    setProfileImageUpload(false);
+
     const fileSelector = document.createElement('input');
+
     fileSelector.setAttribute('type', 'file');
     fileSelector.click();
     fileSelector.addEventListener(
@@ -81,9 +104,11 @@ const Sidenav = () => {
 
   const handleImageUpload = async e => {
     e.preventDefault();
+
     const file = e.target.files[0];
-    if (!(file.type === ('image/png' || 'image/jpg' || 'image/jpeg'))) {
-      console.log('wrongs');
+
+    if (!(file.type === 'image/png' || file.type === 'image/jpg' || file.type === 'image/jpeg')) {
+      setProfileImageUpload(!profileImgUploadError);
     } else {
       const result = await toBase64(file);
       const prevData = context.data.get;
@@ -94,7 +119,9 @@ const Sidenav = () => {
       } else {
         prevData.profileImage.value = result;
       }
+
       prevData.profileImage.isDeleted = false;
+
       context.data.set(prevState => ({ ...prevState, ...prevData }));
       storage.saveResume(localStorage, context.data.get);
     }
@@ -102,11 +129,13 @@ const Sidenav = () => {
 
   const handleImageDelete = e => {
     e.preventDefault();
+
     if (context.data.get.profileImage) {
       context.data.get.profileImage.isDeleted = true;
       context.data.get.profileImage.deletedOn = new Date();
       context.data.set(prevState => ({ ...prevState, ...context.data.get }));
     }
+
     storage.saveResume(localStorage, context.data.get);
   };
 
@@ -133,6 +162,7 @@ const Sidenav = () => {
                 </div>
               </div>
             )}
+            {profileImgUploadError && <span>{profileImgUploadErrorMsg}</span>}
           </div>
           <div className="sidenav__contact-block">
             <CardHeader
@@ -169,7 +199,7 @@ const Sidenav = () => {
               <Contact
                 id="github"
                 label="GitHub"
-                value={github.value ? BASE_URL_GITHUB + github.value : ''}
+                value={github.value ? github.value : ''}
                 preview={preview}
                 onHiddenIconClicked={updateHiddenStateContact}
                 onLinkClicked={openLink}
@@ -189,7 +219,7 @@ const Sidenav = () => {
               <Contact
                 id="linkedIn"
                 label="LinkedIn"
-                value={linkedIn.value ? BASE_URL_LINKED_IN + linkedIn.value : ''}
+                value={linkedIn.value ? linkedIn.value : ''}
                 preview={preview}
                 onHiddenIconClicked={updateHiddenStateContact}
                 onLinkClicked={openLink}
@@ -199,7 +229,11 @@ const Sidenav = () => {
         </div>
       </div>
 
-      {!preview && <SidenavBottom />}
+      {!preview && <SidenavBottom resumeJson={context.data.get} deleteIconClicked={deleteBtnClickedHandler} />}
+
+      {showDeleteModal && (
+        <DeletePopup onConfirm={confirmDeleteBtnHandler} onCancel={cancelDeleteBtnHandler}></DeletePopup>
+      )}
     </div>
   );
 };
