@@ -98,11 +98,7 @@ const AddSkill = ({ onClose, isEdit, values }) => {
       >
         <Form>
           <div className="form__content">
-            {!isEdit ? (
-              <InputSelect name="skill" label="Select your skill" />
-            ) : (
-              <InputText name="skill" label="Enter your skill" />
-            )}
+            <InputText name="skill" label="Enter your skill" />
             <InputText name="subSkills" label="Add Sub Skill" placeholder="Add comma separated values" />
             <div className="form-button">
               <div className="form-button__left">
