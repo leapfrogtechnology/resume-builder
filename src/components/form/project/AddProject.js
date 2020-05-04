@@ -98,10 +98,8 @@ const AddProject = ({ onClose, isEdit, values }) => {
         validationSchema={validateProjectInformation}
         validateOnChange={validateProjectInformation}
       >
-        {({ values, setFieldValue, setFieldTouched }) => (
+        {({ setFieldValue, setFieldTouched }) => (
           <Form>
-            <pre>{JSON.stringify(values, null, 2)}</pre>
-
             <div className="form__content">
               <InputText name="name" label="Title of your Project" />
               <div className="form__date-field">
