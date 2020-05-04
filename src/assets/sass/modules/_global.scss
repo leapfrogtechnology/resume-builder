@@ -38,7 +38,7 @@
 .text-link {
   color: $dodger-blue;
   cursor: pointer;
-
+  display: flex;
   @include m(small) {
     font: normal 600 14px/17px $font-primary;
   }
@@ -46,6 +46,10 @@
   @include m(danger) {
     color: $pomegranate;
   }
+}
+
+.text-link-hidden {
+  color: $dusty-gray;
 }
 
 .sub-title {
@@ -69,7 +73,7 @@
   background: $nobel;
   color: $white;
   font: normal 600 10px/12px $font-primary;
-  padding: 2px 4px;
+  padding: 4px 8px;
   margin-left: 10px;
 }
 
