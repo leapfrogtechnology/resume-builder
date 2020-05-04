@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import moment from 'moment';
 import { linkCheck } from '~/common/constants';
 
 const validateCertificateInformation = Yup.object().shape({
@@ -18,7 +19,16 @@ const validateCertificateInformation = Yup.object().shape({
 
       return true;
     }),
-  date: Yup.date().label('Date you received the Certificate').required(),
+  date: Yup.date()
+    .label('Date you received the Certificate')
+    .required('Date is required')
+    .test('check-startdate', 'Date should not be later than current date', function (value) {
+      if (moment(value).format('MMMM YYYY DD') > moment(new Date()).format('MMMM YYYY DD')) {
+        return false;
+      } else {
+        return true;
+      }
+    }),
   description: Yup.string().label('Describe this Certificate (optional)'),
 });
 
