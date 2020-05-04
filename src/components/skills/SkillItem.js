@@ -5,8 +5,9 @@ import OpenModal from '../modal/OpenModal';
 import AddSkill from '../form/skill/AddSkill';
 import EditOptions from '~/components/editoptions/EditOptions';
 
-const SkillItem = ({ title, values, preview, isEdit, onHiddenIconClicked, onEdit, onClose, onDelete }) => {
+const SkillItem = ({ title, values, preview, onHiddenIconClicked, onDelete }) => {
   const [hidden, setHidden] = useState(false);
+  const [editSkill, setEdit] = useState(false);
 
   if (hidden && preview) {
     return <></>;
@@ -23,9 +24,18 @@ const SkillItem = ({ title, values, preview, isEdit, onHiddenIconClicked, onEdit
     onDelete(e, title);
   };
 
-  const subSkillsList = values.map(({ name, label }) => (
-    <span key={name} className="chip-input-tag">
-      {label}
+  const editBtnHandler = e => {
+    e.preventDefault();
+    setEdit(!editSkill);
+  };
+
+  const editBtnCloseHandler = () => {
+    setEdit(!editSkill);
+  };
+
+  const subSkillsList = values.map(({ name }, index) => (
+    <span key={index} className="chip-input-tag">
+      {name}
     </span>
   ));
 
@@ -41,17 +51,17 @@ const SkillItem = ({ title, values, preview, isEdit, onHiddenIconClicked, onEdit
             <EditOptions
               isHidden={hidden}
               onHiddenIconClicked={hiddenIconClickedHandler}
-              onEditButtonClicked={onEdit}
+              onEditButtonClicked={editBtnHandler}
               onDeleteButtonClicked={deleteIconClickedHandler}
             />
           )}
-          {isEdit && (
+          {editSkill && (
             <OpenModal
               component={AddSkill}
-              onClose={onClose}
-              showModal={isEdit}
-              isEdit={isEdit}
-              data={isEdit ? { name: title, subSkills: values } : ''}
+              onClose={editBtnCloseHandler}
+              showModal={editSkill}
+              isEdit={editSkill}
+              data={editSkill ? { name: title, subSkills: values } : ''}
             ></OpenModal>
           )}
         </div>
