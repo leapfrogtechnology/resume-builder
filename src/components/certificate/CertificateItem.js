@@ -38,12 +38,13 @@ const CertificateItem = ({ title, link, year, description, preview, onHiddenIcon
   return (
     <div className="certificate__row">
       <div className="certificate__row-header">
-        <div className="sub-title text-link">
+        <div
+          className={!hidden ? 'sub-title text-link' : 'sub-title text-link text-link-hidden'}
+          onClick={e => window.open(link)}
+        >
           {title}
           <span className="arrow-icon">
-            <a href={link}>
-              <img src={UpRightArrow} alt="Arrow" />
-            </a>
+            <img src={UpRightArrow} alt="Arrow" />
           </span>
           {hidden && <span className="hidden-tag">Hidden</span>}
         </div>
