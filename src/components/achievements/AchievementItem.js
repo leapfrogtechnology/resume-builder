@@ -35,7 +35,7 @@ const AchievementItem = ({ title, date, description, preview, onHiddenIconClicke
   };
 
   return (
-    <div className="achievements__row">
+    <div className={!hidden ? 'achievements__row' : 'achievements__row achievements--hidden'}>
       <div className="achievements__row-header">
         <div className="sub-title">
           {title}
