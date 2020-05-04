@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Calendar } from '~/assets/image';
 import DatePicker from 'react-datepicker';
+import moment from 'moment';
 
 const InputDate = ({ label, placeholder, modifier, setFieldValue, setFieldTouched, ...props }) => {
   const [field, meta] = useField(props);
@@ -28,7 +29,7 @@ const InputDate = ({ label, placeholder, modifier, setFieldValue, setFieldTouche
         <DatePicker
           name={field.name}
           selected={startDate}
-          value={field.value}
+          value={field.value ? moment(field.value).format('MMMM DD YYYY') : ''}
           placeholderText={placeholder}
           shouldCloseOnSelect={true}
           className="input__date-picker"
