@@ -52,19 +52,9 @@ const WorkExperienceShown = ({
       .map((achievement, index) => <li key={index}>{achievement}</li>);
   }
 
-  let labelForDifference = '';
-  const diff = dateUtils.getDifferenceInYearMonth(startDate, currentlyWorking ? new Date() : endDate);
+  let labelForDifference = dateUtils.getDifferenceYearMonth(startDate, endDate, currentlyWorking);
 
-  if (diff.year !== 0) {
-    labelForDifference = diff.year > 1 ? diff.year.toString() + ' years' : diff.year.toString() + ' year';
-    if (diff.month !== 0) {
-      labelForDifference += ' and ';
-    }
-  }
-
-  if (diff.month !== 0) {
-    labelForDifference += diff.month > 1 ? diff.month.toString() + ' months' : diff.month.toString() + ' month';
-  }
+  labelForDifference = labelForDifference ? '( ' + labelForDifference + ' )' : '';
 
   const onHiddenIconClickedHandler = e => {
     e.preventDefault();
@@ -116,7 +106,7 @@ const WorkExperienceShown = ({
         <div className="year">
           <span className="start-date">{moment(startDate).format('MMMM YYYY')}</span> -{' '}
           <span className="end-date">{currentlyWorking ? 'Present' : moment(endDate).format('MMMM YYYY')}</span>{' '}
-          {labelForDifference ? '(' + labelForDifference + ' ) ' : ''}
+          {labelForDifference}
         </div>
       </div>
 

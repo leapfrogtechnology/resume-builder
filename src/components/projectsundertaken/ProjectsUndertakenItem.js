@@ -24,19 +24,9 @@ const ProjectsUndertakenItem = ({
     return <></>;
   }
 
-  let labelForDifference = '';
-  const diff = dateUtils.getDifferenceInYearMonth(startDate, ongoing ? new Date() : endDate);
+  let labelForDifference = dateUtils.getDifferenceYearMonth(startDate, endDate, ongoing);
 
-  if (diff.year !== 0) {
-    labelForDifference = diff.year > 1 ? diff.year.toString() + ' years' : diff.year.toString() + ' year';
-    if (diff.month !== 0) {
-      labelForDifference += ' and ';
-    }
-  }
-
-  if (diff.month !== 0) {
-    labelForDifference += diff.month > 1 ? diff.month.toString() + ' months' : diff.month.toString() + ' month';
-  }
+  labelForDifference = labelForDifference ? '( ' + labelForDifference + ' )' : '';
 
   const editBtnHandler = e => {
     e.preventDefault();
@@ -86,7 +76,7 @@ const ProjectsUndertakenItem = ({
       <div className="year year--dark">
         <span className="start-date">{moment(startDate).format('MMMM YYYY')}</span> -{' '}
         <span className="end-date">{ongoing ? 'Present' : moment(endDate).format('MMMM YYYY')}</span>{' '}
-        {labelForDifference ? '( ' + { labelForDifference } + ' )' : ''}
+        {labelForDifference}
       </div>
       <p className="description">{description}</p>
     </div>
