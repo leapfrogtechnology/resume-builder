@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
+
 import { View, ViewHidden } from '~/assets/image';
 
 const PersonalInfoItem = ({ label, value, bold, preview, onclick, showIcon = false }) => {
@@ -19,10 +20,10 @@ const PersonalInfoItem = ({ label, value, bold, preview, onclick, showIcon = fal
     <div className="personal-info-row">
       <div className="personal-info-row__item">
         <div className="personal-info-row__label">Your {label}</div>
-        <p className={bold ? 'personal-info-row__value  personal-info-row__value--strong' : 'personal-info-row__value'}>
-          {value}
+        <div className="personal-info-row__value-container">
+          <span className={bold ? 'personal-info-row__value  personal-info-row__value--strong' : 'personal-info-row__value'}>{value}</span>
           {hidden && <span className="hidden-tag">Hidden</span>}
-        </p>
+        </div>
       </div>
       {!preview && showIcon && (
         <div className="personal-info-row__icon" onClick={e => onHiddenIconClicked(e)}>
