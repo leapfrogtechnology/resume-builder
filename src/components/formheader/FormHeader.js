@@ -7,6 +7,7 @@ const FormHeader = ({ title, modifier }) => {
 
 FormHeader.propTypes = {
   title: PropTypes.string,
+  modifier: PropTypes.string,
 };
 
 export default FormHeader;
