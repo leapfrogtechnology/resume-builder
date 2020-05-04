@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { View, ViewHidden } from '~/assets/image';
 
 const Contact = ({ id, label, value, preview, onHiddenIconClicked, onLinkClicked }) => {
@@ -51,6 +51,7 @@ Contact.propTypes = {
   value: PropTypes.string,
   preview: PropTypes.bool,
   onHiddenIconClicked: PropTypes.func,
+  onLinkClicked: PropTypes.func,
 };
 
 export default Contact;
