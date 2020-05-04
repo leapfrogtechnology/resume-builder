@@ -19,7 +19,7 @@ export const getWorkExperienceObject = ({
     achievements: achievements,
     refereeName: nameReferee,
     refereeContact: contactReferee,
-    hidden: true,
+    hidden: false,
     isDeleted: false,
     deletedOn: '1970-01-01T00:00:00.000Z',
   };
