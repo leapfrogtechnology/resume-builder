@@ -23,7 +23,7 @@ const InputText = ({ label, placeholder, ...props }) => {
     <div className="input">
       <label className="input__label">{label}</label>
       {props.type && props.type === 'text-area' ? textArea : inputField}
-      {meta.touched && meta.error ? <div className="error">{meta.error}</div> : null}
+      {(meta.touched && meta.error) || meta.error ? <div className="error">{meta.error}</div> : null}
     </div>
   );
 };
