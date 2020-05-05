@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import * as _ from 'lodash';
 import PropTypes from 'prop-types';
 import { Formik, Form } from 'formik';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 
 import Button from '~/components/button/Button';
 import { FormContext } from '../../FormContext';
@@ -17,34 +17,51 @@ import * as skillUtils from '../../../utilities/objects/Skill';
 const AddSkill = ({ onClose, isEdit, values }) => {
   const { data } = useContext(FormContext);
 
+  let skillsList = [];
+
   const validateSkill = Yup.object().shape({
     skill: Yup.string().required(),
   });
 
   let initialValues = {};
 
-  const handleSubmit = formValues => {
+  const handleSubmit = (formValues, resetForm) => {
     if (isEdit) {
       handleSubmitOnEdit(formValues);
     } else {
-      handleSubmitOnAdd(formValues);
+      handleOnAdd(formValues, resetForm);
     }
-
-    data.set(prevState => ({ ...prevState, ...data }));
-
-    storage.saveResume(localStorage, data.get);
-
-    onClose();
   };
 
-  const handleSubmitOnAdd = formValues => {
+  const handleOnAdd = (formValues, resetForm) => {
     const skillObj = skillUtils.getSkillObject({ ...formValues });
 
-    if (data.get.skills) {
-      data.get['skills'].push(skillObj);
+    skillsList.push(skillObj);
+
+    resetForm();
+  };
+
+  const handleSubmitOnAdd = ({ data, skillsList, storage, setFieldError }) => {
+    if (skillsList.length < 1) {
+      setFieldError('skill', 'Add your skills first');
     } else {
-      data.get['skills'] = [];
-      data.get['skills'].push(skillObj);
+      if (data.get.skills) {
+        skillsList.forEach(skill => {
+          data.get['skills'].push(skill);
+        });
+      } else {
+        data.get['skills'] = [];
+
+        skillsList.forEach(skill => {
+          data.get['skills'].push(skill);
+        });
+      }
+
+      data.set(prevState => ({ ...prevState, ...data }));
+
+      storage.saveResume(localStorage, data.get);
+
+      onClose();
     }
   };
 
@@ -63,6 +80,11 @@ const AddSkill = ({ onClose, isEdit, values }) => {
 
       data.get['skills'][index] = skillObj;
     }
+    data.set(prevState => ({ ...prevState, ...data }));
+
+    storage.saveResume(localStorage, data.get);
+
+    onClose();
   };
 
   const getInitialValues = () => {
@@ -90,26 +112,38 @@ const AddSkill = ({ onClose, isEdit, values }) => {
       <FormHeader title={!isEdit ? 'Add Skill' : 'Edit Skill'} />
       <Formik
         initialValues={getInitialValues()}
-        onSubmit={values => {
-          handleSubmit(values);
+        onSubmit={(values, { resetForm }) => {
+          handleSubmit(values, resetForm);
         }}
         validationSchema={validateSkill}
         validateOnChange={validateSkill}
       >
-        <Form>
-          <div className="form__content">
-            <InputText name="skill" label="Enter your skill" />
-            <InputText name="subSkills" label="Add Sub Skill" placeholder="Add comma separated values" />
-            <div className="form-button">
-              <div className="form-button__left">
-                <Button content="Add Skill" type="submit" />
-              </div>
-              <div className="form-button__right">
-                <Button content="Cancel" isCancel={true} type="button" onclick={onClose} />
+        {({ setFieldError }) => (
+          <Form>
+            <div className="form__content">
+              <InputText name="skill" label="Enter your skill" />
+              <InputText name="subSkills" label="Add Sub Skill" placeholder="Add comma separated values" />
+              <div className="form-button">
+                {!isEdit && (
+                  <div className="form-button__left">
+                    <Button
+                      content="Submit Skill"
+                      type="button"
+                      onclick={handleSubmitOnAdd}
+                      submitProps={{ data, skillsList, storage, setFieldError }}
+                    />
+                  </div>
+                )}
+                <div className="form-button__left">
+                  <Button content={!isEdit ? 'Add Skill' : 'Edit Skill'} type="submit" />
+                </div>
+                <div className="form-button__right">
+                  <Button content="Cancel" isCancel={true} type="button" onclick={onClose} />
+                </div>
               </div>
             </div>
-          </div>
-        </Form>
+          </Form>
+        )}
       </Formik>
     </>
   );
