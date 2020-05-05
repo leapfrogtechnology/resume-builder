@@ -16,8 +16,6 @@ const CheckboxInput = ({ value, ...props }) => {
 
 CheckboxInput.propTypes = {
   value: PropTypes.string,
-  setFieldValue: PropTypes.func,
-  setFieldTouched: PropTypes.func,
 };
 
 export default CheckboxInput;
