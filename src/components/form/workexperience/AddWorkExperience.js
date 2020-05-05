@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Formik, Form } from 'formik';
 import React, { useContext } from 'react';
 
-import { Trash } from '~/assets/image';
 import Button from '~/components/button/Button';
 import { FormContext } from '../../FormContext';
 import * as storage from '~/storage/LocalStorage';
@@ -134,14 +133,14 @@ const AddWorkExperience = ({ onClose, isEdit, values }) => {
               />
               <InputText
                 name="roles"
-                label="List down your roles and responsibilities. Separate each role with a period (.) to separate them in new lines."
-                placeholder="eg. I am responsible for..."
+                label="Roles and Responsibilities. "
+                placeholder="Separate each role with a period (.) to separate them in new lines."
                 type="text-area"
               />
               <InputText
                 name="achievements"
-                label="List down your Achievements and Tasks (optional). Separate each achievement with a period (.) to separate them in new lines. "
-                placeholder="eg. I was awarded with..."
+                label="Achievements and Tasks (optional).  "
+                placeholder="Separate each achievement with a period (.) to separate them in new lines."
                 type="text-area"
               />
               <InputText
