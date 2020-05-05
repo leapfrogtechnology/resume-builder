@@ -14,7 +14,7 @@ const DeletePopup = ({ onConfirm, onCancel }) => {
               <img src={Warning} alt="Warning" />
             </div>
             <div className="delete-popup__body">
-              <div class="title">Are you sure?</div>
+              <div className="title">Are you sure?</div>
               <p className="delete-popup__message">{`You are about to delete your resume. Do you want to proceed?`}</p>
               <div className="form-button">
                 <div className="form-button__left">
