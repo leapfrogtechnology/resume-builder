@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 const Button = ({ content, isCancel, type, onclick = null }) => {
   if (onclick) {
     return (
-      <button className={isCancel ? 'btn--cancel' : 'btn'} type={type} onClick={e => onclick(e)}>
+      <button className={isCancel ? 'btn btn--cancel' : 'btn'} type={type} onClick={e => onclick(e)}>
         {content}
       </button>
     );
   } else {
     return (
-      <button className={isCancel ? 'btn--cancel' : 'btn'} type={type}>
+      <button className={isCancel ? 'btn btn--cancel' : 'btn'} type={type}>
         {content}
       </button>
     );

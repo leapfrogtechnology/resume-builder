@@ -6,7 +6,7 @@ const CloseModal = ({ onClose }) => {
   return (
     <div className="close-option-container">
       <div
-        className="close-option"
+        className="close-option icon"
         onClick={e => {
           onClose(e);
         }}

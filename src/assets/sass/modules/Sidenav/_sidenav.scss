@@ -1,7 +1,7 @@
 .sidenav {
   width: 31.5384%;
   .card {
-    padding: 30px 25px;
+    padding: 36px 25px;
   }
 
   @include e(upload-block) {
@@ -17,7 +17,7 @@
     align-items: center;
   }
 
-  .card__header {
+  @include e(contact-block) {
     padding-top: 28px;
   }
 
