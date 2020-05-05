@@ -11,19 +11,17 @@ const SidenavBottom = ({ resumeJson, deleteIconClicked }) => {
       <div className="card">
         <CardHeader title="CV Actions" />
         <ul>
-          <li className="sidenav__cv-action">
+          <li
+            className="sidenav__cv-action"
+            onClick={e => {
+              e.preventDefault();
+              resumeDoc(resumeJson);
+            }}
+          >
             <span className="sidenav__cv-action-icon">
               <img src={Download} alt="Edit" />
             </span>
-            <span
-              className="sidenav__cv-action-label text-link"
-              onClick={e => {
-                e.preventDefault();
-                resumeDoc(resumeJson);
-              }}
-            >
-              Download PDF
-            </span>
+            <span className="sidenav__cv-action-label text-link">Download PDF</span>
           </li>
           <li className="sidenav__cv-action">
             <span className="sidenav__cv-action-icon">
@@ -43,13 +41,11 @@ const SidenavBottom = ({ resumeJson, deleteIconClicked }) => {
             </span>
             <span className="sidenav__cv-action-label text-link">Request Professional Review</span>
           </li>
-          <li className="sidenav__cv-action">
+          <li className="sidenav__cv-action" onClick={deleteIconClicked}>
             <span className="sidenav__cv-action-icon">
               <img src={Delete} alt="Edit" />
             </span>
-            <span className="sidenav__cv-action-label text-link text-link--danger" onClick={deleteIconClicked}>
-              Delete CV
-            </span>
+            <span className="sidenav__cv-action-label text-link text-link--danger">Delete CV</span>
           </li>
         </ul>
       </div>
