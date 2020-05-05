@@ -38,6 +38,7 @@
 .text-link {
   color: $dodger-blue;
   cursor: pointer;
+  text-decoration: none;
   @include m(small) {
     font: normal 600 14px/17px $font-primary;
   }
@@ -125,7 +126,7 @@
   outline: none;
 }
 
-.icon{
+.icon {
   cursor: pointer;
   min-height: 24px;
   min-width: 24px;
