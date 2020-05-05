@@ -4,13 +4,13 @@ import SidenavBottom from './SidenavBottom';
 import { FormContext } from '../FormContext';
 import * as storage from '~/storage/LocalStorage';
 import Contact from '~/components/contact/Contact';
-import { COUNTRY_CODE } from '~/constant/contact.js';
 import DeletePopup from '../form/delete/DeletePopup';
 import { toBase64 } from '~/utilities/file/toBase64.js';
 import { Edit, ProfileImage, Trash } from '~/assets/image';
 import CardHeader from '~/components/cardheader/CardHeader';
 import AddContact from '~/components/form/contact/AddContact';
 import * as profileImageUtils from '~/utilities/objects/ProfileImage.js';
+import { COUNTRY_CODE, baseMailToUrl, baseTelUrl } from '~/constant/contact.js';
 
 const Sidenav = () => {
   const [showModal, setModal] = useState(false);
@@ -26,8 +26,6 @@ const Sidenav = () => {
   const stackOverflow = context.data.get.stackOverflow;
   const linkedIn = context.data.get.linkedIn;
   const profileImg = context.data.get.profileImage;
-
-  let profileImgUploadErrorMsg = 'Incorrect format. Upload image in ( png / jpg / jpeg ) format';
 
   const deleteBtnClickedHandler = () => {
     setDeleteModal(!showDeleteModal);
@@ -68,21 +66,6 @@ const Sidenav = () => {
 
     data[key].hidden = newState;
     context.data.set(data);
-  };
-
-  const openMailTo = (e, value) => {
-    e.preventDefault();
-    window.open('mailto:' + value);
-  };
-
-  const openCallTo = (e, value) => {
-    e.preventDefault();
-    window.open('tel:' + value);
-  };
-
-  const openLink = (e, url) => {
-    e.preventDefault();
-    window.open(url, '_blank').focus();
   };
 
   const createFileUploader = e => {
@@ -178,20 +161,20 @@ const Sidenav = () => {
               <Contact
                 id="email"
                 label="Email Address"
+                baseUrl={baseMailToUrl}
                 value={email.value}
                 preview={preview}
                 onHiddenIconClicked={updateHiddenStateContact}
-                onLinkClicked={openMailTo}
               />
             )}
             {phone && (
               <Contact
                 id="phone"
                 label="Phone Number"
+                baseUrl={baseTelUrl}
                 value={phone.value ? COUNTRY_CODE + '-' + phone.value : ''}
                 preview={preview}
                 onHiddenIconClicked={updateHiddenStateContact}
-                onLinkClicked={openCallTo}
               />
             )}
             {github && (
@@ -201,7 +184,6 @@ const Sidenav = () => {
                 value={github.value ? github.value : ''}
                 preview={preview}
                 onHiddenIconClicked={updateHiddenStateContact}
-                onLinkClicked={openLink}
               />
             )}
             {stackOverflow && (
@@ -211,7 +193,6 @@ const Sidenav = () => {
                 value={stackOverflow.value}
                 preview={preview}
                 onHiddenIconClicked={updateHiddenStateContact}
-                onLinkClicked={openLink}
               />
             )}
             {linkedIn && (
@@ -221,7 +202,6 @@ const Sidenav = () => {
                 value={linkedIn.value ? linkedIn.value : ''}
                 preview={preview}
                 onHiddenIconClicked={updateHiddenStateContact}
-                onLinkClicked={openLink}
               />
             )}
           </div>
