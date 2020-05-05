@@ -9,6 +9,7 @@ import InputText from '~/components/inputtext/InputText';
 import FormHeader from '~/components/formheader/FormHeader';
 import * as contactUtils from '~/utilities/objects/Contact';
 import validateContactInformation from '~/validations/Contact';
+import OutsideClickDetector from '~/components/detector/OutsideClickDetector';
 
 const AddContactInformation = ({ onClose, isEdit }) => {
   const { data } = useContext(FormContext);
@@ -51,7 +52,7 @@ const AddContactInformation = ({ onClose, isEdit }) => {
   };
 
   return (
-    <>
+    <OutsideClickDetector onClose={onClose}>
       <FormHeader title="Edit Contact Information" />
       <Formik
         initialValues={getInitialValues()}
@@ -80,7 +81,7 @@ const AddContactInformation = ({ onClose, isEdit }) => {
           </Form>
         )}
       </Formik>
-    </>
+    </OutsideClickDetector>
   );
 };
 

@@ -11,6 +11,7 @@ import InputDate from '~/components/inputdate/InputDate';
 import FormHeader from '~/components/formheader/FormHeader';
 import * as certificateUtils from '~/utilities/objects/Certificate';
 import validateCertificateInformation from '~/validations/Certificate';
+import OutsideClickDetector from '~/components/detector/OutsideClickDetector';
 
 const AddCertificate = ({ onClose, isEdit, values }) => {
   const { data } = useContext(FormContext);
@@ -75,7 +76,7 @@ const AddCertificate = ({ onClose, isEdit, values }) => {
   };
 
   return (
-    <>
+    <OutsideClickDetector onClose={onClose}>
       <FormHeader title={!isEdit ? 'Add Certificate' : 'Edit Certificate'} />
       <Formik
         initialValues={getInitialValues()}
@@ -115,7 +116,7 @@ const AddCertificate = ({ onClose, isEdit, values }) => {
           </Form>
         )}
       </Formik>
-    </>
+    </OutsideClickDetector>
   );
 };
 

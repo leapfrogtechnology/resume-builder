@@ -11,6 +11,7 @@ import InputDate from '~/components/inputdate/InputDate';
 import FormHeader from '~/components/formheader/FormHeader';
 import CheckboxInput from '~/components/checkbox/CheckboxInput';
 import { validateWorkExperience } from '~/validations/WorkExperience';
+import OutsideClickDetector from '~/components/detector/OutsideClickDetector';
 import * as workExperienceUtils from '../../../utilities/objects/WorkExperience';
 
 const AddWorkExperience = ({ onClose, isEdit, values }) => {
@@ -93,7 +94,7 @@ const AddWorkExperience = ({ onClose, isEdit, values }) => {
   };
 
   return (
-    <>
+    <OutsideClickDetector onClose={onClose}>
       <FormHeader title={!isEdit ? 'Add Work Experience' : 'Edit Work Experience'} />
       <Formik
         initialValues={getInitialValues()}
@@ -165,7 +166,7 @@ const AddWorkExperience = ({ onClose, isEdit, values }) => {
           </Form>
         )}
       </Formik>
-    </>
+    </OutsideClickDetector>
   );
 };
 

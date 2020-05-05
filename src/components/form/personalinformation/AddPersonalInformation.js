@@ -10,6 +10,7 @@ import * as storage from '~/storage/LocalStorage';
 import InputText from '~/components/inputtext/InputText';
 import FormHeader from '~/components/formheader/FormHeader';
 import * as personalInfoUtils from '~/utilities/objects/PersonalInformation';
+import OutsideClickDetector from '~/components/detector/OutsideClickDetector';
 
 const AddPersonalInformation = ({ onClose, isEdit }) => {
   const { data } = useContext(FormContext);
@@ -56,7 +57,7 @@ const AddPersonalInformation = ({ onClose, isEdit }) => {
   };
 
   return (
-    <>
+    <OutsideClickDetector onClose={onClose}>
       <FormHeader title="Edit Personal Information" />
       <Formik
         initialValues={getInitialState()}
@@ -81,7 +82,7 @@ const AddPersonalInformation = ({ onClose, isEdit }) => {
           </div>
         </Form>
       </Formik>
-    </>
+    </OutsideClickDetector>
   );
 };
 
