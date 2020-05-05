@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { View, ViewHidden } from '~/assets/image';
 
-const Contact = ({ id, label, value, preview, onHiddenIconClicked, onLinkClicked }) => {
+const Contact = ({ id, label, value, preview, onHiddenIconClicked, baseUrl = '' }) => {
   const [hidden, setHidden] = useState(false);
 
   const onHiddenBtnClicked = e => {
@@ -35,13 +35,10 @@ const Contact = ({ id, label, value, preview, onHiddenIconClicked, onLinkClicked
           </div>
         )}
       </div>
-      <div
-        className="contact__value text-link"
-        onClick={e => {
-          handleOnLinkClicked(e, value);
-        }}
-      >
-        {value}
+      <div className="contact__value text-link">
+        <a className="text-link" href={baseUrl + value} target="_blank">
+          {value}
+        </a>
       </div>
     </div>
   );
@@ -53,7 +50,7 @@ Contact.propTypes = {
   value: PropTypes.string,
   preview: PropTypes.bool,
   onHiddenIconClicked: PropTypes.func,
-  onLinkClicked: PropTypes.func,
+  baseUrl: PropTypes.string,
 };
 
 export default Contact;
