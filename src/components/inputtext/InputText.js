@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-no-comment-textnodes */
-/* eslint-disable react/prop-types */
 import React from 'react';
 import { useField } from 'formik';
 import PropTypes from 'prop-types';
@@ -23,7 +21,7 @@ const InputText = ({ label, placeholder, ...props }) => {
     <div className="input">
       <label className="input__label">{label}</label>
       {props.type && props.type === 'text-area' ? textArea : inputField}
-      {(meta.touched && meta.error) || meta.error ? <div className="error">{meta.error}</div> : null}
+      {meta.touched && meta.error ? <div className="error">{meta.error}</div> : null}
     </div>
   );
 };
