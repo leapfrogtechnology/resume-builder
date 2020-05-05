@@ -121,12 +121,7 @@ const AddProject = ({ onClose, isEdit, values }) => {
                 />
               </div>
               <div className="form__checkbox-field">
-                <CheckboxInput
-                  name="ongoing"
-                  value="This project is currently ongoing"
-                  setFieldValue={setFieldValue}
-                  setFieldTouched={setFieldTouched}
-                />
+                <CheckboxInput name="ongoing" value="This project is currently ongoing" />
               </div>
               <div className="form__radio-field">
                 <label className="input__label">What Type of Project was This?</label>
