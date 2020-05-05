@@ -4,7 +4,7 @@ import moment from 'moment';
 
 const validateWorkExperience = Yup.object().shape({
   nameOrganization: Yup.string().label('Organization Name').trim().required(),
-  position: Yup.string().label('Title/Position').max(40).required(),
+  position: Yup.string().label('Title/Position').required(),
   currentWork: Yup.boolean().label('Current work'),
   startDate: Yup.date()
     .label('Start date')
@@ -27,8 +27,8 @@ const validateWorkExperience = Yup.object().shape({
         return true;
       }
     }),
-  roles: Yup.string().label('Roles and Responsibilities').min(60).max(200).required(),
-  achievements: Yup.string().label('Achievements and Tasks').max(150),
+  roles: Yup.string().label('Roles and Responsibilities').required(),
+  achievements: Yup.string().label('Achievements and Tasks'),
   nameReferee: Yup.string().label('Name of your Referee').trim(),
   contactReferee: Yup.string()
     .label('Email | Phone Number')
