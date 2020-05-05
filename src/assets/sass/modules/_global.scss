@@ -52,7 +52,6 @@
 }
 
 .sub-title {
-  width: calc(100% - 150px);
   font: normal bold 16px/19px $font-primary;
 }
 
@@ -128,4 +127,6 @@
 
 .icon{
   cursor: pointer;
+  min-height: 24px;
+  min-width: 24px;
 }
