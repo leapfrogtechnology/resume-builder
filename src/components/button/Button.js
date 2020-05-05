@@ -1,10 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Button = ({ content, isCancel, type, onclick = null }) => {
+const Button = ({ content, isCancel, type, onclick = null, submitProps }) => {
   if (onclick) {
     return (
-      <button className={isCancel ? 'btn btn--cancel' : 'btn'} type={type} onClick={e => onclick(e)}>
+      <button
+        className={isCancel ? 'btn btn--cancel' : 'btn'}
+        type={type}
+        onClick={e => {
+          !submitProps ? onclick(e) : onclick({ ...submitProps });
+        }}
+      >
         {content}
       </button>
     );
@@ -21,6 +27,7 @@ Button.propTypes = {
   content: PropTypes.string,
   isCancel: PropTypes.bool,
   onclick: PropTypes.func,
+  submitProps: PropTypes.object,
 };
 
 export default Button;
