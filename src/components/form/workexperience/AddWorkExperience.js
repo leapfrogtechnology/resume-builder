@@ -103,7 +103,7 @@ const AddWorkExperience = ({ onClose, isEdit, values }) => {
         }}
         validationSchema={validateWorkExperience}
       >
-        {({ setFieldValue, setFieldTouched }) => (
+        {({ values, setFieldValue, setFieldTouched }) => (
           <Form>
             <div className="form__content">
               <InputText name="nameOrganization" label="Name of the organization" placeholder="eg. Apple" />
@@ -122,6 +122,7 @@ const AddWorkExperience = ({ onClose, isEdit, values }) => {
                   label="End Date"
                   placeholder="Select date"
                   modifier={true}
+                  checkBoxState={values.currentWork}
                   setFieldValue={setFieldValue}
                   setFieldTouched={setFieldTouched}
                 />
