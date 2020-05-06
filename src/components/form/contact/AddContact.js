@@ -64,11 +64,20 @@ const AddContactInformation = ({ onClose, isEdit }) => {
         {() => (
           <Form>
             <div className="form__content">
-              <InputText name="email" label="Your Email" />
-              <InputText name="phone" label="Phone Number (optional)" />
-              <InputText name="gitHub" label="Github (optional)" />
-              <InputText name="stackOverFlow" label="StackOverflow (optional)" />
-              <InputText name="linkedIn" label="LinkedIn (optional)" />
+              <InputText
+                name="email"
+                label="Your Email"
+                placeholder="ribby@lftechnology.com
+              "
+              />
+              <InputText name="phone" label="Phone Number (optional)" placeholder="9833482922" />
+              <InputText name="gitHub" label="Github (optional)" placeholder="https://www.github.com/..." />
+              <InputText
+                name="stackOverFlow"
+                label="StackOverflow (optional)"
+                placeholder="https://www.stackoverflow.com/..."
+              />
+              <InputText name="linkedIn" label="LinkedIn (optional)" placeholder=" https://www.linkedin.com/..." />
               <div className="form-button">
                 <div className="form-button__left">
                   <Button content="Save Info" type="submit" />
