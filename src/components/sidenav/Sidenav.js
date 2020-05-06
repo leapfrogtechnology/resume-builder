@@ -27,6 +27,8 @@ const Sidenav = () => {
   const linkedIn = context.data.get.linkedIn;
   const profileImg = context.data.get.profileImage;
 
+  const resume = context.data.get;
+
   const deleteBtnClickedHandler = () => {
     setDeleteModal(!showDeleteModal);
   };
@@ -208,7 +210,7 @@ const Sidenav = () => {
         </div>
       </div>
 
-      {!preview && <SidenavBottom resumeJson={context.data.get} deleteIconClicked={deleteBtnClickedHandler} />}
+      {!preview && <SidenavBottom resumeJson={resume} deleteIconClicked={deleteBtnClickedHandler} />}
 
       {showDeleteModal && (
         <DeletePopup onConfirm={confirmDeleteBtnHandler} onCancel={cancelDeleteBtnHandler}></DeletePopup>
