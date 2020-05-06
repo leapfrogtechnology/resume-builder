@@ -158,7 +158,7 @@ const AddProject = ({ onClose, isEdit, values }) => {
               />
               <div className="form-button">
                 <div className="form-button__left">
-                  <Button content="Add Project" type="submit" />
+                  <Button content={!isEdit ? 'Add Project' : 'Save Info'} type="submit" />
                 </div>
                 <div className="form-button__right">
                   <Button content="Cancel" isCancel={true} type="button" onclick={onClose} />
