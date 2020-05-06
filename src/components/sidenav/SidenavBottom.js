@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import resumeDoc from '~/utilities/resume/word.js';
 import CardHeader from '~/components/cardheader/CardHeader';
 import { Download, Copy, Email, Check, Delete } from '~/assets/image';
+import { PDFDownloadLink } from '@react-pdf/renderer';
+import MyDocument from '~/utilities/resume/pdf';
 
 const SidenavBottom = ({ resumeJson, deleteIconClicked }) => {
   return (
@@ -46,6 +48,11 @@ const SidenavBottom = ({ resumeJson, deleteIconClicked }) => {
               <img src={Delete} alt="Edit" />
             </span>
             <span className="sidenav__cv-action-label text-link text-link--danger">Delete CV</span>
+          </li>
+          <li>
+            <PDFDownloadLink document={<MyDocument />} fileName="somename.pdf">
+              {({ blob, url, loading, error }) => (loading ? 'Loading document...' : 'Download now!')}
+            </PDFDownloadLink>
           </li>
         </ul>
       </div>
