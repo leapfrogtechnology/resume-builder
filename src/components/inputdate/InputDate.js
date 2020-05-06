@@ -6,7 +6,7 @@ import { Calendar } from '~/assets/image';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 
-const InputDate = ({ label, placeholder, modifier, setFieldValue, setFieldTouched, ...props }) => {
+const InputDate = ({ label, placeholder, modifier, checkBoxState, setFieldValue, setFieldTouched, ...props }) => {
   const [field, meta] = useField(props);
   const [startDate, setDate] = useState();
   const [datePickerIsOpen, setDatePicker] = useState(false);
@@ -32,18 +32,22 @@ const InputDate = ({ label, placeholder, modifier, setFieldValue, setFieldTouche
           value={field.value ? moment(field.value).format('MMMM DD YYYY') : ''}
           placeholderText={placeholder}
           shouldCloseOnSelect={true}
+          open={datePickerIsOpen}
           className="input__date-picker"
           dateFormat="MM/dd/yyyy"
           onChange={handleChange}
-          onInputClick={openDatePicker}
+          disabled={checkBoxState}
           onClickOutside={e => {
             e.preventDefault();
             setDatePicker(false);
           }}
-          open={datePickerIsOpen}
         ></DatePicker>
         <div className="input__date-calendar">
-          <img src={Calendar} alt="Calendar" onClick={openDatePicker} />
+          {!checkBoxState ? (
+            <img src={Calendar} alt="Calendar" onClick={openDatePicker} />
+          ) : (
+            <img src={Calendar} alt="Calendar" />
+          )}
         </div>
       </div>
       {meta.touched && meta.error ? <div className="error">{meta.error}</div> : null}
