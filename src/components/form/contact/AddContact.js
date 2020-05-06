@@ -8,6 +8,7 @@ import * as storage from '~/storage/LocalStorage';
 import InputText from '~/components/inputtext/InputText';
 import FormHeader from '~/components/formheader/FormHeader';
 import * as contactUtils from '~/utilities/objects/Contact';
+import { PLACEHOLDER_LINK } from '../../../constant/contact';
 import validateContactInformation from '~/validations/Contact';
 import OutsideClickDetector from '~/components/detector/OutsideClickDetector';
 
@@ -66,9 +67,9 @@ const AddContactInformation = ({ onClose, isEdit }) => {
             <div className="form__content">
               <InputText name="email" label="Your Email" />
               <InputText name="phone" label="Phone Number (optional)" />
-              <InputText name="gitHub" label="Github (optional)" />
-              <InputText name="stackOverFlow" label="StackOverflow (optional)" />
-              <InputText name="linkedIn" label="LinkedIn (optional)" />
+              <InputText name="gitHub" label="Github (optional)" placeholder={PLACEHOLDER_LINK} />
+              <InputText name="stackOverFlow" label="StackOverflow (optional)" placeholder={PLACEHOLDER_LINK} />
+              <InputText name="linkedIn" label="LinkedIn (optional)" placeholder={PLACEHOLDER_LINK} />
               <div className="form-button">
                 <div className="form-button__left">
                   <Button content="Save Info" type="submit" />
