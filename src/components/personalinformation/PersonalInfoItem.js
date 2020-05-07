@@ -32,9 +32,7 @@ const PersonalInfoItem = ({ label, value, bold, preview, onclick, showIcon = fal
       </div>
       {!preview && showIcon && (
         <div className="personal-info-row__icon icon" onClick={e => onHiddenIconClicked(e)}>
-          {
-            isHidden ? VIEW_HIDDEN : VIEW
-          }
+          {hidden ? VIEW_HIDDEN : VIEW}
         </div>
       )}
     </div>
