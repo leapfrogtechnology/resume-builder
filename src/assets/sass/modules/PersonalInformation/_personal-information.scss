@@ -25,6 +25,7 @@
   }
 
   @include e(value) {
+    text-align: justify;
     @include m(strong) {
       font-weight: 600;
     }
@@ -33,6 +34,8 @@
   @include e(value-container) {
     display: flex;
     align-items: center;
+    width: calc(100% - 222px);
+    padding-right: 16px;
   }
 
   @include e(icon) {

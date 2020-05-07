@@ -145,7 +145,7 @@ const AddSkill = ({ onClose, isEdit, values }) => {
                     handleOnAdd(e, values, setFieldError, setFieldTouched, resetForm);
                   }}
                 >
-                  <span className="card__footer-icon">{ADD}</span>
+                  <span className="card__footer-icon">{ADD('#B3B3B3')}</span>
                   <span className="card__footer-label add-container__text">Add another skill</span>
                 </div>
               )}

@@ -9,7 +9,7 @@ const CardFooter = ({ label, modifier, onAdd, component, onClose, showModal, hid
     !hide && (
       <>
         <div className={modifier ? `card__footer card__footer--${modifier}` : 'card__footer'} onClick={e => onAdd(e)}>
-          <span className="card__footer-icon">{ADD}</span>
+          <span className="card__footer-icon">{ADD('#29B6F6')}</span>
           <span className="card__footer-label text-link">{label}</span>
         </div>
         {showModal ? <OpenModal component={component} onClose={onClose} showModal={showModal} /> : ''}
