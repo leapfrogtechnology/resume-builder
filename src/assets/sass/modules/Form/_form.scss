@@ -72,6 +72,18 @@
   }
 }
 
+.add-container {
+  cursor: pointer;
+  margin-top: '18px';
+  padding-top: '12px';
+  padding-bottom: '12px';
+  display: flex;
+  align-items: center;
+  @include e(text) {
+    color: $dusty-gray;
+  }
+}
+
 @include keyframes(animate) {
   from {
     opacity: 0;
