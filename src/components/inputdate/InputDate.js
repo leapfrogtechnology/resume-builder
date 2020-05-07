@@ -8,7 +8,7 @@ import { CALENDAR } from '~/components/icons/icon';
 
 const InputDate = ({ label, placeholder, modifier, checkBoxState, setFieldValue, setFieldTouched, ...props }) => {
   const [field, meta] = useField(props);
-  const [startDate, setDate] = useState();
+  const [startDate, setDate] = useState(new Date());
   const [datePickerIsOpen, setDatePicker] = useState(false);
 
   const handleChange = date => {
@@ -29,7 +29,7 @@ const InputDate = ({ label, placeholder, modifier, checkBoxState, setFieldValue,
         <DatePicker
           name={field.name}
           selected={startDate}
-          value={field.value ? moment(field.value).format('MMMM DD YYYY') : ''}
+          value={field.value && !checkBoxState ? moment(field.value).format('MMMM DD YYYY') : ''}
           placeholderText={placeholder}
           shouldCloseOnSelect={true}
           open={datePickerIsOpen}
@@ -43,11 +43,7 @@ const InputDate = ({ label, placeholder, modifier, checkBoxState, setFieldValue,
           }}
         ></DatePicker>
         <div className="input__date-calendar">
-          {!checkBoxState ? (
-            <span onClick={openDatePicker}>{CALENDAR}</span>
-          ) : (
-            {CALENDAR}
-          )}
+          {!checkBoxState ? <span onClick={openDatePicker}>{CALENDAR}</span> : <span>{CALENDAR}</span>}
         </div>
       </div>
       {meta.touched && meta.error ? <div className="error">{meta.error}</div> : null}
