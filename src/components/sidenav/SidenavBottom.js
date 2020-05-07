@@ -2,12 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import MyDocument from '~/utilities/resume/pdf';
-import resumeDoc from '~/utilities/resume/word.js';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import CardHeader from '~/components/cardheader/CardHeader';
 import { Download, Copy, Email, Check, Delete } from '~/assets/image';
 
-const SidenavBottom = ({ resumeJson, deleteIconClicked }) => {
+const SidenavBottom = ({ resumeJson, downloadPdf, downloadPdfIconClicked, deleteIconClicked }) => {
   return (
     <div className="sidenav-bottom">
       <div className="card">
@@ -17,7 +16,7 @@ const SidenavBottom = ({ resumeJson, deleteIconClicked }) => {
             className="sidenav__cv-action"
             onClick={e => {
               e.preventDefault();
-              resumeDoc(resumeJson);
+              downloadPdfIconClicked();
             }}
           >
             <span className="sidenav__cv-action-icon">
@@ -49,11 +48,24 @@ const SidenavBottom = ({ resumeJson, deleteIconClicked }) => {
             </span>
             <span className="sidenav__cv-action-label text-link text-link--danger">Delete CV</span>
           </li>
-          <li>
-            <PDFDownloadLink document={<MyDocument />} fileName="somename.pdf">
-              {({ blob, url, loading, error }) => (loading ? 'Loading document...' : 'Download now!')}
+
+          {downloadPdf && (
+            <PDFDownloadLink document={<MyDocument resumeJson={resumeJson} />} fileName="somename.pdf">
+              {({ url, loading, error }) => {
+                if (!loading) {
+                  let a = document.createElement('a');
+
+                  a.href = url;
+                  a.download = 'resume.pdf';
+                  a.click();
+
+                  window.URL.revokeObjectURL(url);
+
+                  downloadPdfIconClicked();
+                }
+              }}
             </PDFDownloadLink>
-          </li>
+          )}
         </ul>
       </div>
     </div>
@@ -62,6 +74,8 @@ const SidenavBottom = ({ resumeJson, deleteIconClicked }) => {
 
 SidenavBottom.propTypes = {
   resumeJson: PropTypes.object,
+  downloadPdf: PropTypes.bool,
+  downloadPdfIconClicked: PropTypes.func,
   deleteIconClicked: PropTypes.func,
 };
 
