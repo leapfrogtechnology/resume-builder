@@ -61,21 +61,27 @@ const Achievements = () => {
     storage.saveResume(localStorage, context.data.get);
   };
 
+  if ((!achievements || achievements.length < 1) && !preview) {
+    return <></>;
+  }
+
   if (!achievements || achievements.length < 1) {
     return (
-      <>
-        <EmptyCard emptyMessage="You do not have any achievement yet."></EmptyCard>
-        <CardFooter
-          icon={Add}
-          hide={preview}
-          label="Add another achievement"
-          showModal={addAchievement}
-          onAdd={addBtnHandler}
-          component={AddAchievement}
-          onClose={addBtnCloseHandler}
-          modifier="empty"
-        />
-      </>
+      <div className="content-block">
+        <div className="card">
+          <EmptyCard emptyMessage="You do not have any achievement yet."></EmptyCard>
+          <CardFooter
+            icon={Add}
+            hide={preview}
+            label="Add another achievement"
+            showModal={addAchievement}
+            onAdd={addBtnHandler}
+            component={AddAchievement}
+            onClose={addBtnCloseHandler}
+            modifier="empty"
+          />
+        </div>
+      </div>
     );
   }
 
@@ -92,19 +98,21 @@ const Achievements = () => {
   ));
 
   return (
-    <>
-      <CardHeader title="Achievements" />
-      {achievementsList}
-      <CardFooter
-        icon={Add}
-        hide={preview}
-        label="Add another achievement"
-        showModal={addAchievement}
-        onAdd={addBtnHandler}
-        component={AddAchievement}
-        onClose={addBtnCloseHandler}
-      />
-    </>
+    <div className="content-block">
+      <div className="card">
+        <CardHeader title="Achievements" />
+        {achievementsList}
+        <CardFooter
+          icon={Add}
+          hide={preview}
+          label="Add another achievement"
+          showModal={addAchievement}
+          onAdd={addBtnHandler}
+          component={AddAchievement}
+          onClose={addBtnCloseHandler}
+        />
+      </div>
+    </div>
   );
 };
 
