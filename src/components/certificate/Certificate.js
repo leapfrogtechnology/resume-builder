@@ -61,21 +61,27 @@ const Certificate = () => {
     storage.saveResume(localStorage, context.data.get);
   };
 
+  if ((!certificates || certificates.length < 1) && !preview) {
+    return <></>;
+  }
+
   if (!certificates || certificates.length < 1) {
     return (
-      <>
-        <EmptyCard emptyMessage="You do not have any certificates yet."></EmptyCard>
-        <CardFooter
-          icon={Add}
-          hide={preview}
-          label="Add another certificate"
-          showModal={addCertificate}
-          onAdd={addBtnHandler}
-          component={AddCertificate}
-          onClose={addBtnCloseHandler}
-          modifier="empty"
-        />
-      </>
+      <div className="content-block">
+        <div className="card">
+          <EmptyCard emptyMessage="You do not have any certificates yet."></EmptyCard>
+          <CardFooter
+            icon={Add}
+            hide={preview}
+            label="Add another certificate"
+            showModal={addCertificate}
+            onAdd={addBtnHandler}
+            component={AddCertificate}
+            onClose={addBtnCloseHandler}
+            modifier="empty"
+          />
+        </div>
+      </div>
     );
   }
 
@@ -93,19 +99,21 @@ const Certificate = () => {
   ));
 
   return (
-    <>
-      <CardHeader title="Certificates" />
-      <div className="certificate">{certificatesList}</div>
-      <CardFooter
-        icon={Add}
-        hide={preview}
-        label="Add another certificate"
-        showModal={addCertificate}
-        onAdd={addBtnHandler}
-        component={AddCertificate}
-        onClose={addBtnCloseHandler}
-      />
-    </>
+    <div className="content-block">
+      <div className="card">
+        <CardHeader title="Certificates" />
+        <div className="certificate">{certificatesList}</div>
+        <CardFooter
+          icon={Add}
+          hide={preview}
+          label="Add another certificate"
+          showModal={addCertificate}
+          onAdd={addBtnHandler}
+          component={AddCertificate}
+          onClose={addBtnCloseHandler}
+        />
+      </div>
+    </div>
   );
 };
 
