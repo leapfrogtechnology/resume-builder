@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import MyDocument from '~/utilities/resume/pdf';
+import MyDocument from '~/components/pdf/Pdf';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import CardHeader from '~/components/cardheader/CardHeader';
 import { Download, Copy, Email, Check, Delete } from '~/assets/image';
