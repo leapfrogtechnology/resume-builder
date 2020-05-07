@@ -8,7 +8,7 @@ const Media = ({ icon, label, onclick }) => {
       <span className="media__icon">{icon}</span>
       <span className="media__body">{label}</span>
       <div className="media__body icon" onClick={onclick}>
-        {EDIT}
+        {EDIT('#29B6F6')}
       </div>
     </div>
   );

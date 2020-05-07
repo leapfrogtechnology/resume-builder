@@ -5,7 +5,7 @@ import InputText from '~/components/inputtext/InputText';
 import InputDate from '~/components/inputdate/InputDate';
 import FormHeader from '~/components/formheader/FormHeader';
 import CheckboxInput from '~/components/checkbox/CheckboxInput';
-import { CLOSE } from '../../icons/icon';
+import { CLOSE } from '../~/components/icons/icon';
 
 const AddWorkExperience = () => {
   return (

@@ -11,7 +11,7 @@ import CardHeader from '~/components/cardheader/CardHeader';
 import AddContact from '~/components/form/contact/AddContact';
 import * as profileImageUtils from '~/utilities/objects/ProfileImage.js';
 import { COUNTRY_CODE, baseMailToUrl, baseTelUrl } from '~/constant/contact.js';
-import { DELETE } from '../icons/icon';
+import { DELETE } from '~/components/icons/icon';
 
 const Sidenav = () => {
   const [showModal, setModal] = useState(false);

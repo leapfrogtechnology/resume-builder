@@ -4,7 +4,7 @@ import Button from '~/components/button/Button';
 import InputText from '~/components/inputtext/InputText';
 import FormHeader from '~/components/formheader/FormHeader';
 import InputTextArea from '~/components/inputtextarea/InputTextArea';
-import { CLOSE } from '../../icons/icon';
+import { CLOSE } from '../~/components/icons/icon';
 
 const AddPersonalInformation = () => {
   return (

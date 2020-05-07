@@ -3,10 +3,9 @@ import PropTypes from 'prop-types';
 
 import resumeDoc from '~/utilities/resume/word.js';
 import CardHeader from '~/components/cardheader/CardHeader';
-import { Download, Copy, Email, Check, Delete } from '~/assets/image';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import MyDocument from '~/utilities/resume/pdf';
-import { DELETE, CHECK, EMAIL, COPY_LINK, DOWNLOAD } from '../icons/icon';
+import { DELETE, CHECK, EMAIL, COPY_LINK, DOWNLOAD } from '~/components/icons/icon';
 
 const SidenavBottom = ({ resumeJson, deleteIconClicked }) => {
   return (

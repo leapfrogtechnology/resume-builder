@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import OpenModal from '~/components/modal/OpenModal';
-import { ADD } from '../icons/icon';
+import { ADD } from '~/components/icons/icon';
 
 const CardFooter = ({ icon, label, modifier, onAdd, component, onClose, showModal, hide }) => {
   return (

@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Warning } from '~/assets/image';
 import Button from '~/components/button/Button';
-import { WARNING } from '../../icons/icon';
+import { WARNING } from '~/components/icons/icon';
 
 const DeletePopup = ({ onConfirm, onCancel }) => {
   return (

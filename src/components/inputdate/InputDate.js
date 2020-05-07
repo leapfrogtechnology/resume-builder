@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
-import { CALENDAR } from '../icons/icon';
+import { CALENDAR } from '~/components/icons/icon';
 
 const InputDate = ({ label, placeholder, modifier, checkBoxState, setFieldValue, setFieldTouched, ...props }) => {
   const [field, meta] = useField(props);

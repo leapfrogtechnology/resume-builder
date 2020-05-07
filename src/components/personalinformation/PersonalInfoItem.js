@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
 import { View, ViewHidden } from '~/assets/image';
-import { VIEW_HIDDEN, VIEW } from '../icons/icon';
+import { VIEW_HIDDEN, VIEW } from '~/components/icons/icon';
 
 const PersonalInfoItem = ({ label, value, bold, preview, onclick, showIcon = false }) => {
   const [hidden, setHidden] = useState(false);

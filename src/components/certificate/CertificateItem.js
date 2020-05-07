@@ -3,10 +3,9 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
 import OpenModal from '../modal/OpenModal';
-import { UpRightArrow } from '~/assets/image';
 import EditOptions from '~/components/editoptions/EditOptions';
 import AddCertificate from '../form/certificate/AddCertificate';
-import { UP_RIGHT_ARROW } from '../icons/icon';
+import { UP_RIGHT_ARROW } from '~/components/icons/icon';
 
 const CertificateItem = ({ title, link, year, description, preview, onHiddenIconClicked, onDelete }) => {
   const [hidden, setHidden] = useState(false);
