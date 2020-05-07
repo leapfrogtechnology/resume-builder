@@ -5,12 +5,13 @@ import InputText from '~/components/inputtext/InputText';
 import InputDate from '~/components/inputdate/InputDate';
 import FormHeader from '~/components/formheader/FormHeader';
 import CheckboxInput from '~/components/checkbox/CheckboxInput';
+import { CLOSE } from '../../icons/icon';
 
 const AddWorkExperience = () => {
   return (
     <>
       <div className="close-option">
-        <img src={Close} alt="close" />
+        {CLOSE}
       </div>
       <FormHeader title="Add Work Experience" />
       <div className="form__content">

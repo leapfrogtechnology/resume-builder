@@ -2,9 +2,9 @@ import { useField } from 'formik';
 import React, { useState } from 'react';
 
 import PropTypes from 'prop-types';
-import { Calendar } from '~/assets/image';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
+import { CALENDAR } from '../icons/icon';
 
 const InputDate = ({ label, placeholder, modifier, checkBoxState, setFieldValue, setFieldTouched, ...props }) => {
   const [field, meta] = useField(props);
@@ -44,9 +44,9 @@ const InputDate = ({ label, placeholder, modifier, checkBoxState, setFieldValue,
         ></DatePicker>
         <div className="input__date-calendar">
           {!checkBoxState ? (
-            <img src={Calendar} alt="Calendar" onClick={openDatePicker} />
+            <span onClick={openDatePicker}>{CALENDAR}</span>
           ) : (
-            <img src={Calendar} alt="Calendar" />
+            {CALENDAR}
           )}
         </div>
       </div>

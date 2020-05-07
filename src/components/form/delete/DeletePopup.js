@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Warning } from '~/assets/image';
 import Button from '~/components/button/Button';
+import { WARNING } from '../../icons/icon';
 
 const DeletePopup = ({ onConfirm, onCancel }) => {
   return (
@@ -11,7 +12,7 @@ const DeletePopup = ({ onConfirm, onCancel }) => {
         <div className="card">
           <div className="delete-popup__content">
             <div className="delete-popup__icon">
-              <img src={Warning} alt="Warning" />
+              {WARNING}
             </div>
             <div className="delete-popup__body">
               <div className="title">Are you sure?</div>

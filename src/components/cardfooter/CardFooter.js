@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import OpenModal from '~/components/modal/OpenModal';
+import { ADD } from '../icons/icon';
 
 const CardFooter = ({ icon, label, modifier, onAdd, component, onClose, showModal, hide }) => {
   return (
@@ -9,7 +10,7 @@ const CardFooter = ({ icon, label, modifier, onAdd, component, onClose, showModa
       <>
         <div className={modifier ? `card__footer card__footer--${modifier}` : 'card__footer'} onClick={e => onAdd(e)}>
           <span className="card__footer-icon">
-            <img src={icon} alt="Add" />
+            {ADD}
           </span>
           <span className="card__footer-label text-link">{label}</span>
         </div>

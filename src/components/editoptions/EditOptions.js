@@ -1,20 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { View, EditGray, Trash, ViewHidden } from '~/assets/image';
+import { EDIT, DELETE, VIEW, VIEW_HIDDEN } from '~/components/icons/icon';
 
 const EditOptions = ({ isHidden = false, onHiddenIconClicked, onEditButtonClicked, onDeleteButtonClicked }) => {
   return (
     <>
       <div className="edit-options">
         <span className="edit-options__item icon" onClick={e => onHiddenIconClicked(e)}>
-          <img src={isHidden ? ViewHidden : View} alt="View" />
+          {
+            isHidden ? VIEW_HIDDEN : VIEW
+          }
         </span>
         <span className="edit-options__item icon" onClick={e => onEditButtonClicked(e)}>
-          <img src={EditGray} alt="Edit" />
+          {EDIT('#B3B3B3')}
         </span>
         <span className="edit-options__item icon" onClick={e => onDeleteButtonClicked(e)}>
-          <img src={Trash} alt="Trash" />
+          {DELETE('#D2D2D2')}
         </span>
       </div>
     </>

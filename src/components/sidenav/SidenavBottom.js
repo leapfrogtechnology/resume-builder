@@ -6,6 +6,7 @@ import CardHeader from '~/components/cardheader/CardHeader';
 import { Download, Copy, Email, Check, Delete } from '~/assets/image';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import MyDocument from '~/utilities/resume/pdf';
+import { DELETE, CHECK, EMAIL, COPY_LINK, DOWNLOAD } from '../icons/icon';
 
 const SidenavBottom = ({ resumeJson, deleteIconClicked }) => {
   return (
@@ -21,31 +22,31 @@ const SidenavBottom = ({ resumeJson, deleteIconClicked }) => {
             }}
           >
             <span className="sidenav__cv-action-icon">
-              <img src={Download} alt="Edit" />
+              {DOWNLOAD}
             </span>
             <span className="sidenav__cv-action-label text-link">Download PDF</span>
           </li>
           <li className="sidenav__cv-action">
             <span className="sidenav__cv-action-icon">
-              <img src={Copy} alt="Edit" />
+              {COPY_LINK}
             </span>
             <span className="sidenav__cv-action-label text-link">Copy Shareable Link</span>
           </li>
           <li className="sidenav__cv-action">
             <span className="sidenav__cv-action-icon">
-              <img src={Email} alt="Edit" />
+              {EMAIL}
             </span>
             <span className="sidenav__cv-action-label text-link">Email CV as Attachment</span>
           </li>
           <li className="sidenav__cv-action">
             <span className="sidenav__cv-action-icon">
-              <img src={Check} alt="Edit" />
+              {CHECK}
             </span>
             <span className="sidenav__cv-action-label text-link">Request Professional Review</span>
           </li>
           <li className="sidenav__cv-action" onClick={deleteIconClicked}>
             <span className="sidenav__cv-action-icon">
-              <img src={Delete} alt="Edit" />
+              {DELETE('#F44336')}
             </span>
             <span className="sidenav__cv-action-label text-link text-link--danger">Delete CV</span>
           </li>

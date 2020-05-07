@@ -4,6 +4,7 @@ import Button from '~/components/button/Button';
 import InputText from '~/components/inputtext/InputText';
 import FormHeader from '~/components/formheader/FormHeader';
 import InputTextArea from '~/components/inputtextarea/InputTextArea';
+import { CLOSE } from '../../icons/icon';
 
 const AddPersonalInformation = () => {
   return (
@@ -11,7 +12,7 @@ const AddPersonalInformation = () => {
       <div className="form">
         <div className="card">
           <div className="close-option">
-            <img src={Close} alt="close" />
+            {CLOSE}
           </div>
           <FormHeader title="Personal Information" />
           <div className="form__content">

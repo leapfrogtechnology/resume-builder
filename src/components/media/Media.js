@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Edit } from '~/assets/image';
+import { EDIT } from '~/components/icons/icon';
 
 const Media = ({ icon, label, onclick }) => {
   return (
@@ -8,7 +8,7 @@ const Media = ({ icon, label, onclick }) => {
       <span className="media__icon">{icon}</span>
       <span className="media__body">{label}</span>
       <div className="media__body icon" onClick={onclick}>
-        <img src={Edit} alt="Edit" />
+        {EDIT}
       </div>
     </div>
   );

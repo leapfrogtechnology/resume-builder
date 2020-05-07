@@ -6,6 +6,7 @@ import OpenModal from '../modal/OpenModal';
 import { UpRightArrow } from '~/assets/image';
 import EditOptions from '~/components/editoptions/EditOptions';
 import AddCertificate from '../form/certificate/AddCertificate';
+import { UP_RIGHT_ARROW } from '../icons/icon';
 
 const CertificateItem = ({ title, link, year, description, preview, onHiddenIconClicked, onDelete }) => {
   const [hidden, setHidden] = useState(false);
@@ -44,7 +45,7 @@ const CertificateItem = ({ title, link, year, description, preview, onHiddenIcon
         >
           {title}
           <span className="arrow-icon">
-            <img src={UpRightArrow} alt="Arrow" />
+            {UP_RIGHT_ARROW}
           </span>
           {hidden && <span className="hidden-tag">Hidden</span>}
         </div>

@@ -11,6 +11,7 @@ import CardHeader from '~/components/cardheader/CardHeader';
 import AddContact from '~/components/form/contact/AddContact';
 import * as profileImageUtils from '~/utilities/objects/ProfileImage.js';
 import { COUNTRY_CODE, baseMailToUrl, baseTelUrl } from '~/constant/contact.js';
+import { DELETE } from '../icons/icon';
 
 const Sidenav = () => {
   const [showModal, setModal] = useState(false);
@@ -140,7 +141,7 @@ const Sidenav = () => {
                 </div>
                 <div className="sidenav__upload-block-r">
                   <div className="icon" onClick={handleImageDelete}>
-                    <img src={Trash} alt="Trash" />
+                    {DELETE('#D2D2D2')}
                   </div>
                 </div>
               </div>
