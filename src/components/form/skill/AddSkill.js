@@ -4,14 +4,14 @@ import * as Yup from 'yup';
 import * as _ from 'lodash';
 import PropTypes from 'prop-types';
 import { Formik, Form } from 'formik';
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 
+import { ADD } from '~/components/icons/icon';
 import Button from '~/components/button/Button';
 import { FormContext } from '../../FormContext';
 import * as storage from '~/storage/LocalStorage';
 import InputText from '~/components/inputtext/InputText';
 import FormHeader from '~/components/formheader/FormHeader';
-import InputSelect from '~/components/inputselect/InputSelect';
 import * as skillUtils from '../../../utilities/objects/Skill';
 
 const AddSkill = ({ onClose, isEdit, values }) => {
@@ -25,15 +25,21 @@ const AddSkill = ({ onClose, isEdit, values }) => {
 
   let initialValues = {};
 
-  const handleSubmit = (formValues, resetForm) => {
+  const handleSubmit = (formValues, setFieldError) => {
     if (isEdit) {
       handleSubmitOnEdit(formValues);
     } else {
-      handleOnAdd(formValues, resetForm);
+      handleSubmitOnAdd(data, formValues, skillsList, storage, setFieldError);
     }
   };
 
-  const handleOnAdd = (formValues, resetForm) => {
+  const handleOnAdd = (e, formValues, setFieldError, setFieldTouched, resetForm) => {
+    e.preventDefault();
+    if (!formValues.skill) {
+      setFieldError('skill', 'Skill is required');
+      setFieldTouched('skill', true);
+    }
+
     const skillObj = skillUtils.getSkillObject({ ...formValues });
 
     skillsList.push(skillObj);
@@ -41,10 +47,19 @@ const AddSkill = ({ onClose, isEdit, values }) => {
     resetForm();
   };
 
-  const handleSubmitOnAdd = ({ data, skillsList, storage, setFieldError }) => {
-    if (skillsList.length < 1) {
-      setFieldError('skill', 'Add your skills first');
-    } else {
+  const handleSubmitOnAdd = (data, formValues, skillsList, storage, setFieldError) => {
+    if (formValues.skill) {
+      const skillObj = skillUtils.getSkillObject({ ...formValues });
+
+      if (data.get.skills) {
+        data.get['skills'].push(skillObj);
+      } else {
+        data.get['skills'] = [];
+
+        data.get['skills'].push(skillObj);
+      }
+    }
+    if (skillsList.length > 0) {
       if (data.get.skills) {
         skillsList.forEach(skill => {
           data.get['skills'].push(skill);
@@ -56,19 +71,20 @@ const AddSkill = ({ onClose, isEdit, values }) => {
           data.get['skills'].push(skill);
         });
       }
-
-      data.set(prevState => ({ ...prevState, ...data }));
-
-      storage.saveResume(localStorage, data.get);
-
-      onClose();
     }
+
+    data.set(prevState => ({ ...prevState, ...data }));
+
+    storage.saveResume(localStorage, data.get);
+
+    onClose();
   };
 
   const handleSubmitOnEdit = formValues => {
     const isEqual = _.isEqual(formValues, initialValues);
 
     if (isEqual) {
+      onClose();
       return;
     } else {
       const skillObj = skillUtils.getSkillObject({ ...formValues });
@@ -112,30 +128,30 @@ const AddSkill = ({ onClose, isEdit, values }) => {
       <FormHeader title={!isEdit ? 'Add Skill' : 'Edit Skill'} />
       <Formik
         initialValues={getInitialValues()}
-        onSubmit={(values, { resetForm }) => {
-          handleSubmit(values, resetForm);
+        onSubmit={(values, { setFieldError }) => {
+          handleSubmit(values, setFieldError);
         }}
         validationSchema={validateSkill}
-        validateOnChange={validateSkill}
       >
-        {({ setFieldError }) => (
+        {({ values, setFieldError, setFieldTouched, resetForm }) => (
           <Form>
             <div className="form__content">
               <InputText name="skill" label="Enter your skill" />
               <InputText name="subSkills" label="Add Sub Skill" placeholder="Add comma separated values" />
+              {!isEdit && (
+                <div
+                  className="add-container"
+                  onClick={e => {
+                    handleOnAdd(e, values, setFieldError, setFieldTouched, resetForm);
+                  }}
+                >
+                  <span className="card__footer-icon">{ADD}</span>
+                  <span className="card__footer-label add-container__text">Add another skill</span>
+                </div>
+              )}
               <div className="form-button">
-                {!isEdit && (
-                  <div className="form-button__left">
-                    <Button
-                      content="Submit Skill"
-                      type="button"
-                      onclick={handleSubmitOnAdd}
-                      submitProps={{ data, skillsList, storage, setFieldError }}
-                    />
-                  </div>
-                )}
                 <div className="form-button__left">
-                  <Button content={!isEdit ? 'Add Skill' : 'Edit Skill'} type="submit" />
+                  <Button content="Done" type="submit" />
                 </div>
                 <div className="form-button__right">
                   <Button content="Cancel" isCancel={true} type="button" onclick={onClose} />
