@@ -61,7 +61,7 @@ const Achievements = () => {
     storage.saveResume(localStorage, context.data.get);
   };
 
-  if ((!achievements || achievements.length < 1) && !preview) {
+  if ((!achievements || achievements.length < 1) && preview) {
     return <></>;
   }
 
