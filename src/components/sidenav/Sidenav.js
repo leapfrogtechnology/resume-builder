@@ -17,6 +17,7 @@ const Sidenav = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [showDeleteModal, setDeleteModal] = useState(false);
   const [profileImgUploadError, setProfileImageUpload] = useState(false);
+  const [downloadPdf, setDownloadPdf] = useState(false);
 
   const context = useContext(FormContext);
   const preview = context.preview.get;
@@ -27,7 +28,9 @@ const Sidenav = () => {
   const linkedIn = context.data.get.linkedIn;
   const profileImg = context.data.get.profileImage;
 
-  const resume = context.data.get;
+  const donwloadPdfBtnHandler = () => {
+    setDownloadPdf(!downloadPdf);
+  };
 
   const deleteBtnClickedHandler = () => {
     setDeleteModal(!showDeleteModal);
@@ -210,7 +213,14 @@ const Sidenav = () => {
         </div>
       </div>
 
-      {!preview && <SidenavBottom resumeJson={resume} deleteIconClicked={deleteBtnClickedHandler} />}
+      {!preview && (
+        <SidenavBottom
+          resumeJson={context.data.get}
+          downloadPdf={downloadPdf}
+          downloadPdfIconClicked={donwloadPdfBtnHandler}
+          deleteIconClicked={deleteBtnClickedHandler}
+        />
+      )}
 
       {showDeleteModal && (
         <DeletePopup onConfirm={confirmDeleteBtnHandler} onCancel={cancelDeleteBtnHandler}></DeletePopup>
