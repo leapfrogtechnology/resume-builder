@@ -46,6 +46,7 @@ const AddAchievement = ({ onClose, isEdit, values }) => {
     const isEqual = _.isEqual(formValues, values);
 
     if (isEqual) {
+      onClose();
       return;
     } else {
       const achievementObj = achievementUtils.getAchievementObject({ ...formValues });
