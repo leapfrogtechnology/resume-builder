@@ -62,21 +62,27 @@ const Skills = () => {
     context.data.set(prevState => ({ ...prevState, ...data }));
   };
 
+  if ((!skills || skills.length < 1) && preview) {
+    return <></>;
+  }
+
   if (!skills || skills.length < 1) {
     return (
-      <>
-        <EmptyCard emptyMessage="You do not have any skills yet."></EmptyCard>
-        <CardFooter
-          icon={Add}
-          hide={preview}
-          label="Add another skill"
-          showModal={addSkill}
-          onAdd={addBtnHandler}
-          component={AddSkill}
-          onClose={addBtnCloseHandler}
-          modifier="empty"
-        />
-      </>
+      <div className="content-block">
+        <div className="card">
+          <EmptyCard emptyMessage="You do not have any skills yet."></EmptyCard>
+          <CardFooter
+            icon={Add}
+            hide={preview}
+            label="Add another skill"
+            showModal={addSkill}
+            onAdd={addBtnHandler}
+            component={AddSkill}
+            onClose={addBtnCloseHandler}
+            modifier="empty"
+          />
+        </div>
+      </div>
     );
   }
 
@@ -92,19 +98,21 @@ const Skills = () => {
   ));
 
   return (
-    <>
-      <CardHeader title="Skills" />
-      <div className="skills">{skillsList}</div>
-      <CardFooter
-        icon={Add}
-        hide={preview}
-        label="Add another skill"
-        showModal={addSkill}
-        onAdd={addBtnHandler}
-        component={AddSkill}
-        onClose={addBtnCloseHandler}
-      />
-    </>
+    <div className="content-block">
+      <div className="card">
+        <CardHeader title="Skills" />
+        <div className="skills">{skillsList}</div>
+        <CardFooter
+          icon={Add}
+          hide={preview}
+          label="Add another skill"
+          showModal={addSkill}
+          onAdd={addBtnHandler}
+          component={AddSkill}
+          onClose={addBtnCloseHandler}
+        />
+      </div>
+    </div>
   );
 };
 
