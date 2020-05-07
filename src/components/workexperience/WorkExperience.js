@@ -70,21 +70,27 @@ const WorkExperience = () => {
     }
   };
 
+  if ((!workExperience || workExperience.length < 1) && preview) {
+    return <></>;
+  }
+
   if (!workExperience || workExperience.length < 1) {
     return (
-      <>
-        <EmptyCard emptyMessage="You do not have any work experience yet."></EmptyCard>
-        <CardFooter
-          icon={Add}
-          hide={preview}
-          label="Add another work experience"
-          showModal={addWork}
-          onAdd={addBtnHandler}
-          component={AddWorkExperience}
-          onClose={addBtnCloseHandler}
-          modifier="empty"
-        />
-      </>
+      <div className="content-block">
+        <div className="card">
+          <EmptyCard emptyMessage="You do not have any work experience yet."></EmptyCard>
+          <CardFooter
+            icon={Add}
+            hide={preview}
+            label="Add another work experience"
+            showModal={addWork}
+            onAdd={addBtnHandler}
+            component={AddWorkExperience}
+            onClose={addBtnCloseHandler}
+            modifier="empty"
+          />
+        </div>
+      </div>
     );
   }
 
@@ -124,17 +130,19 @@ const WorkExperience = () => {
 
   return (
     <div className="content-block">
-      {!preview && workExperienceList.length > 0 && <CardHeader title="Work Experience" />}
-      {workExperienceList}
-      <CardFooter
-        icon={Add}
-        hide={preview}
-        label="Add another work experience"
-        showModal={addWork}
-        onAdd={addBtnHandler}
-        component={AddWorkExperience}
-        onClose={addBtnCloseHandler}
-      />
+      <div className="card">
+        {!preview && workExperienceList.length > 0 && <CardHeader title="Work Experience" />}
+        {workExperienceList}
+        <CardFooter
+          icon={Add}
+          hide={preview}
+          label="Add another work experience"
+          showModal={addWork}
+          onAdd={addBtnHandler}
+          component={AddWorkExperience}
+          onClose={addBtnCloseHandler}
+        />
+      </div>
     </div>
   );
 };
