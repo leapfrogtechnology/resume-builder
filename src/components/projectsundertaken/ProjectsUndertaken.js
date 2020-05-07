@@ -62,7 +62,7 @@ const ProjectsUndertaken = () => {
     storage.saveResume(localStorage, context.data.get);
   };
 
-  if ((!projects || projects.length < 1) && !preview) {
+  if ((!projects || projects.length < 1) && preview) {
     return <></>;
   }
 

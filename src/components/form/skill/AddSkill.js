@@ -140,7 +140,7 @@ const AddSkill = ({ onClose, isEdit, values }) => {
               <InputText name="subSkills" label="Add Sub Skill" placeholder="Add comma separated values" />
               {!isEdit && (
                 <div
-                  className="add-container"
+                  className="input add-container"
                   onClick={e => {
                     handleOnAdd(e, values, setFieldError, setFieldTouched, resetForm);
                   }}

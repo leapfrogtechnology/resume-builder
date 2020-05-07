@@ -50,6 +50,7 @@ const AddProject = ({ onClose, isEdit, values }) => {
     const isEqual = _.isEqual(formValues, initialValues);
 
     if (isEqual) {
+      onClose();
       return;
     } else {
       const projectObj = projectUtils.getProjectObject({ ...formValues });

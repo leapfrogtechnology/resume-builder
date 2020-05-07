@@ -61,7 +61,7 @@ const Certificate = () => {
     storage.saveResume(localStorage, context.data.get);
   };
 
-  if ((!certificates || certificates.length < 1) && !preview) {
+  if ((!certificates || certificates.length < 1) && preview) {
     return <></>;
   }
 
