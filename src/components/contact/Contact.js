@@ -5,15 +5,9 @@ import { View, ViewHidden } from '~/assets/image';
 const Contact = ({ id, label, value, preview, onHiddenIconClicked, baseUrl = '' }) => {
   const [hidden, setHidden] = useState(false);
 
-  const onHiddenBtnClicked = e => {
-    e.preventDefault();
+  const onHiddenBtnClicked = () => {
     setHidden(!hidden);
-    onHiddenIconClicked(e, id);
-  };
-
-  const handleOnLinkClicked = (e, value) => {
-    e.preventDefault();
-    onLinkClicked(e, value);
+    onHiddenIconClicked(id);
   };
 
   if (!value || (preview && hidden)) {
@@ -30,7 +24,7 @@ const Contact = ({ id, label, value, preview, onHiddenIconClicked, baseUrl = '' 
           </div>
         </div>
         {!preview && (
-          <div className="contact-content__r" onClick={e => onHiddenBtnClicked(e)}>
+          <div className="contact-content__r" onClick={onHiddenBtnClicked}>
             <img src={!hidden ? View : ViewHidden} alt="Edit" />
           </div>
         )}

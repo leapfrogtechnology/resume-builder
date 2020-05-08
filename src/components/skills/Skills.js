@@ -17,23 +17,14 @@ const Skills = () => {
   const preview = context.preview.get;
   const skills = context.data.get.skills;
 
-  const addBtnHandler = () => {
-    setAdd(!addSkill);
-  };
-
-  const addBtnCloseHandler = () => {
-    setAdd(!addSkill);
-  };
+  const toggleAddSkil = () => setAdd(!addSkill);
 
   /**
    * Update the hidden state of skill.
    *
-   * @param {React.MouseEvent} e [ on click event ].
    * @param {string} key [ label of a particular skill].
    */
-  const updateHiddenStateSkill = (e, key) => {
-    e.preventDefault();
-
+  const updateHiddenStateSkill = key => {
     const data = context.data.get;
 
     data['skills'].find(({ label, hidden }, index) => {
@@ -47,9 +38,7 @@ const Skills = () => {
     });
   };
 
-  const deleteSkill = (e, name) => {
-    e.preventDefault();
-
+  const deleteSkill = name => {
     const data = context.data.get;
 
     const filteredSkills = data['skills'].filter(skill => {
@@ -71,9 +60,9 @@ const Skills = () => {
           hide={preview}
           label="Add another skill"
           showModal={addSkill}
-          onAdd={addBtnHandler}
+          onAdd={toggleAddSkil}
           component={AddSkill}
-          onClose={addBtnCloseHandler}
+          onClose={toggleAddSkil}
           modifier="empty"
         />
       </>
@@ -100,9 +89,9 @@ const Skills = () => {
         hide={preview}
         label="Add another skill"
         showModal={addSkill}
-        onAdd={addBtnHandler}
+        onAdd={toggleAddSkil}
         component={AddSkill}
-        onClose={addBtnCloseHandler}
+        onClose={toggleAddSkil}
       />
     </>
   );

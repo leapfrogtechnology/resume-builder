@@ -13,25 +13,16 @@ const SkillItem = ({ title, values, preview, onHiddenIconClicked, onDelete }) =>
     return <></>;
   }
 
-  const hiddenIconClickedHandler = e => {
-    e.preventDefault();
+  const hiddenIconClickedHandler = () => {
     setHidden(!hidden);
-    onHiddenIconClicked(e, title);
+    onHiddenIconClicked(title);
   };
 
-  const deleteIconClickedHandler = e => {
-    e.preventDefault();
-    onDelete(e, title);
+  const deleteIconClickedHandler = () => {
+    onDelete(title);
   };
 
-  const editBtnHandler = e => {
-    e.preventDefault();
-    setEdit(!editSkill);
-  };
-
-  const editBtnCloseHandler = () => {
-    setEdit(!editSkill);
-  };
+  const toggleEditSkill = () => setEdit(!editSkill);
 
   const subSkillsList = values.map(({ name }, index) => (
     <span key={index} className="chip-input-tag">
@@ -51,14 +42,14 @@ const SkillItem = ({ title, values, preview, onHiddenIconClicked, onDelete }) =>
             <EditOptions
               isHidden={hidden}
               onHiddenIconClicked={hiddenIconClickedHandler}
-              onEditButtonClicked={editBtnHandler}
+              onEditButtonClicked={toggleEditSkill}
               onDeleteButtonClicked={deleteIconClickedHandler}
             />
           )}
           {editSkill && (
             <OpenModal
               component={AddSkill}
-              onClose={editBtnCloseHandler}
+              onClose={toggleEditSkill}
               showModal={editSkill}
               isEdit={editSkill}
               data={editSkill ? { name: title, subSkills: values } : ''}

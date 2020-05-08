@@ -11,13 +11,7 @@ import AddExperience from '../form/experience/AddExperience';
 const UserDetail = ({ name, experience, profileImg, preview, onPreviewBtnClicked }) => {
   const [showModal, setModal] = useState(false);
 
-  const editBtnHandler = () => {
-    setModal(!showModal);
-  };
-
-  const closeBtnHandler = () => {
-    setModal(!showModal);
-  };
+  const toggleEdit = () => setModal(!showModal);
 
   return (
     <section className="user-detail">
@@ -29,9 +23,9 @@ const UserDetail = ({ name, experience, profileImg, preview, onPreviewBtnClicked
           <div className="user-detail__emp-attribute">
             <div className="user-detail__username">{name}</div>
             <div className="user-detail__activity">
-              <Media icon={FAVORITE_ICON} label={experience} onclick={editBtnHandler} />
+              <Media icon={FAVORITE_ICON} label={experience} onclick={toggleEdit} />
               {showModal && (
-                <OpenModal component={AddExperience} onClose={closeBtnHandler} showModal={showModal}></OpenModal>
+                <OpenModal component={AddExperience} onClose={toggleEdit} showModal={showModal}></OpenModal>
               )}
             </div>
           </div>

@@ -10,9 +10,8 @@ const PersonalInfoItem = ({ label, value, bold, preview, onclick, showIcon = fal
     return null;
   }
 
-  const onHiddenIconClicked = e => {
-    e.preventDefault();
-    onclick(e, label);
+  const onHiddenIconClicked = () => {
+    onclick(label);
     setHidden(!hidden);
   };
 
@@ -30,7 +29,7 @@ const PersonalInfoItem = ({ label, value, bold, preview, onclick, showIcon = fal
         </div>
       </div>
       {!preview && showIcon && (
-        <div className="personal-info-row__icon icon" onClick={e => onHiddenIconClicked(e)}>
+        <div className="personal-info-row__icon icon" onClick={onHiddenIconClicked}>
           <img src={!hidden ? View : ViewHidden} alt="View" />
         </div>
       )}

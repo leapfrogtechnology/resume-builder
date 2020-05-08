@@ -2,9 +2,9 @@ import moment from 'moment';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
-import OpenModal from '../modal/OpenModal';
-import AddProject from '../form/project/AddProject';
+import OpenModal from '~/components/modal/OpenModal';
 import * as dateUtils from '~/utilities/date/FormatDate';
+import AddProject from '~/components/form/project/AddProject';
 import EditOptions from '~/components/editoptions/EditOptions';
 
 const ProjectsUndertakenItem = ({
@@ -28,24 +28,15 @@ const ProjectsUndertakenItem = ({
 
   labelForDifference = labelForDifference ? '( ' + labelForDifference + ' )' : '';
 
-  const editBtnHandler = e => {
-    e.preventDefault();
-    setEdit(!editProject);
-  };
+  const toggleEditProject = () => setEdit(!editProject);
 
-  const editBtnCloseHandler = () => {
-    setEdit(!editProject);
-  };
-
-  const onHiddenBtnClicked = e => {
-    e.preventDefault();
+  const onHiddenBtnClicked = () => {
     setHidden(!hidden);
-    onHiddenIconClicked(e, title);
+    onHiddenIconClicked(title);
   };
 
-  const deleteIconClickedHandler = e => {
-    e.preventDefault();
-    onDelete(e, title);
+  const deleteIconClickedHandler = () => {
+    onDelete(title);
   };
 
   return (
@@ -59,14 +50,14 @@ const ProjectsUndertakenItem = ({
           <EditOptions
             isHidden={hidden}
             onHiddenIconClicked={onHiddenBtnClicked}
-            onEditButtonClicked={editBtnHandler}
+            onEditButtonClicked={toggleEditProject}
             onDeleteButtonClicked={deleteIconClickedHandler}
           />
         )}
         {editProject && (
           <OpenModal
             component={AddProject}
-            onClose={editBtnCloseHandler}
+            onClose={toggleEditProject}
             showModal={editProject}
             isEdit={editProject}
             data={editProject ? { name: title, date: startDate, description: description } : ''}

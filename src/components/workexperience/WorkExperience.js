@@ -17,9 +17,7 @@ const WorkExperience = () => {
   const preview = context.preview.get;
   const workExperience = context.data.get.workExperience;
 
-  const toggleAddWork = () => {
-    setAdd(!addWork);
-  };
+  const toggleAddWork = () => setAdd(!addWork);
 
   /**
    * Update the hidden state of work.

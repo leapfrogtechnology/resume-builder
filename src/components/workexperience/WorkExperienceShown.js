@@ -65,9 +65,7 @@ const WorkExperienceShown = ({
     onDelete(subTitle, position);
   };
 
-  const toggleEditWork = () => {
-    setEdit(!editWork);
-  };
+  const toggleEditWork = () => setEdit(!editWork);
 
   return (
     <div className="work-experience">

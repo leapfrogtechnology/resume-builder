@@ -16,23 +16,14 @@ const Certificate = () => {
   const certificates = context.data.get.certificates;
   const preview = context.preview.get;
 
-  const addBtnHandler = () => {
-    setAdd(!addCertificate);
-  };
-
-  const addBtnCloseHandler = () => {
-    setAdd(!addCertificate);
-  };
+  const togggleAddCertificate = () => setAdd(!addCertificate);
 
   /**
    * Update the hidden state of skill.
    *
-   * @param {React.MouseEvent} e [ on click event ].
    * @param {string} key [ name of a particular certificate].
    */
-  const updateHiddenStateCertificates = (e, key) => {
-    e.preventDefault();
-
+  const updateHiddenStateCertificates = key => {
     const data = context.data.get;
 
     data['certificates'].find(({ name, hidden }, index) => {
@@ -45,9 +36,7 @@ const Certificate = () => {
     });
   };
 
-  const deleteCertificate = (e, name, link) => {
-    e.preventDefault();
-
+  const deleteCertificate = (name, link) => {
     const data = context.data.get;
 
     const filteredCertificates = data['certificates'].filter(certificate => {
@@ -70,9 +59,9 @@ const Certificate = () => {
           hide={preview}
           label="Add another certificate"
           showModal={addCertificate}
-          onAdd={addBtnHandler}
+          onAdd={togggleAddCertificate}
           component={AddCertificate}
-          onClose={addBtnCloseHandler}
+          onClose={togggleAddCertificate}
           modifier="empty"
         />
       </>
@@ -101,9 +90,9 @@ const Certificate = () => {
         hide={preview}
         label="Add another certificate"
         showModal={addCertificate}
-        onAdd={addBtnHandler}
+        onAdd={togggleAddCertificate}
         component={AddCertificate}
-        onClose={addBtnCloseHandler}
+        onClose={togggleAddCertificate}
       />
     </>
   );

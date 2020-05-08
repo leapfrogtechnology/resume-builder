@@ -12,13 +12,7 @@ const SidenavBottom = ({ resumeJson, downloadPdf, downloadPdfIconClicked, delete
       <div className="card">
         <CardHeader title="CV Actions" />
         <ul>
-          <li
-            className="sidenav__cv-action"
-            onClick={e => {
-              e.preventDefault();
-              downloadPdfIconClicked();
-            }}
-          >
+          <li className="sidenav__cv-action" onClick={downloadPdfIconClicked}>
             <span className="sidenav__cv-action-icon">
               <img src={Download} alt="Edit" />
             </span>

@@ -15,25 +15,16 @@ const CertificateItem = ({ title, link, year, description, preview, onHiddenIcon
     return <></>;
   }
 
-  const onHiddenBtnClicked = e => {
-    e.preventDefault();
+  const onHiddenBtnClicked = () => {
     setHidden(!hidden);
-    onHiddenIconClicked(e, title);
+    onHiddenIconClicked(title);
   };
 
-  const deleteIconClickedHandler = e => {
-    e.preventDefault();
-    onDelete(e, title, link);
+  const deleteIconClickedHandler = () => {
+    onDelete(title, link);
   };
 
-  const editBtnHandler = e => {
-    e.preventDefault();
-    setEdit(!editCertificate);
-  };
-
-  const editBtnCloseHandler = () => {
-    setEdit(!editCertificate);
-  };
+  const toggleEditCertificate = () => setEdit(!editCertificate);
 
   return (
     <div className="certificate__row">
@@ -52,14 +43,14 @@ const CertificateItem = ({ title, link, year, description, preview, onHiddenIcon
           <EditOptions
             onHiddenIconClicked={onHiddenBtnClicked}
             isHidden={hidden}
-            onEditButtonClicked={editBtnHandler}
+            onEditButtonClicked={toggleEditCertificate}
             onDeleteButtonClicked={deleteIconClickedHandler}
           />
         )}
         {editCertificate && (
           <OpenModal
             component={AddCertificate}
-            onClose={editBtnCloseHandler}
+            onClose={toggleEditCertificate}
             showModal={editCertificate}
             isEdit={editCertificate}
             data={editCertificate ? { name: title, link: link, date: year, description: description } : ''}

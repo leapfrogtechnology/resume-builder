@@ -32,26 +32,14 @@ const Sidenav = () => {
     setDownloadPdf(!downloadPdf);
   };
 
-  const deleteBtnClickedHandler = () => {
-    setDeleteModal(!showDeleteModal);
-  };
-
   const confirmDeleteBtnHandler = () => {
     context.deleteCV();
-    setDeleteModal(!showDeleteModal);
+    toggleDelete();
   };
 
-  const cancelDeleteBtnHandler = () => {
-    setDeleteModal(!showDeleteModal);
-  };
+  const toggleDelete = () => setDeleteModal(!showDeleteModal);
 
-  const editBtnHandler = e => {
-    e.preventDefault();
-    setModal(!showModal);
-    setIsEdit(!isEdit);
-  };
-
-  const closeBtnHandler = () => {
+  const toggleEdit = () => {
     setModal(!showModal);
     setIsEdit(!isEdit);
   };
@@ -59,12 +47,9 @@ const Sidenav = () => {
   /**
    * Update the hidden state of contact detail.
    *
-   * @param {React.MouseEvent} e [ on click event ].
    * @param {string} key [ label of a particular contact type].
    */
-  const updateHiddenStateContact = (e, key) => {
-    e.preventDefault();
-
+  const updateHiddenStateContact = key => {
     const data = context.data.get;
     const previousState = data[key].hidden;
     const newState = !previousState;
@@ -73,8 +58,7 @@ const Sidenav = () => {
     context.data.set(data);
   };
 
-  const createFileUploader = e => {
-    e.preventDefault();
+  const createFileUploader = () => {
     setProfileImageUpload(false);
 
     const fileSelector = document.createElement('input');
@@ -91,8 +75,6 @@ const Sidenav = () => {
   };
 
   const handleImageUpload = async e => {
-    e.preventDefault();
-
     const file = e.target.files[0];
 
     if (!(file.type === 'image/png' || file.type === 'image/jpg' || file.type === 'image/jpeg')) {
@@ -115,9 +97,7 @@ const Sidenav = () => {
     }
   };
 
-  const handleImageDelete = e => {
-    e.preventDefault();
-
+  const handleImageDelete = () => {
     if (context.data.get.profileImage) {
       context.data.get.profileImage.isDeleted = true;
       context.data.get.profileImage.deletedOn = new Date();
@@ -139,7 +119,7 @@ const Sidenav = () => {
                   <div className="profile-image-wrapper">
                     <img src={profileImg && !profileImg.isDeleted ? profileImg.value : ProfileImage} alt="Image" />
                   </div>
-                  <span className="text-link text-link--small" onClick={e => createFileUploader(e)}>
+                  <span className="text-link text-link--small" onClick={_e => createFileUploader()}>
                     Upload new Photo
                   </span>
                 </div>
@@ -157,8 +137,8 @@ const Sidenav = () => {
               icon={Edit}
               hideIcon={preview}
               component={AddContact}
-              onEdit={editBtnHandler}
-              onClose={closeBtnHandler}
+              onEdit={toggleEdit}
+              onClose={toggleEdit}
               showModal={showModal}
               isEdit={isEdit}
             />
@@ -218,13 +198,11 @@ const Sidenav = () => {
           resumeJson={context.data.get}
           downloadPdf={downloadPdf}
           downloadPdfIconClicked={donwloadPdfBtnHandler}
-          deleteIconClicked={deleteBtnClickedHandler}
+          deleteIconClicked={toggleDelete}
         />
       )}
 
-      {showDeleteModal && (
-        <DeletePopup onConfirm={confirmDeleteBtnHandler} onCancel={cancelDeleteBtnHandler}></DeletePopup>
-      )}
+      {showDeleteModal && <DeletePopup onConfirm={confirmDeleteBtnHandler} onCancel={toggleDelete}></DeletePopup>}
     </div>
   );
 };
