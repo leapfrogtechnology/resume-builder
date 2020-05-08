@@ -188,12 +188,12 @@ const MyDocument = ({ resumeJson }) => {
           contactsList={contactsList}
         ></PersonalInformation>
         <ContentWrapper heading="Skills" data={skills} WrappedComponent={Skills} />
-        <ContentWrapper
+        {/* <ContentWrapper
           heading="Work Experience"
           data={workExperience}
           WrappedComponent={WorkExperience}
           experience={experience}
-        />
+        /> */}
         {/* <ProjectUndertaken heading="Projects Undertaken" data={projects}></ProjectUndertaken> */}
         {/* <Achievement heading="Achievements" data={achievements}></Achievement> */}
         {/* <Certificate heading="Certificates" data={certificates}></Certificate>{' '} */}
@@ -294,7 +294,7 @@ const Skills = ({ heading, data }) => {
 const SkillItem = ({ label, list }) => {
   return (
     <View style={skills.content}>
-      <Text>{label + ' '}</Text>
+      <Text>{label} </Text>
       <SubSkillItem subSkills={list} />
     </View>
   );
