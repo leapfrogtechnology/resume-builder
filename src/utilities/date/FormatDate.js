@@ -70,15 +70,26 @@ export const getDifferenceYearMonth = (startDate, endDate, currentlyWorking) => 
   const diff = getDifferenceInYearMonth(startDate, currentlyWorking ? new Date() : endDate);
 
   if (diff.year !== 0) {
-    labelForDifference = diff.year > 1 ? diff.year.toString() + ' years' : diff.year.toString() + ' year';
+    labelForDifference = diff.year > 1 ? `${diff.year} years ` : `${diff.year} year `;
     if (diff.month !== 0) {
       labelForDifference += ' and ';
     }
   }
 
   if (diff.month !== 0) {
-    labelForDifference += diff.month > 1 ? diff.month.toString() + ' months' : diff.month.toString() + ' month';
+    labelForDifference += diff.month > 1 ? ` ${diff.month} months` : ` ${diff.month} month`;
   }
 
   return labelForDifference;
+};
+
+export const getEngagementTenure = (startDate, endDate, currentlyEngaged) => {
+  const differenceInDate = getDifferenceYearMonth(startDate, endDate, currentlyEngaged);
+
+  let postfixOne = currentlyEngaged ? 'Present' : moment(endDate).format('MMMM YYYY');
+  let postfixTwo = differenceInDate ? `( ${differenceInDate} )` : '';
+
+  const labelForDate = `${moment(startDate).format('MMMM YYYY')}  -  ${postfixOne} ${postfixTwo}`;
+
+  return labelForDate;
 };
