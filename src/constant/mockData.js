@@ -13,7 +13,7 @@ const DATA = {
   },
   experience: {
     value: '4',
-    type: 'Yeas',
+    type: 'Years',
   },
   // Contact Information
   email: { value: 'ribby@lftechnology.com', hidden: false },
