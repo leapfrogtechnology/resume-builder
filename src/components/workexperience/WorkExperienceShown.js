@@ -56,23 +56,16 @@ const WorkExperienceShown = ({
 
   labelForDifference = labelForDifference ? '( ' + labelForDifference + ' )' : '';
 
-  const onHiddenIconClickedHandler = e => {
-    e.preventDefault();
+  const onHiddenIconClickedHandler = () => {
     setHidden(!hidden);
-    onHiddenIconClicked(e, subTitle);
+    onHiddenIconClicked(subTitle);
   };
 
-  const onDeleteIconClickedHanlder = e => {
-    e.preventDefault();
-    onDelete(e, subTitle, position);
+  const onDeleteIconClickedHanlder = () => {
+    onDelete(subTitle, position);
   };
 
-  const editBtnCloseHandler = () => {
-    setEdit(!editWork);
-  };
-
-  const editBtnHandler = e => {
-    e.preventDefault();
+  const toggleEditWork = () => {
     setEdit(!editWork);
   };
 
@@ -88,14 +81,14 @@ const WorkExperienceShown = ({
             <EditOptions
               isHidden={hidden}
               onHiddenIconClicked={onHiddenIconClickedHandler}
-              onEditButtonClicked={editBtnHandler}
+              onEditButtonClicked={toggleEditWork}
               onDeleteButtonClicked={onDeleteIconClickedHanlder}
             />
           )}
           {editWork && (
             <OpenModal
               component={AddWorkExperience}
-              onClose={editBtnCloseHandler}
+              onClose={toggleEditWork}
               showModal={editWork}
               isEdit={editWork}
               data={editWork ? { name: subTitle, position: position } : ''}
@@ -127,12 +120,7 @@ const WorkExperienceShown = ({
             <ul className="referee-name work-experience__row-item">
               <li>
                 {refereeName}
-                <span
-                  className="referee-email text-link"
-                  onClick={e => {
-                    onContactLinkClicked(e, refereeContact);
-                  }}
-                >
+                <span className="referee-email text-link" onClick={e => onContactLinkClicked(refereeContact)}>
                   {/^\d+$/.test(refereeContact) ? ' ' + COUNTRY_CODE + '-' + refereeContact : ' ' + refereeContact}
                 </span>
               </li>
@@ -152,9 +140,9 @@ WorkExperienceShown.propTypes = {
   roles: PropTypes.string,
   achievements: PropTypes.string,
   refereeName: PropTypes.string,
+  refereeContact: PropTypes.string,
   currentlyWorking: PropTypes.bool,
   preview: PropTypes.bool,
-  refereeContact: PropTypes.string,
   onHiddenIconClicked: PropTypes.func,
   onDelete: PropTypes.func,
   onContactLinkClicked: PropTypes.func,

@@ -17,23 +17,16 @@ const WorkExperience = () => {
   const preview = context.preview.get;
   const workExperience = context.data.get.workExperience;
 
-  const addBtnHandler = () => {
-    setAdd(!addWork);
-  };
-
-  const addBtnCloseHandler = () => {
+  const toggleAddWork = () => {
     setAdd(!addWork);
   };
 
   /**
    * Update the hidden state of work.
    *
-   * @param {React.MouseEvent} e [ on click event ].
    * @param {string} key [ name of a particular work experience].
    */
-  const updateHiddenStateWork = (e, key) => {
-    e.preventDefault();
-
+  const updateHiddenStateWork = key => {
     const data = context.data.get;
 
     data['workExperience'].find(({ name, hidden }, index) => {
@@ -46,9 +39,7 @@ const WorkExperience = () => {
     });
   };
 
-  const deleteWorkExperience = (e, name, position) => {
-    e.preventDefault();
-
+  const deleteWorkExperience = (name, position) => {
     const data = context.data.get;
 
     const filteredWorkExperiences = data['workExperience'].filter(work => {
@@ -62,7 +53,7 @@ const WorkExperience = () => {
     storage.saveResume(localStorage, context.data.get);
   };
 
-  const contactLinkHandler = (e, value) => {
+  const contactLinkHandler = value => {
     if (isNaN(value)) {
       window.open('mailto:' + value);
     } else {
@@ -79,9 +70,9 @@ const WorkExperience = () => {
           hide={preview}
           label="Add another work experience"
           showModal={addWork}
-          onAdd={addBtnHandler}
+          onAdd={toggleAddWork}
           component={AddWorkExperience}
-          onClose={addBtnCloseHandler}
+          onClose={toggleAddWork}
           modifier="empty"
         />
       </>
@@ -131,9 +122,9 @@ const WorkExperience = () => {
         hide={preview}
         label="Add another work experience"
         showModal={addWork}
-        onAdd={addBtnHandler}
+        onAdd={toggleAddWork}
         component={AddWorkExperience}
-        onClose={addBtnCloseHandler}
+        onClose={toggleAddWork}
       />
     </div>
   );
