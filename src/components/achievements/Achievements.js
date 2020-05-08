@@ -16,23 +16,16 @@ const Achievements = () => {
   const preview = context.preview.get;
   const achievements = context.data.get.achievements;
 
-  const addBtnHandler = () => {
-    setAdd(!addAchievement);
-  };
-
-  const addBtnCloseHandler = () => {
+  const toggleAddAchievent = () => {
     setAdd(!addAchievement);
   };
 
   /**
    * Update the hidden state of skill.
    *
-   * @param {React.MouseEvent} e [ on click event ].
    * @param {string} key [ name of a particular achievements].
    */
-  const updateHiddenStateAchievement = (e, key) => {
-    e.preventDefault();
-
+  const updateHiddenStateAchievement = key => {
     const data = context.data.get;
 
     data['achievements'].find(({ name, hidden }, index) => {
@@ -45,9 +38,7 @@ const Achievements = () => {
     });
   };
 
-  const deleteAchievment = (e, name, date) => {
-    e.preventDefault();
-
+  const deleteAchievment = (name, date) => {
     const data = context.data.get;
 
     const filteredAchievements = data['achievements'].filter(achievement => {
@@ -70,9 +61,9 @@ const Achievements = () => {
           hide={preview}
           label="Add another achievement"
           showModal={addAchievement}
-          onAdd={addBtnHandler}
+          onAdd={toggleAddAchievent}
           component={AddAchievement}
-          onClose={addBtnCloseHandler}
+          onClose={toggleAddAchievent}
           modifier="empty"
         />
       </>
@@ -100,9 +91,9 @@ const Achievements = () => {
         hide={preview}
         label="Add another achievement"
         showModal={addAchievement}
-        onAdd={addBtnHandler}
+        onAdd={toggleAddAchievent}
         component={AddAchievement}
-        onClose={addBtnCloseHandler}
+        onClose={toggleAddAchievent}
       />
     </>
   );
