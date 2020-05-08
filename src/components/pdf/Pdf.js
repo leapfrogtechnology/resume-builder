@@ -1,7 +1,8 @@
 import moment from 'moment';
+import { Page, Text, View, Document, StyleSheet, Image, Font } from '@react-pdf/renderer';
+
 import { ProfileImage } from '~/assets/image';
 import * as dateUtils from '~/utilities/date/FormatDate';
-import { Page, Text, View, Document, StyleSheet, Image, Font } from '@react-pdf/renderer';
 
 // Register font used here.
 Font.register({
@@ -186,14 +187,42 @@ const MyDocument = ({ resumeJson }) => {
           profileImg={profileImg}
           contactsList={contactsList}
         ></PersonalInformation>
-        <Skills heading="Skills" data={skills}></Skills>
-        <WorkExperience heading="Work Experiences" experience={experience} data={workExperience}></WorkExperience>
-        <ProjectUndertaken heading="Projects Undertaken" data={projects}></ProjectUndertaken>
-        <Achievement heading="Achievements" data={achievements}></Achievement>
-        <Certificate heading="Certificates" data={certificates}></Certificate>
+        <ContentWrapper heading="Skills" data={skills} WrappedComponent={Skills} />
+        <ContentWrapper
+          heading="Work Experience"
+          data={workExperience}
+          WrappedComponent={WorkExperience}
+          experience={experience}
+        />
+        {/* <ProjectUndertaken heading="Projects Undertaken" data={projects}></ProjectUndertaken> */}
+        {/* <Achievement heading="Achievements" data={achievements}></Achievement> */}
+        {/* <Certificate heading="Certificates" data={certificates}></Certificate>{' '} */}
       </Page>
     </Document>
   );
+};
+
+/**
+ * HOC that renders other components
+ * @param {string} heading Title to show.
+ * @param {data} data Data to pass to WrappedComponent.
+ * @param {React.Component} WrappedComponent Component to render.
+ */
+const ContentWrapper = ({ heading, data, WrappedComponent, experience = null }) => {
+  if (!data) {
+    return <></>;
+  }
+
+  const filteredData = data.filter(value => !value.hidden); //Remove hidden data
+
+  if (filteredData.length < 1) {
+    return <></>;
+  } else {
+    if (experience) {
+      return <WrappedComponent heading={heading} data={filteredData} experience={experience} />;
+    }
+    return <WrappedComponent heading={heading} data={filteredData} />;
+  }
 };
 
 /**
@@ -244,45 +273,59 @@ const PersonalInformation = ({ name, role, introduction, profileImg, contactsLis
  * @param {Array} data Array of Skill object.
  */
 const Skills = ({ heading, data }) => {
-  if (!data) {
-    return <></>;
-  }
-
-  const filteredSkills = data.filter(skill => !skill.hidden); //Remove hidden skill
-
-  if (filteredSkills.length < 1) {
-    return <></>;
-  }
+  const skillsItem = data.map(({ label, subSkills }, index) => (
+    <SkillItem key={index} label={label} list={subSkills}></SkillItem>
+  ));
 
   return (
     <View style={styles.resumeContentBlock}>
       <Text style={styles.contentHeader}>{heading}</Text>
-      <View style={skills.paragraph}>
-        {filteredSkills.map((skill, index) => (
-          <View key={index} style={skills.content}>
-            <Text>{skill.label + ' '}</Text>
-            {skill.subSkills
-              .map(subSkill => {
-                return subSkill.name;
-              })
-              .join()
-              .trim() && (
-              <Text>
-                {' ( ' +
-                  skill.subSkills
-                    .map(subSkill => {
-                      return subSkill.name;
-                    })
-                    .join()
-                    .trim() +
-                  ' ) , '}
-              </Text>
-            )}
-          </View>
-        ))}
-      </View>
+      <View style={skills.paragraph}>{skillsItem}</View>
     </View>
   );
+};
+
+/**
+ * Create a single skill Item.
+ *
+ * @param {string} label Name of skill.
+ * @param {Array} list List of subskills.
+ */
+const SkillItem = ({ label, list }) => {
+  return (
+    <View style={skills.content}>
+      <Text>{label + ' '}</Text>
+      <SubSkillItem subSkills={list} />
+    </View>
+  );
+};
+
+const SubSkillItem = ({ subSkills }) => {
+  if (subSkills.length < 1) {
+    return (
+      <>
+        <Text>{' , '}</Text>
+      </>
+    );
+  } else {
+    const filteredResult = subSkills
+      .filter(({ name }) => {
+        return name !== '';
+      })
+      .map(value => value.name)
+      .join()
+      .trim();
+
+    if (!filteredResult) {
+      return (
+        <>
+          <Text>{' , '}</Text>
+        </>
+      );
+    } else {
+      return <Text>{' ( ' + filteredResult + ' ) , '}</Text>;
+    }
+  }
 };
 
 /**
@@ -293,12 +336,6 @@ const Skills = ({ heading, data }) => {
  * @param {Array} data Array of workExperience object.
  */
 const WorkExperience = ({ heading, experience, data }) => {
-  if (!data) {
-    return <></>;
-  }
-
-  const filteredExperience = data.filter(exp => !exp.hidden); //Remove hidden work experience
-
   let experienceLabel = '';
 
   //Create label to show overall work experience.
@@ -328,16 +365,14 @@ const WorkExperience = ({ heading, experience, data }) => {
 
   experienceLabel = experienceLabel ? '( ' + experienceLabel + ' )' : '';
 
-  if (filteredExperience.length < 1) {
-    return <></>;
-  }
+  const workExperiences = data.map((value, index) => (
+    <WorkExperienceItem key={index} workExperience={value}></WorkExperienceItem>
+  ));
 
   return (
     <View style={styles.resumeContentBlock}>
       <Text style={styles.contentHeader}>{heading + ' ' + experienceLabel}</Text>
-      {filteredExperience.map((value, index) => (
-        <WorkExperienceItem key={index} workExperience={value}></WorkExperienceItem>
-      ))}
+      {workExperiences}
     </View>
   );
 };
