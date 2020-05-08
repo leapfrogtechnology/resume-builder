@@ -14,7 +14,7 @@ import FormHeader from '~/components/formheader/FormHeader';
 const AddSkill = ({ onClose, isEdit, values }) => {
   const { data } = useContext(FormContext);
 
-  let skillsList = [];
+  const skillsList = [];
 
   const validateSkill = Yup.object().shape({
     skill: Yup.string().required(),

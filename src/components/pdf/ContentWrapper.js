@@ -17,6 +17,7 @@ const ContentWrapper = ({ heading, data, WrappedComponent, experience = null }) 
     if (experience) {
       return <WrappedComponent heading={heading} data={filteredData} experience={experience} />;
     }
+
     return <WrappedComponent heading={heading} data={filteredData} />;
   }
 };

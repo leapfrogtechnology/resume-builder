@@ -6,9 +6,6 @@ import Header from '~/components/header/Header';
 import * as storage from '~/storage/LocalStorage';
 import { FormContext } from '../components/FormContext';
 import Dashboard from '~/components/dashboard/Dashboard';
-import Pdf from '~/components/pdf/Pdf.js';
-import { PDFViewer } from '@react-pdf/renderer';
-import MyDocument from '../utilities/resume/pdf';
 
 const App = () => {
   // App state

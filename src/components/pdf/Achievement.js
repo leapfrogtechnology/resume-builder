@@ -1,11 +1,11 @@
+import React from 'react';
+import moment from 'moment';
+import PropTypes from 'prop-types';
 import { Text, View } from '@react-pdf/renderer';
 import * as pdfStyles from '~/components/pdf/pdf.styles.js';
 
 /**
  * Create achievements section.
- *
- * @param {string} heading Heading to show.
- * @param {Array} data Array of achievement object.
  */
 const Achievement = ({ heading, data }) => {
   const achievementItems = data.map(({ name, date, description }, index) => (
@@ -28,6 +28,17 @@ const AchievementItem = ({ title, date, description }) => {
       {description ? <Text>{description}</Text> : <></>}
     </View>
   );
+};
+
+Achievement.propTypes = {
+  heading: PropTypes.string,
+  data: PropTypes.array,
+};
+
+AchievementItem.propTypes = {
+  title: PropTypes.string,
+  date: PropTypes.string,
+  description: PropTypes.description,
 };
 
 export default Achievement;

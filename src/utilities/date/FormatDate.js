@@ -57,7 +57,7 @@ export const getDifferenceInYearMonth = (startDate, endDate) => {
 };
 
 /**
- * Get Label for duration in years and months
+ * Get Label for duration in years and months.
  *
  * @param {Date} startDate Start date.
  * @param {Date} endDate End date.
@@ -94,8 +94,8 @@ export const getDifferenceYearMonth = (startDate, endDate, currentlyWorking) => 
 export const getEngagementTenure = (startDate, endDate, currentlyEngaged) => {
   const differenceInDate = getDifferenceYearMonth(startDate, endDate, currentlyEngaged);
 
-  let postfixOne = currentlyEngaged ? 'Present' : moment(endDate).format('MMMM YYYY');
-  let postfixTwo = differenceInDate ? `( ${differenceInDate} )` : '';
+  const postfixOne = currentlyEngaged ? 'Present' : moment(endDate).format('MMMM YYYY');
+  const postfixTwo = differenceInDate ? `( ${differenceInDate} )` : '';
 
   const labelForDate = `${moment(startDate).format('MMMM YYYY')}  -  ${postfixOne} ${postfixTwo}`;
 
@@ -125,5 +125,6 @@ export const getExperienceLabel = experienceTime => {
       experienceLabel += `${experienceTime.month} months `;
     }
   }
+
   return experienceLabel;
 };

@@ -59,6 +59,7 @@ InputDate.propTypes = {
   label: PropTypes.string,
   placeholder: PropTypes.string,
   modifier: PropTypes.bool,
+  checkBoxState: PropTypes.bool,
   setFieldValue: PropTypes.func,
   setFieldTouched: PropTypes.func,
 };

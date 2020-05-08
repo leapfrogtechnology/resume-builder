@@ -12,4 +12,4 @@ const linkCheck = new RegExp(
   'i'
 ); // fragment locator
 
-export { skills, emailCheck, phoneNumberCheck, linkCheck };
+export { emailCheck, phoneNumberCheck, linkCheck };
