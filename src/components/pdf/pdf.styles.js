@@ -1,6 +1,5 @@
 import { StyleSheet, Font } from '@react-pdf/renderer';
 
-// Register font used here.
 Font.register({
   family: 'Arial',
   fonts: [
@@ -10,7 +9,6 @@ Font.register({
   ],
 });
 
-// Create styles for overall template.
 export const styles = StyleSheet.create({
   page: {
     backgroundColor: 'white',
@@ -55,7 +53,6 @@ export const styles = StyleSheet.create({
   },
 });
 
-// Create styles for personal information section
 export const personalInformationStyles = StyleSheet.create({
   personalInformation: {
     display: 'flex',
@@ -114,7 +111,6 @@ export const personalInformationStyles = StyleSheet.create({
   },
 });
 
-// Create styles for workExperience section.
 export const workExpStyles = StyleSheet.create({
   list: {
     display: 'list-item',
@@ -122,7 +118,6 @@ export const workExpStyles = StyleSheet.create({
   },
 });
 
-// Create styles for skills section.
 export const skills = StyleSheet.create({
   paragraph: {
     width: '75%',
