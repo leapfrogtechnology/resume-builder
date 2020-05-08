@@ -17,25 +17,7 @@ const WorkExperience = ({ heading, experience, data }) => {
   if (experience) {
     const experienceInYearAndMonth = dateUtils.getExperienceFormat(experience);
 
-    experienceLabel = '';
-
-    if (experienceInYearAndMonth.year === 0 && experienceInYearAndMonth.month === 0) {
-      experienceLabel = '';
-    } else {
-      if (experienceInYearAndMonth.year !== 0) {
-        experienceLabel =
-          experienceInYearAndMonth.year > 1
-            ? `${experienceInYearAndMonth.year} years `
-            : `${experienceInYearAndMonth.year}  year `;
-      }
-
-      if (experienceInYearAndMonth.month !== 0) {
-        experienceLabel +=
-          experienceInYearAndMonth.month > 1
-            ? `${experienceInYearAndMonth.month} months `
-            : `${experienceInYearAndMonth.month} month `;
-      }
-    }
+    experienceLabel = dateUtils.getExperienceLabel(experienceInYearAndMonth);
   }
 
   experienceLabel = experienceLabel ? `( ${experienceLabel} )` : '';
