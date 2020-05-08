@@ -1,8 +1,8 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+
 /**
  * HOC that renders other components
- * @param {string} heading Title to show.
- * @param {data} data Data to pass to WrappedComponent.
- * @param {React.Component} WrappedComponent Component to render.
  */
 const ContentWrapper = ({ heading, data, WrappedComponent, experience = null }) => {
   if (!data) {
@@ -19,6 +19,13 @@ const ContentWrapper = ({ heading, data, WrappedComponent, experience = null }) 
     }
     return <WrappedComponent heading={heading} data={filteredData} />;
   }
+};
+
+ContentWrapper.propTypes = {
+  heading: PropTypes.string,
+  data: PropTypes.array,
+  WrappedComponent: PropTypes.func,
+  experience: PropTypes.object || null,
 };
 
 export default ContentWrapper;

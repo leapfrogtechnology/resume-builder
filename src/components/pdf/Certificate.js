@@ -1,11 +1,11 @@
+import React from 'react';
+import moment from 'moment';
+import PropTypes from 'prop-types';
 import { Text, View } from '@react-pdf/renderer';
 import * as pdfStyles from '~/components/pdf/pdf.styles.js';
 
 /**
  * Create certificate section.
- *
- * @param {string} heading Header to show.
- * @param {Array} data Array of certificate object.
  */
 const Certificate = ({ heading, data }) => {
   const certificateItems = data.map(({ name, link, date, description }, index) => (
@@ -29,6 +29,18 @@ const CertificateItem = ({ title, link, date, description }) => {
       {description ? <Text>{description}</Text> : <></>}
     </View>
   );
+};
+
+Certificate.propTypes = {
+  heading: PropTypes.string,
+  data: PropTypes.array,
+};
+
+CertificateItem.propTypes = {
+  title: PropTypes.string,
+  link: PropTypes.string,
+  date: PropTypes.string,
+  description: PropTypes.description,
 };
 
 export default Certificate;

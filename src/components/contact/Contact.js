@@ -30,7 +30,7 @@ const Contact = ({ id, label, value, preview, onHiddenIconClicked, baseUrl = '' 
         )}
       </div>
       <div className="contact__value text-link">
-        <a className="text-link" href={baseUrl + value} target="_blank">
+        <a className="text-link" href={baseUrl + value} rel="noopener noreferrer" target="_blank">
           {value}
         </a>
       </div>

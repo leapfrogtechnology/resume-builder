@@ -1,3 +1,5 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Text, View } from '@react-pdf/renderer';
 import * as dateUtils from '~/utilities/date/FormatDate';
 import * as pdfStyles from '~/components/pdf/pdf.styles.js';
@@ -5,15 +7,11 @@ import WorkExperienceItem from '~/components/pdf/WorkExperienceItem';
 
 /**
  * Create work experience section.
- *
- * @param {string} heading Header to show.
- * @param {object} experience Overall experience of resumee holder.
- * @param {Array} data Array of workExperience object.
  */
 const WorkExperience = ({ heading, experience, data }) => {
   let experienceLabel = '';
 
-  //Create label to show overall work experience.
+  // Create label to show overall work experience.
   if (experience) {
     const experienceInYearAndMonth = dateUtils.getExperienceFormat(experience);
 
@@ -32,6 +30,12 @@ const WorkExperience = ({ heading, experience, data }) => {
       {workExperiences}
     </View>
   );
+};
+
+WorkExperience.propTypes = {
+  heading: PropTypes.string,
+  experience: PropTypes.object,
+  data: PropTypes.array,
 };
 
 export default WorkExperience;

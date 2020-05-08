@@ -1,11 +1,10 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Text, View } from '@react-pdf/renderer';
 import * as pdfStyles from '~/components/pdf/pdf.styles.js';
 
 /**
  * Create a single skill Item.
- *
- * @param {string} label Name of skill.
- * @param {Array} list List of subskills.
  */
 const SkillItem = ({ label, list }) => {
   return (
@@ -42,6 +41,15 @@ const SubSkillItem = ({ subSkills }) => {
       return <Text>{`( ${filteredResult} ), `}</Text>;
     }
   }
+};
+
+SkillItem.propTypes = {
+  label: PropTypes.string,
+  list: PropTypes.array,
+};
+
+SubSkillItem.propTypes = {
+  subSkills: PropTypes.array,
 };
 
 export default SkillItem;

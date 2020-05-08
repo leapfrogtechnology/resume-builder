@@ -72,6 +72,7 @@ const AddCertificate = ({ onClose, isEdit, values }) => {
         description: '',
       };
     }
+
     return initialValues;
   };
 

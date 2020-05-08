@@ -1,12 +1,11 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Text, View } from '@react-pdf/renderer';
 import SkillItem from '~/components/pdf/SkillItem';
 import * as pdfStyles from '~/components/pdf/pdf.styles.js';
 
 /**
  * Create skills section
- *
- * @param {string} heading Header to show.
- * @param {Array} data Array of Skill object.
  */
 const Skills = ({ heading, data }) => {
   const skillsItem = data.map(({ label, subSkills }, index) => (
@@ -19,6 +18,11 @@ const Skills = ({ heading, data }) => {
       <View style={pdfStyles.skills.paragraph}>{skillsItem}</View>
     </View>
   );
+};
+
+Skills.propTypes = {
+  heading: PropTypes.string,
+  data: PropTypes.array,
 };
 
 export default Skills;

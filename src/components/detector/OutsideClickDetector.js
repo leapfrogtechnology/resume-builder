@@ -1,8 +1,9 @@
+/* eslint-disable */
 import PropTypes from 'prop-types';
 import React, { useRef, useEffect } from 'react';
 
 /**
- * Hook that alerts clicks outside of the passed ref
+ * Hook that alerts clicks outside of the passed ref.
  */
 function useOutsideClickDetector(ref, onClose) {
   useEffect(() => {

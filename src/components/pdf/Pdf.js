@@ -1,3 +1,5 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Page, Document } from '@react-pdf/renderer';
 
 import Skills from '~/components/pdf/Skill';
@@ -61,6 +63,10 @@ const MyDocument = ({ resumeJson }) => {
       </Page>
     </Document>
   );
+};
+
+MyDocument.propTypes = {
+  resumeJson: PropTypes.object,
 };
 
 export default MyDocument;

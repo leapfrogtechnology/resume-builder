@@ -1,13 +1,11 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import { ProfileImage } from '~/assets/image';
 import { Text, View, Image } from '@react-pdf/renderer';
 import * as pdfStyles from '~/components/pdf/pdf.styles.js';
 
 /**
  * Create personal info section.
- *
- * @param {string} name Name of resumee holder.
- * @param {object} role Role of resume holder.
- * @param {Array} contactsList List of contacts having hidden = false.
  */
 const PersonalInformation = ({ name, role, introduction, profileImg, contacts }) => {
   const contactItems = contacts.map((contact, index) => (
@@ -52,6 +50,19 @@ const PersonalInformationItem = ({ label, value }) => {
       <Text style={pdfStyles.personalInformationStyles.contentRight}>{value}</Text>
     </View>
   );
+};
+
+PersonalInformation.propTypes = {
+  name: PropTypes.string,
+  role: PropTypes.object,
+  introduction: PropTypes.object,
+  profileImg: PropTypes.string,
+  contacts: PropTypes.array,
+};
+
+PersonalInformationItem.propTypes = {
+  label: PropTypes.string,
+  value: PropTypes.string,
 };
 
 export default PersonalInformation;

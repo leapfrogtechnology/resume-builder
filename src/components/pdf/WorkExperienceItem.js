@@ -1,3 +1,5 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Text, View } from '@react-pdf/renderer';
 
 import List from '~/components/pdf/List';
@@ -6,8 +8,6 @@ import * as pdfStyles from '~/components/pdf/pdf.styles.js';
 
 /**
  * Create a single work experience section.
- *
- * @param {object} workExperience Work Experience object.
  */
 const WorkExperienceItem = ({ workExperience }) => {
   const labelForDate = dateUtils.getEngagementTenure(
@@ -46,6 +46,15 @@ const RefereeSection = ({ name, contact }) => {
       <Text>{`Referee ${name} ( ${contact} )`}</Text>
     </View>
   );
+};
+
+WorkExperienceItem.propTypes = {
+  workExperience: PropTypes.object,
+};
+
+RefereeSection.propTypes = {
+  name: PropTypes.string,
+  contact: PropTypes.string,
 };
 
 export default WorkExperienceItem;
