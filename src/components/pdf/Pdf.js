@@ -52,9 +52,9 @@ const MyDocument = ({ resumeJson }) => {
           WrappedComponent={WorkExperience}
           experience={experience}
         />
-        {/* <ProjectUndertaken heading="Projects Undertaken" data={projects}></ProjectUndertaken> */}
-        {/* <Achievement heading="Achievements" data={achievements}></Achievement> */}
-        {/* <Certificate heading="Certificates" data={certificates}></Certificate>{' '} */}
+        <ContentWrapper heading="Projects Undertaken" data={projects} WrappedComponent={ProjectUndertaken} />
+        <ContentWrapper heading="Achievements" data={achievements} WrappedComponent={Achievement} />
+        <ContentWrapper heading="Certificates" data={certificates} WrappedComponent={Certificate} />
       </Page>
     </Document>
   );
@@ -243,16 +243,11 @@ const WorkExperience = ({ heading, experience, data }) => {
  * @param {object} workExperience Work Experience object.
  */
 const WorkExperienceItem = ({ workExperience }) => {
-  const differenceInDate = dateUtils.getDifferenceYearMonth(
+  const labelForDate = getEngagementTenure(
     workExperience.startDate,
     workExperience.endDate,
     workExperience.currentlyWorking
   );
-
-  let postfixOne = workExperience.currentlyWorking ? 'Present' : moment(workExperience.endDate).format('MMMM YYYY');
-  let postfixTwo = differenceInDate ? `( ${differenceInDate} )` : '';
-
-  const labelForDate = moment(workExperience.startDate).format('MMMM YYYY') + ' - ' + postfixOne + postfixTwo;
 
   const roles = workExperience.responsibilities.split('.').filter(role => role.trim() !== '');
   const achievements = workExperience.achievements.split('.').filter(achievement => achievement.trim() !== '');
@@ -312,24 +307,12 @@ const RefereeSection = ({ name, contact }) => {
  * @param {Array} data Array of project object.
  */
 const ProjectUndertaken = ({ heading, data }) => {
-  if (!data) {
-    return <></>;
-  }
-
-  const filteredProjects = data.filter(project => !project.hidden); //Remove hidden project.
-
-  if (filteredProjects.length < 1) {
-    return <></>;
-  }
+  const projectsUntertaken = data.map((project, index) => <ProjectItem key={index} project={project} />);
 
   return (
     <View style={pdfStyles.styles.resumeContentBlock}>
       <Text style={pdfStyles.styles.contentHeader}>{heading}</Text>
-      <View style={pdfStyles.styles.contentBlock}>
-        {filteredProjects.map((value, index) => (
-          <ProjectItem key={index} project={value}></ProjectItem>
-        ))}
-      </View>
+      <View style={pdfStyles.styles.contentBlock}>{projectsUntertaken}</View>
     </View>
   );
 };
@@ -340,18 +323,13 @@ const ProjectUndertaken = ({ heading, data }) => {
  * @param {object} project Project object.
  */
 const ProjectItem = ({ project }) => {
-  const differenceInDate = dateUtils.getDifferenceYearMonth(project.startDate, project.endDate, project.ongoing);
-
-  let postfixOne = project.ongoing ? 'Present' : moment(project.endDate).format('MMMM YYYY');
-  let postfixTwo = differenceInDate ? ' ( ' + differenceInDate + ' )' : '';
-
-  const labelForDate = moment(project.startDate).format('MMMM YYYY') + ' - ' + postfixOne + postfixTwo;
+  const labelForDate = getEngagementTenure(project.startDate, project.endDate, project.ongoing);
 
   return (
     <View style={pdfStyles.styles.paragraph}>
       <Text style={pdfStyles.styles.contentSubHeader}>{project.name}</Text>
       <Text>{labelForDate}</Text>
-      {project.description && <Text>{project.description}</Text>}
+      {project.description ? <Text>{project.description}</Text> : <></>}
     </View>
   );
 };
@@ -363,34 +341,27 @@ const ProjectItem = ({ project }) => {
  * @param {Array} data Array of achievement object.
  */
 const Achievement = ({ heading, data }) => {
-  if (!data) {
-    return <></>;
-  }
-
-  const filteredAchievements = data.filter(achievement => !achievement.hidden);
-
-  if (filteredAchievements.length < 1) {
-    return <></>;
-  }
+  const achievementItems = data.map(({ name, date, description }, index) => (
+    <AchievementItem key={index} title={name} date={date} description={description} />
+  ));
 
   return (
     <View style={pdfStyles.styles.resumeContentBlock}>
       <Text style={pdfStyles.styles.contentHeader}>{heading}</Text>
-      <View style={pdfStyles.styles.contentBlock}>
-        {filteredAchievements.map((achievement, index) => {
-          return (
-            <View key={index} style={pdfStyles.styles.paragraph}>
-              <Text style={pdfStyles.styles.contentSubHeader}>{achievement.name}</Text>
-              <Text>{moment(achievement.date).format('MMMM YYYY')}</Text>
-              {achievement.description && <Text>{achievement.description}</Text>}
-            </View>
-          );
-        })}
-      </View>
+      <View style={pdfStyles.styles.contentBlock}>{achievementItems}</View>
     </View>
   );
 };
 
+const AchievementItem = ({ title, date, description }) => {
+  return (
+    <View style={pdfStyles.styles.paragraph}>
+      <Text style={pdfStyles.styles.contentSubHeader}>{title}</Text>
+      <Text>{moment(date).format('MMMM YYYY')}</Text>
+      {description ? <Text>{description}</Text> : <></>}
+    </View>
+  );
+};
 /**
  * Create certificate section.
  *
@@ -398,29 +369,25 @@ const Achievement = ({ heading, data }) => {
  * @param {Array} data Array of certificate object.
  */
 const Certificate = ({ heading, data }) => {
-  if (!data) {
-    return <></>;
-  }
-
-  const filteredCertificates = data.filter(certificate => !certificate.hidden);
-
-  if (filteredCertificates.length < 1) {
-    return <></>;
-  }
+  const certificateItems = data.map(({ name, link, date, description }, index) => (
+    <CertificateItem key={index} title={name} link={link} date={date} description={description} />
+  ));
 
   return (
     <View style={pdfStyles.styles.resumeContentBlock}>
       <Text style={pdfStyles.styles.contentHeader}>{heading}</Text>
-      <View style={pdfStyles.styles.contentBlock}>
-        {filteredCertificates.map((certificate, index) => (
-          <View key={index} style={pdfStyles.styles.paragraph}>
-            <Text style={pdfStyles.styles.contentSubHeader}>{certificate.name}</Text>
-            <Text>{certificate.link}</Text>
-            <Text>{moment(certificate.date).format('MMMM YYYY')}</Text>
-            {certificate.description && <Text>{certificate.description}</Text>}
-          </View>
-        ))}
-      </View>
+      <View style={pdfStyles.styles.contentBlock}>{certificateItems}</View>
+    </View>
+  );
+};
+
+const CertificateItem = ({ title, link, date, description }) => {
+  return (
+    <View style={pdfStyles.styles.paragraph}>
+      <Text style={pdfStyles.styles.contentSubHeader}>{title}</Text>
+      <Text>{link}</Text>
+      <Text>{moment(date).format('MMMM YYYY')}</Text>
+      {description ? <Text>{description}</Text> : <></>}
     </View>
   );
 };
@@ -432,6 +399,17 @@ const PersonalInformationItem = ({ label, value }) => {
       <Text style={pdfStyles.personalInformationStyles.contentRight}>{value}</Text>
     </View>
   );
+};
+
+const getEngagementTenure = (startDate, endDate, currentlyEngaged) => {
+  const differenceInDate = dateUtils.getDifferenceYearMonth(startDate, endDate, currentlyEngaged);
+
+  let postfixOne = currentlyEngaged ? 'Present' : moment(endDate).format('MMMM YYYY');
+  let postfixTwo = differenceInDate ? `( ${differenceInDate} )` : '';
+
+  const labelForDate = `${moment(startDate).format('MMMM YYYY')}  -  ${postfixOne} ${postfixTwo}`;
+
+  return labelForDate;
 };
 
 export default MyDocument;
