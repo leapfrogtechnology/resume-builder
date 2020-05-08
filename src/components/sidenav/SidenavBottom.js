@@ -45,9 +45,9 @@ const SidenavBottom = ({ resumeJson, downloadPdf, downloadPdfIconClicked, delete
 
           {downloadPdf && (
             <PDFDownloadLink document={<MyDocument resumeJson={resumeJson} />} fileName="somename.pdf">
-              {({ url, loading, error }) => {
+              {({ url, loading }) => {
                 if (!loading) {
-                  let a = document.createElement('a');
+                  const a = document.createElement('a');
 
                   a.href = url;
                   a.download = 'resume.pdf';
