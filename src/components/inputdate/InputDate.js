@@ -1,10 +1,10 @@
+import moment from 'moment';
 import { useField } from 'formik';
+import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
-import PropTypes from 'prop-types';
 import { Calendar } from '~/assets/image';
 import DatePicker from 'react-datepicker';
-import moment from 'moment';
 
 const InputDate = ({ label, placeholder, modifier, checkBoxState, setFieldValue, setFieldTouched, ...props }) => {
   const [field, meta] = useField(props);
