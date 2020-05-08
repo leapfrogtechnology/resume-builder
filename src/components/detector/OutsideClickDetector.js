@@ -1,5 +1,5 @@
-import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import React, { useRef, useEffect } from 'react';
 
 /**
  * Hook that alerts clicks outside of the passed ref

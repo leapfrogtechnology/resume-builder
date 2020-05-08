@@ -2,7 +2,7 @@ import moment from 'moment';
 import ProptTypes from 'prop-types';
 import React, { useState } from 'react';
 
-import OpenModal from '../modal/OpenModal';
+import OpenModal from '~/components/modal/OpenModal';
 import EditOptions from '~/components/editoptions/EditOptions';
 import AddAchievement from '~/components/form/achievement/AddAchievement';
 

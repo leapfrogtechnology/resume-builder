@@ -1,18 +1,15 @@
-/* eslint-disable require-jsdoc */
-/* eslint-disable react/prop-types */
 import * as Yup from 'yup';
 import * as _ from 'lodash';
 import PropTypes from 'prop-types';
 import { Formik, Form } from 'formik';
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 
 import Button from '~/components/button/Button';
-import { FormContext } from '../../FormContext';
 import * as storage from '~/storage/LocalStorage';
+import { FormContext } from '~/components/FormContext';
+import * as skillUtils from '~/utilities/objects/Skill';
 import InputText from '~/components/inputtext/InputText';
 import FormHeader from '~/components/formheader/FormHeader';
-import InputSelect from '~/components/inputselect/InputSelect';
-import * as skillUtils from '../../../utilities/objects/Skill';
 
 const AddSkill = ({ onClose, isEdit, values }) => {
   const { data } = useContext(FormContext);

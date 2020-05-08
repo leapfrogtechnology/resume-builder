@@ -1,12 +1,12 @@
 import React, { useState, useContext } from 'react';
 
 import { Add } from '~/assets/image';
-import { FormContext } from '../FormContext';
-import AchievementItem from './AchievementItem';
 import * as storage from '~/storage/LocalStorage';
+import { FormContext } from '~/components/FormContext';
 import EmptyCard from '~/components/emptycard/EmptyCard';
 import CardHeader from '~/components/cardheader/CardHeader';
 import CardFooter from '~/components/cardfooter/CardFooter';
+import AchievementItem from '~/components/achievements/AchievementItem';
 import AddAchievement from '~/components/form/achievement/AddAchievement';
 
 const Achievements = () => {

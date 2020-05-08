@@ -2,11 +2,11 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
 import { Image } from '~/assets/image';
-import OpenModal from '../modal/OpenModal';
 import Media from '~/components/media/Media';
 import Button from '~/components/button/Button';
+import OpenModal from '~/components/modal/OpenModal';
 import { FAVORITE_ICON } from '~/components/icons/icon';
-import AddExperience from '../form/experience/AddExperience';
+import AddExperience from '~/components/form/experience/AddExperience';
 
 const UserDetail = ({ name, experience, profileImg, preview, onPreviewBtnClicked }) => {
   const [showModal, setModal] = useState(false);

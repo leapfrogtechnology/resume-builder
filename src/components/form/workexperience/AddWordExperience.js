@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Close, Trash } from '~/assets/image';
 import Button from '~/components/button/Button';
 import InputText from '~/components/inputtext/InputText';

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Card from './card/Card';
+import Card from '~/components/card/Card';
 
 const Form = ({ component }) => {
   return (

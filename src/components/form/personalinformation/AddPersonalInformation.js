@@ -5,8 +5,8 @@ import { Formik, Form } from 'formik';
 import React, { useContext } from 'react';
 
 import Button from '~/components/button/Button';
-import { FormContext } from '../../FormContext';
 import * as storage from '~/storage/LocalStorage';
+import { FormContext } from '~/components/FormContext';
 import InputText from '~/components/inputtext/InputText';
 import FormHeader from '~/components/formheader/FormHeader';
 import * as personalInfoUtils from '~/utilities/objects/PersonalInformation';

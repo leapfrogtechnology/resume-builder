@@ -1,13 +1,13 @@
 import React, { useContext, useState } from 'react';
 
 import { Add } from '~/assets/image';
-import { FormContext } from '../FormContext';
 import * as storage from '~/storage/LocalStorage';
-import WorkExperienceShown from './WorkExperienceShown';
+import { FormContext } from '~/components/FormContext';
 import EmptyCard from '~/components/emptycard/EmptyCard';
 import CardHeader from '~/components/cardheader/CardHeader';
 import CardFooter from '~/components/cardfooter/CardFooter';
-import AddWorkExperience from '../form/workexperience/AddWorkExperience';
+import WorkExperienceShown from '~/components/workexperience/WorkExperienceShown';
+import AddWorkExperience from '~/components/form/workexperience/AddWorkExperience';
 
 const WorkExperience = () => {
   const context = useContext(FormContext);

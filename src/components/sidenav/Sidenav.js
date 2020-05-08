@@ -1,14 +1,14 @@
 import React, { useContext, useState } from 'react';
 
-import SidenavBottom from './SidenavBottom';
-import { FormContext } from '../FormContext';
 import * as storage from '~/storage/LocalStorage';
 import Contact from '~/components/contact/Contact';
 import DeletePopup from '../form/delete/DeletePopup';
+import { FormContext } from '~/components/FormContext';
 import { toBase64 } from '~/utilities/file/toBase64.js';
 import { Edit, ProfileImage, Trash } from '~/assets/image';
 import CardHeader from '~/components/cardheader/CardHeader';
 import AddContact from '~/components/form/contact/AddContact';
+import SidenavBottom from '~/components/sidenav/SidenavBottom';
 import * as profileImageUtils from '~/utilities/objects/ProfileImage.js';
 import { COUNTRY_CODE, baseMailToUrl, baseTelUrl } from '~/constant/contact.js';
 

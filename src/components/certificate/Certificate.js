@@ -1,13 +1,13 @@
 import React, { useContext, useState } from 'react';
 
 import { Add } from '~/assets/image';
-import { FormContext } from '../FormContext';
-import CertificateItem from './CertificateItem';
 import * as storage from '~/storage/LocalStorage';
+import { FormContext } from '~/components/FormContext';
 import EmptyCard from '~/components/emptycard/EmptyCard';
 import CardFooter from '~/components/cardfooter/CardFooter';
 import CardHeader from '~/components/cardheader/CardHeader';
-import AddCertificate from '../form/certificate/AddCertificate';
+import CertificateItem from '~/components/certificate/CertificateItem';
+import AddCertificate from '~/components/form/certificate/AddCertificate';
 
 const Certificate = () => {
   const [addCertificate, setAdd] = useState(false);

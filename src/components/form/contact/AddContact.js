@@ -3,12 +3,12 @@ import { Formik, Form } from 'formik';
 import React, { useContext } from 'react';
 
 import Button from '~/components/button/Button';
-import { FormContext } from '../../FormContext';
 import * as storage from '~/storage/LocalStorage';
+import { PLACEHOLDER_LINK } from '~/constant/contact';
+import { FormContext } from '~/components/FormContext';
 import InputText from '~/components/inputtext/InputText';
 import FormHeader from '~/components/formheader/FormHeader';
 import * as contactUtils from '~/utilities/objects/Contact';
-import { PLACEHOLDER_LINK } from '../../../constant/contact';
 import validateContactInformation from '~/validations/Contact';
 import OutsideClickDetector from '~/components/detector/OutsideClickDetector';
 

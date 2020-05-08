@@ -2,10 +2,10 @@ import moment from 'moment';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
-import OpenModal from '../modal/OpenModal';
 import { UpRightArrow } from '~/assets/image';
+import OpenModal from '~/components/modal/OpenModal';
 import EditOptions from '~/components/editoptions/EditOptions';
-import AddCertificate from '../form/certificate/AddCertificate';
+import AddCertificate from '~/components/form/certificate/AddCertificate';
 
 const CertificateItem = ({ title, link, year, description, preview, onHiddenIconClicked, onDelete }) => {
   const [hidden, setHidden] = useState(false);

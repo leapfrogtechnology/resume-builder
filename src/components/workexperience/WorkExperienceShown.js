@@ -2,11 +2,11 @@ import moment from 'moment';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
-import OpenModal from '../modal/OpenModal';
+import { COUNTRY_CODE } from '~/constant/contact';
+import OpenModal from '~/components/modal/OpenModal';
 import * as dateUtils from '~/utilities/date/FormatDate';
 import EditOptions from '~/components/editoptions/EditOptions';
-import AddWorkExperience from '../form/workexperience/AddWorkExperience';
-import { COUNTRY_CODE } from '../../constant/contact';
+import AddWorkExperience from '~/components/form/workexperience/AddWorkExperience';
 
 const WorkExperienceShown = ({
   subTitle,

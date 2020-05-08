@@ -4,15 +4,15 @@ import { Formik, Form } from 'formik';
 import React, { useContext } from 'react';
 
 import Button from '~/components/button/Button';
-import { FormContext } from '../../FormContext';
 import * as storage from '~/storage/LocalStorage';
+import { FormContext } from '~/components/FormContext';
 import InputText from '~/components/inputtext/InputText';
 import InputDate from '~/components/inputdate/InputDate';
 import FormHeader from '~/components/formheader/FormHeader';
 import CheckboxInput from '~/components/checkbox/CheckboxInput';
 import { validateWorkExperience } from '~/validations/WorkExperience';
+import * as workExperienceUtils from '~/utilities/objects/WorkExperience';
 import OutsideClickDetector from '~/components/detector/OutsideClickDetector';
-import * as workExperienceUtils from '../../../utilities/objects/WorkExperience';
 
 const AddWorkExperience = ({ onClose, isEdit, values }) => {
   const { data } = useContext(FormContext);
