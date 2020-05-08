@@ -1,151 +1,9 @@
 import moment from 'moment';
-import { Page, Text, View, Document, StyleSheet, Image, Font } from '@react-pdf/renderer';
+import { Page, Text, View, Document, Image } from '@react-pdf/renderer';
 
 import { ProfileImage } from '~/assets/image';
 import * as dateUtils from '~/utilities/date/FormatDate';
-
-// Register font used here.
-Font.register({
-  family: 'Arial',
-  fonts: [
-    {
-      src: '~/assets/fonts/arial.ttf',
-    },
-  ],
-});
-
-// Create styles for overall template.
-const styles = StyleSheet.create({
-  page: {
-    backgroundColor: 'white',
-    margin: '60px 56px 40px 40px',
-    fontSize: 10,
-    lineHeight: 1.5,
-  },
-  personalInformation: {
-    display: 'flex',
-    color: 'black',
-  },
-  infoLeft: {
-    marginRight: 20,
-  },
-  infoRight: {
-    display: 'flex',
-    alignItems: 'center',
-  },
-  profileImageWrapper: {
-    marginRight: 20,
-    width: 50,
-    height: 50,
-    borderRadius: '50%',
-    overflow: 'hidden',
-  },
-  resumeContentBlock: {
-    marginTop: 34,
-  },
-  contentHeader: {
-    fontSize: 14,
-    fontWeight: 'bold',
-  },
-  contentSubHeader: {
-    fontSize: 10,
-    fontWeight: 'bold',
-    marginBottom: 4,
-  },
-  paragraph: {
-    marginTop: 12,
-    width: '90%',
-    textAlign: 'justify',
-  },
-});
-
-// Create styles for personal information section
-const personalInformationStyles = StyleSheet.create({
-  personalInformation: {
-    display: 'flex',
-    flexDirection: 'row',
-  },
-
-  left: {
-    marginRight: 20,
-  },
-
-  profileImageWrapper: {
-    marginRight: 20,
-    width: 50,
-    height: 50,
-    borderRadius: '50%',
-    overflow: 'hidden',
-  },
-  profileDetail: {
-    display: 'inline-block',
-  },
-  profileName: {
-    fontSize: 22,
-    fontWeight: 'bold',
-  },
-  profileStatus: {
-    fontWeight: 'normal',
-    fontSize: 12 || 14,
-  },
-  content: {
-    marginTop: 24,
-  },
-  contentRight: {
-    fontWeight: 'normal',
-    fontSize: 10 || 12,
-  },
-  contentLeft: {
-    width: 50,
-    fontSize: 10 || 12,
-    fontWeight: '500',
-    marginRight: 20,
-  },
-  contentRow: {
-    fontSize: 10,
-  },
-  contentRowItem: {
-    display: 'flex',
-    flexDirection: 'row',
-  },
-  contentBlock: {
-    marginTop: 15,
-  },
-  paragraph: {
-    marginTop: 12,
-    width: '75%',
-    textAlign: 'justify',
-  },
-});
-
-// Create styles for workExperience section.
-const workExpStyles = StyleSheet.create({
-  list: {
-    display: 'list-item',
-    paddingLeft: 4,
-  },
-});
-
-// Create styles for skills section.
-const skills = StyleSheet.create({
-  paragraph: {
-    width: '75%',
-    textAlign: 'justify',
-    display: 'flex',
-    flexDirection: 'row',
-  },
-  content: {
-    display: 'flex',
-    flexDirection: 'row',
-  },
-  textBold: {
-    fontWeight: 'bold',
-    fontSize: 14,
-  },
-  text: {
-    fontSize: 12,
-  },
-});
+import * as pdfStyles from '~/components/pdf/pdf.styles.js';
 
 // Create Document Component
 const MyDocument = ({ resumeJson }) => {
@@ -179,7 +37,7 @@ const MyDocument = ({ resumeJson }) => {
 
   return (
     <Document>
-      <Page size="A4" style={styles.page}>
+      <Page size="A4" style={pdfStyles.styles.page}>
         <PersonalInformation
           name={name}
           role={role}
@@ -235,26 +93,28 @@ const ContentWrapper = ({ heading, data, WrappedComponent, experience = null }) 
 const PersonalInformation = ({ name, role, introduction, profileImg, contactsList }) => {
   return (
     <View>
-      <View style={personalInformationStyles.personalInformation}>
-        <View style={personalInformationStyles.left}>
-          <View style={personalInformationStyles.profileImageWrapper}>
+      <View style={pdfStyles.personalInformationStyles.personalInformation}>
+        <View style={pdfStyles.personalInformationStyles.left}>
+          <View style={pdfStyles.personalInformationStyles.profileImageWrapper}>
             <Image src={profileImg && !profileImg.deleted ? profileImg.value : ProfileImage} alt="Image"></Image>
           </View>
         </View>
         <View>
           <View>
-            <Text style={personalInformationStyles.profileName}>{name}</Text>
-            {role && !role.hidden && <Text style={personalInformationStyles.profileStatus}>{role.label}</Text>}
+            <Text style={pdfStyles.personalInformationStyles.profileName}>{name}</Text>
+            {role && !role.hidden && (
+              <Text style={pdfStyles.personalInformationStyles.profileStatus}>{role.label}</Text>
+            )}
           </View>
-          <View style={personalInformationStyles.content}>
-            <View style={personalInformationStyles.contentRow}>
+          <View style={pdfStyles.personalInformationStyles.content}>
+            <View style={pdfStyles.personalInformationStyles.contentRow}>
               {contactsList.map((contact, index) => (
                 <PersonalInformationItem label={contact.type} value={contact.value} key={index} />
               ))}
             </View>
             {introduction && !introduction.hidden && (
-              <View style={personalInformationStyles.contentRow}>
-                <View style={personalInformationStyles.paragraph}>
+              <View style={pdfStyles.personalInformationStyles.contentRow}>
+                <View style={pdfStyles.personalInformationStyles.paragraph}>
                   <Text>{introduction.value}</Text>
                 </View>
               </View>
@@ -278,9 +138,9 @@ const Skills = ({ heading, data }) => {
   ));
 
   return (
-    <View style={styles.resumeContentBlock}>
-      <Text style={styles.contentHeader}>{heading}</Text>
-      <View style={skills.paragraph}>{skillsItem}</View>
+    <View style={pdfStyles.styles.resumeContentBlock}>
+      <Text style={pdfStyles.styles.contentHeader}>{heading}</Text>
+      <View style={pdfStyles.skills.paragraph}>{skillsItem}</View>
     </View>
   );
 };
@@ -293,7 +153,7 @@ const Skills = ({ heading, data }) => {
  */
 const SkillItem = ({ label, list }) => {
   return (
-    <View style={skills.content}>
+    <View style={pdfStyles.skills.content}>
       <Text>{`${label} `}</Text>
       <SubSkillItem subSkills={list} />
     </View>
@@ -350,28 +210,28 @@ const WorkExperience = ({ heading, experience, data }) => {
       if (experienceInYearAndMonth.year !== 0) {
         experienceLabel =
           experienceInYearAndMonth.year > 1
-            ? experienceInYearAndMonth.year.toString() + ' years '
-            : experienceInYearAndMonth.year.toString() + ' year ';
+            ? `${experienceInYearAndMonth.year} years `
+            : `${experienceInYearAndMonth.year}  year `;
       }
 
       if (experienceInYearAndMonth.month !== 0) {
         experienceLabel +=
           experienceInYearAndMonth.month > 1
-            ? experienceInYearAndMonth.month.toString() + ' months'
-            : experienceInYearAndMonth.month.toString() + ' month';
+            ? `${experienceInYearAndMonth.month} months `
+            : `${experienceInYearAndMonth.month} month `;
       }
     }
   }
 
-  experienceLabel = experienceLabel ? '( ' + experienceLabel + ' )' : '';
+  experienceLabel = experienceLabel ? `( ${experienceLabel} )` : '';
 
   const workExperiences = data.map((value, index) => (
     <WorkExperienceItem key={index} workExperience={value}></WorkExperienceItem>
   ));
 
   return (
-    <View style={styles.resumeContentBlock}>
-      <Text style={styles.contentHeader}>{heading + ' ' + experienceLabel}</Text>
+    <View style={pdfStyles.styles.resumeContentBlock}>
+      <Text style={pdfStyles.styles.contentHeader}>{`${heading} ${experienceLabel}`}</Text>
       {workExperiences}
     </View>
   );
@@ -390,7 +250,7 @@ const WorkExperienceItem = ({ workExperience }) => {
   );
 
   let postfixOne = workExperience.currentlyWorking ? 'Present' : moment(workExperience.endDate).format('MMMM YYYY');
-  let postfixTwo = differenceInDate ? ' ( ' + differenceInDate + ' )' : '';
+  let postfixTwo = differenceInDate ? `( ${differenceInDate} )` : '';
 
   const labelForDate = moment(workExperience.startDate).format('MMMM YYYY') + ' - ' + postfixOne + postfixTwo;
 
@@ -401,9 +261,9 @@ const WorkExperienceItem = ({ workExperience }) => {
   const refereeContact = workExperience.refereeContact;
 
   return (
-    <View style={styles.contentBlock}>
-      <View style={styles.paragraph}>
-        <Text style={styles.contentSubHeader}>{workExperience.name}</Text>
+    <View style={pdfStyles.styles.contentBlock}>
+      <View style={pdfStyles.styles.paragraph}>
+        <Text style={pdfStyles.styles.contentSubHeader}>{workExperience.name}</Text>
         <Text>{workExperience.position}</Text>
         <Text>{labelForDate}</Text>
       </View>
@@ -422,7 +282,7 @@ const List = ({ title, items }) => {
   }
 
   return (
-    <View style={styles.paragraph}>
+    <View style={pdfStyles.styles.paragraph}>
       <Text>{title}</Text>
       <View>{listItems}</View>
     </View>
@@ -430,7 +290,7 @@ const List = ({ title, items }) => {
 };
 
 const ListItem = ({ item }) => {
-  return <Text style={workExpStyles.list}>&#8226; {item.trim()}</Text>;
+  return <Text style={pdfStyles.workExpStyles.list}>&#8226; {item.trim()}</Text>;
 };
 
 const RefereeSection = ({ name, contact }) => {
@@ -439,11 +299,12 @@ const RefereeSection = ({ name, contact }) => {
   }
 
   return (
-    <View style={styles.paragraph}>
+    <View style={pdfStyles.styles.paragraph}>
       <Text>{`Referee ${name} ( ${contact} )`}</Text>
     </View>
   );
 };
+
 /**
  * Create projects undertaken section.
  *
@@ -462,9 +323,9 @@ const ProjectUndertaken = ({ heading, data }) => {
   }
 
   return (
-    <View style={styles.resumeContentBlock}>
-      <Text style={styles.contentHeader}>{heading}</Text>
-      <View style={styles.contentBlock}>
+    <View style={pdfStyles.styles.resumeContentBlock}>
+      <Text style={pdfStyles.styles.contentHeader}>{heading}</Text>
+      <View style={pdfStyles.styles.contentBlock}>
         {filteredProjects.map((value, index) => (
           <ProjectItem key={index} project={value}></ProjectItem>
         ))}
@@ -487,8 +348,8 @@ const ProjectItem = ({ project }) => {
   const labelForDate = moment(project.startDate).format('MMMM YYYY') + ' - ' + postfixOne + postfixTwo;
 
   return (
-    <View style={styles.paragraph}>
-      <Text style={styles.contentSubHeader}>{project.name}</Text>
+    <View style={pdfStyles.styles.paragraph}>
+      <Text style={pdfStyles.styles.contentSubHeader}>{project.name}</Text>
       <Text>{labelForDate}</Text>
       {project.description && <Text>{project.description}</Text>}
     </View>
@@ -513,13 +374,13 @@ const Achievement = ({ heading, data }) => {
   }
 
   return (
-    <View style={styles.resumeContentBlock}>
-      <Text style={styles.contentHeader}>{heading}</Text>
-      <View style={styles.contentBlock}>
+    <View style={pdfStyles.styles.resumeContentBlock}>
+      <Text style={pdfStyles.styles.contentHeader}>{heading}</Text>
+      <View style={pdfStyles.styles.contentBlock}>
         {filteredAchievements.map((achievement, index) => {
           return (
-            <View key={index} style={styles.paragraph}>
-              <Text style={styles.contentSubHeader}>{achievement.name}</Text>
+            <View key={index} style={pdfStyles.styles.paragraph}>
+              <Text style={pdfStyles.styles.contentSubHeader}>{achievement.name}</Text>
               <Text>{moment(achievement.date).format('MMMM YYYY')}</Text>
               {achievement.description && <Text>{achievement.description}</Text>}
             </View>
@@ -548,12 +409,12 @@ const Certificate = ({ heading, data }) => {
   }
 
   return (
-    <View style={styles.resumeContentBlock}>
-      <Text style={styles.contentHeader}>{heading}</Text>
-      <View style={styles.contentBlock}>
+    <View style={pdfStyles.styles.resumeContentBlock}>
+      <Text style={pdfStyles.styles.contentHeader}>{heading}</Text>
+      <View style={pdfStyles.styles.contentBlock}>
         {filteredCertificates.map((certificate, index) => (
-          <View key={index} style={styles.paragraph}>
-            <Text style={styles.contentSubHeader}>{certificate.name}</Text>
+          <View key={index} style={pdfStyles.styles.paragraph}>
+            <Text style={pdfStyles.styles.contentSubHeader}>{certificate.name}</Text>
             <Text>{certificate.link}</Text>
             <Text>{moment(certificate.date).format('MMMM YYYY')}</Text>
             {certificate.description && <Text>{certificate.description}</Text>}
@@ -566,9 +427,9 @@ const Certificate = ({ heading, data }) => {
 
 const PersonalInformationItem = ({ label, value }) => {
   return (
-    <View style={personalInformationStyles.contentRowItem}>
-      <Text style={personalInformationStyles.contentLeft}>{label}</Text>
-      <Text style={personalInformationStyles.contentRight}>{value}</Text>
+    <View style={pdfStyles.personalInformationStyles.contentRowItem}>
+      <Text style={pdfStyles.personalInformationStyles.contentLeft}>{label}</Text>
+      <Text style={pdfStyles.personalInformationStyles.contentRight}>{value}</Text>
     </View>
   );
 };
