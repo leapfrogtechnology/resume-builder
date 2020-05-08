@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react';
 
-import SkillItem from './SkillItem';
 import { Add } from '~/assets/image';
-import { FormContext } from '../FormContext';
-import AddSkill from '../form/skill/AddSkill';
 import * as storage from '~/storage/LocalStorage';
+import SkillItem from '~/components/skills/SkillItem';
+import { FormContext } from '~/components/FormContext';
+import AddSkill from '~/components/form/skill/AddSkill';
 import EmptyCard from '~/components/emptycard/EmptyCard';
 import CardHeader from '~/components/cardheader/CardHeader';
 import CardFooter from '~/components/cardfooter/CardFooter';

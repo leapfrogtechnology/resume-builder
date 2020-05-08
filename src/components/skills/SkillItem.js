@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
-import OpenModal from '../modal/OpenModal';
-import AddSkill from '../form/skill/AddSkill';
+import OpenModal from '~/components//modal/OpenModal';
+import AddSkill from '~/components/form/skill/AddSkill';
 import EditOptions from '~/components/editoptions/EditOptions';
 
 const SkillItem = ({ title, values, preview, onHiddenIconClicked, onDelete }) => {
