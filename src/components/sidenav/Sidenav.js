@@ -2,16 +2,16 @@ import React, { useContext, useState } from 'react';
 
 import SidenavBottom from './SidenavBottom';
 import { FormContext } from '../FormContext';
+import { DELETE } from '~/components/icons/icon';
 import * as storage from '~/storage/LocalStorage';
 import Contact from '~/components/contact/Contact';
+import { Edit, ProfileImage } from '~/assets/image';
 import DeletePopup from '../form/delete/DeletePopup';
 import { toBase64 } from '~/utilities/file/toBase64.js';
-import { Edit, ProfileImage, Trash } from '~/assets/image';
 import CardHeader from '~/components/cardheader/CardHeader';
 import AddContact from '~/components/form/contact/AddContact';
 import * as profileImageUtils from '~/utilities/objects/ProfileImage.js';
 import { COUNTRY_CODE, baseMailToUrl, baseTelUrl } from '~/constant/contact.js';
-import { DELETE } from '~/components/icons/icon';
 
 const Sidenav = () => {
   const [showModal, setModal] = useState(false);
@@ -209,7 +209,7 @@ const Sidenav = () => {
         </div>
       </div>
 
-      {!preview && <SidenavBottom resumeJson={context.data.get} deleteIconClicked={deleteBtnClickedHandler} />}
+      {!preview && <SidenavBottom deleteIconClicked={deleteBtnClickedHandler} />}
 
       {showDeleteModal && (
         <DeletePopup onConfirm={confirmDeleteBtnHandler} onCancel={cancelDeleteBtnHandler}></DeletePopup>
