@@ -188,12 +188,12 @@ const MyDocument = ({ resumeJson }) => {
           contactsList={contactsList}
         ></PersonalInformation>
         <ContentWrapper heading="Skills" data={skills} WrappedComponent={Skills} />
-        {/* <ContentWrapper
+        <ContentWrapper
           heading="Work Experience"
           data={workExperience}
           WrappedComponent={WorkExperience}
           experience={experience}
-        /> */}
+        />
         {/* <ProjectUndertaken heading="Projects Undertaken" data={projects}></ProjectUndertaken> */}
         {/* <Achievement heading="Achievements" data={achievements}></Achievement> */}
         {/* <Certificate heading="Certificates" data={certificates}></Certificate>{' '} */}
@@ -294,7 +294,7 @@ const Skills = ({ heading, data }) => {
 const SkillItem = ({ label, list }) => {
   return (
     <View style={skills.content}>
-      <Text>{label} </Text>
+      <Text>{`${label} `}</Text>
       <SubSkillItem subSkills={list} />
     </View>
   );
@@ -323,7 +323,7 @@ const SubSkillItem = ({ subSkills }) => {
         </>
       );
     } else {
-      return <Text>{' ( ' + filteredResult + ' ) , '}</Text>;
+      return <Text>{`( ${filteredResult} ), `}</Text>;
     }
   }
 };
@@ -395,7 +395,7 @@ const WorkExperienceItem = ({ workExperience }) => {
   const labelForDate = moment(workExperience.startDate).format('MMMM YYYY') + ' - ' + postfixOne + postfixTwo;
 
   const roles = workExperience.responsibilities.split('.').filter(role => role.trim() !== '');
-  const achievments = workExperience.achievements.split('.').filter(achievment => achievment.trim() !== '');
+  const achievements = workExperience.achievements.split('.').filter(achievement => achievement.trim() !== '');
 
   const refereeName = workExperience.refereeName;
   const refereeContact = workExperience.refereeContact;
@@ -407,39 +407,43 @@ const WorkExperienceItem = ({ workExperience }) => {
         <Text>{workExperience.position}</Text>
         <Text>{labelForDate}</Text>
       </View>
-      {roles && (
-        <View style={styles.paragraph}>
-          <Text>Roles and Responsibilities</Text>
-          <View>
-            {roles.map((role, index) => (
-              <Text key={index} style={workExpStyles.list}>
-                &#8226; {role.trim()}
-              </Text>
-            ))}
-          </View>
-        </View>
-      )}
-      {achievments && (
-        <View style={styles.paragraph}>
-          <Text>Achievements</Text>
-          <View>
-            {achievments.map((achievment, index) => (
-              <Text key={index} style={workExpStyles.list}>
-                &#8226; {achievment.trim()}
-              </Text>
-            ))}
-          </View>
-        </View>
-      )}
-      {refereeName && refereeContact && (
-        <View style={styles.paragraph}>
-          <Text>{'Referee' + ' ' + refereeName + ' ' + '( ' + refereeContact + ' )'}</Text>
-        </View>
-      )}
+      <List title="Roles and Responsibilities" items={roles} />
+      <List title="Achievements" items={achievements} />
+      <RefereeSection name={refereeName} contact={refereeContact} />
     </View>
   );
 };
 
+const List = ({ title, items }) => {
+  const listItems = items.map((item, index) => <ListItem key={index} item={item} />);
+
+  if (items.length < 1) {
+    return <></>;
+  }
+
+  return (
+    <View style={styles.paragraph}>
+      <Text>{title}</Text>
+      <View>{listItems}</View>
+    </View>
+  );
+};
+
+const ListItem = ({ item }) => {
+  return <Text style={workExpStyles.list}>&#8226; {item.trim()}</Text>;
+};
+
+const RefereeSection = ({ name, contact }) => {
+  if (!name || !contact) {
+    return <></>;
+  }
+
+  return (
+    <View style={styles.paragraph}>
+      <Text>{`Referee ${name} ( ${contact} )`}</Text>
+    </View>
+  );
+};
 /**
  * Create projects undertaken section.
  *
