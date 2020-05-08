@@ -83,6 +83,14 @@ export const getDifferenceYearMonth = (startDate, endDate, currentlyWorking) => 
   return labelForDifference;
 };
 
+/**
+ * Get Engagement tenure.
+ *
+ * @param {Date} startDate Start date.
+ * @param {Date} endDate End date.
+ * @param {bool} currentlyEngaged Boolean value indicating if currently engaged.
+ * @returns {string}
+ */
 export const getEngagementTenure = (startDate, endDate, currentlyEngaged) => {
   const differenceInDate = getDifferenceYearMonth(startDate, endDate, currentlyEngaged);
 
@@ -92,4 +100,30 @@ export const getEngagementTenure = (startDate, endDate, currentlyEngaged) => {
   const labelForDate = `${moment(startDate).format('MMMM YYYY')}  -  ${postfixOne} ${postfixTwo}`;
 
   return labelForDate;
+};
+
+/**
+ * Get Label for total experience when experience in year and month is given.
+ *
+ * @param {object} experienceTime Exprience in year and month.
+ */
+export const getExperienceLabel = experienceTime => {
+  let experienceLabel = '';
+
+  if (experienceTime.year === 0 && experienceTime.month === 0) {
+    experienceLabel = '';
+  } else {
+    if (experienceTime.year === 1) {
+      experienceLabel = `${experienceTime.year}  year `;
+    } else {
+      experienceLabel = `${experienceTime.year} years `;
+    }
+
+    if (experienceTime.month === 1) {
+      experienceLabel += `${experienceTime.month} month `;
+    } else {
+      experienceLabel += `${experienceTime.month} months `;
+    }
+  }
+  return experienceLabel;
 };
