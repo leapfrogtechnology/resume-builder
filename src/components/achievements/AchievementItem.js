@@ -14,24 +14,19 @@ const AchievementItem = ({ title, date, description, preview, onHiddenIconClicke
     return <></>;
   }
 
-  const editBtnHandler = e => {
-    e.preventDefault();
-    setEdit(!editAchievement);
-  };
+  const toggleEditAchievement = () => setEdit(!editAchievement);
 
   const editBtnCloseHandler = () => {
     setEdit(!editAchievement);
   };
 
-  const onHiddenBtnClicked = e => {
-    e.preventDefault();
+  const onHiddenBtnClicked = () => {
     setHidden(!hidden);
-    onHiddenIconClicked(e, title);
+    onHiddenIconClicked(title);
   };
 
-  const deleteIconClickedHandler = e => {
-    e.preventDefault();
-    onDelete(e, title, date);
+  const deleteIconClickedHandler = () => {
+    onDelete(title, date);
   };
 
   return (
@@ -45,7 +40,7 @@ const AchievementItem = ({ title, date, description, preview, onHiddenIconClicke
           <EditOptions
             isHidden={hidden}
             onHiddenIconClicked={onHiddenBtnClicked}
-            onEditButtonClicked={editBtnHandler}
+            onEditButtonClicked={toggleEditAchievement}
             onDeleteButtonClicked={deleteIconClickedHandler}
           />
         )}
