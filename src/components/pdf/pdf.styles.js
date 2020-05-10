@@ -2,11 +2,7 @@ import { StyleSheet, Font } from '@react-pdf/renderer';
 
 Font.register({
   family: 'Arial',
-  fonts: [
-    {
-      src: '~/assets/fonts/arial.ttf',
-    },
-  ],
+  src: 'https://fonts.google.com/?query=Arial',
 });
 
 export const styles = StyleSheet.create({
@@ -67,8 +63,12 @@ export const personalInformationStyles = StyleSheet.create({
     marginRight: 20,
     width: 50,
     height: 50,
-    borderRadius: '50%',
     overflow: 'hidden',
+  },
+  profileImage: {
+    width: 50,
+    height: 50,
+    borderRadius: 50,
   },
   profileDetail: {
     display: 'inline-block',
