@@ -5,6 +5,7 @@ import { Page, Document } from '@react-pdf/renderer';
 import Skills from '~/components/pdf/Skill';
 import Certificate from '~/components/pdf/Certificate';
 import Achievement from '~/components/pdf/Achievement';
+import { capitalize } from '~/utilities/string/capitalize';
 import * as pdfStyles from '~/components/pdf/pdf.styles.js';
 import WorkExperience from '~/components/pdf/WorkExperience';
 import ContentWrapper from '~/components/pdf/ContentWrapper';
@@ -13,6 +14,7 @@ import PersonalInformation from '~/components/pdf/PersonalInformation';
 
 const MyDocument = ({ resumeJson }) => {
   const contacts = [];
+  const contactKeys = ['email', 'phone', 'github', 'linkedIn'];
   const name = resumeJson.name;
   const role = resumeJson.role;
   const profileImg = resumeJson.profileImage;
@@ -24,21 +26,11 @@ const MyDocument = ({ resumeJson }) => {
   const achievements = resumeJson.achievements;
   const certificates = resumeJson.certificates;
 
-  if (resumeJson['email'] && !resumeJson['email'].hidden && resumeJson['email'].value) {
-    contacts.push({ type: 'Email', value: resumeJson['email'].value });
-  }
-
-  if (resumeJson['phone'] && !resumeJson['phone'].hidden && resumeJson['phone'].value) {
-    contacts.push({ type: 'Phone', value: resumeJson['phone'].value });
-  }
-
-  if (resumeJson['github'] && !resumeJson['github'].hidden && resumeJson['github'].value) {
-    contacts.push({ type: 'Github', value: resumeJson['github'].value });
-  }
-
-  if (resumeJson['linkedIn'] && !resumeJson['linkedIn'].hidden && resumeJson['linkedIn'].value) {
-    contacts.push({ type: 'LinkedIn', value: resumeJson['linkedIn'].value });
-  }
+  Object.keys(resumeJson).forEach(key => {
+    if (contactKeys.includes(key) && resumeJson[key] && !resumeJson[key].hidden && resumeJson[key].value) {
+      contacts.push({ type: capitalize(key), value: resumeJson[key].value });
+    }
+  });
 
   return (
     <Document>
