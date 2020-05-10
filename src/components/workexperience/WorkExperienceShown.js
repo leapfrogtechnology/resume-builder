@@ -54,7 +54,9 @@ const WorkExperienceShown = ({
 
   let labelForDifference = dateUtils.getDifferenceYearMonth(startDate, endDate, currentlyWorking);
 
-  labelForDifference = labelForDifference ? '( ' + labelForDifference + ' )' : '';
+  labelForDifference = labelForDifference ? `( ${labelForDifference} )` : '';
+
+  const refereeDetail = /^\d+$/.test(refereeContact) ? ` ${COUNTRY_CODE} - ${refereeContact}` : ` ${refereeContact}`;
 
   const onHiddenIconClickedHandler = () => {
     setHidden(!hidden);
@@ -119,7 +121,7 @@ const WorkExperienceShown = ({
               <li>
                 {refereeName}
                 <span className="referee-email text-link" onClick={e => onContactLinkClicked(refereeContact)}>
-                  {/^\d+$/.test(refereeContact) ? ' ' + COUNTRY_CODE + '-' + refereeContact : ' ' + refereeContact}
+                  {refereeDetail}
                 </span>
               </li>
             </ul>
