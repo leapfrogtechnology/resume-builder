@@ -17,7 +17,11 @@ const PersonalInformation = ({ name, role, introduction, profileImg, contacts })
       <View style={pdfStyles.personalInformationStyles.personalInformation}>
         <View style={pdfStyles.personalInformationStyles.left}>
           <View style={pdfStyles.personalInformationStyles.profileImageWrapper}>
-            <Image src={profileImg && !profileImg.deleted ? profileImg.value : ProfileImage} alt="Image"></Image>
+            <Image
+              style={pdfStyles.personalInformationStyles.profileImage}
+              src={profileImg && !profileImg.deleted ? profileImg.value : ProfileImage}
+              alt="Image"
+            ></Image>
           </View>
         </View>
         <View>
