@@ -6,6 +6,7 @@ import { FormContext } from '~/components/FormContext';
 import EmptyCard from '~/components/emptycard/EmptyCard';
 import CardHeader from '~/components/cardheader/CardHeader';
 import CardFooter from '~/components/cardfooter/CardFooter';
+import { baseMailToUrl, baseTelUrl } from '~/constant/contact.js';
 import WorkExperienceShown from '~/components/workexperience/WorkExperienceShown';
 import AddWorkExperience from '~/components/form/workexperience/AddWorkExperience';
 
@@ -53,9 +54,9 @@ const WorkExperience = () => {
 
   const contactLinkHandler = value => {
     if (isNaN(value)) {
-      window.open('mailto:' + value);
+      window.open(baseMailToUrl + value);
     } else {
-      window.open('tel:' + value);
+      window.open(baseTelUrl + value);
     }
   };
 
