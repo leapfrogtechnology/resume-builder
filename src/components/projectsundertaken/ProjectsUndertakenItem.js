@@ -1,4 +1,3 @@
-import moment from 'moment';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
@@ -65,9 +64,8 @@ const ProjectsUndertakenItem = ({
         )}
       </div>
       <div className="year year--dark">
-        <span className="start-date">{moment(startDate).format('MMMM YYYY')}</span> -{' '}
-        <span className="end-date">{ongoing ? 'Present' : moment(endDate).format('MMMM YYYY')}</span>{' '}
-        {labelForDifference}
+        <span className="start-date">{dateUtils.format(startDate)}</span> -{' '}
+        <span className="end-date">{ongoing ? 'Present' : dateUtils.format(endDate)}</span> {labelForDifference}
       </div>
       <p className="description">{description}</p>
     </div>

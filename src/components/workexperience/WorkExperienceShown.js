@@ -1,4 +1,3 @@
-import moment from 'moment';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
@@ -97,8 +96,8 @@ const WorkExperienceShown = ({
         </div>
         <div className="work-experience__position">{position}</div>
         <div className="year">
-          <span className="start-date">{moment(startDate).format('MMMM YYYY')}</span> -{' '}
-          <span className="end-date">{currentlyWorking ? 'Present' : moment(endDate).format('MMMM YYYY')}</span>{' '}
+          <span className="start-date">{dateUtils.format(startDate)}</span> -{' '}
+          <span className="end-date">{currentlyWorking ? 'Present' : dateUtils.format(endDate)}</span>{' '}
           {labelForDifference}
         </div>
       </div>
