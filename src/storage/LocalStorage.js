@@ -1,11 +1,11 @@
-export const getResume = storage => {
-  return JSON.parse(storage.getItem('resume'));
+export const getResume = () => {
+  return JSON.parse(localStorage.getItem('resume'));
 };
 
-export const saveResume = (storage, resume) => {
-  storage.setItem('resume', JSON.stringify(resume));
+export const saveResume = resume => {
+  localStorage.setItem('resume', JSON.stringify(resume));
 };
 
-export const deleteResume = storage => {
-  storage.clear();
+export const deleteResume = () => {
+  localStorage.clear();
 };
