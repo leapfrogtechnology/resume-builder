@@ -4,7 +4,7 @@ import Head from 'next/head';
 import DATA from '../constant/mockData';
 import Header from '~/components/header/Header';
 import * as storage from '~/storage/LocalStorage';
-import { FormContext } from '../components/FormContext';
+import { FormContext } from '~/components/FormContext';
 import Dashboard from '~/components/dashboard/Dashboard';
 
 const App = () => {
@@ -13,7 +13,7 @@ const App = () => {
   const [loading, setLoading] = useState(true);
   const [data, updateData] = useState({});
 
-  const username = DATA.name;
+  const username = data.name;
 
   const handleOnPreviewBtnClicked = e => {
     e.preventDefault();
@@ -53,14 +53,11 @@ const App = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta httpEquiv="X-UA-Compatible" content="ie=edge" />
         <title>ResumeBuilder</title>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
       </Head>
       <FormContext.Provider value={store}>
         <Header name={username} status="Employee" onPreviewBtnClicked={handleOnPreviewBtnClicked} />
         <Dashboard />
-        {/* <PDFViewer children={<MyDocument resumeJson={store.data.get}></MyDocument>}></PDFViewer> */}
       </FormContext.Provider>
     </div>
   );
