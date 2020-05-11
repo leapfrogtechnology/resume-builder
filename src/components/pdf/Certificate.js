@@ -24,8 +24,8 @@ const CertificateItem = ({ title, link, date, description }) => {
   return (
     <View style={pdfStyles.styles.paragraph}>
       <Text style={pdfStyles.styles.contentSubHeader}>{title}</Text>
-      <Text>{link}</Text>
       <Text>{moment(date).format('MMMM YYYY')}</Text>
+      <Text>{link}</Text>
       {description ? <Text>{description}</Text> : <></>}
     </View>
   );
