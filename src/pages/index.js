@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
 import Head from 'next/head';
-import DATA from '../constant/mockData';
 import Header from '~/components/header/Header';
 import * as storage from '~/storage/LocalStorage';
 import { FormContext } from '~/components/FormContext';
