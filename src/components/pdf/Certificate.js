@@ -40,7 +40,7 @@ CertificateItem.propTypes = {
   title: PropTypes.string,
   link: PropTypes.string,
   date: PropTypes.string,
-  description: PropTypes.description,
+  description: PropTypes.string,
 };
 
 export default Certificate;
