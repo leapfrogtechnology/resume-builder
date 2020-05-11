@@ -28,7 +28,7 @@ const AddExperience = ({ onClose }) => {
 
     data.set(prevState => ({ ...prevState, ...data.get }));
 
-    storage.saveResume(localStorage, data.get);
+    storage.saveResume(data.get);
 
     onClose();
   };

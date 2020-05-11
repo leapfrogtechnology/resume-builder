@@ -21,7 +21,7 @@ const AddContactInformation = ({ onClose, isEdit }) => {
 
     Object.assign(prevData, contactObj);
 
-    storage.saveResume(localStorage, prevData);
+    storage.saveResume(prevData);
 
     data.set(prevState => ({ ...prevState, ...contactObj }));
 

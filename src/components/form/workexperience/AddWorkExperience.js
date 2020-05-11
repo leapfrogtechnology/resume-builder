@@ -29,7 +29,7 @@ const AddWorkExperience = ({ onClose, isEdit, values }) => {
 
     data.set(prevState => ({ ...prevState, ...data }));
 
-    storage.saveResume(localStorage, data.get);
+    storage.saveResume(data.get);
 
     onClose();
   };

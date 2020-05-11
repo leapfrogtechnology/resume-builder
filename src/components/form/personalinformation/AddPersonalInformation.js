@@ -27,11 +27,9 @@ const AddPersonalInformation = ({ onClose, isEdit }) => {
 
     Object.assign(prevData, personalInfoObj);
 
-    storage.saveResume(localStorage, prevData);
+    storage.saveResume(data.get);
 
     data.set(prevState => ({ ...prevState, ...personalInfoObj }));
-
-    storage.saveResume(localStorage, data.get);
 
     onClose();
   };
