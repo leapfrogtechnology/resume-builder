@@ -2,10 +2,10 @@ import moment from 'moment';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
-import OpenModal from '../modal/OpenModal';
-import EditOptions from '~/components/editoptions/EditOptions';
-import AddCertificate from '../form/certificate/AddCertificate';
+import OpenModal from '~/components/modal/OpenModal';
 import { UP_RIGHT_ARROW } from '~/components/icons/icon';
+import EditOptions from '~/components/editoptions/EditOptions';
+import AddCertificate from '~/components/form/certificate/AddCertificate';
 
 const CertificateItem = ({ title, link, year, description, preview, onHiddenIconClicked, onDelete }) => {
   const [hidden, setHidden] = useState(false);
@@ -15,51 +15,40 @@ const CertificateItem = ({ title, link, year, description, preview, onHiddenIcon
     return <></>;
   }
 
-  const onHiddenBtnClicked = e => {
-    e.preventDefault();
+  const onHiddenBtnClicked = () => {
     setHidden(!hidden);
-    onHiddenIconClicked(e, title);
+    onHiddenIconClicked(title);
   };
 
-  const deleteIconClickedHandler = e => {
-    e.preventDefault();
-    onDelete(e, title, link);
+  const deleteIconClickedHandler = () => {
+    onDelete(title, link);
   };
 
-  const editBtnHandler = e => {
-    e.preventDefault();
-    setEdit(!editCertificate);
-  };
-
-  const editBtnCloseHandler = () => {
-    setEdit(!editCertificate);
-  };
+  const toggleEditCertificate = () => setEdit(!editCertificate);
 
   return (
     <div className="certificate__row">
       <div className="certificate__row-header">
         <div
           className={!hidden ? 'sub-title text-link' : 'sub-title text-link text-link-hidden'}
-          onClick={e => window.open(link)}
+          onClick={_e => window.open(link)}
         >
           {title}
-          <span className="arrow-icon">
-            {UP_RIGHT_ARROW}
-          </span>
+          <span className="arrow-icon">{UP_RIGHT_ARROW}</span>
           {hidden && <span className="hidden-tag">Hidden</span>}
         </div>
         {!preview && (
           <EditOptions
             onHiddenIconClicked={onHiddenBtnClicked}
             isHidden={hidden}
-            onEditButtonClicked={editBtnHandler}
+            onEditButtonClicked={toggleEditCertificate}
             onDeleteButtonClicked={deleteIconClickedHandler}
           />
         )}
         {editCertificate && (
           <OpenModal
             component={AddCertificate}
-            onClose={editBtnCloseHandler}
+            onClose={toggleEditCertificate}
             showModal={editCertificate}
             isEdit={editCertificate}
             data={editCertificate ? { name: title, link: link, date: year, description: description } : ''}

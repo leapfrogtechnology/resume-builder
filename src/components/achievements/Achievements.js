@@ -1,12 +1,12 @@
 import React, { useState, useContext } from 'react';
 
 import { Add } from '~/assets/image';
-import { FormContext } from '../FormContext';
-import AchievementItem from './AchievementItem';
 import * as storage from '~/storage/LocalStorage';
+import { FormContext } from '~/components/FormContext';
 import EmptyCard from '~/components/emptycard/EmptyCard';
 import CardHeader from '~/components/cardheader/CardHeader';
 import CardFooter from '~/components/cardfooter/CardFooter';
+import AchievementItem from '~/components/achievements/AchievementItem';
 import AddAchievement from '~/components/form/achievement/AddAchievement';
 
 const Achievements = () => {
@@ -16,23 +16,16 @@ const Achievements = () => {
   const preview = context.preview.get;
   const achievements = context.data.get.achievements;
 
-  const addBtnHandler = () => {
-    setAdd(!addAchievement);
-  };
-
-  const addBtnCloseHandler = () => {
+  const toggleAddAchievent = () => {
     setAdd(!addAchievement);
   };
 
   /**
    * Update the hidden state of skill.
    *
-   * @param {React.MouseEvent} e [ on click event ].
    * @param {string} key [ name of a particular achievements].
    */
-  const updateHiddenStateAchievement = (e, key) => {
-    e.preventDefault();
-
+  const updateHiddenStateAchievement = key => {
     const data = context.data.get;
 
     data['achievements'].find(({ name, hidden }, index) => {
@@ -45,9 +38,7 @@ const Achievements = () => {
     });
   };
 
-  const deleteAchievment = (e, name, date) => {
-    e.preventDefault();
-
+  const deleteAchievment = (name, date) => {
     const data = context.data.get;
 
     const filteredAchievements = data['achievements'].filter(achievement => {
@@ -75,9 +66,9 @@ const Achievements = () => {
             hide={preview}
             label="Add another achievement"
             showModal={addAchievement}
-            onAdd={addBtnHandler}
+            onAdd={toggleAddAchievent}
             component={AddAchievement}
-            onClose={addBtnCloseHandler}
+            onClose={toggleAddAchievent}
             modifier="empty"
           />
         </div>
@@ -107,9 +98,9 @@ const Achievements = () => {
           hide={preview}
           label="Add another achievement"
           showModal={addAchievement}
-          onAdd={addBtnHandler}
+          onAdd={toggleAddAchievent}
           component={AddAchievement}
-          onClose={addBtnCloseHandler}
+          onClose={toggleAddAchievent}
         />
       </div>
     </div>

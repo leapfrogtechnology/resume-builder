@@ -57,7 +57,7 @@ export const getDifferenceInYearMonth = (startDate, endDate) => {
 };
 
 /**
- * Get Label for duration in years and months
+ * Get Label for duration in years and months.
  *
  * @param {Date} startDate Start date.
  * @param {Date} endDate End date.
@@ -70,15 +70,61 @@ export const getDifferenceYearMonth = (startDate, endDate, currentlyWorking) => 
   const diff = getDifferenceInYearMonth(startDate, currentlyWorking ? new Date() : endDate);
 
   if (diff.year !== 0) {
-    labelForDifference = diff.year > 1 ? diff.year.toString() + ' years' : diff.year.toString() + ' year';
+    labelForDifference = diff.year > 1 ? `${diff.year} years ` : `${diff.year} year `;
     if (diff.month !== 0) {
       labelForDifference += ' and ';
     }
   }
 
   if (diff.month !== 0) {
-    labelForDifference += diff.month > 1 ? diff.month.toString() + ' months' : diff.month.toString() + ' month';
+    labelForDifference += diff.month > 1 ? ` ${diff.month} months` : ` ${diff.month} month`;
   }
 
   return labelForDifference;
+};
+
+/**
+ * Get Engagement tenure.
+ *
+ * @param {Date} startDate Start date.
+ * @param {Date} endDate End date.
+ * @param {bool} currentlyEngaged Boolean value indicating if currently engaged.
+ * @returns {string}
+ */
+export const getEngagementTenure = (startDate, endDate, currentlyEngaged) => {
+  const differenceInDate = getDifferenceYearMonth(startDate, endDate, currentlyEngaged);
+
+  const postfixOne = currentlyEngaged ? 'Present' : moment(endDate).format('MMMM YYYY');
+  const postfixTwo = differenceInDate ? `( ${differenceInDate} )` : '';
+
+  const labelForDate = `${moment(startDate).format('MMMM YYYY')}  -  ${postfixOne} ${postfixTwo}`;
+
+  return labelForDate;
+};
+
+/**
+ * Get Label for total experience when experience in year and month is given.
+ *
+ * @param {object} experienceTime Exprience in year and month.
+ */
+export const getExperienceLabel = experienceTime => {
+  let experienceLabel = '';
+
+  if (experienceTime.year === 0 && experienceTime.month === 0) {
+    experienceLabel = '';
+  } else {
+    if (experienceTime.year === 1) {
+      experienceLabel = `${experienceTime.year}  year `;
+    } else {
+      experienceLabel = `${experienceTime.year} years `;
+    }
+
+    if (experienceTime.month === 1) {
+      experienceLabel += `${experienceTime.month} month `;
+    } else {
+      experienceLabel += `${experienceTime.month} months `;
+    }
+  }
+
+  return experienceLabel;
 };

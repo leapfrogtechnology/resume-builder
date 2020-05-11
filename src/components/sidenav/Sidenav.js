@@ -1,15 +1,15 @@
 import React, { useContext, useState } from 'react';
 
-import SidenavBottom from './SidenavBottom';
-import { FormContext } from '../FormContext';
 import { DELETE } from '~/components/icons/icon';
 import * as storage from '~/storage/LocalStorage';
 import Contact from '~/components/contact/Contact';
 import { Edit, ProfileImage } from '~/assets/image';
 import DeletePopup from '../form/delete/DeletePopup';
+import { FormContext } from '~/components/FormContext';
 import { toBase64 } from '~/utilities/file/toBase64.js';
 import CardHeader from '~/components/cardheader/CardHeader';
 import AddContact from '~/components/form/contact/AddContact';
+import SidenavBottom from '~/components/sidenav/SidenavBottom';
 import * as profileImageUtils from '~/utilities/objects/ProfileImage.js';
 import { COUNTRY_CODE, baseMailToUrl, baseTelUrl } from '~/constant/contact.js';
 
@@ -18,6 +18,7 @@ const Sidenav = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [showDeleteModal, setDeleteModal] = useState(false);
   const [profileImgUploadError, setProfileImageUpload] = useState(false);
+  const [downloadPdf, setDownloadPdf] = useState(false);
 
   const context = useContext(FormContext);
   const preview = context.preview.get;
@@ -28,26 +29,18 @@ const Sidenav = () => {
   const linkedIn = context.data.get.linkedIn;
   const profileImg = context.data.get.profileImage;
 
-  const deleteBtnClickedHandler = () => {
-    setDeleteModal(!showDeleteModal);
+  const donwloadPdfBtnHandler = () => {
+    setDownloadPdf(!downloadPdf);
   };
 
   const confirmDeleteBtnHandler = () => {
     context.deleteCV();
-    setDeleteModal(!showDeleteModal);
+    toggleDelete();
   };
 
-  const cancelDeleteBtnHandler = () => {
-    setDeleteModal(!showDeleteModal);
-  };
+  const toggleDelete = () => setDeleteModal(!showDeleteModal);
 
-  const editBtnHandler = e => {
-    e.preventDefault();
-    setModal(!showModal);
-    setIsEdit(!isEdit);
-  };
-
-  const closeBtnHandler = () => {
+  const toggleEdit = () => {
     setModal(!showModal);
     setIsEdit(!isEdit);
   };
@@ -55,12 +48,9 @@ const Sidenav = () => {
   /**
    * Update the hidden state of contact detail.
    *
-   * @param {React.MouseEvent} e [ on click event ].
    * @param {string} key [ label of a particular contact type].
    */
-  const updateHiddenStateContact = (e, key) => {
-    e.preventDefault();
-
+  const updateHiddenStateContact = key => {
     const data = context.data.get;
     const previousState = data[key].hidden;
     const newState = !previousState;
@@ -69,8 +59,7 @@ const Sidenav = () => {
     context.data.set(data);
   };
 
-  const createFileUploader = e => {
-    e.preventDefault();
+  const createFileUploader = () => {
     setProfileImageUpload(false);
 
     const fileSelector = document.createElement('input');
@@ -87,8 +76,6 @@ const Sidenav = () => {
   };
 
   const handleImageUpload = async e => {
-    e.preventDefault();
-
     const file = e.target.files[0];
 
     if (!(file.type === 'image/png' || file.type === 'image/jpg' || file.type === 'image/jpeg')) {
@@ -111,9 +98,7 @@ const Sidenav = () => {
     }
   };
 
-  const handleImageDelete = e => {
-    e.preventDefault();
-
+  const handleImageDelete = () => {
     if (context.data.get.profileImage) {
       context.data.get.profileImage.isDeleted = true;
       context.data.get.profileImage.deletedOn = new Date();
@@ -135,7 +120,7 @@ const Sidenav = () => {
                   <div className="profile-image-wrapper">
                     <img src={profileImg && !profileImg.isDeleted ? profileImg.value : ProfileImage} alt="Image" />
                   </div>
-                  <span className="text-link text-link--small" onClick={e => createFileUploader(e)}>
+                  <span className="text-link text-link--small" onClick={_e => createFileUploader()}>
                     Upload new Photo
                   </span>
                 </div>
@@ -153,8 +138,8 @@ const Sidenav = () => {
               icon={Edit}
               hideIcon={preview}
               component={AddContact}
-              onEdit={editBtnHandler}
-              onClose={closeBtnHandler}
+              onEdit={toggleEdit}
+              onClose={toggleEdit}
               showModal={showModal}
               isEdit={isEdit}
             />
@@ -209,11 +194,16 @@ const Sidenav = () => {
         </div>
       </div>
 
-      {!preview && <SidenavBottom deleteIconClicked={deleteBtnClickedHandler} />}
-
-      {showDeleteModal && (
-        <DeletePopup onConfirm={confirmDeleteBtnHandler} onCancel={cancelDeleteBtnHandler}></DeletePopup>
+      {!preview && (
+        <SidenavBottom
+          resumeJson={context.data.get}
+          downloadPdf={downloadPdf}
+          downloadPdfIconClicked={donwloadPdfBtnHandler}
+          deleteIconClicked={toggleDelete}
+        />
       )}
+
+      {showDeleteModal && <DeletePopup onConfirm={confirmDeleteBtnHandler} onCancel={toggleDelete}></DeletePopup>}
     </div>
   );
 };

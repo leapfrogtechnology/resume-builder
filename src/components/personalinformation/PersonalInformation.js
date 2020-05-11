@@ -1,10 +1,9 @@
 import React, { useContext, useState } from 'react';
 
 import { Edit } from '~/assets/image';
-import { FormContext } from '../FormContext';
-import * as storage from '~/storage/LocalStorage';
-import PersonalInfoItem from './PersonalInfoItem';
+import { FormContext } from '~/components/FormContext';
 import CardHeader from '~/components/cardheader/CardHeader';
+import PersonalInfoItem from '~/components/personalinformation/PersonalInfoItem';
 import AddPersonalInformation from '~/components/form/personalinformation/AddPersonalInformation';
 
 const PersonalInformation = () => {
@@ -21,13 +20,7 @@ const PersonalInformation = () => {
   const [showModel, setModal] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
 
-  const editBtnHandler = e => {
-    e.preventDefault();
-    setModal(!showModel);
-    setIsEdit(!isEdit);
-  };
-
-  const closeBtnHandler = () => {
+  const toggleEdit = () => {
     setModal(!showModel);
     setIsEdit(!isEdit);
   };
@@ -35,12 +28,9 @@ const PersonalInformation = () => {
   /**
    * Update the hidden state of personal information.
    *
-   * @param {React.MouseEvent} e [ on click event ].
    * @param {string} key [ name of a particular info].
    */
-  const updateHiddenState = (e, key) => {
-    e.preventDefault();
-
+  const updateHiddenState = key => {
     const data = context.data.get;
     const currentState = data[key].hidden;
     const newState = !currentState;
@@ -57,8 +47,8 @@ const PersonalInformation = () => {
           title="Personal Information"
           icon={!preview ? Edit : ''}
           component={AddPersonalInformation}
-          onEdit={editBtnHandler}
-          onClose={closeBtnHandler}
+          onEdit={toggleEdit}
+          onClose={toggleEdit}
           showModal={showModel}
           isEdit={isEdit}
         />

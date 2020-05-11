@@ -1,11 +1,11 @@
+import * as _ from 'lodash';
 import PropTypes from 'prop-types';
 import { Formik, Form } from 'formik';
 import React, { useContext } from 'react';
 
-import * as _ from 'lodash';
-import { FormContext } from '../../FormContext';
 import Button from '~/components/button/Button';
 import * as storage from '~/storage/LocalStorage';
+import { FormContext } from '~/components/FormContext';
 import InputText from '~/components/inputtext/InputText';
 import InputDate from '~/components/inputdate/InputDate';
 import FormHeader from '~/components/formheader/FormHeader';
@@ -73,6 +73,7 @@ const AddCertificate = ({ onClose, isEdit, values }) => {
         description: '',
       };
     }
+
     return initialValues;
   };
 

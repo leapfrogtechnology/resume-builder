@@ -2,11 +2,11 @@ import moment from 'moment';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
-import OpenModal from '../modal/OpenModal';
+import { COUNTRY_CODE } from '~/constant/contact';
+import OpenModal from '~/components/modal/OpenModal';
 import * as dateUtils from '~/utilities/date/FormatDate';
 import EditOptions from '~/components/editoptions/EditOptions';
-import AddWorkExperience from '../form/workexperience/AddWorkExperience';
-import { COUNTRY_CODE } from '../../constant/contact';
+import AddWorkExperience from '~/components/form/workexperience/AddWorkExperience';
 
 const WorkExperienceShown = ({
   subTitle,
@@ -54,27 +54,20 @@ const WorkExperienceShown = ({
 
   let labelForDifference = dateUtils.getDifferenceYearMonth(startDate, endDate, currentlyWorking);
 
-  labelForDifference = labelForDifference ? '( ' + labelForDifference + ' )' : '';
+  labelForDifference = labelForDifference ? `( ${labelForDifference} )` : '';
 
-  const onHiddenIconClickedHandler = e => {
-    e.preventDefault();
+  const refereeDetail = /^\d+$/.test(refereeContact) ? ` ${COUNTRY_CODE} - ${refereeContact}` : ` ${refereeContact}`;
+
+  const onHiddenIconClickedHandler = () => {
     setHidden(!hidden);
-    onHiddenIconClicked(e, subTitle);
+    onHiddenIconClicked(subTitle);
   };
 
-  const onDeleteIconClickedHanlder = e => {
-    e.preventDefault();
-    onDelete(e, subTitle, position);
+  const onDeleteIconClickedHanlder = () => {
+    onDelete(subTitle, position);
   };
 
-  const editBtnCloseHandler = () => {
-    setEdit(!editWork);
-  };
-
-  const editBtnHandler = e => {
-    e.preventDefault();
-    setEdit(!editWork);
-  };
+  const toggleEditWork = () => setEdit(!editWork);
 
   return (
     <div className="work-experience">
@@ -88,14 +81,14 @@ const WorkExperienceShown = ({
             <EditOptions
               isHidden={hidden}
               onHiddenIconClicked={onHiddenIconClickedHandler}
-              onEditButtonClicked={editBtnHandler}
+              onEditButtonClicked={toggleEditWork}
               onDeleteButtonClicked={onDeleteIconClickedHanlder}
             />
           )}
           {editWork && (
             <OpenModal
               component={AddWorkExperience}
-              onClose={editBtnCloseHandler}
+              onClose={toggleEditWork}
               showModal={editWork}
               isEdit={editWork}
               data={editWork ? { name: subTitle, position: position } : ''}
@@ -127,13 +120,8 @@ const WorkExperienceShown = ({
             <ul className="referee-name work-experience__row-item">
               <li>
                 {refereeName}
-                <span
-                  className="referee-email text-link"
-                  onClick={e => {
-                    onContactLinkClicked(e, refereeContact);
-                  }}
-                >
-                  {/^\d+$/.test(refereeContact) ? ' ' + COUNTRY_CODE + '-' + refereeContact : ' ' + refereeContact}
+                <span className="referee-email text-link" onClick={e => onContactLinkClicked(refereeContact)}>
+                  {refereeDetail}
                 </span>
               </li>
             </ul>
@@ -152,9 +140,9 @@ WorkExperienceShown.propTypes = {
   roles: PropTypes.string,
   achievements: PropTypes.string,
   refereeName: PropTypes.string,
+  refereeContact: PropTypes.string,
   currentlyWorking: PropTypes.bool,
   preview: PropTypes.bool,
-  refereeContact: PropTypes.string,
   onHiddenIconClicked: PropTypes.func,
   onDelete: PropTypes.func,
   onContactLinkClicked: PropTypes.func,

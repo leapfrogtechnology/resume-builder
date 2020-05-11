@@ -1,13 +1,13 @@
 import React, { useContext, useState } from 'react';
 
 import { Add } from '~/assets/image';
-import { FormContext } from '../FormContext';
 import * as storage from '~/storage/LocalStorage';
-import AddProject from '../form/project/AddProject';
+import { FormContext } from '~/components/FormContext';
 import EmptyCard from '~/components/emptycard/EmptyCard';
 import CardHeader from '~/components/cardheader/CardHeader';
 import CardFooter from '~/components/cardfooter/CardFooter';
-import ProjectsUndertakenItem from './ProjectsUndertakenItem';
+import AddProject from '~/components/form/project/AddProject';
+import ProjectsUndertakenItem from '~/components/projectsundertaken/ProjectsUndertakenItem';
 
 const ProjectsUndertaken = () => {
   const context = useContext(FormContext);
@@ -17,23 +17,14 @@ const ProjectsUndertaken = () => {
   const preview = context.preview.get;
   const projects = context.data.get.projects;
 
-  const addBtnHandler = () => {
-    setAdd(!addProject);
-  };
-
-  const addBtnCloseHandler = () => {
-    setAdd(!addProject);
-  };
+  const toggleAddProject = () => setAdd(!addProject);
 
   /**
    * Update the hidden state of project.
    *
-   * @param {React.MouseEvent} e [ on click event ].
    * @param {string} key [ name of a particular project].
    */
-  const updateHiddenStateProject = (e, key) => {
-    e.preventDefault();
-
+  const updateHiddenStateProject = key => {
     const data = context.data.get;
 
     data['projects'].find(({ name, hidden }, index) => {
@@ -46,9 +37,7 @@ const ProjectsUndertaken = () => {
     });
   };
 
-  const deleteProject = (e, name) => {
-    e.preventDefault();
-
+  const deleteProject = name => {
     const data = context.data.get;
 
     const filteredProjects = data['projects'].filter(project => {
@@ -76,9 +65,9 @@ const ProjectsUndertaken = () => {
             hide={preview}
             label="Add another project"
             showModal={addProject}
-            onAdd={addBtnHandler}
+            onAdd={toggleAddProject}
             component={AddProject}
-            onClose={addBtnCloseHandler}
+            onClose={toggleAddProject}
             modifier="empty"
           />
         </div>
@@ -110,9 +99,9 @@ const ProjectsUndertaken = () => {
           hide={preview}
           label="Add another project"
           showModal={addProject}
-          onAdd={addBtnHandler}
+          onAdd={toggleAddProject}
           component={AddProject}
-          onClose={addBtnCloseHandler}
+          onClose={toggleAddProject}
         />
       </div>
     </div>

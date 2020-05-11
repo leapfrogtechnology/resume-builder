@@ -60,6 +60,7 @@ const App = () => {
       <FormContext.Provider value={store}>
         <Header name={username} status="Employee" onPreviewBtnClicked={handleOnPreviewBtnClicked} />
         <Dashboard />
+        {/* <PDFViewer children={<MyDocument resumeJson={store.data.get}></MyDocument>}></PDFViewer> */}
       </FormContext.Provider>
     </div>
   );

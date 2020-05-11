@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react';
 
-import SkillItem from './SkillItem';
 import { Add } from '~/assets/image';
-import { FormContext } from '../FormContext';
-import AddSkill from '../form/skill/AddSkill';
 import * as storage from '~/storage/LocalStorage';
+import SkillItem from '~/components/skills/SkillItem';
+import { FormContext } from '~/components/FormContext';
+import AddSkill from '~/components/form/skill/AddSkill';
 import EmptyCard from '~/components/emptycard/EmptyCard';
 import CardHeader from '~/components/cardheader/CardHeader';
 import CardFooter from '~/components/cardfooter/CardFooter';
@@ -17,23 +17,14 @@ const Skills = () => {
   const preview = context.preview.get;
   const skills = context.data.get.skills;
 
-  const addBtnHandler = () => {
-    setAdd(!addSkill);
-  };
-
-  const addBtnCloseHandler = () => {
-    setAdd(!addSkill);
-  };
+  const toggleAddSkil = () => setAdd(!addSkill);
 
   /**
    * Update the hidden state of skill.
    *
-   * @param {React.MouseEvent} e [ on click event ].
    * @param {string} key [ label of a particular skill].
    */
-  const updateHiddenStateSkill = (e, key) => {
-    e.preventDefault();
-
+  const updateHiddenStateSkill = key => {
     const data = context.data.get;
 
     data['skills'].find(({ label, hidden }, index) => {
@@ -47,9 +38,7 @@ const Skills = () => {
     });
   };
 
-  const deleteSkill = (e, name) => {
-    e.preventDefault();
-
+  const deleteSkill = name => {
     const data = context.data.get;
 
     const filteredSkills = data['skills'].filter(skill => {
@@ -76,9 +65,9 @@ const Skills = () => {
             hide={preview}
             label="Add another skill"
             showModal={addSkill}
-            onAdd={addBtnHandler}
+            onAdd={toggleAddSkil}
             component={AddSkill}
-            onClose={addBtnCloseHandler}
+            onClose={toggleAddSkil}
             modifier="empty"
           />
         </div>
@@ -107,9 +96,9 @@ const Skills = () => {
           hide={preview}
           label="Add another skill"
           showModal={addSkill}
-          onAdd={addBtnHandler}
+          onAdd={toggleAddSkil}
           component={AddSkill}
-          onClose={addBtnCloseHandler}
+          onClose={toggleAddSkil}
         />
       </div>
     </div>

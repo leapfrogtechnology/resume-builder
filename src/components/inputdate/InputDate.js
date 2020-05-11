@@ -1,9 +1,9 @@
-import { useField } from 'formik';
-import React, { useState } from 'react';
-
-import PropTypes from 'prop-types';
-import DatePicker from 'react-datepicker';
 import moment from 'moment';
+import { useField } from 'formik';
+import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+import DatePicker from 'react-datepicker';
+
 import { CALENDAR } from '~/components/icons/icon';
 
 const InputDate = ({ label, placeholder, modifier, checkBoxState, setFieldValue, setFieldTouched, ...props }) => {
@@ -55,6 +55,7 @@ InputDate.propTypes = {
   label: PropTypes.string,
   placeholder: PropTypes.string,
   modifier: PropTypes.bool,
+  checkBoxState: PropTypes.bool,
   setFieldValue: PropTypes.func,
   setFieldTouched: PropTypes.func,
 };

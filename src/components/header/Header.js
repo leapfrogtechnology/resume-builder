@@ -3,41 +3,24 @@ import React, { useContext } from 'react';
 
 import '~/pages/_app';
 import { Logo } from '~/assets/image';
-import { FormContext } from '../FormContext';
 import { DROPDOWN } from '~/components/icons/icon';
+import { FormContext } from '~/components/FormContext';
 import * as dateUtils from '~/utilities/date/FormatDate';
 import UserDetail from '~/components/userdetail/UserDetail';
 
 const Header = ({ name, status, onPreviewBtnClicked }) => {
   const context = useContext(FormContext);
-  const experience = context.data.get.experience;
   const preview = context.preview.get;
+  const experience = context.data.get.experience;
   const profileImage = context.data.get.profileImage;
 
   let experienceLabel = 'You do not have any professional experience yet';
 
   if (experience) {
     const experienceInYearAndMonth = dateUtils.getExperienceFormat(experience);
+    const label = dateUtils.getExperienceLabel(experienceInYearAndMonth);
 
-    experienceLabel = '';
-
-    if (experienceInYearAndMonth.year !== 0) {
-      experienceLabel =
-        experienceInYearAndMonth.year > 1
-          ? experienceInYearAndMonth.year.toString() + ' years '
-          : experienceInYearAndMonth.year.toString() + ' year ';
-    }
-
-    if (experienceInYearAndMonth.month !== 0) {
-      experienceLabel +=
-        experienceInYearAndMonth.month > 1
-          ? experienceInYearAndMonth.month.toString() + ' months'
-          : experienceInYearAndMonth.month.toString() + ' month';
-    }
-
-    experienceLabel += ' professional experience';
-  } else {
-    experienceLabel = 'You do not have any professional experience yet';
+    experienceLabel = label ? `${label} of professional experience` : experienceLabel;
   }
 
   return (

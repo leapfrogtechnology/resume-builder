@@ -7,15 +7,13 @@ const EditOptions = ({ isHidden = false, onHiddenIconClicked, onEditButtonClicke
   return (
     <>
       <div className="edit-options">
-        <span className="edit-options__item icon" onClick={e => onHiddenIconClicked(e)}>
-          {
-            isHidden ? VIEW_HIDDEN : VIEW
-          }
+        <span className="edit-options__item icon" onClick={onHiddenIconClicked}>
+          {isHidden ? VIEW_HIDDEN : VIEW}
         </span>
-        <span className="edit-options__item icon" onClick={e => onEditButtonClicked(e)}>
+        <span className="edit-options__item icon" onClick={onEditButtonClicked}>
           {EDIT('#B3B3B3')}
         </span>
-        <span className="edit-options__item icon" onClick={e => onDeleteButtonClicked(e)}>
+        <span className="edit-options__item icon" onClick={onDeleteButtonClicked}>
           {DELETE('#D2D2D2')}
         </span>
       </div>
