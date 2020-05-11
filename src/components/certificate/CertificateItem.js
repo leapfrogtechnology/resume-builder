@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
 import OpenModal from '~/components/modal/OpenModal';
+import { format } from '~/utilities/date/FormatDate';
 import { UP_RIGHT_ARROW } from '~/components/icons/icon';
 import EditOptions from '~/components/editoptions/EditOptions';
 import AddCertificate from '~/components/form/certificate/AddCertificate';
@@ -55,7 +56,7 @@ const CertificateItem = ({ title, link, year, description, preview, onHiddenIcon
           ></OpenModal>
         )}
       </div>
-      <div className="year year--dark">{moment(year).format('MMMM YYYY')}</div>
+      <div className="year year--dark">{format(year)}</div>
       <p className="description">{description}</p>
     </div>
   );

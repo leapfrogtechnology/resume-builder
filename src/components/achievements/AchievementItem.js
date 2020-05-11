@@ -3,6 +3,7 @@ import ProptTypes from 'prop-types';
 import React, { useState } from 'react';
 
 import OpenModal from '~/components/modal/OpenModal';
+import { format } from '~/utilities/date/FormatDate';
 import EditOptions from '~/components/editoptions/EditOptions';
 import AddAchievement from '~/components/form/achievement/AddAchievement';
 
@@ -54,7 +55,7 @@ const AchievementItem = ({ title, date, description, preview, onHiddenIconClicke
           ></OpenModal>
         )}
       </div>
-      <div className="year year--dark">{moment(date).format('MMMM YYYY')}</div>
+      <div className="year year--dark">{format(date)}</div>
       <p className="description">{description}</p>
     </div>
   );

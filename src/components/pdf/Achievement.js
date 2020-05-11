@@ -1,7 +1,7 @@
 import React from 'react';
-import moment from 'moment';
 import PropTypes from 'prop-types';
 import { Text, View } from '@react-pdf/renderer';
+import { format } from '~/utilities/date/FormatDate';
 import * as pdfStyles from '~/components/pdf/pdf.styles.js';
 
 /**
@@ -24,7 +24,7 @@ const AchievementItem = ({ title, date, description }) => {
   return (
     <View style={pdfStyles.styles.paragraph}>
       <Text style={pdfStyles.styles.contentSubHeader}>{title}</Text>
-      <Text>{moment(date).format('MMMM YYYY')}</Text>
+      <Text>{format(date)}</Text>
       {description ? <Text>{description}</Text> : <></>}
     </View>
   );
