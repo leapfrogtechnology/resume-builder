@@ -17,6 +17,7 @@ const Achievements = () => {
   const achievements = context.data.get.achievements;
 
   const toggleAddAchievent = () => setAdd(!addAchievement);
+
   /**
    * Update the hidden state of skill.
    *
