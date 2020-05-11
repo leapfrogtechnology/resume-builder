@@ -1,19 +1,16 @@
 import React from 'react';
-import { Close } from '~/assets/image';
 import Button from '~/components/button/Button';
+import { CLOSE } from '~/components/icons/icon';
 import InputText from '~/components/inputtext/InputText';
 import FormHeader from '~/components/formheader/FormHeader';
 import InputTextArea from '~/components/inputtextarea/InputTextArea';
-import { CLOSE } from '../~/components/icons/icon';
 
 const AddPersonalInformation = () => {
   return (
     <div className="modal">
       <div className="form">
         <div className="card">
-          <div className="close-option">
-            {CLOSE}
-          </div>
+          <div className="close-option">{CLOSE}</div>
           <FormHeader title="Personal Information" />
           <div className="form__content">
             <InputText label="Your Name" />
