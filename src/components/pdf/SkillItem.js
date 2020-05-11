@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Text, View } from '@react-pdf/renderer';
+import { capitalize } from '~/utilities/string/capitalize';
 import * as pdfStyles from '~/components/pdf/pdf.styles.js';
 
 /**
@@ -9,7 +10,7 @@ import * as pdfStyles from '~/components/pdf/pdf.styles.js';
 const SkillItem = ({ label, list }) => {
   return (
     <View style={pdfStyles.skills.content}>
-      <Text>{`${label} `}</Text>
+      <Text>{`${capitalize(label)} `}</Text>
       <SubSkillItem subSkills={list} />
     </View>
   );
@@ -27,7 +28,7 @@ const SubSkillItem = ({ subSkills }) => {
       .filter(({ name }) => {
         return name !== '';
       })
-      .map(value => value.name)
+      .map(value => capitalize(value.name))
       .join()
       .trim();
 
