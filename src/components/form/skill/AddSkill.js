@@ -34,8 +34,9 @@ const AddSkill = ({ onClose, isEdit, values }) => {
   const handleOnAdd = (e, formValues, setFieldError, setFieldTouched, resetForm) => {
     e.preventDefault();
     if (!formValues.skill) {
-      setFieldError('skill', 'Skill is required');
       setFieldTouched('skill', true);
+      setFieldError('skill', 'Skill is required');
+      return;
     }
 
     const skillObj = skillUtils.getSkillObject({ ...formValues });
