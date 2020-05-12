@@ -67,16 +67,10 @@ export const getDifferenceYearMonth = (startDate, endDate, currentlyWorking) => 
 
   const diff = getDifferenceInYearMonth(startDate, currentlyWorking ? new Date() : endDate);
 
-  if (diff.year !== 0) {
-    labelForDifference = timeWithSuffix(diff.year, 'year');
-    if (diff.month !== 0) {
-      labelForDifference += ' and ';
-    }
-  }
+  const years = timeWithSuffix(diff.year, 'year');
+  const months = timeWithSuffix(diff.month, 'month');
 
-  if (diff.month !== 0) {
-    labelForDifference += timeWithSuffix(diff.month, 'month');
-  }
+  labelForDifference = years && months ? [years, months].join(' and ') : years ? years : months;
 
   return labelForDifference;
 };
