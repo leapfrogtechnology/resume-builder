@@ -16,7 +16,7 @@ const AddSkill = ({ onClose, isEdit, values }) => {
 
   const [error, setError] = useState({ status: false, message: 'Skill is a required field' });
 
-  const skillsList = [];
+  const [skills] = useState([]);
 
   let initialValues = {};
 
@@ -39,14 +39,14 @@ const AddSkill = ({ onClose, isEdit, values }) => {
       }
       handleSubmitOnEdit(formValues);
     } else {
-      if (!formValues.skill && skillsList.length < 1) {
+      if (!formValues.skill && skills.length < 1) {
         const err = { status: true, message: 'Skill is a required field' };
 
         setError(prevState => ({ ...prevState, ...err }));
 
         return;
       }
-      handleSubmitOnAdd(data, formValues, skillsList, storage);
+      handleSubmitOnAdd(data, formValues, skills, storage);
     }
   };
 
@@ -63,23 +63,12 @@ const AddSkill = ({ onClose, isEdit, values }) => {
 
     const skillObj = skillUtils.getSkillObject({ ...formValues });
 
-    skillsList.push(skillObj);
+    skills.push(skillObj);
 
     resetForm();
   };
 
   const handleSubmitOnAdd = (data, formValues, skillsList, storage) => {
-    if (formValues.skill) {
-      const skillObj = skillUtils.getSkillObject({ ...formValues });
-
-      if (data.get.skills) {
-        data.get['skills'].push(skillObj);
-      } else {
-        data.get['skills'] = [];
-
-        data.get['skills'].push(skillObj);
-      }
-    }
     if (skillsList.length > 0) {
       if (data.get.skills) {
         skillsList.forEach(skill => {
@@ -91,6 +80,18 @@ const AddSkill = ({ onClose, isEdit, values }) => {
         skillsList.forEach(skill => {
           data.get['skills'].push(skill);
         });
+      }
+    }
+
+    if (formValues.skill) {
+      const skillObj = skillUtils.getSkillObject({ ...formValues });
+
+      if (data.get.skills) {
+        data.get['skills'].push(skillObj);
+      } else {
+        data.get['skills'] = [];
+
+        data.get['skills'].push(skillObj);
       }
     }
 
