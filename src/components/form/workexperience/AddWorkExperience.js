@@ -49,6 +49,7 @@ const AddWorkExperience = ({ onClose, isEdit, values }) => {
     const isEqual = _.isEqual(formValues, initialValues);
 
     if (isEqual) {
+      onClose();
       return;
     } else {
       const workObj = workExperienceUtils.getWorkExperienceObject({ ...formValues });
