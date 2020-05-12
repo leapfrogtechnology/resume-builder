@@ -1,4 +1,3 @@
-import * as Yup from 'yup';
 import * as _ from 'lodash';
 import PropTypes from 'prop-types';
 import { Formik, Form } from 'formik';
