@@ -7,9 +7,7 @@ const Button = ({ content, isCancel, type, onclick = null, submitProps }) => {
       <button
         className={isCancel ? 'btn btn--cancel' : 'btn'}
         type={type}
-        onClick={e => {
-          !submitProps ? onclick(e) : onclick({ ...submitProps });
-        }}
+        onClick={!submitProps ? onclick : onclick({ ...submitProps })}
       >
         {content}
       </button>
