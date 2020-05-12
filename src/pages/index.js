@@ -31,8 +31,8 @@ const App = () => {
   };
 
   useEffect(() => {
-    if (localStorage.getItem('resume')) {
-      const resume = JSON.parse(localStorage.getItem('resume'));
+    if (storage.getResume()) {
+      const resume = storage.getResume();
 
       updateData(prevState => ({ ...prevState, ...resume }));
     } else {
