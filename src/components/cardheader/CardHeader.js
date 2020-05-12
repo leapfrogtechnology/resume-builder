@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import OpenModal from '~/components/modal/OpenModal';
 import { EDIT } from '~/components/icons/icon';
+import OpenModal from '~/components/modal/OpenModal';
+import { EDIT_ICON_COLOR_BLUE } from '~/constant/color';
 
 const CardHeader = ({ title, icon = null, hideIcon = false, component, onEdit, onClose, showModal, isEdit }) => {
   return (
@@ -13,7 +14,7 @@ const CardHeader = ({ title, icon = null, hideIcon = false, component, onEdit, o
         </div>
         {icon && !hideIcon && (
           <div className="card__header_r icon" onClick={e => onEdit(e)}>
-            {EDIT('#29B6F6')}
+            {EDIT(EDIT_ICON_COLOR_BLUE)}
           </div>
         )}
       </div>
