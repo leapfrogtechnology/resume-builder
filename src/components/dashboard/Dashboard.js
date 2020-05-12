@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import Skills from '~/components/skills/Skills';
 import Sidenav from '~/components/sidenav/Sidenav';
@@ -9,12 +8,12 @@ import WorkExperience from '~/components/workexperience/WorkExperience';
 import ProjectsUndertaken from '~/components/projectsundertaken/ProjectsUndertaken';
 import PersonalInformation from '~/components/personalinformation/PersonalInformation';
 
-const Dashboard = ({ profile, preview }) => {
+const Dashboard = () => {
   return (
     <section className="container">
       <div className="main-container">
         <div className="main-content">
-          <PersonalInformation preview={preview} />
+          <PersonalInformation />
           <Skills />
           <WorkExperience />
           <ProjectsUndertaken />
@@ -25,11 +24,6 @@ const Dashboard = ({ profile, preview }) => {
       </div>
     </section>
   );
-};
-
-Dashboard.propTypes = {
-  profile: PropTypes.object,
-  preview: PropTypes.bool,
 };
 
 export default Dashboard;

@@ -1,25 +1,29 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 
-import { AppContext } from '~/pages';
 import { Add } from '~/assets/image';
-import CertificateItem from './CertificateItem';
+import * as storage from '~/storage/LocalStorage';
+import { FormContext } from '~/components/FormContext';
+import EmptyCard from '~/components/emptycard/EmptyCard';
 import CardFooter from '~/components/cardfooter/CardFooter';
 import CardHeader from '~/components/cardheader/CardHeader';
+import CertificateItem from '~/components/certificate/CertificateItem';
+import AddCertificate from '~/components/form/certificate/AddCertificate';
 
 const Certificate = () => {
-  const context = useContext(AppContext);
+  const [addCertificate, setAdd] = useState(false);
+  const context = useContext(FormContext);
+
   const certificates = context.data.get.certificates;
   const preview = context.preview.get;
+
+  const togggleAddCertificate = () => setAdd(!addCertificate);
 
   /**
    * Update the hidden state of skill.
    *
-   * @param {React.MouseEvent} e [ on click event ].
    * @param {string} key [ name of a particular certificate].
    */
-  const updateHiddenStateCertificates = (e, key) => {
-    e.preventDefault();
-
+  const updateHiddenStateCertificates = key => {
     const data = context.data.get;
 
     data['certificates'].find(({ name, hidden }, index) => {
@@ -32,6 +36,44 @@ const Certificate = () => {
     });
   };
 
+  const deleteCertificate = (name, link) => {
+    const data = context.data.get;
+
+    const filteredCertificates = data['certificates'].filter(certificate => {
+      return certificate.name !== name && certificate.link !== link;
+    });
+
+    data['certificates'] = filteredCertificates;
+
+    context.data.set(prevState => ({ ...prevState, ...data }));
+
+    storage.saveResume(context.data.get);
+  };
+
+  if ((!certificates || certificates.length < 1) && preview) {
+    return <></>;
+  }
+
+  if (!certificates || certificates.length < 1) {
+    return (
+      <div className="content-block">
+        <div className="card">
+          <EmptyCard emptyMessage="You do not have any certificates yet."></EmptyCard>
+          <CardFooter
+            icon={Add}
+            hide={preview}
+            label="Add another certificate"
+            showModal={addCertificate}
+            onAdd={togggleAddCertificate}
+            component={AddCertificate}
+            onClose={togggleAddCertificate}
+            modifier="empty"
+          />
+        </div>
+      </div>
+    );
+  }
+
   const certificatesList = certificates.map(({ name, link, date, description }) => (
     <CertificateItem
       key={name}
@@ -41,15 +83,24 @@ const Certificate = () => {
       description={description}
       preview={preview}
       onHiddenIconClicked={updateHiddenStateCertificates}
+      onDelete={deleteCertificate}
     />
   ));
 
   return (
-    <div className="certificate-block">
+    <div className="content-block">
       <div className="card">
         <CardHeader title="Certificates" />
         <div className="certificate">{certificatesList}</div>
-        <CardFooter icon={Add} hide={preview} label="Add another certificate" />
+        <CardFooter
+          icon={Add}
+          hide={preview}
+          label="Add another certificate"
+          showModal={addCertificate}
+          onAdd={togggleAddCertificate}
+          component={AddCertificate}
+          onClose={togggleAddCertificate}
+        />
       </div>
     </div>
   );

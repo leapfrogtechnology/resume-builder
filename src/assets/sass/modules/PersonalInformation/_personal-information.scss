@@ -5,15 +5,13 @@
 .personal-info-row {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding-top: 20px;
   font: normal normal 16px/19px $font-primary;
 
   &:last-child {
     padding-bottom: 0;
-
-    .personal-info-row__label {
-      align-self: flex-start;
-    }
+    align-items: flex-start;
   }
 
   @include e(item) {
@@ -26,15 +24,21 @@
     margin-right: 90px;
   }
 
-  @include e(icon) {
-    width: 24px;
-  }
-
   @include e(value) {
-    width: 456px;
-
+    text-align: justify;
     @include m(strong) {
       font-weight: 600;
     }
+  }
+
+  @include e(value-container) {
+    display: flex;
+    align-items: center;
+    width: calc(100% - 222px);
+    padding-right: 16px;
+  }
+
+  @include e(icon) {
+    cursor: pointer;
   }
 }

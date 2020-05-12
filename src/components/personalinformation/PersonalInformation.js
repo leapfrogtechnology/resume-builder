@@ -1,42 +1,57 @@
-import PropTypes from 'prop-types';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 
 import { Edit } from '~/assets/image';
-import { AppContext } from '../../pages';
-import PersonalInfoItem from './PersonalInfoItem';
+import { FormContext } from '~/components/FormContext';
 import CardHeader from '~/components/cardheader/CardHeader';
+import PersonalInfoItem from '~/components/personalinformation/PersonalInfoItem';
+import AddPersonalInformation from '~/components/form/personalinformation/AddPersonalInformation';
 
-const PersonalInformation = ({ preview }) => {
+const PersonalInformation = () => {
   const bold = true;
-  const context = useContext(AppContext);
+  const context = useContext(FormContext);
 
   const previousData = context.data.get;
+  const preview = context.preview.get;
 
   const name = previousData.name;
   const role = previousData.role;
   const introduction = previousData.introduction;
 
+  const [showModel, setModal] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
+
+  const toggleEdit = () => {
+    setModal(!showModel);
+    setIsEdit(!isEdit);
+  };
+
   /**
    * Update the hidden state of personal information.
    *
-   * @param {React.MouseEvent} e [ on click event ].
    * @param {string} key [ name of a particular info].
    */
-  const updateHiddenState = (e, key) => {
-    e.preventDefault();
-
+  const updateHiddenState = key => {
     const data = context.data.get;
     const currentState = data[key].hidden;
     const newState = !currentState;
 
     data[key].hidden = newState;
+
     context.data.set(data);
   };
 
   return (
-    <div className="personal-info-block">
+    <div className="content-block">
       <div className="card">
-        <CardHeader title="Personal Information" icon={!preview ? Edit : ''} />
+        <CardHeader
+          title="Personal Information"
+          icon={!preview ? Edit : ''}
+          component={AddPersonalInformation}
+          onEdit={toggleEdit}
+          onClose={toggleEdit}
+          showModal={showModel}
+          isEdit={isEdit}
+        />
         {name && (
           <PersonalInfoItem
             label="name"
@@ -69,10 +84,6 @@ const PersonalInformation = ({ preview }) => {
       </div>
     </div>
   );
-};
-
-PersonalInformation.propTypes = {
-  preview: PropTypes.bool,
 };
 
 export default PersonalInformation;

@@ -1,7 +1,7 @@
 .sidenav {
   width: 31.5384%;
   .card {
-    padding: 0 25px 30px;
+    padding: 36px 25px;
   }
 
   @include e(upload-block) {
@@ -12,17 +12,13 @@
     border-bottom: 1px solid $alto;
   }
 
-  .profile-image-wrapper {
-    margin-right: 20px;
-  }
-
   @include e(upload-block-l) {
     display: flex;
     align-items: center;
   }
 
-  .card__header {
-    padding-top: 30px;
+  @include e(contact-block) {
+    padding-top: 28px;
   }
 
   @include e(cv-action) {
@@ -39,4 +35,12 @@
 
 .sidenav-bottom {
   margin-top: 20px;
+}
+
+.profile-image-wrapper {
+  margin-right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
 }

@@ -1,5 +1,5 @@
-.modal {
-  position: absolute;
+.modal-container {
+  position: fixed;
   top: 0;
   left: 0;
   background: rgba($color: $black, $alpha: 0.7);
@@ -10,7 +10,7 @@
   display: flex;
   align-items: center;
   animation-name: animate;
-  animation-duration: 1s;
+  animation-duration: 0.5s;
 }
 
 .form {
@@ -20,6 +20,10 @@
 
   @include e(header) {
     font: normal bold 24px/29px $font-primary;
+
+    @include m(dark) {
+      color: $black;
+    }
   }
 
   @include e(radio-field) {
@@ -50,6 +54,10 @@
       margin-left: 20px;
     }
   }
+
+  .field-error {
+    border: 1px solid $pomegranate;
+  }
 }
 
 .form-button {
@@ -61,6 +69,19 @@
   @include e(right) {
     display: flex;
     align-items: center;
+  }
+}
+
+.add-container {
+  cursor: pointer;
+  margin-top: 18px;
+  padding: 12px 0;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid #b3b3b3;
+  border-bottom: 1px dashed #b3b3b3;
+  @include e(text) {
+    color: $dusty-gray;
   }
 }
 

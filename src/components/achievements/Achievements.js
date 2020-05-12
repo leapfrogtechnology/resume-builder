@@ -1,25 +1,29 @@
-import React, {useState, useContext} from 'react';
+import React, { useState, useContext } from 'react';
 
-import { AppContext } from '~/pages';
 import { Add } from '~/assets/image';
-import AchievementItem from './AchievementItem';
+import * as storage from '~/storage/LocalStorage';
+import { FormContext } from '~/components/FormContext';
+import EmptyCard from '~/components/emptycard/EmptyCard';
 import CardHeader from '~/components/cardheader/CardHeader';
 import CardFooter from '~/components/cardfooter/CardFooter';
+import AchievementItem from '~/components/achievements/AchievementItem';
+import AddAchievement from '~/components/form/achievement/AddAchievement';
 
 const Achievements = () => {
-  const context = useContext(AppContext);
+  const [addAchievement, setAdd] = useState(false);
+  const context = useContext(FormContext);
+
   const preview = context.preview.get;
   const achievements = context.data.get.achievements;
+
+  const toggleAddAchievent = () => setAdd(!addAchievement);
 
   /**
    * Update the hidden state of skill.
    *
-   * @param {React.MouseEvent} e [ on click event ].
    * @param {string} key [ name of a particular achievements].
    */
-  const updateHiddenStateAchievement = (e, key) => {
-    e.preventDefault();
-
+  const updateHiddenStateAchievement = key => {
     const data = context.data.get;
 
     data['achievements'].find(({ name, hidden }, index) => {
@@ -32,22 +36,70 @@ const Achievements = () => {
     });
   };
 
-  const achievementsList = achievements.map(({ name, date }) => (
+  const deleteAchievment = (name, date) => {
+    const data = context.data.get;
+
+    const filteredAchievements = data['achievements'].filter(achievement => {
+      return achievement.name !== name && achievement.date !== date;
+    });
+
+    data['achievements'] = filteredAchievements;
+
+    context.data.set(prevState => ({ ...prevState, ...data }));
+
+    storage.saveResume(context.data.get);
+  };
+
+  if ((!achievements || achievements.length < 1) && preview) {
+    return <></>;
+  }
+
+  if (!achievements || achievements.length < 1) {
+    return (
+      <div className="content-block">
+        <div className="card">
+          <EmptyCard emptyMessage="You do not have any achievement yet."></EmptyCard>
+          <CardFooter
+            icon={Add}
+            hide={preview}
+            label="Add another achievement"
+            showModal={addAchievement}
+            onAdd={toggleAddAchievent}
+            component={AddAchievement}
+            onClose={toggleAddAchievent}
+            modifier="empty"
+          />
+        </div>
+      </div>
+    );
+  }
+
+  const achievementsList = achievements.map(({ name, date, description }, index) => (
     <AchievementItem
-      key={name}
+      key={index}
       title={name}
       date={date}
+      description={description}
       preview={preview}
       onHiddenIconClicked={updateHiddenStateAchievement}
+      onDelete={deleteAchievment}
     />
   ));
 
   return (
-    <div className="achievements-block">
+    <div className="content-block">
       <div className="card">
         <CardHeader title="Achievements" />
         {achievementsList}
-        <CardFooter icon={Add} hide={preview} label="Add another achievement" />
+        <CardFooter
+          icon={Add}
+          hide={preview}
+          label="Add another achievement"
+          showModal={addAchievement}
+          onAdd={toggleAddAchievent}
+          component={AddAchievement}
+          onClose={toggleAddAchievent}
+        />
       </div>
     </div>
   );

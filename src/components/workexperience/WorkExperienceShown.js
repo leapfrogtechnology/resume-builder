@@ -1,6 +1,12 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
+
+import { refereeCheck } from '~/common/constants';
+import { COUNTRY_CODE } from '~/constant/contact';
+import OpenModal from '~/components/modal/OpenModal';
+import * as dateUtils from '~/utilities/date/FormatDate';
 import EditOptions from '~/components/editoptions/EditOptions';
+import AddWorkExperience from '~/components/form/workexperience/AddWorkExperience';
 
 const WorkExperienceShown = ({
   subTitle,
@@ -11,23 +17,59 @@ const WorkExperienceShown = ({
   achievements,
   refereeName,
   refereeContact,
+  currentlyWorking,
   preview,
   onHiddenIconClicked,
+  onDelete,
+  onContactLinkClicked,
 }) => {
   const [hidden, setHidden] = useState(false);
-
-  const rolesList = roles.split('.').map(role => <li key={role}>{role}</li>);
-  const achievementsList = achievements.split('.').map(achievement => <li key={achievement}>{achievement}</li>);
+  const [editWork, setEdit] = useState(false);
 
   if (hidden && preview) {
     return <></>;
   }
 
-  const onHiddenIconClickedHandler = e => {
-    e.preventDefault();
+  const rolesList = roles
+    .split('.')
+    .filter(role => {
+      if (role.trim()) {
+        return role;
+      }
+    })
+    .map((role, index) => <li key={index}>{role}</li>);
+
+  let achievementsList = null;
+
+  if (achievements.length > 1) {
+    achievementsList = achievements
+      .split('.')
+      .filter(achievement => {
+        if (achievement.trim()) {
+          return achievement;
+        }
+      })
+      .map((achievement, index) => <li key={index}>{achievement}</li>);
+  }
+
+  let labelForDifference = dateUtils.getDifferenceYearMonth(startDate, endDate, currentlyWorking);
+
+  labelForDifference = labelForDifference ? `( ${labelForDifference} )` : '';
+
+  const refereeDetail = refereeCheck.test(refereeContact)
+    ? ` ${COUNTRY_CODE} - ${refereeContact}`
+    : ` ${refereeContact}`;
+
+  const onHiddenIconClickedHandler = () => {
     setHidden(!hidden);
-    onHiddenIconClicked(e, subTitle);
+    onHiddenIconClicked(subTitle);
   };
+
+  const onDeleteIconClickedHanlder = () => {
+    onDelete(subTitle, position);
+  };
+
+  const toggleEditWork = () => setEdit(!editWork);
 
   return (
     <div className="work-experience">
@@ -37,28 +79,55 @@ const WorkExperienceShown = ({
             {subTitle}
             {hidden && <span className="hidden-tag">Hidden</span>}
           </div>
-          {!preview && <EditOptions isHidden={hidden} onHiddenIconClicked={onHiddenIconClickedHandler} />}
+          {!preview && (
+            <EditOptions
+              isHidden={hidden}
+              onHiddenIconClicked={onHiddenIconClickedHandler}
+              onEditButtonClicked={toggleEditWork}
+              onDeleteButtonClicked={onDeleteIconClickedHanlder}
+            />
+          )}
+          {editWork && (
+            <OpenModal
+              component={AddWorkExperience}
+              onClose={toggleEditWork}
+              showModal={editWork}
+              isEdit={editWork}
+              data={editWork ? { name: subTitle, position: position } : ''}
+            ></OpenModal>
+          )}
         </div>
         <div className="work-experience__position">{position}</div>
-        <div className="work-experience__exp-year">
-          <span className="start-date">{startDate}</span> - <span className="end-date">{endDate}</span>(3 years and 3
-          months)
+        <div className="year">
+          <span className="start-date">{dateUtils.format(startDate)}</span> -{' '}
+          <span className="end-date">{currentlyWorking ? 'Present' : dateUtils.format(endDate)}</span>{' '}
+          {labelForDifference}
         </div>
       </div>
-
       <div>
         <div className="work-experience__row">
           Roles and Responsibilities
           <ul className="work-experience__row-item">{rolesList}</ul>
         </div>
-        <div className="work-experience__row">
-          Achievements
-          <ul className="work-experience__row-item">{achievementsList}</ul>
-        </div>
-        <div className="work-experience__row">
-          Referee <span className="referee-name">{refereeName}</span>
-          <span className="referee-email text-link">{' ' + refereeContact}</span>
-        </div>
+        {achievements && (
+          <div className="work-experience__row">
+            Achievements
+            <ul className="work-experience__row-item">{achievementsList}</ul>
+          </div>
+        )}
+        {(refereeName || refereeContact) && (
+          <div className="work-experience__row">
+            Referee
+            <ul className="referee-name work-experience__row-item">
+              <li>
+                {refereeName}
+                <span className="referee-email text-link" onClick={e => onContactLinkClicked(refereeContact)}>
+                  {refereeDetail}
+                </span>
+              </li>
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -72,9 +141,12 @@ WorkExperienceShown.propTypes = {
   roles: PropTypes.string,
   achievements: PropTypes.string,
   refereeName: PropTypes.string,
-  preview: PropTypes.bool,
   refereeContact: PropTypes.string,
+  currentlyWorking: PropTypes.bool,
+  preview: PropTypes.bool,
   onHiddenIconClicked: PropTypes.func,
+  onDelete: PropTypes.func,
+  onContactLinkClicked: PropTypes.func,
 };
 
 export default WorkExperienceShown;

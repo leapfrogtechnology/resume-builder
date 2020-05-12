@@ -1,28 +1,25 @@
 import React from 'react';
-import { Warning } from '~/assets/image';
-import Button from '~/components/button/Button';
-import CardHeader from '~/components/cardheader/CardHeader';
+import PropTypes from 'prop-types';
 
-const DeletePopup = ({item, entry_title}) => {
+import Button from '~/components/button/Button';
+import { WARNING } from '~/components/icons/icon';
+
+const DeletePopup = ({ onConfirm, onCancel }) => {
   return (
-    <div className="modal">
+    <div className="modal-container">
       <div className="delete-popup">
         <div className="card">
           <div className="delete-popup__content">
-            <div className="delete-popup__icon">
-              <img src={Warning} alt="Warning" />
-            </div>
+            <div className="delete-popup__icon">{WARNING}</div>
             <div className="delete-popup__body">
-              <CardHeader title="Are you sure?" />
-              <p className="delete-popup__message">
-                {`You are about to delete a ${item} for ${entry_title}. Do you want to proceed?`}
-              </p>
+              <div className="title">Are you sure?</div>
+              <p className="delete-popup__message">{`You are about to delete your resume. Do you want to proceed?`}</p>
               <div className="form-button">
                 <div className="form-button__left">
-                  <Button content="Yes, Delete" />
+                  <Button content="Yes, Delete" onclick={onConfirm} />
                 </div>
                 <div className="form-button__right">
-                  <Button content="Cancel" isCancel={true} />
+                  <Button content="Cancel" isCancel={true} onclick={onCancel} />
                 </div>
               </div>
             </div>
@@ -30,7 +27,12 @@ const DeletePopup = ({item, entry_title}) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
+
+DeletePopup.propTypes = {
+  onConfirm: PropTypes.func,
+  onCancel: PropTypes.func,
+};
 
 export default DeletePopup;

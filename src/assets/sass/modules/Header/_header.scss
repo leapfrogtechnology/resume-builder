@@ -28,11 +28,23 @@
   @include e(name) {
     font: normal 600 14px/17px $font-primary;
     color: $mine-shaft;
+
+    @include m(large) {
+      font: normal bold 24px/28px $font-primary;
+    }
+
+    @include m(dark) {
+      color: $black;
+    }
   }
 
   @include e(status) {
     font: normal normal 12px/15px $font-primary;
     color: $dusty-gray;
+
+    @include m(dark) {
+      color: $black;
+    }
   }
 
   .dropdown {

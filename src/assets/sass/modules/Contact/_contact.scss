@@ -8,7 +8,15 @@
     font: normal normal 16px/19px $font-primary;
   }
 
-  .value {
+  @include e(r) {
+    cursor: pointer;
+  }
+}
+
+.contact {
+  @include e(value) {
     font: normal normal 16px/19px $font-primary;
+    word-break: break-word;
+    width: calc(100% - 45px);
   }
 }
