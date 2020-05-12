@@ -48,7 +48,7 @@ const ProjectsUndertaken = () => {
 
     context.data.set(prevState => ({ ...prevState, ...data }));
 
-    storage.saveResume(localStorage, context.data.get);
+    storage.saveResume(context.data.get);
   };
 
   if ((!projects || projects.length < 1) && preview) {

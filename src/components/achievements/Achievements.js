@@ -47,7 +47,7 @@ const Achievements = () => {
 
     context.data.set(prevState => ({ ...prevState, ...data }));
 
-    storage.saveResume(localStorage, context.data.get);
+    storage.saveResume(context.data.get);
   };
 
   if ((!achievements || achievements.length < 1) && preview) {

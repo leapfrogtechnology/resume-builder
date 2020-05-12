@@ -47,7 +47,7 @@ const Certificate = () => {
 
     context.data.set(prevState => ({ ...prevState, ...data }));
 
-    storage.saveResume(localStorage, context.data.get);
+    storage.saveResume(context.data.get);
   };
 
   if ((!certificates || certificates.length < 1) && preview) {

@@ -47,7 +47,7 @@ const Skills = () => {
 
     data['skills'] = filteredSkills;
 
-    storage.saveResume(localStorage, data);
+    storage.saveResume(data);
     context.data.set(prevState => ({ ...prevState, ...data }));
   };
 

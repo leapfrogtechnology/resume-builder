@@ -6,7 +6,7 @@ import { FormContext } from '~/components/FormContext';
 import EmptyCard from '~/components/emptycard/EmptyCard';
 import CardHeader from '~/components/cardheader/CardHeader';
 import CardFooter from '~/components/cardfooter/CardFooter';
-import { baseMailToUrl, baseTelUrl } from '~/constant/contact.js';
+import { baseMailToUrl, baseTelUrl } from '~/constant/contact';
 import WorkExperienceShown from '~/components/workexperience/WorkExperienceShown';
 import AddWorkExperience from '~/components/form/workexperience/AddWorkExperience';
 
@@ -49,7 +49,7 @@ const WorkExperience = () => {
 
     context.data.set(prevState => ({ ...prevState, ...data }));
 
-    storage.saveResume(localStorage, context.data.get);
+    storage.saveResume(context.data.get);
   };
 
   const contactLinkHandler = value => {

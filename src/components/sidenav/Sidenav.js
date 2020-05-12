@@ -94,7 +94,7 @@ const Sidenav = () => {
       prevData.profileImage.isDeleted = false;
 
       context.data.set(prevState => ({ ...prevState, ...prevData }));
-      storage.saveResume(localStorage, context.data.get);
+      storage.saveResume(context.data.get);
     }
   };
 
@@ -105,7 +105,7 @@ const Sidenav = () => {
       context.data.set(prevState => ({ ...prevState, ...context.data.get }));
     }
 
-    storage.saveResume(localStorage, context.data.get);
+    storage.saveResume(context.data.get);
   };
 
   return (
