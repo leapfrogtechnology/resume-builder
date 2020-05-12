@@ -18,11 +18,7 @@ const SkillItem = ({ label, list }) => {
 
 const SubSkillItem = ({ subSkills }) => {
   if (subSkills.length < 1) {
-    return (
-      <>
-        <Text>{' , '}</Text>
-      </>
-    );
+    return <Text>{' , '}</Text>;
   } else {
     const filteredResult = subSkills
       .filter(({ name }) => {
@@ -33,11 +29,7 @@ const SubSkillItem = ({ subSkills }) => {
       .trim();
 
     if (!filteredResult) {
-      return (
-        <>
-          <Text>{' , '}</Text>
-        </>
-      );
+      return <Text>{' , '}</Text>;
     } else {
       return <Text>{`( ${filteredResult} ), `}</Text>;
     }
