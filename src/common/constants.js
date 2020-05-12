@@ -12,4 +12,6 @@ const linkCheck = new RegExp(
   'i'
 ); // fragment locator
 
-export { emailCheck, phoneNumberCheck, linkCheck };
+const refereeCheck = /^\d+$/;
+
+export { emailCheck, phoneNumberCheck, linkCheck, refereeCheck };
