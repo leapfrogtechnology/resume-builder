@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
+import { refereeCheck } from '~/common/constants';
 import { COUNTRY_CODE } from '~/constant/contact';
 import OpenModal from '~/components/modal/OpenModal';
 import * as dateUtils from '~/utilities/date/FormatDate';
@@ -55,7 +56,9 @@ const WorkExperienceShown = ({
 
   labelForDifference = labelForDifference ? `( ${labelForDifference} )` : '';
 
-  const refereeDetail = /^\d+$/.test(refereeContact) ? ` ${COUNTRY_CODE} - ${refereeContact}` : ` ${refereeContact}`;
+  const refereeDetail = refereeCheck.test(refereeContact)
+    ? ` ${COUNTRY_CODE} - ${refereeContact}`
+    : ` ${refereeContact}`;
 
   const onHiddenIconClickedHandler = () => {
     setHidden(!hidden);
