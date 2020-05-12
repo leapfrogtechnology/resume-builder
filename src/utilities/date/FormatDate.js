@@ -129,3 +129,17 @@ export const getExperienceLabel = experienceTime => {
 
   return experienceLabel;
 };
+
+export const timeWithSuffix = (value, tag) => {
+  switch (value) {
+    case 0:
+      return '';
+      break;
+    case 1:
+      return value + tag;
+      break;
+    default:
+      return value + ' ' + tag + 's';
+      break;
+  }
+};
