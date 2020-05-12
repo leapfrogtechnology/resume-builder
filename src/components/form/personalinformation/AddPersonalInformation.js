@@ -1,5 +1,4 @@
 /* eslint-disable require-jsdoc */
-import * as Yup from 'yup';
 import PropTypes from 'prop-types';
 import { Formik, Form } from 'formik';
 import React, { useContext } from 'react';
@@ -9,17 +8,12 @@ import * as storage from '~/storage/LocalStorage';
 import { FormContext } from '~/components/FormContext';
 import InputText from '~/components/inputtext/InputText';
 import FormHeader from '~/components/formheader/FormHeader';
+import validatePersonalInformation from '~/validations/PersonalInformation';
 import * as personalInfoUtils from '~/utilities/objects/PersonalInformation';
 import OutsideClickDetector from '~/components/detector/OutsideClickDetector';
 
 const AddPersonalInformation = ({ onClose, isEdit }) => {
   const { data } = useContext(FormContext);
-
-  const validatePersonalInformation = Yup.object().shape({
-    name: Yup.string().label('Name').min(10).max(35, 'Limit 35 characters').required(),
-    role: Yup.string().label('Role').max(40, 'Limit 40 characters').required(),
-    introduction: Yup.string().label('Introduction').max(200, 'Limit 200 characters').required(),
-  });
 
   const handleSubmit = values => {
     const personalInfoObj = personalInfoUtils.getPersonalInfoObject({ ...values });
