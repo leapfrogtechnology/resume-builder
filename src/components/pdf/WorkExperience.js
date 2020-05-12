@@ -15,10 +15,13 @@ const WorkExperience = ({ heading, experience, data }) => {
   if (experience) {
     const experienceInYearAndMonth = dateUtils.getExperienceFormat(experience);
 
-    experienceLabel = dateUtils.getExperienceLabel(experienceInYearAndMonth);
+    experienceLabel =
+      dateUtils.timeWithSuffix(experienceInYearAndMonth.year, 'year') +
+      ' ' +
+      dateUtils.timeWithSuffix(experienceInYearAndMonth.month, 'month');
   }
 
-  experienceLabel = experienceLabel ? `( ${experienceLabel} )` : '';
+  experienceLabel = experienceLabel.trim() ? `( ${experienceLabel.trim()} )` : '';
 
   const workExperiences = data.map((value, index) => (
     <WorkExperienceItem key={index} workExperience={value}></WorkExperienceItem>
