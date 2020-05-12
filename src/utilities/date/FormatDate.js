@@ -37,23 +37,21 @@ export const getExperienceFormat = experience => {
  * @returns {Object} Difference.
  */
 export const getDifferenceInYearMonth = (startDate, endDate) => {
-  const a = moment(endDate);
-  const b = moment(startDate);
+  const formattedEndDate = moment(endDate);
+  const formattedStartDate = moment(startDate);
 
-  const years = a.diff(b, 'year');
+  const years = formattedEndDate.diff(formattedStartDate, 'year');
 
-  b.add(years, 'years');
+  formattedStartDate.add(years, 'years');
 
-  const months = a.diff(b, 'months');
+  const months = formattedEndDate.diff(formattedStartDate, 'months');
 
-  b.add(months, 'months');
+  formattedStartDate.add(months, 'months');
 
-  const difference = {
+  return {
     year: years,
     month: months,
   };
-
-  return difference;
 };
 
 /**
