@@ -50,21 +50,27 @@ const Achievements = () => {
     storage.saveResume(localStorage, context.data.get);
   };
 
+  if ((!achievements || achievements.length < 1) && preview) {
+    return <></>;
+  }
+
   if (!achievements || achievements.length < 1) {
     return (
-      <>
-        <EmptyCard emptyMessage="You do not have any achievement yet."></EmptyCard>
-        <CardFooter
-          icon={Add}
-          hide={preview}
-          label="Add another achievement"
-          showModal={addAchievement}
-          onAdd={toggleAddAchievent}
-          component={AddAchievement}
-          onClose={toggleAddAchievent}
-          modifier="empty"
-        />
-      </>
+      <div className="content-block">
+        <div className="card">
+          <EmptyCard emptyMessage="You do not have any achievement yet."></EmptyCard>
+          <CardFooter
+            icon={Add}
+            hide={preview}
+            label="Add another achievement"
+            showModal={addAchievement}
+            onAdd={toggleAddAchievent}
+            component={AddAchievement}
+            onClose={toggleAddAchievent}
+            modifier="empty"
+          />
+        </div>
+      </div>
     );
   }
 
@@ -81,19 +87,21 @@ const Achievements = () => {
   ));
 
   return (
-    <>
-      <CardHeader title="Achievements" />
-      {achievementsList}
-      <CardFooter
-        icon={Add}
-        hide={preview}
-        label="Add another achievement"
-        showModal={addAchievement}
-        onAdd={toggleAddAchievent}
-        component={AddAchievement}
-        onClose={toggleAddAchievent}
-      />
-    </>
+    <div className="content-block">
+      <div className="card">
+        <CardHeader title="Achievements" />
+        {achievementsList}
+        <CardFooter
+          icon={Add}
+          hide={preview}
+          label="Add another achievement"
+          showModal={addAchievement}
+          onAdd={toggleAddAchievent}
+          component={AddAchievement}
+          onClose={toggleAddAchievent}
+        />
+      </div>
+    </div>
   );
 };
 

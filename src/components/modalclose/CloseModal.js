@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Close } from '~/assets/image';
+import { CLOSE } from '~/components/icons/icon';
 
 const CloseModal = ({ onClose }) => {
   return (
@@ -11,7 +12,7 @@ const CloseModal = ({ onClose }) => {
           onClose(e);
         }}
       >
-        <img src={Close} alt="close" />
+        {CLOSE}
       </div>
     </div>
   );

@@ -60,7 +60,7 @@ PersonalInformation.propTypes = {
   name: PropTypes.string,
   role: PropTypes.object,
   introduction: PropTypes.object,
-  profileImg: PropTypes.string,
+  profileImg: PropTypes.object,
   contacts: PropTypes.array,
 };
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Warning } from '~/assets/image';
 import Button from '~/components/button/Button';
+import { WARNING } from '~/components/icons/icon';
 
 const DeletePopup = ({ onConfirm, onCancel }) => {
   return (
@@ -10,9 +10,7 @@ const DeletePopup = ({ onConfirm, onCancel }) => {
       <div className="delete-popup">
         <div className="card">
           <div className="delete-popup__content">
-            <div className="delete-popup__icon">
-              <img src={Warning} alt="Warning" />
-            </div>
+            <div className="delete-popup__icon">{WARNING}</div>
             <div className="delete-popup__body">
               <div className="title">Are you sure?</div>
               <p className="delete-popup__message">{`You are about to delete your resume. Do you want to proceed?`}</p>

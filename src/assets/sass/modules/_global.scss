@@ -59,10 +59,10 @@
 .edit-options {
   @include e(item) {
     display: inline-block;
-    padding-left: 16px;
+    margin-left: 16px;
 
     &:first-child {
-      padding-left: 0;
+      margin-left: 0;
     }
   }
 }
@@ -79,13 +79,6 @@
 .close-option-container {
   display: flex;
   justify-content: flex-end;
-}
-
-.close-option {
-  width: 24px;
-  height: 24px;
-  overflow: hidden;
-  object-fit: cover;
 }
 
 .error {

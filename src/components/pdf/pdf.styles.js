@@ -8,7 +8,9 @@ Font.register({
 export const styles = StyleSheet.create({
   page: {
     backgroundColor: 'white',
-    margin: '60px 56px 40px 40px',
+    paddingTop: 60,
+    paddingBottom: 50,
+    paddingHorizontal: 40,
     fontSize: 10,
     lineHeight: 1.5,
   },

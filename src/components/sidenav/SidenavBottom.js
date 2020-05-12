@@ -4,7 +4,7 @@ import { PDFDownloadLink } from '@react-pdf/renderer';
 
 import MyDocument from '~/components/pdf/Pdf';
 import CardHeader from '~/components/cardheader/CardHeader';
-import { Download, Copy, Email, Check, Delete } from '~/assets/image';
+import { DELETE, CHECK, EMAIL, COPY_LINK, DOWNLOAD } from '~/components/icons/icon';
 
 const SidenavBottom = ({ resumeJson, downloadPdf, downloadPdfIconClicked, deleteIconClicked }) => {
   return (
@@ -13,33 +13,23 @@ const SidenavBottom = ({ resumeJson, downloadPdf, downloadPdfIconClicked, delete
         <CardHeader title="CV Actions" />
         <ul>
           <li className="sidenav__cv-action" onClick={downloadPdfIconClicked}>
-            <span className="sidenav__cv-action-icon">
-              <img src={Download} alt="Edit" />
-            </span>
+            <span className="sidenav__cv-action-icon">{DOWNLOAD}</span>
             <span className="sidenav__cv-action-label text-link">Download PDF</span>
           </li>
           <li className="sidenav__cv-action">
-            <span className="sidenav__cv-action-icon">
-              <img src={Copy} alt="Edit" />
-            </span>
+            <span className="sidenav__cv-action-icon">{COPY_LINK}</span>
             <span className="sidenav__cv-action-label text-link">Copy Shareable Link</span>
           </li>
           <li className="sidenav__cv-action">
-            <span className="sidenav__cv-action-icon">
-              <img src={Email} alt="Edit" />
-            </span>
+            <span className="sidenav__cv-action-icon">{EMAIL}</span>
             <span className="sidenav__cv-action-label text-link">Email CV as Attachment</span>
           </li>
           <li className="sidenav__cv-action">
-            <span className="sidenav__cv-action-icon">
-              <img src={Check} alt="Edit" />
-            </span>
+            <span className="sidenav__cv-action-icon">{CHECK}</span>
             <span className="sidenav__cv-action-label text-link">Request Professional Review</span>
           </li>
           <li className="sidenav__cv-action" onClick={deleteIconClicked}>
-            <span className="sidenav__cv-action-icon">
-              <img src={Delete} alt="Edit" />
-            </span>
+            <span className="sidenav__cv-action-icon">{DELETE('#F44336')}</span>
             <span className="sidenav__cv-action-label text-link text-link--danger">Delete CV</span>
           </li>
 

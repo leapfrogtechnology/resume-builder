@@ -24,8 +24,8 @@ const CertificateItem = ({ title, link, date, description }) => {
   return (
     <View style={pdfStyles.styles.paragraph}>
       <Text style={pdfStyles.styles.contentSubHeader}>{title}</Text>
-      <Text>{link}</Text>
       <Text>{format(date)}</Text>
+      <Text>{link}</Text>
       {description ? <Text>{description}</Text> : <></>}
     </View>
   );
@@ -40,7 +40,7 @@ CertificateItem.propTypes = {
   title: PropTypes.string,
   link: PropTypes.string,
   date: PropTypes.string,
-  description: PropTypes.description,
+  description: PropTypes.string,
 };
 
 export default Certificate;

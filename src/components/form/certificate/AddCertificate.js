@@ -46,6 +46,7 @@ const AddCertificate = ({ onClose, isEdit, values }) => {
     const isEqual = _.isEqual(formValues, values);
 
     if (isEqual) {
+      onClose();
       return;
     } else {
       const certificateObj = certificateUtils.getCertificateObject({ ...formValues });

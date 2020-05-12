@@ -101,7 +101,6 @@ const WorkExperienceShown = ({
           {labelForDifference}
         </div>
       </div>
-
       <div>
         <div className="work-experience__row">
           Roles and Responsibilities

@@ -113,12 +113,13 @@ export const getExperienceLabel = experienceTime => {
   if (experienceTime.year === 0 && experienceTime.month === 0) {
     experienceLabel = '';
   } else {
-    if (experienceTime.year === 1) {
+    if (experienceTime.year === 0) {
+      experienceLabel = '';
+    } else if (experienceTime.year === 1) {
       experienceLabel = `${experienceTime.year}  year `;
     } else {
       experienceLabel = `${experienceTime.year} years `;
     }
-
     if (experienceTime.month === 1) {
       experienceLabel += `${experienceTime.month} month `;
     } else {

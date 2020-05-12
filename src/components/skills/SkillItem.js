@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 
 import OpenModal from '~/components//modal/OpenModal';
 import AddSkill from '~/components/form/skill/AddSkill';
+import { capitalize } from '~/utilities/string/capitalize';
 import EditOptions from '~/components/editoptions/EditOptions';
 
 const SkillItem = ({ title, values, preview, onHiddenIconClicked, onDelete }) => {
@@ -26,7 +27,7 @@ const SkillItem = ({ title, values, preview, onHiddenIconClicked, onDelete }) =>
 
   const subSkillsList = values.map(({ name }, index) => (
     <span key={index} className="chip-input-tag">
-      {name}
+      {capitalize(name)}
     </span>
   ));
 
@@ -34,7 +35,7 @@ const SkillItem = ({ title, values, preview, onHiddenIconClicked, onDelete }) =>
     <div className={!hidden ? 'skills__row' : 'skills__row skills--hidden'}>
       <div className="skills__row-header">
         <div className="skils__row-header-left sub-title">
-          {title}
+          {capitalize(title)}
           {hidden && !preview && <span className="hidden-tag">Hidden</span>}
         </div>
         <div className="skills__row-header-right">

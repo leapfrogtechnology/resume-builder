@@ -51,21 +51,27 @@ const ProjectsUndertaken = () => {
     storage.saveResume(localStorage, context.data.get);
   };
 
+  if ((!projects || projects.length < 1) && preview) {
+    return <></>;
+  }
+
   if (!projects || projects.length < 1) {
     return (
-      <>
-        <EmptyCard emptyMessage="You do not have any projects undertaken yet."></EmptyCard>
-        <CardFooter
-          icon={Add}
-          hide={preview}
-          label="Add another project"
-          showModal={addProject}
-          onAdd={toggleAddProject}
-          component={AddProject}
-          onClose={toggleAddProject}
-          modifier="empty"
-        />
-      </>
+      <div className="content-block">
+        <div className="card">
+          <EmptyCard emptyMessage="You do not have any projects undertaken yet."></EmptyCard>
+          <CardFooter
+            icon={Add}
+            hide={preview}
+            label="Add another project"
+            showModal={addProject}
+            onAdd={toggleAddProject}
+            component={AddProject}
+            onClose={toggleAddProject}
+            modifier="empty"
+          />
+        </div>
+      </div>
     );
   }
 
@@ -84,19 +90,21 @@ const ProjectsUndertaken = () => {
   ));
 
   return (
-    <>
-      <CardHeader title="Projects Undertaken" />
-      <div className="projects-undertaken">{projectsList}</div>
-      <CardFooter
-        icon={Add}
-        hide={preview}
-        label="Add another project"
-        showModal={addProject}
-        onAdd={toggleAddProject}
-        component={AddProject}
-        onClose={toggleAddProject}
-      />
-    </>
+    <div className="content-block">
+      <div className="card">
+        <CardHeader title="Projects Undertaken" />
+        <div className="projects-undertaken">{projectsList}</div>
+        <CardFooter
+          icon={Add}
+          hide={preview}
+          label="Add another project"
+          showModal={addProject}
+          onAdd={toggleAddProject}
+          component={AddProject}
+          onClose={toggleAddProject}
+        />
+      </div>
+    </div>
   );
 };
 

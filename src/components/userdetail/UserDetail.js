@@ -21,9 +21,9 @@ const UserDetail = ({ name, experience, profileImg, preview, onPreviewBtnClicked
             <img src={profileImg && !profileImg.isDeleted ? profileImg.value : Image} alt="Profile Picture" />
           </div>
           <div className="user-detail__emp-attribute">
-            <div className="user-detail__username">{name}</div>
+            <div className="user-detail__username">{name ? name : 'Welcome, Leapfrogger !'}</div>
             <div className="user-detail__activity">
-              <Media icon={FAVORITE_ICON} label={experience} onclick={toggleEdit} />
+              <Media icon={FAVORITE_ICON} label={experience} preview={preview} onclick={toggleEdit} />
               {showModal && (
                 <OpenModal component={AddExperience} onClose={toggleEdit} showModal={showModal}></OpenModal>
               )}

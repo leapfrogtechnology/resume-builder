@@ -18,7 +18,10 @@ const Header = ({ name, status, onPreviewBtnClicked }) => {
 
   if (experience) {
     const experienceInYearAndMonth = dateUtils.getExperienceFormat(experience);
-    const label = dateUtils.getExperienceLabel(experienceInYearAndMonth);
+    const label =
+      dateUtils.timeWithSuffix(experienceInYearAndMonth.year, 'year') +
+      ' ' +
+      dateUtils.timeWithSuffix(experienceInYearAndMonth.month, 'month');
 
     experienceLabel = label ? `${label} of professional experience` : experienceLabel;
   }

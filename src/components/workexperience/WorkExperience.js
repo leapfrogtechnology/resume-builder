@@ -6,6 +6,7 @@ import { FormContext } from '~/components/FormContext';
 import EmptyCard from '~/components/emptycard/EmptyCard';
 import CardHeader from '~/components/cardheader/CardHeader';
 import CardFooter from '~/components/cardfooter/CardFooter';
+import { baseMailToUrl, baseTelUrl } from '~/constant/contact.js';
 import WorkExperienceShown from '~/components/workexperience/WorkExperienceShown';
 import AddWorkExperience from '~/components/form/workexperience/AddWorkExperience';
 
@@ -53,27 +54,33 @@ const WorkExperience = () => {
 
   const contactLinkHandler = value => {
     if (isNaN(value)) {
-      window.open('mailto:' + value);
+      window.open(baseMailToUrl + value);
     } else {
-      window.open('tel:' + value);
+      window.open(baseTelUrl + value);
     }
   };
 
+  if ((!workExperience || workExperience.length < 1) && preview) {
+    return <></>;
+  }
+
   if (!workExperience || workExperience.length < 1) {
     return (
-      <>
-        <EmptyCard emptyMessage="You do not have any work experience yet."></EmptyCard>
-        <CardFooter
-          icon={Add}
-          hide={preview}
-          label="Add another work experience"
-          showModal={addWork}
-          onAdd={toggleAddWork}
-          component={AddWorkExperience}
-          onClose={toggleAddWork}
-          modifier="empty"
-        />
-      </>
+      <div className="content-block">
+        <div className="card">
+          <EmptyCard emptyMessage="You do not have any work experience yet."></EmptyCard>
+          <CardFooter
+            icon={Add}
+            hide={preview}
+            label="Add another work experience"
+            showModal={addWork}
+            onAdd={toggleAddWork}
+            component={AddWorkExperience}
+            onClose={toggleAddWork}
+            modifier="empty"
+          />
+        </div>
+      </div>
     );
   }
 
@@ -113,17 +120,19 @@ const WorkExperience = () => {
 
   return (
     <div className="content-block">
-      {!preview && workExperienceList.length > 0 && <CardHeader title="Work Experience" />}
-      {workExperienceList}
-      <CardFooter
-        icon={Add}
-        hide={preview}
-        label="Add another work experience"
-        showModal={addWork}
-        onAdd={toggleAddWork}
-        component={AddWorkExperience}
-        onClose={toggleAddWork}
-      />
+      <div className="card">
+        <CardHeader title="Work Experience" />
+        {workExperienceList}
+        <CardFooter
+          icon={Add}
+          hide={preview}
+          label="Add another work experience"
+          showModal={addWork}
+          onAdd={toggleAddWork}
+          component={AddWorkExperience}
+          onClose={toggleAddWork}
+        />
+      </div>
     </div>
   );
 };

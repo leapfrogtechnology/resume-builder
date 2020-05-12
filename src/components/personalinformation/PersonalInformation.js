@@ -41,46 +41,48 @@ const PersonalInformation = () => {
   };
 
   return (
-    <>
-      <CardHeader
-        title="Personal Information"
-        icon={!preview ? Edit : ''}
-        component={AddPersonalInformation}
-        onEdit={toggleEdit}
-        onClose={toggleEdit}
-        showModal={showModel}
-        isEdit={isEdit}
-      />
-      {name && (
-        <PersonalInfoItem
-          label="name"
-          value={name}
-          preview={preview}
-          bold={bold}
-          onclick={updateHiddenState}
-        ></PersonalInfoItem>
-      )}
-      {role && (
-        <PersonalInfoItem
-          label="role"
-          value={role.label}
-          preview={preview}
-          bold={bold}
-          onclick={updateHiddenState}
-          showIcon={true}
-        ></PersonalInfoItem>
-      )}
-      {introduction && (
-        <PersonalInfoItem
-          label="introduction"
-          value={introduction.value}
-          preview={preview}
-          bold={!bold}
-          showIcon={true}
-          onclick={updateHiddenState}
-        ></PersonalInfoItem>
-      )}
-    </>
+    <div className="content-block">
+      <div className="card">
+        <CardHeader
+          title="Personal Information"
+          icon={!preview ? Edit : ''}
+          component={AddPersonalInformation}
+          onEdit={toggleEdit}
+          onClose={toggleEdit}
+          showModal={showModel}
+          isEdit={isEdit}
+        />
+        {name && (
+          <PersonalInfoItem
+            label="name"
+            value={name}
+            preview={preview}
+            bold={bold}
+            onclick={updateHiddenState}
+          ></PersonalInfoItem>
+        )}
+        {role && (
+          <PersonalInfoItem
+            label="role"
+            value={role.label}
+            preview={preview}
+            bold={bold}
+            onclick={updateHiddenState}
+            showIcon={true}
+          ></PersonalInfoItem>
+        )}
+        {introduction && (
+          <PersonalInfoItem
+            label="introduction"
+            value={introduction.value}
+            preview={preview}
+            bold={!bold}
+            showIcon={true}
+            onclick={updateHiddenState}
+          ></PersonalInfoItem>
+        )}
+      </div>
+    </div>
   );
 };
 

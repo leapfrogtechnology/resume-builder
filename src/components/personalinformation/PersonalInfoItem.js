@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
-import { View, ViewHidden } from '~/assets/image';
+import { VIEW_HIDDEN, VIEW } from '~/components/icons/icon';
 
 const PersonalInfoItem = ({ label, value, bold, preview, onclick, showIcon = false }) => {
   const [hidden, setHidden] = useState(false);
@@ -30,7 +30,7 @@ const PersonalInfoItem = ({ label, value, bold, preview, onclick, showIcon = fal
       </div>
       {!preview && showIcon && (
         <div className="personal-info-row__icon icon" onClick={onHiddenIconClicked}>
-          <img src={!hidden ? View : ViewHidden} alt="View" />
+          {hidden ? VIEW_HIDDEN : VIEW}
         </div>
       )}
     </div>

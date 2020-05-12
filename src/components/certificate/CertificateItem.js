@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
-import { UpRightArrow } from '~/assets/image';
 import OpenModal from '~/components/modal/OpenModal';
 import { format } from '~/utilities/date/FormatDate';
+import { UP_RIGHT_ARROW } from '~/components/icons/icon';
 import EditOptions from '~/components/editoptions/EditOptions';
 import AddCertificate from '~/components/form/certificate/AddCertificate';
 
@@ -34,9 +34,7 @@ const CertificateItem = ({ title, link, year, description, preview, onHiddenIcon
           onClick={_e => window.open(link)}
         >
           {title}
-          <span className="arrow-icon">
-            <img src={UpRightArrow} alt="Arrow" />
-          </span>
+          <span className="arrow-icon">{UP_RIGHT_ARROW}</span>
           {hidden && <span className="hidden-tag">Hidden</span>}
         </div>
         {!preview && (
