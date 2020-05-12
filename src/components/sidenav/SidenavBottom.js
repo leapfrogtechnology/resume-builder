@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 
 import MyDocument from '~/components/pdf/Pdf';
+import { downloadPDF } from '~/utilities/download';
 import CardHeader from '~/components/cardheader/CardHeader';
 import { DELETE, CHECK, EMAIL, COPY_LINK, DOWNLOAD } from '~/components/icons/icon';
 
@@ -36,17 +37,7 @@ const SidenavBottom = ({ resumeJson, downloadPdf, downloadPdfIconClicked, delete
           {downloadPdf && (
             <PDFDownloadLink document={<MyDocument resumeJson={resumeJson} />} fileName="somename.pdf">
               {({ url, loading }) => {
-                if (!loading) {
-                  const a = document.createElement('a');
-
-                  a.href = url;
-                  a.download = 'resume.pdf';
-                  a.click();
-
-                  window.URL.revokeObjectURL(url);
-
-                  downloadPdfIconClicked();
-                }
+                downloadPDF(url, loading, downloadPdfIconClicked);
               }}
             </PDFDownloadLink>
           )}
