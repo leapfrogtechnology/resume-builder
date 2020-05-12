@@ -1,9 +1,11 @@
+import { RESUME } from '~/constant/storage.js';
+
 export const getResume = () => {
-  return JSON.parse(localStorage.getItem('resume'));
+  return JSON.parse(localStorage.getItem(RESUME));
 };
 
 export const saveResume = resume => {
-  localStorage.setItem('resume', JSON.stringify(resume));
+  localStorage.setItem(RESUME, JSON.stringify(resume));
 };
 
 export const deleteResume = () => {
