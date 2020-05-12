@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 import * as _ from 'lodash';
 import PropTypes from 'prop-types';
 import { Formik, Form } from 'formik';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 
 import { ADD } from '~/components/icons/icon';
 import Button from '~/components/button/Button';
@@ -15,27 +15,50 @@ import FormHeader from '~/components/formheader/FormHeader';
 const AddSkill = ({ onClose, isEdit, values }) => {
   const { data } = useContext(FormContext);
 
-  const skillsList = [];
+  const [error, setError] = useState({ status: false, message: 'Skill is a required field' });
 
-  const validateSkill = Yup.object().shape({
-    skill: Yup.string().required(),
-  });
+  const skillsList = [];
 
   let initialValues = {};
 
-  const handleSubmit = (formValues, setFieldError) => {
-    if (isEdit) {
-      handleSubmitOnEdit(formValues);
-    } else {
-      handleSubmitOnAdd(data, formValues, skillsList, storage, setFieldError);
+  const handleOnInputChange = value => {
+    if (value) {
+      const err = { status: false, message: '' };
+
+      setError(prevState => ({ ...prevState, ...err }));
     }
   };
 
-  const handleOnAdd = (e, formValues, setFieldError, setFieldTouched, resetForm) => {
+  const handleSubmit = formValues => {
+    if (isEdit) {
+      if (!formValues.skill) {
+        const err = { status: true, message: 'Skill is a required field' };
+
+        setError(prevState => ({ ...prevState, ...err }));
+
+        return;
+      }
+      handleSubmitOnEdit(formValues);
+    } else {
+      if (!formValues.skill && skillsList.length < 1) {
+        const err = { status: true, message: 'Skill is a required field' };
+
+        setError(prevState => ({ ...prevState, ...err }));
+
+        return;
+      }
+      handleSubmitOnAdd(data, formValues, skillsList, storage);
+    }
+  };
+
+  const handleOnAdd = (e, formValues, resetForm) => {
     e.preventDefault();
+
     if (!formValues.skill) {
-      setFieldTouched('skill', true);
-      setFieldError('skill', 'Skill is required');
+      const err = { status: true, message: 'Skill is a required field' };
+
+      setError(prevState => ({ ...prevState, ...err }));
+
       return;
     }
 
@@ -46,7 +69,7 @@ const AddSkill = ({ onClose, isEdit, values }) => {
     resetForm();
   };
 
-  const handleSubmitOnAdd = (data, formValues, skillsList, storage, setFieldError) => {
+  const handleSubmitOnAdd = (data, formValues, skillsList, storage) => {
     if (formValues.skill) {
       const skillObj = skillUtils.getSkillObject({ ...formValues });
 
@@ -84,6 +107,7 @@ const AddSkill = ({ onClose, isEdit, values }) => {
 
     if (isEqual) {
       onClose();
+
       return;
     } else {
       const skillObj = skillUtils.getSkillObject({ ...formValues });
@@ -127,21 +151,26 @@ const AddSkill = ({ onClose, isEdit, values }) => {
       <FormHeader title={!isEdit ? 'Add Skill' : 'Edit Skill'} />
       <Formik
         initialValues={getInitialValues()}
-        onSubmit={(values, { setFieldError }) => {
-          handleSubmit(values, setFieldError);
+        onSubmit={values => {
+          handleSubmit(values);
         }}
-        validationSchema={validateSkill}
       >
-        {({ values, setFieldError, setFieldTouched, resetForm }) => (
+        {({ values, resetForm, setFieldValue }) => (
           <Form>
             <div className="form__content">
-              <InputText name="skill" label="Enter your skill" />
+              <InputText
+                name="skill"
+                label="Enter your skill"
+                error={error}
+                onchange={handleOnInputChange}
+                setFieldValue={setFieldValue}
+              />
               <InputText name="subSkills" label="Add Sub Skill" placeholder="Add comma separated values" />
               {!isEdit && (
                 <div
                   className="input add-container"
                   onClick={e => {
-                    handleOnAdd(e, values, setFieldError, setFieldTouched, resetForm);
+                    handleOnAdd(e, values, resetForm);
                   }}
                 >
                   <span className="card__footer-icon">{ADD('#B3B3B3')}</span>
