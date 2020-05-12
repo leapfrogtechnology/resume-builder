@@ -14,13 +14,10 @@ const App = () => {
 
   const username = data.name;
 
-  const handleOnPreviewBtnClicked = e => {
-    e.preventDefault();
-    setPreview(!preview);
-  };
+  const togglePreview = () => setPreview(!preview);
 
   const deleteCVHandler = () => {
-    storage.deleteResume(localStorage);
+    storage.deleteResume();
     updateData({});
   };
 
@@ -55,7 +52,7 @@ const App = () => {
         <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.js"></script>
       </Head>
       <FormContext.Provider value={store}>
-        <Header name={username} status="Employee" onPreviewBtnClicked={handleOnPreviewBtnClicked} />
+        <Header name={username} status="Employee" onPreviewBtnClicked={togglePreview} />
         <Dashboard />
       </FormContext.Provider>
     </div>
