@@ -28,9 +28,9 @@ const App = () => {
   };
 
   useEffect(() => {
-    if (storage.getResume()) {
-      const resume = storage.getResume();
+    const resume = storage.getResume();
 
+    if (resume) {
       updateData(prevState => ({ ...prevState, ...resume }));
     } else {
       updateData({});
