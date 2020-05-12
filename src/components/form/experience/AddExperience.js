@@ -7,17 +7,13 @@ import Button from '~/components/button/Button';
 import * as storage from '~/storage/LocalStorage';
 import { FormContext } from '~/components/FormContext';
 import InputText from '~/components/inputtext/InputText';
+import validateExperience from '~/validations/Experience';
 import FormHeader from '~/components/formheader/FormHeader';
 import InputRadio from '~/components/inputradio/InputRadio';
 import OutsideClickDetector from '~/components/detector/OutsideClickDetector';
 
 const AddExperience = ({ onClose }) => {
   const { data } = useContext(FormContext);
-
-  const validateExperience = Yup.object().shape({
-    value: Yup.number().label('Your proffessional experience').min(0).integer(),
-    type: Yup.string().required('It is required'),
-  });
 
   const handleSubmit = values => {
     if (data.get.experience) {
