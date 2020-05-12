@@ -22,6 +22,7 @@ const Header = ({ name, status, onPreviewBtnClicked }) => {
       dateUtils.timeWithSuffix(experienceInYearAndMonth.year, 'year') +
       ' ' +
       dateUtils.timeWithSuffix(experienceInYearAndMonth.month, 'month');
+
     experienceLabel = label.trim() ? `${label.trim()} of professional experience` : experienceLabel;
   }
 

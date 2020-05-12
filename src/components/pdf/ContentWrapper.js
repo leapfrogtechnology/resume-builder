@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 /**
- * HOC that renders other components
+ * HOC that renders other components.
  */
 const ContentWrapper = ({ heading, data, WrappedComponent, experience = null }) => {
   if (!data) {
     return <></>;
   }
 
-  const filteredData = data.filter(value => !value.hidden); //Remove hidden data
+  const filteredData = data.filter(value => !value.hidden); // Remove hidden data
 
   if (filteredData.length < 1) {
     return <></>;
