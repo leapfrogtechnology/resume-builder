@@ -9,9 +9,9 @@
   cursor: pointer;
 
   @include m(cancel) {
-    border: 1px solid $alto;
+    border: 1px solid $alto !important;
     padding: 8px 16px;
-    color: $alto;
-    background: none;
+    color: $alto !important;
+    background: none !important;
   }
 }
