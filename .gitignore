@@ -12,7 +12,7 @@ logs
 /coverage
 
 # production
-/build
+/src/out
 
 # misc
 .DS_Store

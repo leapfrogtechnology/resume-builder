@@ -1,0 +1,31 @@
+.work-experience {
+  padding-top: 28px;
+  font: normal normal 14px/17px $font-primary;
+  color: mine-shaft;
+
+  @include e(row-header) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 4px;
+  }
+
+  .year {
+    padding: 6px 0 12px;
+  }
+
+  @include e(row-item) {
+    padding: 0 0 20px 12px;
+  }
+
+  @include e(row) {
+    &:last-child {
+      padding-bottom: 28px;
+      border-bottom: 1px solid $alto;
+    }
+  }
+
+  @include m(hidden) {
+    color: $dusty-gray;
+  }
+}

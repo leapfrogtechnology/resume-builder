@@ -1,0 +1,47 @@
+.personal-info {
+  padding-top: 26px;
+}
+
+.personal-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20px;
+  font: normal normal 16px/19px $font-primary;
+
+  &:last-child {
+    padding-bottom: 0;
+    align-items: flex-start;
+
+    .personal-info-row__value-container {
+      width: calc(100% - 222px);
+    }
+  }
+
+  @include e(item) {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  @include e(label) {
+    width: 132px;
+    margin-right: 90px;
+  }
+
+  @include e(value) {
+    text-align: justify;
+    @include m(strong) {
+      font-weight: 600;
+    }
+  }
+
+  @include e(value-container) {
+    display: flex;
+    align-items: center;
+    padding-right: 16px;
+  }
+
+  @include e(icon) {
+    cursor: pointer;
+  }
+}

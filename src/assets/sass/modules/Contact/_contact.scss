@@ -1,0 +1,22 @@
+.contact-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 26px 0 0;
+
+  .key {
+    font: normal normal 16px/19px $font-primary;
+  }
+
+  @include e(r) {
+    cursor: pointer;
+  }
+}
+
+.contact {
+  @include e(value) {
+    font: normal normal 16px/19px $font-primary;
+    word-break: break-word;
+    width: calc(100% - 45px);
+  }
+}

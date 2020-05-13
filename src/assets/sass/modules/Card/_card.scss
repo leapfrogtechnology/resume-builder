@@ -1,0 +1,28 @@
+.card {
+  @include e(header) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  @include e(footer) {
+    display: flex;
+    align-items: center;
+    margin-top: 25px;
+    font-weight: 600;
+    cursor: pointer;
+
+    @include m(empty) {
+      justify-content: center;
+    }
+  }
+
+  @include e(footer-icon) {
+    margin-right: 12px;
+  }
+
+  @include m(empty) {
+    text-align: center;
+    padding: 68px 0;
+  }
+}
