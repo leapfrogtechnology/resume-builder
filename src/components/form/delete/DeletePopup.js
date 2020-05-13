@@ -16,10 +16,10 @@ const DeletePopup = ({ onConfirm, onCancel }) => {
               <p className="delete-popup__message">{`You are about to delete your resume. Do you want to proceed?`}</p>
               <div className="form-button">
                 <div className="form-button__left">
-                  <Button content="Yes, Delete" onclick={onConfirm} modifier="danger"/>
+                  <Button content="Yes, Delete" onclick={onConfirm} modifier="danger" />
                 </div>
                 <div className="form-button__right">
-                  <Button content="Cancel" modifier="secondary" onclick={onCancel}/>
+                  <Button content="Cancel" modifier="secondary" onclick={onCancel} />
                 </div>
               </div>
             </div>
