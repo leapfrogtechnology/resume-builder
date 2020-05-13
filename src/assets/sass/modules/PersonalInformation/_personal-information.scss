@@ -16,7 +16,7 @@
 
   @include e(item) {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
   }
 
   @include e(label) {

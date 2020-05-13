@@ -1,24 +1,18 @@
 .sidenav {
   width: 31.5384%;
-  .card {
-    padding: 36px 25px;
-  }
 
   @include e(upload-block) {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 18px 0 24px 0;
+    margin-bottom: 28px;
     border-bottom: 1px solid $alto;
   }
 
   @include e(upload-block-l) {
     display: flex;
     align-items: center;
-  }
-
-  @include e(contact-block) {
-    padding-top: 28px;
   }
 
   @include e(cv-action) {
