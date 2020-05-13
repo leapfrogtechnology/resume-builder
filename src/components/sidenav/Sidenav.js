@@ -22,6 +22,7 @@ const Sidenav = () => {
 
   const context = useContext(FormContext);
   const preview = context.preview.get;
+  const username = context.data.get.name;
   const email = context.data.get.email;
   const phone = context.data.get.phone;
   const github = context.data.get.github;
@@ -197,6 +198,7 @@ const Sidenav = () => {
       {!preview && (
         <SidenavBottom
           resumeJson={context.data.get}
+          username={username}
           downloadPdf={downloadPdf}
           downloadPdfIconClicked={donwloadPdfBtnHandler}
           deleteIconClicked={toggleDelete}
