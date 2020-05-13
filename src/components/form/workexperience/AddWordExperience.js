@@ -18,8 +18,8 @@ const AddWorkExperience = () => {
         <InputText label="Name of the organization" placeholder="eg. Apple" />
         <InputText label="Your Title or Position" placeholder="eg. Software Engineer" />
         <div className="form__date-field">
-          <InputDate label="Start Date" placeholder="Select date" modifier={true} />
-          <InputDate label="End Date" placeholder="Select date" modifier={true} />
+          <InputDate label="Start Date" placeholder="Select date" modifier="secondary" />
+          <InputDate label="End Date" placeholder="Select date" modifier="secondary" />
         </div>
         <CheckboxInput value="I currently work here" />
         <InputText
@@ -43,7 +43,7 @@ const AddWorkExperience = () => {
           </div>
           <div className="form-button__right">
             <img src={Trash} alt="Delete" />
-            <Button content="Cancel" isCancel={true} />
+            <Button content="Cancel" modifier="secondary" />
           </div>
         </div>
       </div>

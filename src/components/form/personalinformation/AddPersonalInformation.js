@@ -68,7 +68,7 @@ const AddPersonalInformation = ({ onClose, isEdit }) => {
                 <Button content="Save Info" type="submit" />
               </div>
               <div className="form-button__right">
-                <Button content="Cancel" isCancel={true} type="button" onclick={onClose} />
+                <Button content="Cancel" modifier="secondary" type="button" onclick={onClose} />
               </div>
             </div>
           </div>
