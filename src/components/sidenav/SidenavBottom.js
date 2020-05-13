@@ -7,7 +7,7 @@ import { downloadPDF } from '~/utilities/download';
 import CardHeader from '~/components/cardheader/CardHeader';
 import { DELETE, CHECK, EMAIL, COPY_LINK, DOWNLOAD } from '~/components/icons/icon';
 
-const SidenavBottom = ({ resumeJson, downloadPdf, downloadPdfIconClicked, deleteIconClicked }) => {
+const SidenavBottom = ({ resumeJson, username, downloadPdf, downloadPdfIconClicked, deleteIconClicked }) => {
   return (
     <div className="sidenav-bottom">
       <div className="card">
@@ -37,7 +37,7 @@ const SidenavBottom = ({ resumeJson, downloadPdf, downloadPdfIconClicked, delete
           {downloadPdf && (
             <PDFDownloadLink document={<MyDocument resumeJson={resumeJson} />} fileName="somename.pdf">
               {({ url, loading }) => {
-                downloadPDF(url, loading, downloadPdfIconClicked);
+                downloadPDF(url, username, loading, downloadPdfIconClicked);
               }}
             </PDFDownloadLink>
           )}
@@ -49,6 +49,7 @@ const SidenavBottom = ({ resumeJson, downloadPdf, downloadPdfIconClicked, delete
 
 SidenavBottom.propTypes = {
   resumeJson: PropTypes.object,
+  username: PropTypes.string,
   downloadPdf: PropTypes.bool,
   downloadPdfIconClicked: PropTypes.func,
   deleteIconClicked: PropTypes.func,

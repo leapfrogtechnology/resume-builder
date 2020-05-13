@@ -109,7 +109,7 @@ const AddProject = ({ onClose, isEdit, values }) => {
                   name="startDate"
                   label="Start Date"
                   placeholder="Select date"
-                  modifier={true}
+                  modifier="secondary"
                   setFieldValue={setFieldValue}
                   setFieldTouched={setFieldTouched}
                 />
@@ -117,7 +117,7 @@ const AddProject = ({ onClose, isEdit, values }) => {
                   name="endDate"
                   label="End Date"
                   placeholder="Select date"
-                  modifier={true}
+                  modifier="secondary"
                   setFieldValue={setFieldValue}
                   setFieldTouched={setFieldTouched}
                 />
@@ -162,7 +162,7 @@ const AddProject = ({ onClose, isEdit, values }) => {
                   <Button content={!isEdit ? 'Add Project' : 'Save Info'} type="submit" />
                 </div>
                 <div className="form-button__right">
-                  <Button content="Cancel" isCancel={true} type="button" onclick={onClose} />
+                  <Button content="Cancel" modifier="secondary" type="button" onclick={onClose} />
                 </div>
               </div>
             </div>

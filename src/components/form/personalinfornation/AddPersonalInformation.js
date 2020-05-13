@@ -21,7 +21,7 @@ const AddPersonalInformation = () => {
                 <Button content="Save Info" />
               </div>
               <div className="form-button__right">
-                <Button content="Cancel" isCancel={true} />
+                <Button content="Cancel" modifier="secondary" />
               </div>
             </div>
           </div>

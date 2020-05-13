@@ -14,4 +14,8 @@ const linkCheck = new RegExp(
 
 const refereeCheck = /^\d+$/;
 
-export { emailCheck, phoneNumberCheck, linkCheck, refereeCheck };
+const protocolRegEx = new RegExp('^(http|https)://');
+
+const http = 'https://';
+
+export { emailCheck, phoneNumberCheck, linkCheck, refereeCheck, protocolRegEx, http };
