@@ -12,6 +12,10 @@
   &:last-child {
     padding-bottom: 0;
     align-items: flex-start;
+
+    .personal-info-row__value-container {
+      width: calc(100% - 222px);
+    }
   }
 
   @include e(item) {
@@ -34,7 +38,6 @@
   @include e(value-container) {
     display: flex;
     align-items: center;
-    width: calc(100% - 222px);
     padding-right: 16px;
   }
 
