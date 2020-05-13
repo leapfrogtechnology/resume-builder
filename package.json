@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "next ./src",
-    "build": "next build ./src",
+    "build": "next build ./src && next export ./src",
     "start": "next start ./src",
     "format": "prettier --write . '**/*.{ts,js,md,yaml,json}'",
     "format:check": "prettier --check . '**/*.{ts,js,md,yaml,json}'",
