@@ -19,7 +19,7 @@ const DeletePopup = ({ onConfirm, onCancel }) => {
                   <Button content="Yes, Delete" onclick={onConfirm} modifier="danger"/>
                 </div>
                 <div className="form-button__right">
-                  <Button content="Cancel" modifier="secondary" onclick={onCancel} modifier="secondary"/>
+                  <Button content="Cancel" modifier="secondary" onclick={onCancel}/>
                 </div>
               </div>
             </div>
