@@ -5,6 +5,15 @@ Font.register({
   src: 'https://fonts.google.com/?query=Arial',
 });
 
+// Register hyphenation callback.
+// In this example, we enable words to break in half.
+Font.registerHyphenationCallback(word => {
+  const middle = Math.floor(word.length / 2);
+  const parts = word.length === 1 ? [word] : [word.substr(0, middle), word.substr(middle)];
+
+  return parts;
+});
+
 export const styles = StyleSheet.create({
   page: {
     backgroundColor: 'white',
@@ -46,7 +55,6 @@ export const styles = StyleSheet.create({
   },
   paragraph: {
     marginTop: 12,
-    width: '90%',
     textAlign: 'justify',
   },
 });
@@ -108,7 +116,7 @@ export const personalInformationStyles = StyleSheet.create({
   },
   paragraph: {
     marginTop: 12,
-    width: '75%',
+    width: '80%',
     textAlign: 'justify',
   },
 });
@@ -122,14 +130,15 @@ export const workExpStyles = StyleSheet.create({
 
 export const skills = StyleSheet.create({
   paragraph: {
-    width: '75%',
     textAlign: 'justify',
     display: 'flex',
     flexDirection: 'row',
+    flexWrap: 'wrap',
   },
   content: {
     display: 'flex',
     flexDirection: 'row',
+    flexWrap: 'wrap',
   },
   textBold: {
     fontWeight: 'bold',
