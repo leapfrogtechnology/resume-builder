@@ -8,7 +8,7 @@
     "test": "test"
   },
   "scripts": {
-    "dev": "node ./src",
+    "dev": "babel-watch ./src",
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --write . '**/*.{ts,js,md,yaml,json}'",
     "format:check": "prettier --check . '**/*.{ts,js,md,yaml,json}'",
@@ -32,13 +32,37 @@
   },
   "homepage": "https://github.com/leapfrogtechnology/resume-builder#readme",
   "dependencies": {
+    "@hapi/boom": "^9.1.0",
     "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
-    "firebase": "^7.14.3"
+    "firebase": "^7.14.3",
+    "firebase-admin": "^8.12.1",
+    "google-auth-library": "^6.0.0",
+    "http-status-code": "^2.1.0",
+    "http-status-codes": "^1.4.0",
+    "morgan": "^1.10.0",
+    "swagger-jsdoc": "^4.0.0",
+    "uninstall": "0.0.0",
+    "winston": "^3.2.1",
+    "winston-daily-rotate-file": "^4.4.2"
   },
   "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.6",
+    "@babel/node": "^7.8.7",
+    "@babel/preset-env": "^7.9.6",
+    "@babel/register": "^7.9.0",
+    "babel-watch": "^7.0.0",
+    "eslint": "^7.0.0",
+    "eslint-config-leapfrog": "^3.0.0",
+    "eslint-config-prettier": "^6.11.0",
     "husky": "^4.2.5",
-    "lint-staged": "^10.1.3",
+    "lint-staged": "^10.2.2",
     "prettier": "2.0.4"
+  },
+  "engines": {
+    "node": ">= 12.14.1",
+    "npm": ">= 6.13.4"
   }
 }
