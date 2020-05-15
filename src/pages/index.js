@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import Head from 'next/head';
+import GoogleLoginComponent from '../components/login/Login';
 import Header from '~/components/header/Header';
 import * as storage from '~/storage/LocalStorage';
 import { FormContext } from '~/components/FormContext';
@@ -54,6 +55,7 @@ const App = () => {
       <FormContext.Provider value={store}>
         <Header name={username} status="Employee" onPreviewBtnClicked={togglePreview} />
         <Dashboard />
+        <GoogleLoginComponent />
       </FormContext.Provider>
     </div>
   );
