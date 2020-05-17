@@ -1,20 +1,46 @@
 import Boom from '@hapi/boom';
-
-import { firebaseApp } from './../index';
+const { firebase, admin } = require('../utils/firebaseConfig');
 
 /**
- * Check the database to see if user exists and if exists, return token.
+ * Login user into firebase with google Id token and return firebase token if success.
  *
  * @param {Object} data
  * @returns {Promise}
  */
 export async function loginUser(data) {
   try {
-    const { id, idToken, name, email } = data;
+    const { idToken, email } = data;
 
-    const credential = firebaseApp.auth.GoogleAuthProvider.credential(idToken);
+    const credential = firebase.auth.GoogleAuthProvider.credential(idToken);
 
-    const result = await firebaseApp.auth().signInWithCredential(credential);
+    const userLogin = await firebase.auth().signInWithCredential(credential);
+
+    const token = userLogin.user.getIdToken();
+
+    const userInfo = {
+      user: {
+        name: userLogin.user.displayName,
+        email: userLogin.user.email,
+      },
+      token: token,
+    };
+
+    return userInfo;
+  } catch (err) {
+    console.error(err);
+
+    throw err;
+  }
+}
+
+export async function fetchByEmail(email) {
+  try {
+    const result = await admin.auth().getUserByEmail(email);
+
+    if (!result) {
+      throw new Boom.notFound('User not registered');
+    }
+
     return result;
   } catch (err) {
     console.error(err);
