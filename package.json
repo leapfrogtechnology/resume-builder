@@ -37,6 +37,7 @@
   "homepage": "https://github.com/leapfrogtechnology/resume-builder#readme",
   "dependencies": {
     "@react-pdf/renderer": "^1.6.8",
+    "axios": "^0.19.2",
     "classnames": "^2.2.6",
     "firebase": "^7.14.4",
     "formik": "^2.1.4",
