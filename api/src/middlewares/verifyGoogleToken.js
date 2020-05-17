@@ -7,15 +7,12 @@ const validateGoogleToken = async (req, res, next) => {
   try {
     const ticket = await OAuth2Client.verifyIdToken({ idToken: req.body.tokenId });
     const payload = ticket.getPayload();
-    const userId = payload['sub'];
 
     let data;
 
     if (payload) {
       data = {
-        id: userId,
         idToken: req.body.tokenId,
-        name: payload.name,
         email: payload.email,
       };
       req.user = data;
