@@ -1,5 +1,5 @@
 const urlConstants = {
-  googleLoginUrl: process.env.REACT_APP_GOOGLE_LOGIN_URL,
+  googleLoginUrl: 'http://0.0.0.0:8848/api/auth/google',
 };
 
 export default urlConstants;
