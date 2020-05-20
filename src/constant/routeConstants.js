@@ -1,5 +1,5 @@
 const routeConstants = {
-  RESUME_BUILDER: '/',
+  DASHBOARD: '/',
   LOGIN: '/login',
 };
 
