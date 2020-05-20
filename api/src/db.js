@@ -1,3 +1,3 @@
-import { firebaseApp } from './index';
+const { admin } = require('./utils/firebaseConfig');
 
-export const db = firebaseApp.database();
+export const db = admin.database();
