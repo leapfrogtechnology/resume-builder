@@ -1,0 +1,6 @@
+{
+  "ACCESS_TOKEN_SALT": "resume-builder access top secret",
+  "ACCESS_EXPIRY_TIME": "5m",
+  "REFRESH_TOKEN_SALT": "resume-builder refresh top secret",
+  "REFRESH_EXPIRY_TIME": "10m"
+}
