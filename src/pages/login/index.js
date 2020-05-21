@@ -10,12 +10,7 @@ import * as resumeBuilderService from '~/service/resumeBuilder';
 
 const Login = () => {
   const router = useRouter();
-  const [isLoggedIn, setIsLogggedIn] = useState(false);
   const [loginErrorMessage, setLoginErrorMessage] = useState(null);
-
-  useEffect(() => {
-    localStorage.getAccessToken() ? setIsLogggedIn(true) : setIsLogggedIn(false);
-  });
 
   const responseGoogle = response => {
     const data = {
@@ -30,15 +25,16 @@ const Login = () => {
         await localStorage.saveAccessToken(accessToken);
         await localStorage.saveRefreshToken(refreshToken);
 
-        setIsLogggedIn(true);
         setLoginErrorMessage(null);
+
+        router.push(routeConstants.DASHBOARD);
       })
       .catch(err => {
         setLoginErrorMessage(getErrorMessage(err));
       });
   };
 
-  return !isLoggedIn ? (
+  return (
     <>
       <GoogleLogin
         clientId={textConstants.GOOGLE_CLIENT_ID}
@@ -53,8 +49,6 @@ const Login = () => {
       ></GoogleLogin>
       {loginErrorMessage && <div>{loginErrorMessage}</div>}
     </>
-  ) : (
-    router.push(routeConstants.DASHBOARD)
   );
 };
 
