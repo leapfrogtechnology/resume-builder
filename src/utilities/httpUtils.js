@@ -1,9 +1,5 @@
 import axios from 'axios';
 
-import { ACCESS_TOKEN } from '~/constant/storage';
-import textConstants from '~/constant/textConstants';
-import * as localStorage from '~/storage/LocalStorage';
-
 /**
  * Http Get.
  *
@@ -71,34 +67,3 @@ export function remove(url, data = {}) {
 
   return axios(request);
 }
-
-axios.interceptors.response.use(
-  response => {
-    return response;
-  },
-  error => {
-    if (
-      error.response.status === textConstants.UNAUTHORIZED_CODE &&
-      error.response.data.error.message === textConstants.ACCESS_TOKEN_EXPIRE
-    ) {
-      localStorage.logout();
-    }
-
-    return Promise.reject(error);
-  }
-);
-
-axios.interceptors.request.use(
-  config => {
-    const accessToken = localStorage.getAccessToken(ACCESS_TOKEN) || null;
-
-    if (accessToken !== null || accessToken !== undefined) {
-      config.headers.Authorization = `Bearer ${accessToken}`;
-    }
-
-    return config;
-  },
-  err => {
-    return Promise.reject(err);
-  }
-);
