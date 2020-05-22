@@ -30,9 +30,11 @@ const UserDetail = ({ name, experience, profileImg, preview, onPreviewBtnClicked
             </div>
           </div>
         </div>
-        <div className="user-detail__right-content">
-          <Button content={!preview ? 'Preview' : 'Back To Edit'} onclick={onPreviewBtnClicked} />
-        </div>
+        {onPreviewBtnClicked && (
+          <div className="user-detail__right-content">
+            <Button content={!preview ? 'Preview' : 'Back To Edit'} onclick={onPreviewBtnClicked} />
+          </div>
+        )}
       </div>
     </section>
   );
