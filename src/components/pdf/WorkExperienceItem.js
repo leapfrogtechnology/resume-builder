@@ -43,7 +43,8 @@ const RefereeSection = ({ name, contact }) => {
 
   return (
     <View style={pdfStyles.styles.paragraph}>
-      <Text>{`Referee ${name} ( ${contact} )`}</Text>
+      <Text>Referee</Text>
+      <Text>{`${name} ( ${contact} )`}</Text>
     </View>
   );
 };
