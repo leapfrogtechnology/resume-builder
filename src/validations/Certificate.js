@@ -23,7 +23,7 @@ const validateCertificateInformation = Yup.object().shape({
     .label('Date you received the Certificate')
     .required('Date is required')
     .test('check-startdate', 'Date should not be later than current date', function (value) {
-      if (moment(value).format('MMMM YYYY DD') > moment(new Date()).format('MMMM YYYY DD')) {
+      if (moment(value) > moment(new Date())) {
         return false;
       } else {
         return true;
