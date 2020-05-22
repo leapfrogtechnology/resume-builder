@@ -17,18 +17,6 @@ const SidenavBottom = ({ resumeJson, username, downloadPdf, downloadPdfIconClick
             <span className="sidenav__cv-action-icon">{DOWNLOAD}</span>
             <span className="sidenav__cv-action-label text-link">Download PDF</span>
           </li>
-          <li className="sidenav__cv-action">
-            <span className="sidenav__cv-action-icon">{COPY_LINK}</span>
-            <span className="sidenav__cv-action-label text-link">Copy Shareable Link</span>
-          </li>
-          <li className="sidenav__cv-action">
-            <span className="sidenav__cv-action-icon">{EMAIL}</span>
-            <span className="sidenav__cv-action-label text-link">Email CV as Attachment</span>
-          </li>
-          <li className="sidenav__cv-action">
-            <span className="sidenav__cv-action-icon">{CHECK}</span>
-            <span className="sidenav__cv-action-label text-link">Request Professional Review</span>
-          </li>
           <li className="sidenav__cv-action" onClick={deleteIconClicked}>
             <span className="sidenav__cv-action-icon">{DELETE('#F44336')}</span>
             <span className="sidenav__cv-action-label text-link text-link--danger">Delete CV</span>
