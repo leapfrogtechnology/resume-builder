@@ -14,7 +14,7 @@ function buildError(err) {
       message: HttpStatus.getStatusText(HttpStatus.BAD_REQUEST),
       details:
         err.details &&
-        err.details.map(err => {
+        err.details.map((err) => {
           return {
             message: err.message,
             param: err.path.join('.'),
@@ -28,6 +28,13 @@ function buildError(err) {
     return {
       code: err.output.statusCode,
       message: err.output.payload.message || err.output.payload.error,
+    };
+  }
+
+  if (err.code === 'auth/user-not-found') {
+    return {
+      code: HttpStatus.NOT_FOUND,
+      message: err.message,
     };
   }
 
