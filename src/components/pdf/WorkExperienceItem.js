@@ -13,7 +13,7 @@ const WorkExperienceItem = ({ workExperience }) => {
   const labelForDate = dateUtils.getEngagementTenure(
     workExperience.startDate,
     workExperience.endDate,
-    workExperience.currentlyWorking
+    workExperience.ongoing
   );
 
   const roles = workExperience.responsibilities.split('.').filter(role => role.trim() !== '');
