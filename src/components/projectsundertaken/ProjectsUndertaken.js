@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 
 import { Add } from '~/assets/image';
 import * as storage from '~/storage/LocalStorage';
+import { orderByDate } from '~/utilities/orderBy';
 import { FormContext } from '~/components/FormContext';
 import EmptyCard from '~/components/emptycard/EmptyCard';
 import CardHeader from '~/components/cardheader/CardHeader';
@@ -75,7 +76,7 @@ const ProjectsUndertaken = () => {
     );
   }
 
-  const projectsList = projects.map(({ name, startDate, endDate, description, ongoing }, index) => (
+  const projectsList = orderByDate(projects).map(({ name, startDate, endDate, description, ongoing }, index) => (
     <ProjectsUndertakenItem
       key={index}
       title={name}
