@@ -14,7 +14,7 @@ export const getWorkExperienceObject = ({
     position: position,
     startDate: startDate,
     endDate: endDate,
-    currentlyWorking: currentWork,
+    ongoing: currentWork,
     responsibilities: roles,
     achievements: achievements,
     refereeName: nameReferee,
