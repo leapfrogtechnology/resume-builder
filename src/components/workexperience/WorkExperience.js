@@ -1,14 +1,16 @@
 import React, { useContext, useState } from 'react';
 
 import { Add } from '~/assets/image';
-import * as storage from '~/storage/LocalStorage';
 import { FormContext } from '~/components/FormContext';
 import EmptyCard from '~/components/emptycard/EmptyCard';
 import CardHeader from '~/components/cardheader/CardHeader';
 import CardFooter from '~/components/cardfooter/CardFooter';
-import { baseMailToUrl, baseTelUrl } from '~/constant/contact';
 import WorkExperienceShown from '~/components/workexperience/WorkExperienceShown';
 import AddWorkExperience from '~/components/form/workexperience/AddWorkExperience';
+
+import * as storage from '~/storage/LocalStorage';
+import { orderByDate } from '~/utilities/orderBy';
+import { baseMailToUrl, baseTelUrl } from '~/constant/contact';
 
 const WorkExperience = () => {
   const context = useContext(FormContext);
@@ -84,19 +86,11 @@ const WorkExperience = () => {
     );
   }
 
-  const workExperienceList = workExperience.map(
+  const workExperienceList = orderByDate(
+    workExperience
+  ).map(
     (
-      {
-        name,
-        position,
-        startDate,
-        endDate,
-        currentlyWorking,
-        responsibilities,
-        achievements,
-        refereeName,
-        refereeContact,
-      },
+      { name, position, startDate, endDate, ongoing, responsibilities, achievements, refereeName, refereeContact },
       index
     ) => (
       <WorkExperienceShown
@@ -109,7 +103,7 @@ const WorkExperience = () => {
         achievements={achievements}
         refereeName={refereeName}
         refereeContact={refereeContact}
-        currentlyWorking={currentlyWorking}
+        currentlyWorking={ongoing}
         preview={preview}
         onHiddenIconClicked={updateHiddenStateWork}
         onDelete={deleteWorkExperience}
