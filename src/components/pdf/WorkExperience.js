@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Text, View } from '@react-pdf/renderer';
+import { orderByDate } from '~/utilities/orderBy';
 import * as dateUtils from '~/utilities/date/FormatDate';
 import * as pdfStyles from '~/components/pdf/pdf.styles.js';
 import WorkExperienceItem from '~/components/pdf/WorkExperienceItem';
@@ -23,7 +24,7 @@ const WorkExperience = ({ heading, experience, data }) => {
 
   experienceLabel = experienceLabel.trim() ? `( ${experienceLabel.trim()} )` : '';
 
-  const workExperiences = data.map((value, index) => (
+  const workExperiences = orderByDate(data).map((value, index) => (
     <WorkExperienceItem key={index} workExperience={value}></WorkExperienceItem>
   ));
 
