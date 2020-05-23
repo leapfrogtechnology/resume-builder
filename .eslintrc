@@ -11,6 +11,9 @@
       "version": "detect"
     }
   },
+  "rules": {
+    "linebreak-style": [2, "windows"]
+  },
   "parserOptions": {
     "ecmaVersion": 2018,
     "sourceType": "module",
