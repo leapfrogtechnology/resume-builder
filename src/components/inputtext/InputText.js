@@ -34,8 +34,10 @@ const InputText = ({ label, placeholder, error, onchange, setFieldValue, ...prop
 
   return (
     <div className="input">
-      <label className="input__label">{label}</label>
-      {props.type && props.type === 'text-area' ? textArea : inputField}
+      <label>
+        <span className="input__label">{label}</span>
+        {props.type && props.type === 'text-area' ? textArea : inputField}
+      </label>
       {(meta.touched && meta.error) || (error && error.status) ? <div className="error">{errorMessage}</div> : null}
     </div>
   );

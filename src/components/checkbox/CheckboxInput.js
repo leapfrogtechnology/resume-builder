@@ -7,8 +7,10 @@ const CheckboxInput = ({ value, ...props }) => {
 
   return (
     <div className="input">
-      <input type="checkbox" className="input__checkbox" checked={field.value} {...field} />
-      <label className="input__label input__label--dark">{value}</label>
+      <label>
+        <input type="checkbox" className="input__checkbox" checked={field.value} {...field} />
+        <span className="input__label input__label--dark">{value}</span>
+      </label>
       {meta.touched && meta.error ? <div className="error">{meta.error}</div> : null}
     </div>
   );

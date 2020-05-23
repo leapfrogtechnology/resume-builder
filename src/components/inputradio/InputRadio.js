@@ -14,15 +14,17 @@ const InputRadio = ({ label, value, placeholder, setFieldValue, setFieldTouched,
 
   return (
     <div className="input__label-container">
-      <input
-        type="radio"
-        className="input__radio-field"
-        value={value}
-        checked={field.value === value}
-        onChange={e => change(e, field.name, true)}
-        {...props}
-      />
-      <label className="input__radio-label">{placeholder}</label>
+      <label>
+        <input
+          type="radio"
+          className="input__radio-field"
+          value={value}
+          checked={field.value === value}
+          onChange={e => change(e, field.name, true)}
+          {...props}
+        />
+        <span className="input__radio-label">{placeholder}</span>
+      </label>
       {meta.touched && meta.error ? <div className="error">{meta.error}</div> : null}
     </div>
   );
