@@ -10,6 +10,7 @@ import { FormContext } from '~/components/FormContext';
 import * as skillUtils from '~/utilities/objects/Skill';
 import InputText from '~/components/inputtext/InputText';
 import FormHeader from '~/components/formheader/FormHeader';
+import OutsideClickDetector from '~/components/detector/OutsideClickDetector';
 
 const AddSkill = ({ onClose, isEdit, values }) => {
   const { data } = useContext(FormContext);
@@ -147,7 +148,7 @@ const AddSkill = ({ onClose, isEdit, values }) => {
   };
 
   return (
-    <>
+    <OutsideClickDetector onClose={onClose}>
       <FormHeader title={!isEdit ? 'Add Skill' : 'Edit Skill'} />
       <Formik
         initialValues={getInitialValues()}
@@ -189,7 +190,7 @@ const AddSkill = ({ onClose, isEdit, values }) => {
           </Form>
         )}
       </Formik>
-    </>
+    </OutsideClickDetector>
   );
 };
 
