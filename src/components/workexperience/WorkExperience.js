@@ -16,24 +16,23 @@ const WorkExperience = () => {
 
   return (
     <Section dataKey="workExperience" component={AddWorkExperience}>
-      {({ data, preview, onDelete, updateHiddenState }) =>
+      {({ data, preview, deleteItem, updateHiddenState }) =>
         data.map(
-          (
-            {
-              name,
-              position,
-              startDate,
-              endDate,
-              currentlyWorking,
-              responsibilities,
-              achievements,
-              refereeName,
-              refereeContact,
-            },
-            index
-          ) => (
+          ({
+            id,
+            name,
+            position,
+            startDate,
+            endDate,
+            currentlyWorking,
+            responsibilities,
+            achievements,
+            refereeName,
+            refereeContact,
+          }) => (
             <WorkExperienceShown
-              key={index}
+              id={id}
+              key={id}
               subTitle={name}
               position={position}
               startDate={startDate}
@@ -45,7 +44,7 @@ const WorkExperience = () => {
               currentlyWorking={currentlyWorking}
               preview={preview}
               onHiddenIconClicked={updateHiddenState}
-              onDelete={onDelete}
+              onDelete={deleteItem}
               onContactLinkClicked={contactLinkHandler}
             />
           )

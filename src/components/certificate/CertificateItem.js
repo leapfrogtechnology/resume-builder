@@ -7,7 +7,7 @@ import { UP_RIGHT_ARROW } from '~/components/icons/icon';
 import EditOptions from '~/components/editoptions/EditOptions';
 import AddCertificate from '~/components/form/certificate/AddCertificate';
 
-const CertificateItem = ({ title, link, year, description, preview, onHiddenIconClicked, onDelete }) => {
+const CertificateItem = ({ id, title, link, year, description, preview, onHiddenIconClicked, onDelete }) => {
   const [hidden, setHidden] = useState(false);
   const [editCertificate, setEdit] = useState(false);
 
@@ -21,7 +21,7 @@ const CertificateItem = ({ title, link, year, description, preview, onHiddenIcon
   };
 
   const deleteIconClickedHandler = () => {
-    onDelete(title, link);
+    onDelete(id);
   };
 
   const toggleEditCertificate = () => setEdit(!editCertificate);
@@ -62,6 +62,7 @@ const CertificateItem = ({ title, link, year, description, preview, onHiddenIcon
 };
 
 CertificateItem.propTypes = {
+  id: PropTypes.string,
   title: PropTypes.string,
   year: PropTypes.string,
   description: PropTypes.string,

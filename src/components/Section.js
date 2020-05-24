@@ -7,12 +7,13 @@ import { FormContext } from '~/components/FormContext';
 import EmptyCard from '~/components/emptycard/EmptyCard';
 import CardHeader from '~/components/cardheader/CardHeader';
 import CardFooter from '~/components/cardfooter/CardFooter';
-import { capitalize } from '~/utilities/string/capitalize';
+import { capitalize, camelToTitle, singularize } from '~/utilities/string';
 
 const Section = ({ dataKey, component, children }) => {
   const context = useContext(FormContext);
   const [isAdding, setIsAdd] = useState(false);
 
+  const title = capitalize(camelToTitle(dataKey));
   const preview = context.preview.get;
   const contextData = context.data.get[dataKey];
 
@@ -21,7 +22,7 @@ const Section = ({ dataKey, component, children }) => {
   /**
    * Update the hidden state of skill.
    *
-   * @param {string} key [ name of a particular achievements].
+   * @param {string} key [ name of a particular section ].
    */
   const updateHiddenState = key => {
     const data = context.data.get;
@@ -36,11 +37,9 @@ const Section = ({ dataKey, component, children }) => {
     });
   };
 
-  const deleteItem = (name, date) => {
+  const deleteItem = id => {
     const data = context.data.get;
-    const filteredData = data[dataKey].filter(item => {
-      return item.name !== name && item.date !== date;
-    });
+    const filteredData = data[dataKey].filter(item => item.id !== id);
 
     data[dataKey] = filteredData;
     context.data.set(prevState => ({ ...prevState, ...data }));
@@ -56,11 +55,11 @@ const Section = ({ dataKey, component, children }) => {
     return (
       <div className="content-block">
         <div className="card">
-          <EmptyCard emptyMessage={`You do not have any ${dataKey} yet.`}></EmptyCard>
+          <EmptyCard emptyMessage={`You do not have any ${title} yet.`}></EmptyCard>
           <CardFooter
             icon={Add}
             hide={preview}
-            label={`Add another ${dataKey}`}
+            label={`Add another ${title}`}
             showModal={isAdding}
             onAdd={toggleAdd}
             component={component}
@@ -75,12 +74,12 @@ const Section = ({ dataKey, component, children }) => {
   return (
     <div className="content-block">
       <div className="card">
-        <CardHeader title={capitalize(dataKey)} />
+        <CardHeader title={title} />
         {children({ data: contextData, deleteItem, updateHiddenState, preview })}
         <CardFooter
           icon={Add}
           hide={preview}
-          label={`Add another ${dataKey}`}
+          label={`Add another ${singularize(title)}`}
           showModal={isAdding}
           onAdd={toggleAdd}
           component={component}

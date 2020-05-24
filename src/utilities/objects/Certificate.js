@@ -1,7 +1,9 @@
 import { ensureHasProtocol } from '~/utilities/string/checkProtocol';
+import { v4 } from 'uuid';
 
 export const getCertificateObject = ({ name, link, date, description }) => {
   return {
+    id: v4(),
     name: name,
     link: link ? ensureHasProtocol(link) : link,
     date: date,

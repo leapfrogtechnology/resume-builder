@@ -6,7 +6,7 @@ import { format } from '~/utilities/date/FormatDate';
 import EditOptions from '~/components/editoptions/EditOptions';
 import AddAchievement from '~/components/form/achievement/AddAchievement';
 
-const AchievementItem = ({ title, date, description, preview, onHiddenIconClicked, onDelete }) => {
+const AchievementItem = ({ id, title, date, description, preview, onHiddenIconClicked, onDelete }) => {
   const [hidden, setHidden] = useState(false);
   const [editAchievement, setEdit] = useState(false);
 
@@ -26,7 +26,7 @@ const AchievementItem = ({ title, date, description, preview, onHiddenIconClicke
   };
 
   const deleteIconClickedHandler = () => {
-    onDelete(title, date);
+    onDelete(id);
   };
 
   return (
@@ -61,6 +61,7 @@ const AchievementItem = ({ title, date, description, preview, onHiddenIconClicke
 };
 
 AchievementItem.propTypes = {
+  id: ProptTypes.string,
   title: ProptTypes.string,
   date: ProptTypes.string,
   description: ProptTypes.string,

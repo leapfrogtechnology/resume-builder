@@ -1,3 +1,5 @@
+import { v4 } from 'uuid';
+
 export const getSkillObject = ({ skill, subSkills }) => {
   const subSkillsList = [];
 
@@ -10,6 +12,7 @@ export const getSkillObject = ({ skill, subSkills }) => {
   });
 
   return {
+    id: v4(),
     name: skill,
     label: skill,
     hidden: false,

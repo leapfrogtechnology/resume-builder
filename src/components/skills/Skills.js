@@ -7,15 +7,16 @@ import Section from '~/components/Section';
 const Skills = () => {
   return (
     <Section dataKey="skills" component={AddSkill}>
-      {({ data, preview, onDelete, updateHiddenState }) =>
-        data.map(({ name, subSkills }, index) => (
+      {({ data, preview, deleteItem, updateHiddenState }) =>
+        data.map(({ id, name, subSkills }) => (
           <SkillItem
-            key={index}
+            id={id}
+            key={id}
             title={name}
             values={subSkills}
             preview={preview}
             onHiddenIconClicked={updateHiddenState}
-            onDelete={onDelete}
+            onDelete={deleteItem}
           />
         ))
       }

@@ -7,6 +7,7 @@ import AddProject from '~/components/form/project/AddProject';
 import EditOptions from '~/components/editoptions/EditOptions';
 
 const ProjectsUndertakenItem = ({
+  id,
   title,
   startDate,
   endDate,
@@ -35,7 +36,7 @@ const ProjectsUndertakenItem = ({
   };
 
   const deleteIconClickedHandler = () => {
-    onDelete(title);
+    onDelete(id);
   };
 
   return (
@@ -73,6 +74,7 @@ const ProjectsUndertakenItem = ({
 };
 
 ProjectsUndertakenItem.propTypes = {
+  id: PropTypes.string,
   title: PropTypes.string,
   startDate: PropTypes.string,
   endDate: PropTypes.string,

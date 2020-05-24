@@ -1,5 +1,8 @@
+import { v4 } from 'uuid';
+
 export const getProjectObject = ({ name, startDate, endDate, ongoing, type, description }) => {
   return {
+    id: v4(),
     name: name,
     startDate: startDate,
     endDate: endDate,

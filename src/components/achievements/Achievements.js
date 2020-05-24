@@ -7,16 +7,17 @@ import Section from '~/components/Section';
 const Achievements = () => {
   return (
     <Section dataKey="achievements" component={AddAchievement}>
-      {({ data, preview, onDelete, updateHiddenState }) =>
-        data.map(({ name, date, description }, index) => (
+      {({ data, preview, deleteItem, updateHiddenState }) =>
+        data.map(({ id, name, date, description }) => (
           <AchievementItem
-            key={index}
+            id={id}
+            key={id}
             title={name}
             date={date}
             description={description}
             preview={preview}
             onHiddenIconClicked={updateHiddenState}
-            onDelete={onDelete}
+            onDelete={deleteItem}
           />
         ))
       }

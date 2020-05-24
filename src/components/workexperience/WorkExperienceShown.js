@@ -9,6 +9,7 @@ import EditOptions from '~/components/editoptions/EditOptions';
 import AddWorkExperience from '~/components/form/workexperience/AddWorkExperience';
 
 const WorkExperienceShown = ({
+  id,
   subTitle,
   position,
   startDate,
@@ -66,7 +67,7 @@ const WorkExperienceShown = ({
   };
 
   const onDeleteIconClickedHanlder = () => {
-    onDelete(subTitle, position);
+    onDelete(id);
   };
 
   const toggleEditWork = () => setEdit(!editWork);
@@ -134,6 +135,7 @@ const WorkExperienceShown = ({
 };
 
 WorkExperienceShown.propTypes = {
+  id: PropTypes.id,
   subTitle: PropTypes.string,
   position: PropTypes.string,
   startDate: PropTypes.string,

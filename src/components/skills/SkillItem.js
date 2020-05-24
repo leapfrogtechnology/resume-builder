@@ -6,7 +6,7 @@ import AddSkill from '~/components/form/skill/AddSkill';
 import { capitalize } from '~/utilities/string/capitalize';
 import EditOptions from '~/components/editoptions/EditOptions';
 
-const SkillItem = ({ title, values, preview, onHiddenIconClicked, onDelete }) => {
+const SkillItem = ({ id, title, values, preview, onHiddenIconClicked, onDelete }) => {
   const [hidden, setHidden] = useState(false);
   const [editSkill, setEdit] = useState(false);
 
@@ -20,7 +20,7 @@ const SkillItem = ({ title, values, preview, onHiddenIconClicked, onDelete }) =>
   };
 
   const deleteIconClickedHandler = () => {
-    onDelete(title);
+    onDelete(id);
   };
 
   const toggleEditSkill = () => setEdit(!editSkill);
@@ -64,6 +64,7 @@ const SkillItem = ({ title, values, preview, onHiddenIconClicked, onDelete }) =>
 };
 
 SkillItem.propTypes = {
+  id: PropTypes.string,
   title: PropTypes.string,
   values: PropTypes.array,
   preview: PropTypes.bool,

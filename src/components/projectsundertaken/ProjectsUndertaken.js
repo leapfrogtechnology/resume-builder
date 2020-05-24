@@ -7,10 +7,11 @@ import Section from '~/components/Section';
 const ProjectsUndertaken = () => {
   return (
     <Section dataKey="projects" component={AddProject}>
-      {({ data, preview, onDelete, updateHiddenState }) =>
-        data.map(({ name, startDate, endDate, description, ongoing }, index) => (
+      {({ data, preview, deleteItem, updateHiddenState }) =>
+        data.map(({ id, name, startDate, endDate, description, ongoing }) => (
           <ProjectsUndertakenItem
-            key={index}
+            id={id}
+            key={id}
             title={name}
             startDate={startDate}
             endDate={endDate}
@@ -18,7 +19,7 @@ const ProjectsUndertaken = () => {
             description={description}
             preview={preview}
             onHiddenIconClicked={updateHiddenState}
-            onDelete={onDelete}
+            onDelete={deleteItem}
           />
         ))
       }
