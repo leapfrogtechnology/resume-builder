@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
+import React, { useState } from 'react';
 import GoogleLogin from 'react-google-login';
-import React, { useState, useEffect } from 'react';
 
 import textConstants from '~/constant/textConstants';
 import routeConstants from '~/constant/routeConstants';
@@ -35,7 +35,7 @@ const Login = () => {
   };
 
   return (
-    <>
+    <div className="login">
       <GoogleLogin
         clientId={textConstants.GOOGLE_CLIENT_ID}
         buttonText={
@@ -48,7 +48,7 @@ const Login = () => {
         onFailure={responseGoogle}
       ></GoogleLogin>
       {loginErrorMessage && <div>{loginErrorMessage}</div>}
-    </>
+    </div>
   );
 };
 
