@@ -20,10 +20,11 @@ const Login = () => {
     resumeBuilderService
       .validateUser(data)
       .then(async res => {
-        const { accessToken, refreshToken } = res.data.data;
+        const { username, email, tokens } = res.data.data;
 
-        await localStorage.saveAccessToken(accessToken);
-        await localStorage.saveRefreshToken(refreshToken);
+        await localStorage.saveAccessToken(tokens.accessToken);
+        await localStorage.saveRefreshToken(tokens.refreshToken);
+        await localStorage.saveUser(username, email);
 
         setLoginErrorMessage(null);
 
