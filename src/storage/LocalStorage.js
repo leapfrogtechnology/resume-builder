@@ -1,5 +1,4 @@
-import { RESUME, USER, ACCESS_TOKEN } from '~/constant/storage.js';
-import { REFRESH_TOKEN } from '../constant/storage';
+import { RESUME, USER, ACCESS_TOKEN, REFRESH_TOKEN } from '~/constant/storage';
 
 export const getResume = () => {
   return JSON.parse(localStorage.getItem(RESUME));
@@ -21,8 +20,8 @@ export const saveUser = user => {
   localStorage.setItem(USER, JSON.stringify(user));
 };
 
-export const getAccessToken = async () => {
-  return await localStorage.getItem(ACCESS_TOKEN);
+export const getAccessToken = () => {
+  return localStorage.getItem(ACCESS_TOKEN);
 };
 
 export const saveAccessToken = token => {
@@ -44,5 +43,4 @@ export const getRefreshToken = () => {
 export function logout() {
   localStorage.removeItem(ACCESS_TOKEN);
   localStorage.removeItem(REFRESH_TOKEN);
-  window.location.href = routeConstants.LOGIN;
 }
