@@ -24,7 +24,7 @@ export default function withAuth(AuthComponent) {
     }
 
     render() {
-      return <div>{this.state.isLoading ? <div>LOADING....</div> : <AuthComponent {...this.props} />}</div>;
+      return !this.state.isLoading && <AuthComponent {...this.props} />;
     }
   };
 }
