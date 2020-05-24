@@ -18,8 +18,6 @@ const validateGoogleToken = async (req, res, next) => {
     const ticket = await OAuth2Client.verifyIdToken({ idToken: req.body.tokenId });
     const payload = ticket.getPayload();
 
-    let data;
-
     if (payload) {
       const domain = payload['hd'];
 
@@ -29,7 +27,7 @@ const validateGoogleToken = async (req, res, next) => {
         });
       }
 
-      data = {
+      const data = {
         idToken: req.body.tokenId,
         email: payload.email,
         name: payload.name,
