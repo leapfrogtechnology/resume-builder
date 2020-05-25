@@ -1,3 +1,4 @@
+import swal from 'sweetalert';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import GoogleLogin from 'react-google-login';
@@ -31,7 +32,7 @@ const Login = () => {
         router.push(routeConstants.DASHBOARD);
       })
       .catch(err => {
-        setLoginErrorMessage(getErrorMessage(err));
+        swal({ text: getErrorMessage(err) });
       });
   };
 
