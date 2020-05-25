@@ -24,7 +24,7 @@ export const fetchResume = async email => {
 
   const result = await http.get(fetchResumeUrl, {});
 
-  return result.data;
+  return result;
 };
 
 export const deleteResume = (data = {}) => {
