@@ -1,38 +1,90 @@
 import Head from 'next/head';
+import swal from 'sweetalert';
+import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
 
 import Header from '~/components/header/Header';
 import { FormContext } from '~/components/FormContext';
 import Dashboard from '~/components/dashboard/Dashboard';
 
+import textConstants from '~/constant/textConstants';
+import routeConstants from '~/constant/routeConstants';
+
 import withAuth from '~/utilities/auth';
+import { getErrorMessage } from '~/utilities/getErrorMessage';
+
 import * as storageUtil from '~/storage/LocalStorage';
+import * as resumeService from '~/service/resumeBuilder';
 
 const Profile = () => {
+  const router = useRouter();
   const [data, updateData] = useState({});
   const [preview, setPreview] = useState(false);
 
   const togglePreview = () => setPreview(!preview);
 
-  const deleteCVHandler = () => {
-    storageUtil.deleteResume();
-    updateData({});
+  const deleteCVHandler = async () => {
+    try {
+      const result = await resumeService.deleteResume();
+
+      updateData(result);
+    } catch (err) {
+      handleErrorResponse(err);
+    }
+  };
+
+  const updateCvHandler = async (updatedData, onClose = null) => {
+    try {
+      const result = await resumeService.saveResume(updatedData);
+
+      updateData(prevState => ({ ...prevState, ...result.data.data }));
+      onClose();
+    } catch (err) {
+      onClose();
+
+      handleErrorResponse(err);
+    }
+  };
+
+  const handleErrorResponse = err => {
+    const errorMessage = getErrorMessage(err);
+
+    switch (errorMessage) {
+      case textConstants.SESSION_EXPIRED:
+        swal({ text: errorMessage });
+        logout();
+      default:
+        swal({ text: errorMessage });
+    }
+  };
+
+  const logout = () => {
+    storageUtil.logout();
+
+    router.push(routeConstants.LOGIN);
   };
 
   const store = {
     preview: { get: preview, set: setPreview },
     data: { get: data, set: updateData },
     deleteCV: deleteCVHandler,
+    updateCV: updateCvHandler,
   };
 
   useEffect(() => {
-    const resume = storageUtil.getResume();
+    const getUserProfile = async () => {
+      const userEmail = storageUtil.getUser().email;
 
-    if (resume) {
-      updateData(prevState => ({ ...prevState, ...resume }));
-    } else {
-      updateData({});
-    }
+      try {
+        const result = await resumeService.fetchUserProfile(userEmail);
+        const resume = result.data;
+
+        updateData(resume ? JSON.parse(resume) : {});
+      } catch (err) {
+        handleErrorResponse(err);
+      }
+    };
+    getUserProfile();
   }, []);
 
   return (
