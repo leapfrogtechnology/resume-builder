@@ -8,6 +8,7 @@ import Image from '~/assets/images/Image.png';
 import Email from '~/assets/images/email.png';
 import Trash from '~/assets/images/trash.png';
 import Check from '~/assets/images/check.png';
+import Google from '~/assets/images/google.svg';
 import Delete from '~/assets/images/delete.png';
 import Warning from '~/assets/images/warning.png';
 import Calendar from '~/assets/images/calendar.png';
@@ -37,4 +38,5 @@ export {
   Calendar,
   Warning,
   LoginPicture,
+  Google,
 };
