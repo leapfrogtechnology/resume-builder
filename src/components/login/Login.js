@@ -10,6 +10,7 @@ import routeConstants from '~/constant/routeConstants';
 
 import * as storageUtil from '~/storage/LocalStorage';
 import { getErrorMessage } from '~/utilities/getErrorMessage';
+import { Logo, LoginPicture } from '../../assets/image';
 
 const GoogleLoginComponent = () => {
   const [loginErrorMessage, setLoginErrorMessage] = useState(null);
