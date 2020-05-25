@@ -2,7 +2,7 @@ import http from '~/utilities/httpUtils';
 import urlConstants from '~/constant/urlConstants';
 
 export const validateUser = data => {
-  const { googleLoginUrl } = urlConstants;
+  const googleLoginUrl = urlConstants.apiBaseUrl + urlConstants.googleLoginUrl;
 
   return new Promise(resolve => {
     const result = http.post(googleLoginUrl, data);
@@ -11,30 +11,36 @@ export const validateUser = data => {
   });
 };
 
-export const saveResume = data => {
-  const { saveResumeUrl } = urlConstants;
+export const saveResume = async data => {
+  const saveResumeUrl = urlConstants.apiBaseUrl + urlConstants.saveResumeUrl;
 
-  return new Promise(resolve => {
-    const result = httpUtils.post(saveResumeUrl, data);
+  const result = await http.put(saveResumeUrl, data);
 
-    resolve(result);
-  });
+  return result;
 };
 
 export const fetchResume = async email => {
   const fetchResumeUrl = urlConstants.apiBaseUrl + urlConstants.fetchResumeUrl + email;
 
-  const result = await httpUtils.get(fetchResumeUrl, {});
+  const result = await http.get(fetchResumeUrl, {});
 
   return result.data;
 };
 
-export const deleteResume = data => {
+export const deleteResume = (data = {}) => {
   const deleteResumeUrl = urlConstants.apiBaseUrl + urlConstants.deleteResumeUrl;
 
   return new Promise(resolve => {
-    const result = httpUtils.remove(deleteResumeUrl, data);
+    const result = http.delete(deleteResumeUrl, data);
 
     resolve(result);
   });
+};
+
+export const fetchUserProfile = async email => {
+  const fetchUserProfile = urlConstants.apiBaseUrl + urlConstants.fetchUserProfileUrl + '/' + email;
+
+  const result = await http.get(fetchUserProfile, {});
+
+  return result.data;
 };
