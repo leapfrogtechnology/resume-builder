@@ -51,6 +51,7 @@
     "react-google-login": "^5.1.19",
     "react-router-dom": "^5.1.2",
     "sass": "^1.26.3",
+    "sweetalert": "^2.1.2",
     "yup": "^0.28.3"
   },
   "devDependencies": {
