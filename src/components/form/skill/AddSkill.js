@@ -5,14 +5,15 @@ import React, { useContext, useState } from 'react';
 
 import { ADD } from '~/components/icons/icon';
 import Button from '~/components/button/Button';
-import * as storage from '~/storage/LocalStorage';
 import { FormContext } from '~/components/FormContext';
-import * as skillUtils from '~/utilities/objects/Skill';
 import InputText from '~/components/inputtext/InputText';
 import FormHeader from '~/components/formheader/FormHeader';
+import OutsideClickDetector from '~/components/detector/OutsideClickDetector';
+
+import * as skillUtils from '~/utilities/objects/Skill';
 
 const AddSkill = ({ onClose, isEdit, values }) => {
-  const { data } = useContext(FormContext);
+  const { data, updateCV } = useContext(FormContext);
 
   const [error, setError] = useState({ status: false, message: 'Skill is a required field' });
 
@@ -28,7 +29,7 @@ const AddSkill = ({ onClose, isEdit, values }) => {
     }
   };
 
-  const handleSubmit = formValues => {
+  const handleSubmit = async formValues => {
     if (isEdit) {
       if (!formValues.skill) {
         const err = { status: true, message: 'Skill is a required field' };
@@ -46,7 +47,7 @@ const AddSkill = ({ onClose, isEdit, values }) => {
 
         return;
       }
-      handleSubmitOnAdd(data, formValues, skills, storage);
+      handleSubmitOnAdd(data, formValues, skills);
     }
   };
 
@@ -68,17 +69,19 @@ const AddSkill = ({ onClose, isEdit, values }) => {
     resetForm();
   };
 
-  const handleSubmitOnAdd = (data, formValues, skillsList, storage) => {
+  const handleSubmitOnAdd = async (data, formValues, skillsList) => {
+    const prevData = { ...data.get };
+
     if (skillsList.length > 0) {
-      if (data.get.skills) {
+      if (prevData.skills) {
         skillsList.forEach(skill => {
-          data.get['skills'].push(skill);
+          prevData['skills'].push(skill);
         });
       } else {
-        data.get['skills'] = [];
+        prevData['skills'] = [];
 
         skillsList.forEach(skill => {
-          data.get['skills'].push(skill);
+          prevData['skills'].push(skill);
         });
       }
     }
@@ -86,23 +89,19 @@ const AddSkill = ({ onClose, isEdit, values }) => {
     if (formValues.skill) {
       const skillObj = skillUtils.getSkillObject({ ...formValues });
 
-      if (data.get.skills) {
-        data.get['skills'].push(skillObj);
+      if (prevData.skills) {
+        prevData['skills'].push(skillObj);
       } else {
-        data.get['skills'] = [];
+        prevData['skills'] = [];
 
-        data.get['skills'].push(skillObj);
+        prevData['skills'].push(skillObj);
       }
     }
 
-    data.set(prevState => ({ ...prevState, ...data }));
-
-    storage.saveResume(data.get);
-
-    onClose();
+    updateCV(prevData, onClose);
   };
 
-  const handleSubmitOnEdit = formValues => {
+  const handleSubmitOnEdit = async formValues => {
     const isEqual = _.isEqual(formValues, initialValues);
 
     if (isEqual) {
@@ -111,19 +110,17 @@ const AddSkill = ({ onClose, isEdit, values }) => {
       return;
     } else {
       const skillObj = skillUtils.getSkillObject({ ...formValues });
-      const skills = data.get['skills'];
+      const prevData = { ...data.get };
+      const skills = prevData['skills'];
 
       const index = skills.findIndex(skill => {
         return skill.name === values.name;
       });
 
-      data.get['skills'][index] = skillObj;
+      prevData['skills'][index] = skillObj;
+
+      updateCV(prevData, onClose);
     }
-    data.set(prevState => ({ ...prevState, ...data }));
-
-    storage.saveResume(data.get);
-
-    onClose();
   };
 
   const getInitialValues = () => {
@@ -147,7 +144,7 @@ const AddSkill = ({ onClose, isEdit, values }) => {
   };
 
   return (
-    <>
+    <OutsideClickDetector onClose={onClose}>
       <FormHeader title={!isEdit ? 'Add Skill' : 'Edit Skill'} />
       <Formik
         initialValues={getInitialValues()}
@@ -189,7 +186,7 @@ const AddSkill = ({ onClose, isEdit, values }) => {
           </Form>
         )}
       </Formik>
-    </>
+    </OutsideClickDetector>
   );
 };
 
