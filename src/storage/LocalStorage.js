@@ -43,4 +43,5 @@ export const getRefreshToken = () => {
 export function logout() {
   localStorage.removeItem(ACCESS_TOKEN);
   localStorage.removeItem(REFRESH_TOKEN);
+  localStorage.removeItem(USER);
 }
