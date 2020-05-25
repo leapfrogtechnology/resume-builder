@@ -13,19 +13,15 @@ import * as personalInfoUtils from '~/utilities/objects/PersonalInformation';
 import OutsideClickDetector from '~/components/detector/OutsideClickDetector';
 
 const AddPersonalInformation = ({ onClose, isEdit }) => {
-  const { data } = useContext(FormContext);
+  const { data, updateCV } = useContext(FormContext);
 
   const handleSubmit = values => {
     const personalInfoObj = personalInfoUtils.getPersonalInfoObject({ ...values });
-    const prevData = data.get;
+    const prevData = { ...data.get };
 
     Object.assign(prevData, personalInfoObj);
 
-    storage.saveResume(data.get);
-
-    data.set(prevState => ({ ...prevState, ...personalInfoObj }));
-
-    onClose();
+    updateCV(prevData, onClose);
   };
 
   const getInitialState = () => {
