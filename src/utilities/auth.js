@@ -14,9 +14,9 @@ export default function withAuth(AuthComponent) {
     }
 
     async componentDidMount() {
-      const token = (await localStorage.getAccessToken()) || null;
+      const user = (await localStorage.getUser()) || null;
 
-      if (!token) {
+      if (!user) {
         Router.replace(routeConstants.LOGIN);
         return;
       }
