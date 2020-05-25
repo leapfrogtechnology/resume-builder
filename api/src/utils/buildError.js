@@ -31,7 +31,16 @@ function buildError(err) {
     };
   }
 
+  // User not found in firebase
   if (err.code === 'auth/user-not-found') {
+    return {
+      code: HttpStatus.NOT_FOUND,
+      message: err.message,
+    };
+  }
+
+  // Invalid Email query
+  if (err.code === 'auth/invalid-email') {
     return {
       code: HttpStatus.NOT_FOUND,
       message: err.message,
