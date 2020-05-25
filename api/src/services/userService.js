@@ -94,3 +94,17 @@ export const createUser = (userInfo) => {
     resume: '',
   });
 };
+
+/**
+ * Fetch User Profile (Resume) by uid.
+ *
+ * @param {*} uid
+ * @returns {Promise}
+ */
+export const fetchUserProfile = async (uid) => {
+  const userRef = db.ref(`users/${uid}`);
+
+  return userRef.once('value').then((snapshot) => {
+    return snapshot.val().resume;
+  });
+};
