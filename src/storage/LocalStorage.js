@@ -1,4 +1,4 @@
-import { RESUME, USER, ACCESS_TOKEN, REFRESH_TOKEN } from '~/constant/storage.js';
+import { RESUME, USER, ACCESS_TOKEN, REFRESH_TOKEN } from '~/constant/storage';
 
 export const getResume = () => {
   return JSON.parse(localStorage.getItem(RESUME));
@@ -16,8 +16,8 @@ export const getUser = () => {
   return JSON.parse(localStorage.getItem(USER));
 };
 
-export const saveUser = user => {
-  localStorage.setItem(USER, JSON.stringify(user));
+export const saveUser = (name, email) => {
+  localStorage.setItem(USER, JSON.stringify({ name: name, email: email }));
 };
 
 export const getAccessToken = () => {
@@ -43,5 +43,4 @@ export const getRefreshToken = () => {
 export function logout() {
   localStorage.removeItem(ACCESS_TOKEN);
   localStorage.removeItem(REFRESH_TOKEN);
-  window.location.href = 'http://localhost:3000/login';
 }

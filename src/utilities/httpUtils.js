@@ -1,69 +1,69 @@
 import axios from 'axios';
+import urlConstants from '~/constant/urlConstants';
+import textConstants from '~/constant/textConstants';
+import * as localStorage from '~/storage/LocalStorage';
 
-/**
- * Http Get.
- *
- * @param {*} url
- * @param {*} [params={}]
- * @returns {Promise}
- */
-export function get(url, params = {}) {
-  const request = {
-    method: 'get',
-    url: url,
-    params: params,
-  };
+const http = axios.create({
+  baseURL: urlConstants.apiBaseUrl,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
 
-  return axios(request);
-}
+http.interceptors.response.use(
+  response => {
+    return response;
+  },
+  error => {
+    const originalRequest = error.config;
 
-/**
- * Http POST.
- *
- * @param {*} url
- * @param {*} data
- * @returns  {Promise}
- */
-export function post(url, data) {
-  const request = {
-    method: 'post',
-    url: url,
-    data: data,
-  };
+    if (
+      error.response.status === textConstants.UNAUTHORIZED_CODE &&
+      error.response.data.error &&
+      error.response.data.error.message === textConstants.ACCESS_TOKEN_EXPIRE
+    ) {
+      const refreshToken = localStorage.getRefreshToken();
 
-  return axios(request);
-}
+      return http.post(urlConstants.refreshTokenUrl, { authorization: `Bearer ${refreshToken}` }).then(({ data }) => {
+        const accessToken = data.accessToken;
 
-/**
- * Http Put.
- *
- * @param {*} url
- * @param {*} data
- * @returns {Promise}
- */
-export function put(url, data) {
-  const request = {
-    method: 'put',
-    url: url,
-    data: data,
-  };
+        localStorage.saveAccessToken(accessToken);
+        originalRequest.headers.Authorization = `Bearer ${accessToken}`;
 
-  return axios(request);
-}
+        return http(originalRequest);
+      });
+    } else if (
+      originalRequest.url !== urlConstants.googleLoginUrl &&
+      ((error.response.status === textConstants.UNAUTHORIZED_CODE &&
+        error.response.data.error &&
+        error.response.data.error.message === textConstants.REFRESH_TOKEN_EXPIRE) ||
+        (error.response.status === textConstants.NOT_FOUND &&
+          error.response.data.error &&
+          error.response.data.error.message === textConstants.USER_NOT_REGISTERED) ||
+        (error.response.status === textConstants.NOT_FOUND &&
+          error.response.data.error &&
+          error.response.data.error.message === textConstants.TOKEN_NOT_FOUND))
+    ) {
+      error.response.data.error.message = textConstants.SESSION_EXPIRED;
+    }
 
-/**
- * Http Delete.
- *
- * @param {*} url
- * @param {*} [data={}]
- * @returns {Promise}
- */
-export function remove(url, data = {}) {
-  const request = {
-    method: 'delete',
-    data,
-    url,
-  };
+    return Promise.reject(error);
+  }
+);
 
-  return axios(request);
-}
+http.interceptors.request.use(
+  config => {
+    const accessToken = localStorage.getAccessToken() || null;
+
+    if (accessToken !== null || accessToken !== undefined) {
+      config.headers.Authorization = `Bearer ${accessToken}`;
+    }
+
+    return config;
+  },
+  err => {
+    return Promise.reject(err);
+  }
+);
+
+export default http;

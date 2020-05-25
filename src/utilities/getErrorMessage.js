@@ -20,6 +20,8 @@ export function getErrorMessage(error) {
             : error.response.data.error.message;
       } else if (error.response.data.details) {
         errorMessage = error.response.data.error.details[0].message;
+      } else if (error.response.data.message) {
+        errorMessage = error.response.data.message;
       } else {
         errorMessage = String(error.response.data);
       }

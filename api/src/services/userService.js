@@ -37,7 +37,7 @@ export const loginUser = async (data) => {
       await createUser(userInfo.user);
       await sessionService.createSession(userInfo);
 
-      return userInfo.tokens;
+      return { username: userInfo.user.name, email: userInfo.user.email, tokens: userInfo.tokens };
     }
 
     const tokens = tokenService.generateTokens({ email: user.email, uid: user.uid });
@@ -53,7 +53,7 @@ export const loginUser = async (data) => {
 
     await sessionService.createSession(userInfo);
 
-    return userInfo.tokens;
+    return { username: userInfo.user.name, email: userInfo.user.email, tokens: userInfo.tokens };
   } catch (err) {
     console.error(err);
 

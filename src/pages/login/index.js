@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
+import React, { useState } from 'react';
 import GoogleLogin from 'react-google-login';
-import React, { useState, useEffect } from 'react';
 
 import textConstants from '~/constant/textConstants';
 import routeConstants from '~/constant/routeConstants';
@@ -20,10 +20,11 @@ const Login = () => {
     resumeBuilderService
       .validateUser(data)
       .then(async res => {
-        const { accessToken, refreshToken } = res.data.data;
+        const { username, email, tokens } = res.data.data;
 
-        await localStorage.saveAccessToken(accessToken);
-        await localStorage.saveRefreshToken(refreshToken);
+        await localStorage.saveAccessToken(tokens.accessToken);
+        await localStorage.saveRefreshToken(tokens.refreshToken);
+        await localStorage.saveUser(username, email);
 
         setLoginErrorMessage(null);
 
@@ -35,7 +36,7 @@ const Login = () => {
   };
 
   return (
-    <>
+    <div className="login">
       <GoogleLogin
         clientId={textConstants.GOOGLE_CLIENT_ID}
         buttonText={
@@ -48,7 +49,7 @@ const Login = () => {
         onFailure={responseGoogle}
       ></GoogleLogin>
       {loginErrorMessage && <div>{loginErrorMessage}</div>}
-    </>
+    </div>
   );
 };
 
