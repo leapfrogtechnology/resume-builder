@@ -38,9 +38,9 @@ const Profile = () => {
       const result = await resumeService.saveResume(updatedData);
 
       updateData(prevState => ({ ...prevState, ...result.data.data }));
-      onClose();
+      onClose !== null && onClose();
     } catch (err) {
-      onClose();
+      onClose !== null && onClose();
 
       handleErrorResponse(err);
     }
@@ -77,9 +77,9 @@ const Profile = () => {
 
       try {
         const result = await resumeService.fetchUserProfile(userEmail);
-        const resume = result.data;
+        const resume = JSON.parse(result.data);
 
-        updateData(resume ? JSON.parse(resume) : {});
+        updateData(resume ? resume : {});
       } catch (err) {
         handleErrorResponse(err);
       }
