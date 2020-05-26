@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Text, View } from '@react-pdf/renderer';
+import { orderByDate } from '~/utilities/orderBy';
 import * as dateUtils from '~/utilities/date/FormatDate';
 import * as pdfStyles from '~/components/pdf/pdf.styles.js';
 
@@ -8,7 +9,7 @@ import * as pdfStyles from '~/components/pdf/pdf.styles.js';
  * Create projects undertaken section.
  */
 const ProjectUndertaken = ({ heading, data }) => {
-  const projectsUntertaken = data.map((project, index) => <ProjectItem key={index} project={project} />);
+  const projectsUntertaken = orderByDate(data).map((project, index) => <ProjectItem key={index} project={project} />);
 
   return (
     <View style={pdfStyles.styles.resumeContentBlock}>

@@ -72,7 +72,7 @@ const AddWorkExperience = ({ onClose, isEdit, values }) => {
         position: works[workIndex].position,
         startDate: works[workIndex].startDate,
         endDate: works[workIndex].endDate,
-        currentWork: works[workIndex].currentlyWorking,
+        currentWork: works[workIndex].ongoing,
         roles: works[workIndex].responsibilities,
         achievements: works[workIndex].achievements,
         nameReferee: works[workIndex].refereeName,
