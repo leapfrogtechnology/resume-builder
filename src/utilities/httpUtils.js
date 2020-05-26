@@ -33,16 +33,9 @@ http.interceptors.response.use(
         return http(originalRequest);
       });
     } else if (
-      originalRequest.url !== urlConstants.googleLoginUrl &&
-      ((error.response.status === textConstants.UNAUTHORIZED_CODE &&
-        error.response.data.error &&
-        error.response.data.error.message === textConstants.REFRESH_TOKEN_EXPIRE) ||
-        (error.response.status === textConstants.NOT_FOUND &&
-          error.response.data.error &&
-          error.response.data.error.message === textConstants.USER_NOT_REGISTERED) ||
-        (error.response.status === textConstants.NOT_FOUND &&
-          error.response.data.error &&
-          error.response.data.error.message === textConstants.TOKEN_NOT_FOUND))
+      error.response.status === textConstants.UNAUTHORIZED_CODE &&
+      error.response.data.error &&
+      (error.response.data.error.message === textConstants.REFRESH_TOKEN_EXPIRE || textConstants.TOKEN_NOT_FOUND)
     ) {
       error.response.data.error.message = textConstants.SESSION_EXPIRED;
     }
@@ -55,7 +48,7 @@ http.interceptors.request.use(
   config => {
     const accessToken = localStorage.getAccessToken() || null;
 
-    if (accessToken !== null || accessToken !== undefined) {
+    if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;
     }
 
