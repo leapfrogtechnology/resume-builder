@@ -12,7 +12,7 @@ const Header = ({ name, status, onPreviewBtnClicked }) => {
   const experience = context.data.get.experience;
   const profileImage = context.data.get.profileImage;
 
-  let experienceLabel = 'You do not have any professional experience yet';
+  let experienceLabel = preview ? 'No professional experience yet' : 'You do not have any professional experience yet';
 
   if (experience) {
     const experienceInYearAndMonth = dateUtils.getExperienceFormat(experience);

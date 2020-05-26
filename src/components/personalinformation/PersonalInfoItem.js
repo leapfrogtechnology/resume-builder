@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-
+import { capitalize } from '~/utilities/string/capitalize';
 import { VIEW_HIDDEN, VIEW } from '~/components/icons/icon';
 
 const PersonalInfoItem = ({ label, value, bold, preview, onclick, showIcon = false }) => {
@@ -18,7 +18,10 @@ const PersonalInfoItem = ({ label, value, bold, preview, onclick, showIcon = fal
   return (
     <div className="personal-info-row">
       <div className="personal-info-row__item">
-        <div className="personal-info-row__label">Your {label}</div>
+        <div className="personal-info-row__label">
+          {preview ? '' : 'Your '}
+          {capitalize(label)}
+        </div>
         <div className="personal-info-row__value-container">
           <span
             className={bold ? 'personal-info-row__value  personal-info-row__value--strong' : 'personal-info-row__value'}

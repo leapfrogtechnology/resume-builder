@@ -12,15 +12,12 @@
   &:last-child {
     padding-bottom: 0;
     align-items: flex-start;
-
-    .personal-info-row__value-container {
-      width: calc(100% - 222px);
-    }
   }
 
   @include e(item) {
     display: flex;
     align-items: flex-start;
+    width: 100%;
   }
 
   @include e(label) {
@@ -29,7 +26,7 @@
   }
 
   @include e(value) {
-    text-align: justify;
+    text-align: left;
     @include m(strong) {
       font-weight: 600;
     }
@@ -39,6 +36,7 @@
     display: flex;
     align-items: center;
     padding-right: 16px;
+    width: calc(100% - 222px);
   }
 
   @include e(icon) {
