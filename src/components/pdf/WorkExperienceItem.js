@@ -13,7 +13,7 @@ const WorkExperienceItem = ({ workExperience }) => {
   const labelForDate = dateUtils.getEngagementTenure(
     workExperience.startDate,
     workExperience.endDate,
-    workExperience.currentlyWorking
+    workExperience.ongoing
   );
 
   const roles = workExperience.responsibilities.split('.').filter(role => role.trim() !== '');
@@ -43,7 +43,8 @@ const RefereeSection = ({ name, contact }) => {
 
   return (
     <View style={pdfStyles.styles.paragraph}>
-      <Text>{`Referee ${name} ( ${contact} )`}</Text>
+      <Text>Referee</Text>
+      <Text>{`${name} ( ${contact} )`}</Text>
     </View>
   );
 };

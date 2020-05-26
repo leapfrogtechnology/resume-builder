@@ -8,7 +8,7 @@ const validateProjectInformation = Yup.object().shape({
     .label('Start date')
     .required()
     .test('check-startdate', 'Start Date should not be later than current date', function (value) {
-      if (moment(value).format('MMMM YYYY DD') > moment(new Date()).format('MMMM YYYY DD')) {
+      if (moment(value) > moment(new Date())) {
         return false;
       } else {
         return true;
@@ -19,7 +19,7 @@ const validateProjectInformation = Yup.object().shape({
     .when('ongoing', { is: true, otherwise: Yup.date().required('End Date is required') })
     .when('startDate', (startDate, schema) => startDate && schema.min(startDate))
     .test('check-enddate', 'End Date should not be later than current date', function (value) {
-      if (moment(value).format('MMMM YYYY DD') > moment(new Date()).format('MMMM YYYY DD')) {
+      if (moment(value) > moment(new Date())) {
         return false;
       } else {
         return true;
