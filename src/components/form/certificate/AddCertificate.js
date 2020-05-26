@@ -4,45 +4,43 @@ import { Formik, Form } from 'formik';
 import React, { useContext } from 'react';
 
 import Button from '~/components/button/Button';
-import * as storage from '~/storage/LocalStorage';
 import { FormContext } from '~/components/FormContext';
 import InputText from '~/components/inputtext/InputText';
 import InputDate from '~/components/inputdate/InputDate';
 import FormHeader from '~/components/formheader/FormHeader';
-import * as certificateUtils from '~/utilities/objects/Certificate';
-import validateCertificateInformation from '~/validations/Certificate';
 import OutsideClickDetector from '~/components/detector/OutsideClickDetector';
 
+import * as certificateUtils from '~/utilities/objects/Certificate';
+import validateCertificateInformation from '~/validations/Certificate';
+
 const AddCertificate = ({ onClose, isEdit, values }) => {
-  const { data } = useContext(FormContext);
+  const { data, updateCV } = useContext(FormContext);
 
   const handleSubmit = formValues => {
+    const prevData = { ...data.get };
+
     if (isEdit) {
-      handleSubmitOnEdit(formValues);
+      handleSubmitOnEdit(formValues, prevData);
     } else {
-      handleSubmitOnAdd(formValues);
+      handleSubmitOnAdd(formValues, prevData);
     }
 
-    data.set(prevState => ({ ...prevState, ...data }));
-
-    storage.saveResume(data.get);
-
-    onClose();
+    updateCV(prevData, onClose);
   };
 
-  const handleSubmitOnAdd = formValues => {
+  const handleSubmitOnAdd = (formValues, prevData) => {
     const certificateObj = certificateUtils.getCertificateObject({ ...formValues });
 
-    if (data.get.certificates) {
-      data.get['certificates'].push(certificateObj);
+    if (prevData.certificates) {
+      prevData['certificates'].push(certificateObj);
     } else {
-      data.get['certificates'] = [];
+      prevData['certificates'] = [];
 
-      data.get['certificates'].push(certificateObj);
+      prevData['certificates'].push(certificateObj);
     }
   };
 
-  const handleSubmitOnEdit = formValues => {
+  const handleSubmitOnEdit = (formValues, prevData) => {
     const isEqual = _.isEqual(formValues, values);
 
     if (isEqual) {
@@ -56,7 +54,7 @@ const AddCertificate = ({ onClose, isEdit, values }) => {
         return certificate.name === values.name && certificate.link === values.link;
       });
 
-      data.get['certificates'][index] = certificateObj;
+      prevData['certificates'][index] = certificateObj;
     }
   };
 
