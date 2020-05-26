@@ -27,10 +27,10 @@ const PreviewResume = ({ context }) => {
     const fetchResume = async () => {
       try {
         const result = await resumeService.fetchResume(router.query.email);
-        const resume = result.data;
+        const resume = JSON.parse(result.data);
 
         setStatusCode(result.status);
-        updateData(resume ? JSON.parse(resume) : {});
+        updateData(resume ? resume : {});
       } catch (err) {
         setStatusCode(err.response.status);
 
