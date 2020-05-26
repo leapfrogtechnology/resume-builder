@@ -1,17 +1,18 @@
 import React, { useContext, useState } from 'react';
 
 import { DELETE } from '~/components/icons/icon';
-import * as storage from '~/storage/LocalStorage';
 import Contact from '~/components/contact/Contact';
-import { Edit, ProfileImage } from '~/assets/image';
-import DeletePopup from '../form/delete/DeletePopup';
 import { FormContext } from '~/components/FormContext';
-import { toBase64 } from '~/utilities/file/toBase64.js';
 import CardHeader from '~/components/cardheader/CardHeader';
 import AddContact from '~/components/form/contact/AddContact';
+import DeletePopup from '~/components/form/delete/DeletePopup';
 import SidenavBottom from '~/components/sidenav/SidenavBottom';
-import * as profileImageUtils from '~/utilities/objects/ProfileImage.js';
-import { COUNTRY_CODE, baseMailToUrl, baseTelUrl } from '~/constant/contact.js';
+
+import { Edit, ProfileImage } from '~/assets/image';
+import { toBase64 } from '~/utilities/file/toBase64';
+import * as profileImageUtils from '~/utilities/objects/ProfileImage';
+
+import { COUNTRY_CODE, baseMailToUrl, baseTelUrl } from '~/constant/contact';
 
 const Sidenav = () => {
   const [showModal, setModal] = useState(false);
@@ -20,15 +21,15 @@ const Sidenav = () => {
   const [profileImgUploadError, setProfileImageUpload] = useState(false);
   const [downloadPdf, setDownloadPdf] = useState(false);
 
-  const context = useContext(FormContext);
-  const preview = context.preview.get;
-  const username = context.data.get.name;
-  const email = context.data.get.email;
-  const phone = context.data.get.phone;
-  const github = context.data.get.github;
-  const stackOverflow = context.data.get.stackOverflow;
-  const linkedIn = context.data.get.linkedIn;
-  const profileImg = context.data.get.profileImage;
+  const { preview, data, updateCV } = useContext(FormContext);
+  const previewMode = preview.get;
+  const username = data.get.name;
+  const email = data.get.email;
+  const phone = data.get.phone;
+  const github = data.get.github;
+  const stackOverflow = data.get.stackOverflow;
+  const linkedIn = data.get.linkedIn;
+  const profileImg = data.get.profileImage;
 
   const donwloadPdfBtnHandler = () => {
     setDownloadPdf(!downloadPdf);
@@ -83,7 +84,7 @@ const Sidenav = () => {
       setProfileImageUpload(!profileImgUploadError);
     } else {
       const result = await toBase64(file);
-      const prevData = context.data.get;
+      const prevData = { ...data.get };
       const profileImageObj = profileImageUtils.getProfileImageObject(result);
 
       if (!profileImg) {
@@ -94,26 +95,26 @@ const Sidenav = () => {
 
       prevData.profileImage.isDeleted = false;
 
-      context.data.set(prevState => ({ ...prevState, ...prevData }));
-      storage.saveResume(context.data.get);
+      updateCV(prevData);
     }
   };
 
   const handleImageDelete = () => {
-    if (context.data.get.profileImage) {
-      context.data.get.profileImage.isDeleted = true;
-      context.data.get.profileImage.deletedOn = new Date();
-      context.data.set(prevState => ({ ...prevState, ...context.data.get }));
-    }
+    const prevData = { ...data.get };
 
-    storage.saveResume(context.data.get);
+    if (prevData.profileImage) {
+      prevData.profileImage.isDeleted = true;
+      prevData.profileImage.deletedOn = new Date();
+
+      updateCV(prevData);
+    }
   };
 
   return (
     <div className="sidenav">
       <div className="sidenav-top">
         <div className="card">
-          {!preview && (
+          {!previewMode && (
             <>
               <CardHeader title="Display Picture" />
               <div className="sidenav__upload-block">
@@ -137,7 +138,7 @@ const Sidenav = () => {
             <CardHeader
               title="Contact Information"
               icon={Edit}
-              hideIcon={preview}
+              hideIcon={previewMode}
               component={AddContact}
               onEdit={toggleEdit}
               onClose={toggleEdit}
@@ -150,7 +151,7 @@ const Sidenav = () => {
                 label="Email Address"
                 baseUrl={baseMailToUrl}
                 value={email.value}
-                preview={preview}
+                preview={previewMode}
                 onHiddenIconClicked={updateHiddenStateContact}
               />
             )}
@@ -160,7 +161,7 @@ const Sidenav = () => {
                 label="Phone Number"
                 baseUrl={baseTelUrl}
                 value={phone.value ? COUNTRY_CODE + '-' + phone.value : ''}
-                preview={preview}
+                preview={previewMode}
                 onHiddenIconClicked={updateHiddenStateContact}
               />
             )}
@@ -169,7 +170,7 @@ const Sidenav = () => {
                 id="github"
                 label="GitHub"
                 value={github.value ? github.value : ''}
-                preview={preview}
+                preview={previewMode}
                 onHiddenIconClicked={updateHiddenStateContact}
               />
             )}
@@ -178,7 +179,7 @@ const Sidenav = () => {
                 id="stackOverflow"
                 label="StackOverFlow"
                 value={stackOverflow.value}
-                preview={preview}
+                preview={previewMode}
                 onHiddenIconClicked={updateHiddenStateContact}
               />
             )}
@@ -187,7 +188,7 @@ const Sidenav = () => {
                 id="linkedIn"
                 label="LinkedIn"
                 value={linkedIn.value ? linkedIn.value : ''}
-                preview={preview}
+                preview={previewMode}
                 onHiddenIconClicked={updateHiddenStateContact}
               />
             )}
@@ -195,9 +196,9 @@ const Sidenav = () => {
         </div>
       </div>
 
-      {!preview && (
+      {!previewMode && (
         <SidenavBottom
-          resumeJson={context.data.get}
+          resumeJson={data.get}
           username={username}
           downloadPdf={downloadPdf}
           downloadPdfIconClicked={donwloadPdfBtnHandler}
