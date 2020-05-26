@@ -4,48 +4,46 @@ import { Formik, Form } from 'formik';
 import React, { useContext } from 'react';
 
 import Button from '~/components/button/Button';
-import * as storage from '~/storage/LocalStorage';
 import { FormContext } from '~/components/FormContext';
 import InputText from '~/components/inputtext/InputText';
 import InputDate from '~/components/inputdate/InputDate';
 import FormHeader from '~/components/formheader/FormHeader';
 import CheckboxInput from '~/components/checkbox/CheckboxInput';
-import { validateWorkExperience } from '~/validations/WorkExperience';
-import * as workExperienceUtils from '~/utilities/objects/WorkExperience';
 import OutsideClickDetector from '~/components/detector/OutsideClickDetector';
 
+import { validateWorkExperience } from '~/validations/WorkExperience';
+import * as workExperienceUtils from '~/utilities/objects/WorkExperience';
+
 const AddWorkExperience = ({ onClose, isEdit, values }) => {
-  const { data } = useContext(FormContext);
+  const { data, updateCV } = useContext(FormContext);
 
   let workIndex = -1;
   let initialValues = {};
 
   const handleSubmit = formValues => {
+    const prevData = { ...data.get };
+
     if (isEdit) {
-      handleSubmitOnEdit(formValues);
+      handleSubmitOnEdit(formValues, prevData);
     } else {
-      handleSubmitOnAdd(formValues);
+      handleSubmitOnAdd(formValues, prevData);
     }
 
-    data.set(prevState => ({ ...prevState, ...data }));
-
-    storage.saveResume(data.get);
-
-    onClose();
+    updateCV(prevData, onClose);
   };
 
-  const handleSubmitOnAdd = formValues => {
+  const handleSubmitOnAdd = (formValues, prevData) => {
     const workExperienceObj = workExperienceUtils.getWorkExperienceObject({ ...formValues });
 
-    if (data.get.workExperience) {
-      data.get['workExperience'].push(workExperienceObj);
+    if (prevData.workExperience) {
+      prevData['workExperience'].push(workExperienceObj);
     } else {
-      data.get['workExperience'] = [];
-      data.get['workExperience'].push(workExperienceObj);
+      prevData['workExperience'] = [];
+      prevData['workExperience'].push(workExperienceObj);
     }
   };
 
-  const handleSubmitOnEdit = formValues => {
+  const handleSubmitOnEdit = (formValues, prevData) => {
     const isEqual = _.isEqual(formValues, initialValues);
 
     if (isEqual) {
@@ -55,7 +53,7 @@ const AddWorkExperience = ({ onClose, isEdit, values }) => {
     } else {
       const workObj = workExperienceUtils.getWorkExperienceObject({ ...formValues });
 
-      data.get['workExperience'][workIndex] = workObj;
+      prevData['workExperience'][workIndex] = workObj;
     }
   };
 
