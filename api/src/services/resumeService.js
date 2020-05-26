@@ -11,7 +11,7 @@ export const updateResume = async (userId, resume) => {
   const userRef = db.ref(`/users/${userId}/`);
 
   return userRef.update({ resume: JSON.stringify(resume) }).then(() => {
-    return JSON.stringify(resume);
+    return resume;
   });
 };
 
