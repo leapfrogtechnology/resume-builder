@@ -4,45 +4,43 @@ import { Formik, Form } from 'formik';
 import React, { useContext } from 'react';
 
 import Button from '~/components/button/Button';
-import * as storage from '~/storage/LocalStorage';
 import { FormContext } from '~/components/FormContext';
 import InputText from '~/components/inputtext/InputText';
 import InputDate from '~/components/inputdate/InputDate';
 import FormHeader from '~/components/formheader/FormHeader';
-import * as achievementUtils from '~/utilities/objects/Achievement';
-import validateAchievementInformation from '~/validations/Achievement';
 import OutsideClickDetector from '~/components/detector/OutsideClickDetector';
 
+import * as achievementUtils from '~/utilities/objects/Achievement';
+import validateAchievementInformation from '~/validations/Achievement';
+
 const AddAchievement = ({ onClose, isEdit, values }) => {
-  const data = useContext(FormContext).data;
+  const { data, updateCV } = useContext(FormContext);
 
   const handleSubmit = formValues => {
+    const prevData = { ...data.get };
+
     if (isEdit) {
-      handleSubmitOnEdit(formValues);
+      handleSubmitOnEdit(formValues, prevData);
     } else {
-      handleSubmitOnAdd(formValues);
+      handleSubmitOnAdd(formValues, prevData);
     }
 
-    data.set(prevState => ({ ...prevState, ...data }));
-
-    storage.saveResume(data.get);
-
-    onClose();
+    updateCV(prevData, onClose);
   };
 
-  const handleSubmitOnAdd = formValues => {
+  const handleSubmitOnAdd = (formValues, prevData) => {
     const achievementObj = achievementUtils.getAchievementObject({ ...formValues });
 
-    if (data.get.achievements) {
-      data.get['achievements'].push(achievementObj);
+    if (prevData.achievements) {
+      prevData['achievements'].push(achievementObj);
     } else {
-      data.get['achievements'] = [];
+      prevData['achievements'] = [];
 
-      data.get['achievements'].push(achievementObj);
+      prevData['achievements'].push(achievementObj);
     }
   };
 
-  const handleSubmitOnEdit = formValues => {
+  const handleSubmitOnEdit = (formValues, prevData) => {
     const isEqual = _.isEqual(formValues, values);
 
     if (isEqual) {
@@ -56,7 +54,7 @@ const AddAchievement = ({ onClose, isEdit, values }) => {
         return achievement.name === values.name && achievement.date === values.date;
       });
 
-      data.get['achievements'][index] = achievementObj;
+      prevData['achievements'][index] = achievementObj;
     }
   };
 
