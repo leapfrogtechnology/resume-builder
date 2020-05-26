@@ -6,7 +6,6 @@ import bodyParser from 'body-parser';
 import routes from './routes';
 import logger from './utils/logger';
 
-import json from './middlewares/json';
 import * as errorHandler from './middlewares/errorHandler';
 
 const app = express();
@@ -22,9 +21,9 @@ app.locals.version = process.env.APP_VERSION;
 
 app.use(cors());
 app.use(morgan('dev'));
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(errorHandler.bodyParser);
-app.use(json);
 
 /**
  * Routes Definitions
