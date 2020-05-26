@@ -8,8 +8,6 @@ export const authenticateUser = async (req, res, next) => {
 
     next();
   } catch (err) {
-    console.error(err);
-
     next(err);
   }
 };
