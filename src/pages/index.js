@@ -73,10 +73,8 @@ const Profile = () => {
 
   useEffect(() => {
     const getUserProfile = async () => {
-      const userEmail = storageUtil.getUser().email;
-
       try {
-        const result = await resumeService.fetchUserProfile(userEmail);
+        const result = await resumeService.fetchUserProfile();
         const resume = JSON.parse(result.data);
 
         updateData(resume ? resume : {});
