@@ -9,6 +9,7 @@ import EditOptions from '~/components/editoptions/EditOptions';
 import AddWorkExperience from '~/components/form/workexperience/AddWorkExperience';
 
 const WorkExperienceShown = ({
+  id,
   subTitle,
   position,
   startDate,
@@ -18,12 +19,13 @@ const WorkExperienceShown = ({
   refereeName,
   refereeContact,
   currentlyWorking,
+  hidden,
   preview,
   onHiddenIconClicked,
   onDelete,
   onContactLinkClicked,
 }) => {
-  const [hidden, setHidden] = useState(false);
+  const [isHidden, setIsHidden] = useState(hidden);
   const [editWork, setEdit] = useState(false);
 
   if (hidden && preview) {
@@ -61,27 +63,27 @@ const WorkExperienceShown = ({
     : ` ${refereeContact}`;
 
   const onHiddenIconClickedHandler = () => {
-    setHidden(!hidden);
-    onHiddenIconClicked(subTitle);
+    setIsHidden(!isHidden);
+    onHiddenIconClicked(id);
   };
 
   const onDeleteIconClickedHanlder = () => {
-    onDelete(subTitle, position);
+    onDelete(id);
   };
 
   const toggleEditWork = () => setEdit(!editWork);
 
   return (
     <div className="work-experience">
-      <div className={!hidden ? 'work-experience__row' : 'work-experience__row work-experience--hidden'}>
+      <div className={!isHidden ? 'work-experience__row' : 'work-experience__row work-experience--hidden'}>
         <div className="work-experience__row-header">
           <div className="sub-title">
             {subTitle}
-            {hidden && <span className="hidden-tag">Hidden</span>}
+            {isHidden && <span className="hidden-tag">Hidden</span>}
           </div>
           {!preview && (
             <EditOptions
-              isHidden={hidden}
+              isHidden={isHidden}
               onHiddenIconClicked={onHiddenIconClickedHandler}
               onEditButtonClicked={toggleEditWork}
               onDeleteButtonClicked={onDeleteIconClickedHanlder}
@@ -134,6 +136,7 @@ const WorkExperienceShown = ({
 };
 
 WorkExperienceShown.propTypes = {
+  id: PropTypes.string,
   subTitle: PropTypes.string,
   position: PropTypes.string,
   startDate: PropTypes.string,
@@ -143,6 +146,7 @@ WorkExperienceShown.propTypes = {
   refereeName: PropTypes.string,
   refereeContact: PropTypes.string,
   currentlyWorking: PropTypes.bool,
+  hidden: PropTypes.bool,
   preview: PropTypes.bool,
   onHiddenIconClicked: PropTypes.func,
   onDelete: PropTypes.func,

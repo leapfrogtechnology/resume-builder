@@ -21,7 +21,7 @@ const Sidenav = () => {
   const [profileImgUploadError, setProfileImageUpload] = useState(false);
   const [downloadPdf, setDownloadPdf] = useState(false);
 
-  const { preview, data, updateCV } = useContext(FormContext);
+  const { preview, data, updateCV, deleteCV } = useContext(FormContext);
   const previewMode = preview.get;
   const username = data.get.name;
   const email = data.get.email;
@@ -36,7 +36,7 @@ const Sidenav = () => {
   };
 
   const confirmDeleteBtnHandler = () => {
-    context.deleteCV();
+    deleteCV();
     toggleDelete();
   };
 
@@ -53,12 +53,13 @@ const Sidenav = () => {
    * @param {string} key [ label of a particular contact type].
    */
   const updateHiddenStateContact = key => {
-    const data = context.data.get;
-    const previousState = data[key].hidden;
-    const newState = !previousState;
+    const prevData = { ...data.get };
+    const currentState = prevData[key].hidden;
+    const newState = !currentState;
 
-    data[key].hidden = newState;
-    context.data.set(data);
+    prevData[key].hidden = newState;
+
+    updateCV(prevData);
   };
 
   const createFileUploader = () => {
@@ -151,6 +152,7 @@ const Sidenav = () => {
                 label="Email Address"
                 baseUrl={baseMailToUrl}
                 value={email.value}
+                hidden={email.hidden}
                 preview={previewMode}
                 onHiddenIconClicked={updateHiddenStateContact}
               />
@@ -161,6 +163,7 @@ const Sidenav = () => {
                 label="Phone Number"
                 baseUrl={baseTelUrl}
                 value={phone.value ? COUNTRY_CODE + '-' + phone.value : ''}
+                hidden={phone.hidden}
                 preview={previewMode}
                 onHiddenIconClicked={updateHiddenStateContact}
               />
@@ -170,6 +173,7 @@ const Sidenav = () => {
                 id="github"
                 label="GitHub"
                 value={github.value ? github.value : ''}
+                hidden={github.hidden}
                 preview={previewMode}
                 onHiddenIconClicked={updateHiddenStateContact}
               />
@@ -179,6 +183,7 @@ const Sidenav = () => {
                 id="stackOverflow"
                 label="StackOverFlow"
                 value={stackOverflow.value}
+                hidden={stackOverflow.hidden}
                 preview={previewMode}
                 onHiddenIconClicked={updateHiddenStateContact}
               />
@@ -188,6 +193,7 @@ const Sidenav = () => {
                 id="linkedIn"
                 label="LinkedIn"
                 value={linkedIn.value ? linkedIn.value : ''}
+                hidden={linkedIn.hidden}
                 preview={previewMode}
                 onHiddenIconClicked={updateHiddenStateContact}
               />

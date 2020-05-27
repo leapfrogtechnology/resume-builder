@@ -7,16 +7,18 @@ import AddProject from '~/components/form/project/AddProject';
 import EditOptions from '~/components/editoptions/EditOptions';
 
 const ProjectsUndertakenItem = ({
+  id,
   title,
   startDate,
   endDate,
   description,
   ongoing,
+  hidden,
   preview,
   onHiddenIconClicked,
   onDelete,
 }) => {
-  const [hidden, setHidden] = useState(false);
+  const [isHidden, setIsHidden] = useState(hidden);
   const [editProject, setEdit] = useState(false);
 
   if (hidden && preview) {
@@ -30,24 +32,24 @@ const ProjectsUndertakenItem = ({
   const toggleEditProject = () => setEdit(!editProject);
 
   const onHiddenBtnClicked = () => {
-    setHidden(!hidden);
-    onHiddenIconClicked(title);
+    setIsHidden(!isHidden);
+    onHiddenIconClicked(id);
   };
 
   const deleteIconClickedHandler = () => {
-    onDelete(title);
+    onDelete(id);
   };
 
   return (
-    <div className={!hidden ? 'projects-undertaken__row' : 'projects-undertaken__row projects-undertaken--hidden'}>
+    <div className={!isHidden ? 'projects-undertaken__row' : 'projects-undertaken__row projects-undertaken--hidden'}>
       <div className="projects-undertaken__row-header">
         <div className="sub-title">
           {title}
-          {hidden && <span className="hidden-tag">Hidden</span>}
+          {isHidden && <span className="hidden-tag">Hidden</span>}
         </div>
         {!preview && (
           <EditOptions
-            isHidden={hidden}
+            isHidden={isHidden}
             onHiddenIconClicked={onHiddenBtnClicked}
             onEditButtonClicked={toggleEditProject}
             onDeleteButtonClicked={deleteIconClickedHandler}
@@ -73,11 +75,13 @@ const ProjectsUndertakenItem = ({
 };
 
 ProjectsUndertakenItem.propTypes = {
+  id: PropTypes.string,
   title: PropTypes.string,
   startDate: PropTypes.string,
   endDate: PropTypes.string,
   description: PropTypes.string,
   ongoing: PropTypes.bool,
+  hidden: PropTypes.bool,
   preview: PropTypes.bool,
   isEdit: PropTypes.bool,
   onHiddenIconClicked: PropTypes.func,
