@@ -21,7 +21,7 @@ const Sidenav = () => {
   const [profileImgUploadError, setProfileImageUpload] = useState(false);
   const [downloadPdf, setDownloadPdf] = useState(false);
 
-  const { preview, data, updateCV } = useContext(FormContext);
+  const { preview, data, updateCV, deleteCV } = useContext(FormContext);
   const previewMode = preview.get;
   const username = data.get.name;
   const email = data.get.email;
@@ -36,7 +36,7 @@ const Sidenav = () => {
   };
 
   const confirmDeleteBtnHandler = () => {
-    context.deleteCV();
+    deleteCV();
     toggleDelete();
   };
 
