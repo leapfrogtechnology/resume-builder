@@ -37,8 +37,8 @@ export const deleteResume = (data = {}) => {
   });
 };
 
-export const fetchUserProfile = async email => {
-  const fetchUserProfile = urlConstants.apiBaseUrl + urlConstants.fetchUserProfileUrl + '/' + email;
+export const fetchUserProfile = async () => {
+  const fetchUserProfile = urlConstants.apiBaseUrl + urlConstants.fetchUserProfileUrl;
 
   const result = await http.get(fetchUserProfile, {});
 
