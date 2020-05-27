@@ -2,12 +2,13 @@ import { Router } from 'express';
 
 import * as userController from '../controllers/users';
 import { ensureToken } from '../middlewares/ensureToken';
+import { authenticateUser } from '../middlewares/firebaseAuthenticate';
 
 const router = Router();
 
 /**
- * GET /api/users/:email
+ * GET /api/users/self
  */
-router.get('/:email', ensureToken, userController.fetchUserProfile);
+router.get('/self', ensureToken, authenticateUser, userController.fetchUserProfile);
 
 export default router;
