@@ -34,10 +34,12 @@ export const deleteSession = (userId) => {
  * @param {*} refreshToken
  * @returns
  */
-export const getSession = (refreshToken) => {
+export const getSession = async (refreshToken) => {
   const sessionRef = db.ref(`/session`);
 
-  return sessionRef.once('value').then((snapshot) => {
+  try {
+    const snapshot = await sessionRef.once('value');
+
     const sessions = snapshot.val();
 
     const index = Object.keys(sessions).find((key) => {
@@ -47,5 +49,7 @@ export const getSession = (refreshToken) => {
     if (index) {
       return sessions[index];
     }
-  });
+  } catch (err) {
+    throw err;
+  }
 };
