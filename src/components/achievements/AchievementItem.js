@@ -1,4 +1,4 @@
-import ProptTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
 import OpenModal from '~/components/modal/OpenModal';
@@ -62,13 +62,14 @@ const AchievementItem = ({ id, title, date, description, hidden, preview, onHidd
 };
 
 AchievementItem.propTypes = {
-  id: ProptTypes.string,
-  title: ProptTypes.string,
-  date: ProptTypes.string,
-  description: ProptTypes.string,
-  preview: ProptTypes.bool,
-  onHiddenIconClicked: ProptTypes.func,
-  onDelete: ProptTypes.func,
+  id: PropTypes.string,
+  title: PropTypes.string,
+  date: PropTypes.string,
+  description: PropTypes.string,
+  hidden: PropTypes.bool,
+  preview: PropTypes.bool,
+  onHiddenIconClicked: PropTypes.func,
+  onDelete: PropTypes.func,
 };
 
 export default AchievementItem;
