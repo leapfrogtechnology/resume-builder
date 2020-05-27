@@ -18,10 +18,10 @@ export const updateResume = async (userId, resume) => {
  *
  * @param {*} userId
  */
-export const deleteResume = async (userId, resume) => {
+export const deleteResume = (userId, resume) => {
   const userRef = db.ref(`/users/${userId}/resume`);
 
-  return userRef.set(resume);
+  return userRef.set(JSON.stringify(resume));
 };
 
 /**
