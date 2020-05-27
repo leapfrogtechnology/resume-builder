@@ -6,8 +6,9 @@ import { format } from '~/utilities/date/FormatDate';
 import EditOptions from '~/components/editoptions/EditOptions';
 import AddAchievement from '~/components/form/achievement/AddAchievement';
 
-const AchievementItem = ({ title, date, description, preview, onHiddenIconClicked, onDelete }) => {
-  const [hidden, setHidden] = useState(false);
+const AchievementItem = ({ id, title, date, description, hidden, preview, onHiddenIconClicked, onDelete }) => {
+  const [isHidden, setIsHidden] = useState(hidden);
+
   const [editAchievement, setEdit] = useState(false);
 
   if (hidden && preview) {
@@ -21,24 +22,24 @@ const AchievementItem = ({ title, date, description, preview, onHiddenIconClicke
   };
 
   const onHiddenBtnClicked = () => {
-    setHidden(!hidden);
-    onHiddenIconClicked(title);
+    setIsHidden(!isHidden);
+    onHiddenIconClicked(id);
   };
 
   const deleteIconClickedHandler = () => {
-    onDelete(title, date);
+    onDelete(id);
   };
 
   return (
-    <div className={!hidden ? 'achievements__row' : 'achievements__row achievements--hidden'}>
+    <div className={!isHidden ? 'achievements__row' : 'achievements__row achievements--hidden'}>
       <div className="achievements__row-header">
         <div className="sub-title">
           {title}
-          {hidden && <span className="hidden-tag">Hidden</span>}
+          {isHidden && <span className="hidden-tag">Hidden</span>}
         </div>
         {!preview && (
           <EditOptions
-            isHidden={hidden}
+            isHidden={isHidden}
             onHiddenIconClicked={onHiddenBtnClicked}
             onEditButtonClicked={toggleEditAchievement}
             onDeleteButtonClicked={deleteIconClickedHandler}
@@ -61,6 +62,7 @@ const AchievementItem = ({ title, date, description, preview, onHiddenIconClicke
 };
 
 AchievementItem.propTypes = {
+  id: ProptTypes.string,
   title: ProptTypes.string,
   date: ProptTypes.string,
   description: ProptTypes.string,
