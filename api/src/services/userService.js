@@ -18,12 +18,11 @@ export const loginUser = async (data) => {
 
     const user = await fetchByEmail(email);
 
-    if (user && user.status) {
-      const credential = firebase.auth.GoogleAuthProvider.credential(idToken);
-
+    if (!user) {
+      const credential = await firebase.auth.GoogleAuthProvider.credential(idToken);
       const userLogin = await firebase.auth().signInWithCredential(credential);
 
-      const tokens = tokenService.generateTokens({ email: userLogin.email, uid: userLogin.user.uid });
+      const tokens = tokenService.generateTokens({ email: userLogin.user.email, uid: userLogin.user.uid });
 
       const userInfo = {
         user: {
@@ -39,7 +38,6 @@ export const loginUser = async (data) => {
 
       return { username: userInfo.user.name, email: userInfo.user.email, tokens: userInfo.tokens };
     }
-
     const tokens = tokenService.generateTokens({ email: user.email, uid: user.uid });
 
     const userInfo = {
@@ -55,8 +53,6 @@ export const loginUser = async (data) => {
 
     return { username: userInfo.user.name, email: userInfo.user.email, tokens: userInfo.tokens };
   } catch (err) {
-    console.error(err);
-
     throw err;
   }
 };
@@ -67,31 +63,33 @@ export const loginUser = async (data) => {
  * @param {*} email
  * @returns {Promise}
  */
-export async function fetchByEmail(email) {
+export const fetchByEmail = async (email) => {
   try {
     const result = await admin.auth().getUserByEmail(email);
 
     return result;
   } catch (err) {
     if (err.code === 'auth/user-not-found') {
-      const result = {
-        status: 'NOT FOUND',
-      };
-      return result;
+      return null;
     }
-    console.error(err);
 
     throw err;
   }
-}
+};
 
+/**
+ * Create User profile.
+ *
+ * @param {*} userInfo
+ * @returns {Promise}
+ */
 export const createUser = (userInfo) => {
   const userRef = db.ref(`users/${userInfo.uid}`);
 
   return userRef.set({
     name: userInfo.name,
     email: userInfo.email,
-    resume: '',
+    resume: '{}',
   });
 };
 
@@ -104,7 +102,11 @@ export const createUser = (userInfo) => {
 export const fetchUserProfile = async (uid) => {
   const userRef = db.ref(`users/${uid}`);
 
-  return userRef.once('value').then((snapshot) => {
+  try {
+    const snapshot = await userRef.once('value');
+
     return snapshot.val().resume;
-  });
+  } catch (err) {
+    throw err;
+  }
 };
