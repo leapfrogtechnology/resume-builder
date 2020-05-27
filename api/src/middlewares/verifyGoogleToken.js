@@ -41,8 +41,6 @@ const validateGoogleToken = async (req, res, next) => {
       message: 'Unauthorized access',
     });
   } catch (err) {
-    console.error(err);
-
     throw err;
   }
 };
