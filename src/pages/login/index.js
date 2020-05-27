@@ -13,25 +13,23 @@ import * as resumeBuilderService from '~/service/resumeBuilder';
 const Login = () => {
   const router = useRouter();
 
-  const responseGoogle = response => {
+  const responseGoogle = async response => {
     const data = {
       tokenId: response.tokenId,
     };
 
-    resumeBuilderService
-      .validateUser(data)
-      .then(async res => {
-        const { username, email, tokens } = res.data.data;
+    try {
+      const res = await resumeBuilderService.validateUser(data);
+      const { username, email, tokens } = res.data.data;
 
-        await localStorage.saveAccessToken(tokens.accessToken);
-        await localStorage.saveRefreshToken(tokens.refreshToken);
-        await localStorage.saveUser(username, email);
+      await localStorage.saveAccessToken(tokens.accessToken);
+      await localStorage.saveRefreshToken(tokens.refreshToken);
+      await localStorage.saveUser(username, email);
 
-        router.push(routeConstants.DASHBOARD);
-      })
-      .catch(err => {
-        swal({ text: getErrorMessage(err) });
-      });
+      router.push(routeConstants.DASHBOARD);
+    } catch (err) {
+      swal({ text: getErrorMessage(err) });
+    }
   };
 
   return (
