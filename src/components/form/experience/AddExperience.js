@@ -23,7 +23,8 @@ const AddExperience = ({ onClose }) => {
       prevData['experience'] = { ...values };
     }
 
-    updateCV(prevData, onClose);
+    updateCV(prevData);
+    onClose();
   };
 
   const getInitialValues = () => {

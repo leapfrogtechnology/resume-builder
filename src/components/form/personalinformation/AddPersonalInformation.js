@@ -20,7 +20,8 @@ const AddPersonalInformation = ({ onClose, isEdit }) => {
 
     Object.assign(prevData, personalInfoObj);
 
-    updateCV(prevData, onClose);
+    updateCV(prevData);
+    onClose();
   };
 
   const getInitialState = () => {

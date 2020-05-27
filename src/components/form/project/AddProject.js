@@ -30,7 +30,8 @@ const AddProject = ({ onClose, isEdit, values }) => {
       handleSubmitOnAdd(formValues, prevData);
     }
 
-    updateCV(prevData, onClose);
+    updateCV(prevData);
+    onClose();
   };
 
   const handleSubmitOnAdd = (formValues, prevData) => {

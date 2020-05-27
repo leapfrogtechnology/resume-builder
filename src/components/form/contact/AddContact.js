@@ -21,7 +21,8 @@ const AddContactInformation = ({ onClose, isEdit }) => {
 
     Object.assign(prevData, contactObj);
 
-    updateCV(prevData, onClose);
+    updateCV(prevData);
+    onClose();
   };
 
   const getInitialValues = () => {

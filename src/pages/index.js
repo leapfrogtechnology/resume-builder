@@ -33,15 +33,12 @@ const Profile = () => {
     }
   };
 
-  const updateCvHandler = async (updatedData, onClose = null) => {
+  const updateCvHandler = async updatedData => {
     try {
       const result = await resumeService.saveResume(updatedData);
 
-      updateData(prevState => ({ ...prevState, ...result.data.data }));
-      onClose !== null && onClose();
+      updateData(prevState => ({ ...prevState, ...updatedData }));
     } catch (err) {
-      onClose !== null && onClose();
-
       handleErrorResponse(err);
     }
   };

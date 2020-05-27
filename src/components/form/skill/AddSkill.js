@@ -98,7 +98,8 @@ const AddSkill = ({ onClose, isEdit, values }) => {
       }
     }
 
-    updateCV(prevData, onClose);
+    updateCV(prevData);
+    onClose();
   };
 
   const handleSubmitOnEdit = async formValues => {
@@ -119,7 +120,8 @@ const AddSkill = ({ onClose, isEdit, values }) => {
 
       prevData['skills'][index] = skillObj;
 
-      updateCV(prevData, onClose);
+      updateCV(prevData);
+      onClose();
     }
   };
 
