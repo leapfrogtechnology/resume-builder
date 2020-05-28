@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import swal from 'sweetalert';
 import { useRouter } from 'next/router';
 import GoogleLogin from 'react-google-login';
@@ -12,6 +12,16 @@ import * as resumeBuilderService from '~/service/resumeBuilder';
 
 const Login = () => {
   const router = useRouter();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const user = localStorage.getUser();
+
+    if (user) {
+      setIsLoggedIn(true);
+      router.push(routeConstants.DASHBOARD);
+    }
+  });
 
   const responseGoogle = response => {
     const data = {
@@ -35,49 +45,51 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
-      <div className="header-container">
-        <div className="login-container__top-block">
-          <div className="login-container__logo-wrapper">
-            <img src={Logo} alt="Leapfrog" />
+    !isLoggedIn && (
+      <div className="login-container">
+        <div className="header-container">
+          <div className="login-container__top-block">
+            <div className="login-container__logo-wrapper">
+              <img src={Logo} alt="Leapfrog" />
+            </div>
+          </div>
+        </div>
+        <div className="login-container__bottom-block">
+          <div className="main-container">
+            <div className="login-container__bottom-left">
+              <h1 className="login-container__header">Build your CV like a PRO!</h1>
+              <div className="login-container__login-option">
+                <div className="login-container__label">
+                  Our online tool lets you easily build and share your professional CV’s.
+                </div>
+                <div className="login-container__login-component">
+                  <GoogleLogin
+                    clientId={textConstants.GOOGLE_CLIENT_ID}
+                    render={renderProps => (
+                      <div className="login-container__google" onClick={renderProps.onClick}>
+                        <span className="login-container__google-icon">
+                          <img src={Google} alt="Google" />
+                        </span>
+                        <span className="login-container__google-text">Sign in with Google</span>
+                      </div>
+                    )}
+                    className="login-container__google-button"
+                    onSuccess={responseGoogle}
+                    onFailure={responseGoogle}
+                  ></GoogleLogin>
+                </div>
+              </div>
+              <div className="login-container__disclaimer">
+                By continuing, you are agreeing to our terms and conditions
+              </div>
+            </div>
+            <div className="login-container__bottom-right">
+              <img src={LoginPicture} alt="Login" />
+            </div>
           </div>
         </div>
       </div>
-      <div className="login-container__bottom-block">
-        <div className="main-container">
-          <div className="login-container__bottom-left">
-            <h1 className="login-container__header">Build your CV like a PRO!</h1>
-            <div className="login-container__login-option">
-              <div className="login-container__label">
-                Our online tool lets you easily build and share your professional CV’s.
-              </div>
-              <div className="login-container__login-component">
-                <GoogleLogin
-                  clientId={textConstants.GOOGLE_CLIENT_ID}
-                  render={renderProps => (
-                    <div className="login-container__google" onClick={renderProps.onClick}>
-                      <span className="login-container__google-icon">
-                        <img src={Google} alt="Google" />
-                      </span>
-                      <span className="login-container__google-text">Sign in with Google</span>
-                    </div>
-                  )}
-                  className="login-container__google-button"
-                  onSuccess={responseGoogle}
-                  onFailure={responseGoogle}
-                ></GoogleLogin>
-              </div>
-            </div>
-            <div className="login-container__disclaimer">
-              By continuing, you are agreeing to our terms and conditions
-            </div>
-          </div>
-          <div className="login-container__bottom-right">
-            <img src={LoginPicture} alt="Login" />
-          </div>
-        </div>
-      </div>
-    </div>
+    )
   );
 };
 
