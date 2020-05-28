@@ -10,7 +10,6 @@ import InputDate from '~/components/inputdate/InputDate';
 import InputRadio from '~/components/inputradio/InputRadio';
 import FormHeader from '~/components/formheader/FormHeader';
 import CheckboxInput from '~/components/checkbox/CheckboxInput';
-import OutsideClickDetector from '~/components/detector/OutsideClickDetector';
 
 import * as projectUtils from '~/utilities/objects/Project';
 import validateProjectInformation from '~/validations/Project';
@@ -89,7 +88,7 @@ const AddProject = ({ onClose, isEdit, values }) => {
   };
 
   return (
-    <OutsideClickDetector onClose={onClose}>
+    <>
       <FormHeader title={!isEdit ? 'Add Project' : 'Edit Project'} />
       <Formik
         initialValues={getInitialValues()}
@@ -168,7 +167,7 @@ const AddProject = ({ onClose, isEdit, values }) => {
           </Form>
         )}
       </Formik>
-    </OutsideClickDetector>
+    </>
   );
 };
 

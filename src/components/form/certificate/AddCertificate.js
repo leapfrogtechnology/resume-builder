@@ -8,7 +8,6 @@ import { FormContext } from '~/components/FormContext';
 import InputText from '~/components/inputtext/InputText';
 import InputDate from '~/components/inputdate/InputDate';
 import FormHeader from '~/components/formheader/FormHeader';
-import OutsideClickDetector from '~/components/detector/OutsideClickDetector';
 
 import * as certificateUtils from '~/utilities/objects/Certificate';
 import validateCertificateInformation from '~/validations/Certificate';
@@ -77,7 +76,7 @@ const AddCertificate = ({ onClose, isEdit, values }) => {
   };
 
   return (
-    <OutsideClickDetector onClose={onClose}>
+    <>
       <FormHeader title={!isEdit ? 'Add Certificate' : 'Edit Certificate'} />
       <Formik
         initialValues={getInitialValues()}
@@ -117,7 +116,7 @@ const AddCertificate = ({ onClose, isEdit, values }) => {
           </Form>
         )}
       </Formik>
-    </OutsideClickDetector>
+    </>
   );
 };
 

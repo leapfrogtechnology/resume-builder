@@ -8,7 +8,6 @@ import { FormContext } from '~/components/FormContext';
 import InputText from '~/components/inputtext/InputText';
 import InputDate from '~/components/inputdate/InputDate';
 import FormHeader from '~/components/formheader/FormHeader';
-import OutsideClickDetector from '~/components/detector/OutsideClickDetector';
 
 import * as achievementUtils from '~/utilities/objects/Achievement';
 import validateAchievementInformation from '~/validations/Achievement';
@@ -76,7 +75,7 @@ const AddAchievement = ({ onClose, isEdit, values }) => {
   };
 
   return (
-    <OutsideClickDetector onClose={onClose}>
+    <>
       <FormHeader title={!isEdit ? 'Add Achievement' : 'Edit Achievement'} />
       <Formik
         initialValues={getInitialValues()}
@@ -116,7 +115,7 @@ const AddAchievement = ({ onClose, isEdit, values }) => {
           </Form>
         )}
       </Formik>
-    </OutsideClickDetector>
+    </>
   );
 };
 
