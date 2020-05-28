@@ -7,31 +7,31 @@ import * as pdfStyles from '~/components/pdf/pdf.styles.js';
 /**
  * Create a single skill Item.
  */
-const SkillItem = ({ label, list }) => {
+const SkillItem = ({ label, list, isLast }) => {
   return (
     <View style={pdfStyles.skills.content}>
       <Text>{`${capitalize(label)} `}</Text>
-      <SubSkillItem subSkills={list} />
+      <SubSkillItem subSkills={list} isLast={isLast} />
     </View>
   );
 };
 
-const SubSkillItem = ({ subSkills }) => {
+const SubSkillItem = ({ subSkills, isLast }) => {
   if (subSkills.length < 1) {
-    return <Text>{' , '}</Text>;
+    return <Text>{!isLast ? ' , ' : ''}</Text>;
   } else {
     const filteredResult = subSkills
       .filter(({ name }) => {
         return name !== '';
       })
       .map(value => capitalize(value.name))
-      .join()
+      .join(', ')
       .trim();
 
     if (!filteredResult) {
-      return <Text>{' , '}</Text>;
+      return <Text>{!isLast ? ' , ' : ''}</Text>;
     } else {
-      return <Text>{`( ${filteredResult} ), `}</Text>;
+      return <Text>{!isLast ? `(${filteredResult}), ` : `(${filteredResult})`}</Text>;
     }
   }
 };
