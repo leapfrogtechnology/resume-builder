@@ -9,7 +9,7 @@ const ContentWrapper = ({ heading, data, WrappedComponent, experience = null }) 
     return <></>;
   }
 
-  const filteredData = data.filter(value => !value.hidden); // Remove hidden data
+  const filteredData = data.filter(value => !value.hidden && !value.isDeleted); // Remove hidden and deleted data
 
   if (filteredData.length < 1) {
     return <></>;
