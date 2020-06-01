@@ -22,7 +22,7 @@ export const saveResume = async data => {
 export const fetchResume = async email => {
   const fetchResumeUrl = urlConstants.apiBaseUrl + urlConstants.fetchResumeUrl + email;
 
-  const result = await http.get(fetchResumeUrl, {});
+  const result = await http.get(fetchResumeUrl);
 
   return result;
 };
@@ -40,7 +40,7 @@ export const deleteResume = (data = {}) => {
 export const fetchUserProfile = async () => {
   const fetchUserProfile = urlConstants.apiBaseUrl + urlConstants.fetchUserProfileUrl;
 
-  const result = await http.get(fetchUserProfile, {});
+  const result = await http.get(fetchUserProfile);
 
   return result.data;
 };
