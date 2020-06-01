@@ -1,5 +1,7 @@
+import { camelCase } from '~/common/constants';
+
 export const camelToTitle = s => {
-  return s.replace(/([A-Z]+)*([A-Z][a-z])/g, `$1 $2`);
+  return s.replace(camelCase, `$1 $2`);
 };
 
 export const singularize = s => {
