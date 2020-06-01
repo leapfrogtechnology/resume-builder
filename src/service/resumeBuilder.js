@@ -20,7 +20,7 @@ export const saveResume = async data => {
 };
 
 export const fetchResume = async email => {
-  const fetchResumeUrl = urlConstants.apiBaseUrl + urlConstants.fetchResumeUrl + email;
+  const fetchResumeUrl = urlConstants.apiBaseUrl + urlConstants.fetchResumeUrl.replace(':email', email);
 
   const result = await http.get(fetchResumeUrl);
 
