@@ -1,31 +1,29 @@
-import * as Yup from 'yup';
 import PropTypes from 'prop-types';
 import { Formik, Form } from 'formik';
 import React, { useContext } from 'react';
 
 import Button from '~/components/button/Button';
-import * as storage from '~/storage/LocalStorage';
 import { FormContext } from '~/components/FormContext';
 import InputText from '~/components/inputtext/InputText';
-import validateExperience from '~/validations/Experience';
 import FormHeader from '~/components/formheader/FormHeader';
 import InputRadio from '~/components/inputradio/InputRadio';
 import OutsideClickDetector from '~/components/detector/OutsideClickDetector';
 
+import validateExperience from '~/validations/Experience';
+
 const AddExperience = ({ onClose }) => {
-  const { data } = useContext(FormContext);
+  const { data, updateCV } = useContext(FormContext);
 
   const handleSubmit = values => {
-    if (data.get.experience) {
-      data.get.experience = { ...values };
+    const prevData = { ...data.get };
+
+    if (prevData.experience) {
+      prevData.experience = { ...values };
     } else {
-      data.get['experience'] = { ...values };
+      prevData['experience'] = { ...values };
     }
 
-    data.set(prevState => ({ ...prevState, ...data.get }));
-
-    storage.saveResume(data.get);
-
+    updateCV(prevData);
     onClose();
   };
 

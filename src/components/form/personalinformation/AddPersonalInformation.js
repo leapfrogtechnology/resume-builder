@@ -1,30 +1,26 @@
-/* eslint-disable require-jsdoc */
 import PropTypes from 'prop-types';
 import { Formik, Form } from 'formik';
 import React, { useContext } from 'react';
 
 import Button from '~/components/button/Button';
-import * as storage from '~/storage/LocalStorage';
 import { FormContext } from '~/components/FormContext';
 import InputText from '~/components/inputtext/InputText';
 import FormHeader from '~/components/formheader/FormHeader';
+
 import validatePersonalInformation from '~/validations/PersonalInformation';
 import * as personalInfoUtils from '~/utilities/objects/PersonalInformation';
 import OutsideClickDetector from '~/components/detector/OutsideClickDetector';
 
 const AddPersonalInformation = ({ onClose, isEdit }) => {
-  const { data } = useContext(FormContext);
+  const { data, updateCV } = useContext(FormContext);
 
   const handleSubmit = values => {
     const personalInfoObj = personalInfoUtils.getPersonalInfoObject({ ...values });
-    const prevData = data.get;
+    const prevData = { ...data.get };
 
     Object.assign(prevData, personalInfoObj);
 
-    storage.saveResume(data.get);
-
-    data.set(prevState => ({ ...prevState, ...personalInfoObj }));
-
+    updateCV(prevData);
     onClose();
   };
 

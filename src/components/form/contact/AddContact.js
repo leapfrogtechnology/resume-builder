@@ -3,28 +3,25 @@ import { Formik, Form } from 'formik';
 import React, { useContext } from 'react';
 
 import Button from '~/components/button/Button';
-import * as storage from '~/storage/LocalStorage';
-import { PLACEHOLDER_LINK } from '~/constant/contact';
 import { FormContext } from '~/components/FormContext';
 import InputText from '~/components/inputtext/InputText';
 import FormHeader from '~/components/formheader/FormHeader';
-import * as contactUtils from '~/utilities/objects/Contact';
-import validateContactInformation from '~/validations/Contact';
 import OutsideClickDetector from '~/components/detector/OutsideClickDetector';
 
+import { PLACEHOLDER_LINK } from '~/constant/contact';
+import * as contactUtils from '~/utilities/objects/Contact';
+import validateContactInformation from '~/validations/Contact';
+
 const AddContactInformation = ({ onClose, isEdit }) => {
-  const { data } = useContext(FormContext);
+  const { data, updateCV } = useContext(FormContext);
 
   const handleSubmit = values => {
     const contactObj = contactUtils.getContactObject({ ...values });
-    const prevData = data.get;
+    const prevData = { ...data.get };
 
     Object.assign(prevData, contactObj);
 
-    storage.saveResume(prevData);
-
-    data.set(prevState => ({ ...prevState, ...contactObj }));
-
+    updateCV(prevData);
     onClose();
   };
 

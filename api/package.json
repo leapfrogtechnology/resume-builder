@@ -1,0 +1,69 @@
+{
+  "name": "@leapfrog/resume-builder",
+  "version": "1.0.0",
+  "description": "Resume Builder acts as a platform to create resume.",
+  "license": "MIT",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "dev": "babel-watch ./src",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "prettier --write . '**/*.{ts,js,md,yaml,json}'",
+    "format:check": "prettier --check . '**/*.{ts,js,md,yaml,json}'",
+    "lint": "eslint src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leapfrogtechnology/resume-builder.git"
+  },
+  "keywords": [
+    "resume-builder",
+    "leapfrog-resume-builder",
+    "leapfrog-rb"
+  ],
+  "author": "Leapfrog Technology",
+  "contributors": [
+    "Nikita Shrestha <nik.stha81@gmail.com>"
+  ],
+  "bugs": {
+    "url": "https://github.com/leapfrogtechnology/resume-builder/issues"
+  },
+  "homepage": "https://github.com/leapfrogtechnology/resume-builder#readme",
+  "dependencies": {
+    "@hapi/boom": "^9.1.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "firebase": "^7.14.3",
+    "firebase-admin": "^8.12.1",
+    "google-auth-library": "^6.0.0",
+    "http-status-codes": "^1.4.0",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.10.0",
+    "swagger-jsdoc": "^4.0.0",
+    "uninstall": "0.0.0",
+    "winston": "^3.2.1",
+    "winston-daily-rotate-file": "^4.4.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.6",
+    "@babel/node": "^7.8.7",
+    "@babel/preset-env": "^7.9.6",
+    "@babel/register": "^7.9.0",
+    "babel-watch": "^7.0.0",
+    "eslint": "^7.0.0",
+    "eslint-config-leapfrog": "^3.0.0",
+    "eslint-config-prettier": "^6.11.0",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.2",
+    "prettier": "2.0.4"
+  },
+  "engines": {
+    "node": ">= 12.14.1",
+    "npm": ">= 6.13.4"
+  }
+}

@@ -4,49 +4,48 @@ import { Formik, Form } from 'formik';
 import React, { useContext } from 'react';
 
 import Button from '~/components/button/Button';
-import * as storage from '~/storage/LocalStorage';
 import { FormContext } from '~/components/FormContext';
 import InputText from '~/components/inputtext/InputText';
 import InputDate from '~/components/inputdate/InputDate';
 import InputRadio from '~/components/inputradio/InputRadio';
 import FormHeader from '~/components/formheader/FormHeader';
-import * as projectUtils from '~/utilities/objects/Project';
-import validateProjectInformation from '~/validations/Project';
 import CheckboxInput from '~/components/checkbox/CheckboxInput';
 import OutsideClickDetector from '~/components/detector/OutsideClickDetector';
 
+import * as projectUtils from '~/utilities/objects/Project';
+import validateProjectInformation from '~/validations/Project';
+
 const AddProject = ({ onClose, isEdit, values }) => {
-  const { data } = useContext(FormContext);
+  const { data, updateCV } = useContext(FormContext);
 
   let projectIndex = -1;
   let initialValues = {};
 
   const handleSubmit = formValues => {
+    const prevData = { ...data.get };
+
     if (isEdit) {
-      handleSubmitOnEdit(formValues);
+      handleSubmitOnEdit(formValues, prevData);
     } else {
-      handleSubmitOnAdd(formValues);
+      handleSubmitOnAdd(formValues, prevData);
     }
 
-    data.set(prevState => ({ ...prevState, ...data }));
-
-    storage.saveResume(data.get);
-
+    updateCV(prevData);
     onClose();
   };
 
-  const handleSubmitOnAdd = formValues => {
+  const handleSubmitOnAdd = (formValues, prevData) => {
     const projectObj = projectUtils.getProjectObject({ ...formValues });
 
-    if (data.get.projects) {
-      data.get['projects'].push(projectObj);
+    if (prevData.projects) {
+      prevData['projects'].push(projectObj);
     } else {
-      data.get['projects'] = [];
-      data.get['projects'].push(projectObj);
+      prevData['projects'] = [];
+      prevData['projects'].push(projectObj);
     }
   };
 
-  const handleSubmitOnEdit = formValues => {
+  const handleSubmitOnEdit = (formValues, prevData) => {
     const isEqual = _.isEqual(formValues, initialValues);
 
     if (isEqual) {
@@ -55,7 +54,7 @@ const AddProject = ({ onClose, isEdit, values }) => {
     } else {
       const projectObj = projectUtils.getProjectObject({ ...formValues });
 
-      data.get['projects'][projectIndex] = projectObj;
+      prevData['projects'][projectIndex] = projectObj;
     }
   };
 

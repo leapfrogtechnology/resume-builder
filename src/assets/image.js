@@ -8,15 +8,16 @@ import Image from '~/assets/images/Image.png';
 import Email from '~/assets/images/email.png';
 import Trash from '~/assets/images/trash.png';
 import Check from '~/assets/images/check.png';
+import Google from '~/assets/images/google.svg';
 import Delete from '~/assets/images/delete.png';
 import Warning from '~/assets/images/warning.png';
 import Calendar from '~/assets/images/calendar.png';
 import Download from '~/assets/images/download.png';
 import EditGray from '~/assets/images/edit-gray.png';
+import LoginPicture from '~/assets/images/login.png';
 import ViewHidden from '~/assets/images/eye-hidden.png';
 import ProfileImage from '~/assets/images/image-small.png';
 import UpRightArrow from '~/assets/images/up-right-arrow.png';
-
 export {
   Logo,
   Image,
@@ -36,4 +37,6 @@ export {
   Close,
   Calendar,
   Warning,
+  LoginPicture,
+  Google,
 };

@@ -8,6 +8,13 @@ logs
 # dependencies
 /node_modules
 
+# api
+api/node_modules
+api/dist
+api/logs
+api/info
+api/package-lock.json
+
 # testing
 /coverage
 
