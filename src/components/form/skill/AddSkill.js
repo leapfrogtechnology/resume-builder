@@ -115,7 +115,7 @@ const AddSkill = ({ onClose, isEdit, values }) => {
       const skills = prevData['skills'];
 
       const index = skills.findIndex(skill => {
-        return skill.name === values.name;
+        return skill.id === values.id;
       });
 
       prevData['skills'][index] = skillObj;
@@ -127,9 +127,15 @@ const AddSkill = ({ onClose, isEdit, values }) => {
 
   const getInitialValues = () => {
     if (isEdit) {
+      const skills = data.get.skills;
+
+      const index = skills.findIndex(skill => {
+        return skill.id === values.id;
+      });
+
       initialValues = {
-        skill: values.name,
-        subSkills: values.subSkills
+        skill: skills[index].name,
+        subSkills: skills[index].subSkills
           .map(subSkill => {
             return subSkill.name;
           })
