@@ -31,13 +31,13 @@ const PersonalInformation = () => {
    * @param {string} key [ name of a particular info].
    */
   const updateHiddenState = key => {
-    const data = context.data.get;
+    const data = { ...context.data.get };
     const currentState = data[key].hidden;
     const newState = !currentState;
 
     data[key].hidden = newState;
 
-    context.data.set(data);
+    context.updateCV(data);
   };
 
   return (
@@ -56,6 +56,7 @@ const PersonalInformation = () => {
           <PersonalInfoItem
             label="name"
             value={name}
+            hidden={false}
             preview={preview}
             bold={bold}
             onclick={updateHiddenState}
@@ -65,6 +66,7 @@ const PersonalInformation = () => {
           <PersonalInfoItem
             label="role"
             value={role.label}
+            hidden={role.hidden}
             preview={preview}
             bold={bold}
             onclick={updateHiddenState}
@@ -75,6 +77,7 @@ const PersonalInformation = () => {
           <PersonalInfoItem
             label="introduction"
             value={introduction.value}
+            hidden={introduction.hidden}
             preview={preview}
             bold={!bold}
             showIcon={true}

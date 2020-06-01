@@ -1,10 +1,12 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import { capitalize } from '~/utilities/string/capitalize';
+
 import { VIEW_HIDDEN, VIEW } from '~/components/icons/icon';
 
-const PersonalInfoItem = ({ label, value, bold, preview, onclick, showIcon = false }) => {
-  const [hidden, setHidden] = useState(false);
+import { capitalize } from '~/utilities/string/capitalize';
+
+const PersonalInfoItem = ({ label, value, hidden, bold, preview, onclick, showIcon = false }) => {
+  const [isHidden, setHidden] = useState(hidden);
 
   if (preview && hidden) {
     return null;
@@ -12,7 +14,7 @@ const PersonalInfoItem = ({ label, value, bold, preview, onclick, showIcon = fal
 
   const onHiddenIconClicked = () => {
     onclick(label);
-    setHidden(!hidden);
+    setHidden(!isHidden);
   };
 
   return (
@@ -28,12 +30,12 @@ const PersonalInfoItem = ({ label, value, bold, preview, onclick, showIcon = fal
           >
             {value}
           </span>
-          {hidden && <span className="hidden-tag">Hidden</span>}
+          {isHidden && <span className="hidden-tag">Hidden</span>}
         </div>
       </div>
       {!preview && showIcon && (
         <div className="personal-info-row__icon icon" onClick={onHiddenIconClicked}>
-          {hidden ? VIEW_HIDDEN : VIEW}
+          {isHidden ? VIEW_HIDDEN : VIEW}
         </div>
       )}
     </div>
@@ -43,6 +45,7 @@ const PersonalInfoItem = ({ label, value, bold, preview, onclick, showIcon = fal
 PersonalInfoItem.propTypes = {
   label: PropTypes.string,
   value: PropTypes.string,
+  hidden: PropTypes.bool,
   preview: PropTypes.bool,
   bold: PropTypes.bool,
   showIcon: PropTypes.bool,

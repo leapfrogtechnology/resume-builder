@@ -18,4 +18,6 @@ const protocolRegEx = new RegExp('^(http|https)://');
 
 const http = 'https://';
 
-export { emailCheck, phoneNumberCheck, linkCheck, refereeCheck, protocolRegEx, http };
+const camelCase = /([A-Z]+)*([A-Z][a-z])/g;
+
+export { emailCheck, phoneNumberCheck, linkCheck, refereeCheck, protocolRegEx, http, camelCase };
