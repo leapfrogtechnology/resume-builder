@@ -114,9 +114,7 @@ const AddSkill = ({ onClose, isEdit, values }) => {
       const prevData = { ...data.get };
       const skills = prevData['skills'];
 
-      const index = skills.findIndex(skill => {
-        return skill.id === values.id;
-      });
+      const index = skills.findIndex(skill => skill.id === values.id);
 
       prevData['skills'][index] = skillObj;
 
@@ -129,9 +127,7 @@ const AddSkill = ({ onClose, isEdit, values }) => {
     if (isEdit) {
       const skills = data.get.skills;
 
-      const index = skills.findIndex(skill => {
-        return skill.id === values.id;
-      });
+      const index = skills.findIndex(skill => skill.id === values.id);
 
       initialValues = {
         skill: skills[index].name,
