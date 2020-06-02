@@ -53,7 +53,7 @@ const SkillItem = ({ id, title, values, hidden, preview, onHiddenIconClicked, on
               onClose={toggleEditSkill}
               showModal={editSkill}
               isEdit={editSkill}
-              data={editSkill ? { id: id } : ''}
+              data={editSkill ? { id } : ''}
             ></OpenModal>
           )}
         </div>
