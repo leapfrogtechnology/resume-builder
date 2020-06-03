@@ -8,13 +8,14 @@ import { FormContext } from '~/components/FormContext';
 import InputText from '~/components/inputtext/InputText';
 import InputDate from '~/components/inputdate/InputDate';
 import FormHeader from '~/components/formheader/FormHeader';
-import OutsideClickDetector from '~/components/detector/OutsideClickDetector';
 
 import * as achievementUtils from '~/utilities/objects/Achievement';
 import validateAchievementInformation from '~/validations/Achievement';
 
 const AddAchievement = ({ onClose, isEdit, values }) => {
   const { data, updateCV } = useContext(FormContext);
+
+  let initialValues = {};
 
   const handleSubmit = formValues => {
     const prevData = { ...data.get };
@@ -42,7 +43,7 @@ const AddAchievement = ({ onClose, isEdit, values }) => {
   };
 
   const handleSubmitOnEdit = (formValues, prevData) => {
-    const isEqual = _.isEqual(formValues, values);
+    const isEqual = _.isEqual(formValues, initialValues);
 
     if (isEqual) {
       onClose();
@@ -51,19 +52,22 @@ const AddAchievement = ({ onClose, isEdit, values }) => {
       const achievementObj = achievementUtils.getAchievementObject({ ...formValues });
       const achievements = data.get.achievements;
 
-      const index = achievements.findIndex(achievement => {
-        return achievement.name === values.name && achievement.date === values.date;
-      });
+      const index = achievements.findIndex(achievement => achievement.id === values.id);
 
       prevData['achievements'][index] = achievementObj;
     }
   };
 
   const getInitialValues = () => {
-    let initialValues = {};
-
     if (isEdit) {
-      initialValues = { ...values };
+      const achievements = data.get.achievements;
+      const achievement = achievements.find(achievement => achievement.id === values.id);
+
+      initialValues = {
+        name: achievement.name,
+        date: achievement.date,
+        description: achievement.description,
+      };
     } else {
       initialValues = {
         name: '',
@@ -76,7 +80,7 @@ const AddAchievement = ({ onClose, isEdit, values }) => {
   };
 
   return (
-    <OutsideClickDetector onClose={onClose}>
+    <>
       <FormHeader title={!isEdit ? 'Add Achievement' : 'Edit Achievement'} />
       <Formik
         initialValues={getInitialValues()}
@@ -116,7 +120,7 @@ const AddAchievement = ({ onClose, isEdit, values }) => {
           </Form>
         )}
       </Formik>
-    </OutsideClickDetector>
+    </>
   );
 };
 

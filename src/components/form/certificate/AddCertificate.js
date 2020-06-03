@@ -8,13 +8,14 @@ import { FormContext } from '~/components/FormContext';
 import InputText from '~/components/inputtext/InputText';
 import InputDate from '~/components/inputdate/InputDate';
 import FormHeader from '~/components/formheader/FormHeader';
-import OutsideClickDetector from '~/components/detector/OutsideClickDetector';
 
 import * as certificateUtils from '~/utilities/objects/Certificate';
 import validateCertificateInformation from '~/validations/Certificate';
 
 const AddCertificate = ({ onClose, isEdit, values }) => {
   const { data, updateCV } = useContext(FormContext);
+
+  let initialValues = {};
 
   const handleSubmit = formValues => {
     const prevData = { ...data.get };
@@ -42,7 +43,7 @@ const AddCertificate = ({ onClose, isEdit, values }) => {
   };
 
   const handleSubmitOnEdit = (formValues, prevData) => {
-    const isEqual = _.isEqual(formValues, values);
+    const isEqual = _.isEqual(formValues, initialValues);
 
     if (isEqual) {
       onClose();
@@ -51,19 +52,24 @@ const AddCertificate = ({ onClose, isEdit, values }) => {
       const certificateObj = certificateUtils.getCertificateObject({ ...formValues });
       const certificates = data.get.certificates;
 
-      const index = certificates.findIndex(certificate => {
-        return certificate.name === values.name && certificate.link === values.link;
-      });
+      const index = certificates.findIndex(certificate => certificate.id === values.id);
 
       prevData['certificates'][index] = certificateObj;
     }
   };
 
   const getInitialValues = () => {
-    let initialValues = {};
-
     if (isEdit) {
-      initialValues = { ...values };
+      const certificates = data.get.certificates;
+
+      const certificate = certificates.find(certificate => certificate.id === values.id);
+
+      initialValues = {
+        name: certificate.name,
+        link: certificate.link,
+        date: certificate.date,
+        description: certificate.description,
+      };
     } else {
       initialValues = {
         name: '',
@@ -77,7 +83,7 @@ const AddCertificate = ({ onClose, isEdit, values }) => {
   };
 
   return (
-    <OutsideClickDetector onClose={onClose}>
+    <>
       <FormHeader title={!isEdit ? 'Add Certificate' : 'Edit Certificate'} />
       <Formik
         initialValues={getInitialValues()}
@@ -117,7 +123,7 @@ const AddCertificate = ({ onClose, isEdit, values }) => {
           </Form>
         )}
       </Formik>
-    </OutsideClickDetector>
+    </>
   );
 };
 

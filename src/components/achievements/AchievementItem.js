@@ -1,4 +1,4 @@
-import ProptTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
 import OpenModal from '~/components/modal/OpenModal';
@@ -6,8 +6,9 @@ import { format } from '~/utilities/date/FormatDate';
 import EditOptions from '~/components/editoptions/EditOptions';
 import AddAchievement from '~/components/form/achievement/AddAchievement';
 
-const AchievementItem = ({ title, date, description, preview, onHiddenIconClicked, onDelete }) => {
-  const [hidden, setHidden] = useState(false);
+const AchievementItem = ({ id, title, date, description, hidden, preview, onHiddenIconClicked, onDelete }) => {
+  const [isHidden, setIsHidden] = useState(hidden);
+
   const [editAchievement, setEdit] = useState(false);
 
   if (hidden && preview) {
@@ -21,24 +22,24 @@ const AchievementItem = ({ title, date, description, preview, onHiddenIconClicke
   };
 
   const onHiddenBtnClicked = () => {
-    setHidden(!hidden);
-    onHiddenIconClicked(title);
+    setIsHidden(!isHidden);
+    onHiddenIconClicked(id);
   };
 
   const deleteIconClickedHandler = () => {
-    onDelete(title, date);
+    onDelete(id);
   };
 
   return (
-    <div className={!hidden ? 'achievements__row' : 'achievements__row achievements--hidden'}>
+    <div className={!isHidden ? 'achievements__row' : 'achievements__row achievements--hidden'}>
       <div className="achievements__row-header">
         <div className="sub-title">
           {title}
-          {hidden && <span className="hidden-tag">Hidden</span>}
+          {isHidden && <span className="hidden-tag">Hidden</span>}
         </div>
         {!preview && (
           <EditOptions
-            isHidden={hidden}
+            isHidden={isHidden}
             onHiddenIconClicked={onHiddenBtnClicked}
             onEditButtonClicked={toggleEditAchievement}
             onDeleteButtonClicked={deleteIconClickedHandler}
@@ -50,7 +51,7 @@ const AchievementItem = ({ title, date, description, preview, onHiddenIconClicke
             onClose={editBtnCloseHandler}
             showModal={editAchievement}
             isEdit={editAchievement}
-            data={editAchievement ? { name: title, date: date, description: description } : ''}
+            data={editAchievement ? { id } : ''}
           ></OpenModal>
         )}
       </div>
@@ -61,12 +62,14 @@ const AchievementItem = ({ title, date, description, preview, onHiddenIconClicke
 };
 
 AchievementItem.propTypes = {
-  title: ProptTypes.string,
-  date: ProptTypes.string,
-  description: ProptTypes.string,
-  preview: ProptTypes.bool,
-  onHiddenIconClicked: ProptTypes.func,
-  onDelete: ProptTypes.func,
+  id: PropTypes.string,
+  title: PropTypes.string,
+  date: PropTypes.string,
+  description: PropTypes.string,
+  hidden: PropTypes.bool,
+  preview: PropTypes.bool,
+  onHiddenIconClicked: PropTypes.func,
+  onDelete: PropTypes.func,
 };
 
 export default AchievementItem;
