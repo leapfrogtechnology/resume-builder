@@ -29,7 +29,7 @@ const AddSkill = ({ onClose, isEdit, values }) => {
     }
   };
 
-  const handleSubmit = async formValues => {
+  const handleSubmit = formValues => {
     if (isEdit) {
       if (!formValues.skill) {
         const err = { status: true, message: 'Skill is a required field' };
@@ -69,7 +69,7 @@ const AddSkill = ({ onClose, isEdit, values }) => {
     resetForm();
   };
 
-  const handleSubmitOnAdd = async (data, formValues, skillsList) => {
+  const handleSubmitOnAdd = (data, formValues, skillsList) => {
     const prevData = { ...data.get };
 
     if (skillsList.length > 0) {
@@ -102,7 +102,7 @@ const AddSkill = ({ onClose, isEdit, values }) => {
     onClose();
   };
 
-  const handleSubmitOnEdit = async formValues => {
+  const handleSubmitOnEdit = formValues => {
     const isEqual = _.isEqual(formValues, initialValues);
 
     if (isEqual) {
