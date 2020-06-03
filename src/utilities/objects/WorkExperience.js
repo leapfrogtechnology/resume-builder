@@ -1,3 +1,5 @@
+import { v4 } from 'uuid';
+
 export const getWorkExperienceObject = ({
   nameOrganization,
   position,
@@ -10,6 +12,7 @@ export const getWorkExperienceObject = ({
   contactReferee,
 }) => {
   return {
+    id: v4(),
     name: nameOrganization,
     position: position,
     startDate: startDate,
