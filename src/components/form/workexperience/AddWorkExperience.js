@@ -9,7 +9,6 @@ import InputText from '~/components/inputtext/InputText';
 import InputDate from '~/components/inputdate/InputDate';
 import FormHeader from '~/components/formheader/FormHeader';
 import CheckboxInput from '~/components/checkbox/CheckboxInput';
-import OutsideClickDetector from '~/components/detector/OutsideClickDetector';
 
 import { validateWorkExperience } from '~/validations/WorkExperience';
 import * as workExperienceUtils from '~/utilities/objects/WorkExperience';
@@ -17,7 +16,6 @@ import * as workExperienceUtils from '~/utilities/objects/WorkExperience';
 const AddWorkExperience = ({ onClose, isEdit, values }) => {
   const { data, updateCV } = useContext(FormContext);
 
-  let workIndex = -1;
   let initialValues = {};
 
   const handleSubmit = formValues => {
@@ -53,29 +51,30 @@ const AddWorkExperience = ({ onClose, isEdit, values }) => {
       return;
     } else {
       const workObj = workExperienceUtils.getWorkExperienceObject({ ...formValues });
+      const workExperiences = data.get.workExperience;
 
-      prevData['workExperience'][workIndex] = workObj;
+      const index = workExperiences.findIndex(experience => experience.id === values.id);
+
+      prevData['workExperience'][index] = workObj;
     }
   };
 
   const getInitialValues = () => {
     if (isEdit) {
-      const works = data.get['workExperience'];
+      const workExperiences = data.get.workExperience;
 
-      workIndex = works.findIndex(work => {
-        return work.name === values.name && work.position === values.position;
-      });
+      const work = workExperiences.find(work => work.id === values.id);
 
       initialValues = {
-        nameOrganization: works[workIndex].name,
-        position: works[workIndex].position,
-        startDate: works[workIndex].startDate,
-        endDate: works[workIndex].endDate,
-        currentWork: works[workIndex].ongoing,
-        roles: works[workIndex].responsibilities,
-        achievements: works[workIndex].achievements,
-        nameReferee: works[workIndex].refereeName,
-        contactReferee: works[workIndex].refereeContact,
+        nameOrganization: work.name,
+        position: work.position,
+        startDate: work.startDate,
+        endDate: work.endDate,
+        currentWork: work.ongoing,
+        roles: work.responsibilities,
+        achievements: work.achievements,
+        nameReferee: work.refereeName,
+        contactReferee: work.refereeContact,
       };
     } else {
       initialValues = {
@@ -95,7 +94,7 @@ const AddWorkExperience = ({ onClose, isEdit, values }) => {
   };
 
   return (
-    <OutsideClickDetector onClose={onClose}>
+    <>
       <FormHeader title={!isEdit ? 'Add Work Experience' : 'Edit Work Experience'} />
       <Formik
         initialValues={getInitialValues()}
@@ -168,7 +167,7 @@ const AddWorkExperience = ({ onClose, isEdit, values }) => {
           </Form>
         )}
       </Formik>
-    </OutsideClickDetector>
+    </>
   );
 };
 
