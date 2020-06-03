@@ -6,8 +6,8 @@ import AddSkill from '~/components/form/skill/AddSkill';
 import { capitalize } from '~/utilities/string/capitalize';
 import EditOptions from '~/components/editoptions/EditOptions';
 
-const SkillItem = ({ title, values, preview, onHiddenIconClicked, onDelete }) => {
-  const [hidden, setHidden] = useState(false);
+const SkillItem = ({ id, title, values, hidden, preview, onHiddenIconClicked, onDelete }) => {
+  const [isHidden, setIsHidden] = useState(hidden);
   const [editSkill, setEdit] = useState(false);
 
   if (hidden && preview) {
@@ -15,12 +15,12 @@ const SkillItem = ({ title, values, preview, onHiddenIconClicked, onDelete }) =>
   }
 
   const hiddenIconClickedHandler = () => {
-    setHidden(!hidden);
-    onHiddenIconClicked(title);
+    setIsHidden(!isHidden);
+    onHiddenIconClicked(id);
   };
 
   const deleteIconClickedHandler = () => {
-    onDelete(title);
+    onDelete(id);
   };
 
   const toggleEditSkill = () => setEdit(!editSkill);
@@ -32,16 +32,16 @@ const SkillItem = ({ title, values, preview, onHiddenIconClicked, onDelete }) =>
   ));
 
   return (
-    <div className={!hidden ? 'skills__row' : 'skills__row skills--hidden'}>
+    <div className={!isHidden ? 'skills__row' : 'skills__row skills--hidden'}>
       <div className="skills__row-header">
         <div className="skils__row-header-left sub-title">
           {capitalize(title)}
-          {hidden && !preview && <span className="hidden-tag">Hidden</span>}
+          {isHidden && !preview && <span className="hidden-tag">Hidden</span>}
         </div>
         <div className="skills__row-header-right">
           {!preview && (
             <EditOptions
-              isHidden={hidden}
+              isHidden={isHidden}
               onHiddenIconClicked={hiddenIconClickedHandler}
               onEditButtonClicked={toggleEditSkill}
               onDeleteButtonClicked={deleteIconClickedHandler}
@@ -53,7 +53,7 @@ const SkillItem = ({ title, values, preview, onHiddenIconClicked, onDelete }) =>
               onClose={toggleEditSkill}
               showModal={editSkill}
               isEdit={editSkill}
-              data={editSkill ? { name: title, subSkills: values } : ''}
+              data={editSkill ? { id } : ''}
             ></OpenModal>
           )}
         </div>
@@ -64,8 +64,10 @@ const SkillItem = ({ title, values, preview, onHiddenIconClicked, onDelete }) =>
 };
 
 SkillItem.propTypes = {
+  id: PropTypes.string,
   title: PropTypes.string,
   values: PropTypes.array,
+  hidden: PropTypes.bool,
   preview: PropTypes.bool,
   onHiddenIconClicked: PropTypes.func,
   onEdit: PropTypes.func,

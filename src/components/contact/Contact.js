@@ -2,11 +2,11 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { View, ViewHidden } from '~/assets/image';
 
-const Contact = ({ id, label, value, preview, onHiddenIconClicked, baseUrl = '' }) => {
-  const [hidden, setHidden] = useState(false);
+const Contact = ({ id, label, value, hidden, preview, onHiddenIconClicked, baseUrl = '' }) => {
+  const [isHidden, setHidden] = useState(hidden);
 
   const onHiddenBtnClicked = () => {
-    setHidden(!hidden);
+    setHidden(!isHidden);
     onHiddenIconClicked(id);
   };
 
@@ -20,12 +20,12 @@ const Contact = ({ id, label, value, preview, onHiddenIconClicked, baseUrl = '' 
         <div className="contact-content__l">
           <div className="key">
             {label}
-            {hidden && !preview && <span className="hidden-tag">Hidden</span>}
+            {isHidden && !preview && <span className="hidden-tag">Hidden</span>}
           </div>
         </div>
         {!preview && (
           <div className="contact-content__r" onClick={onHiddenBtnClicked}>
-            <img src={!hidden ? View : ViewHidden} alt="Edit" />
+            <img src={!isHidden ? View : ViewHidden} alt="Edit" />
           </div>
         )}
       </div>
@@ -42,6 +42,7 @@ Contact.propTypes = {
   id: PropTypes.string,
   label: PropTypes.string,
   value: PropTypes.string,
+  hidden: PropTypes.bool,
   preview: PropTypes.bool,
   onHiddenIconClicked: PropTypes.func,
   baseUrl: PropTypes.string,

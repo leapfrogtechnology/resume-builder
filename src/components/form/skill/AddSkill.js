@@ -29,7 +29,7 @@ const AddSkill = ({ onClose, isEdit, values }) => {
     }
   };
 
-  const handleSubmit = async formValues => {
+  const handleSubmit = formValues => {
     if (isEdit) {
       if (!formValues.skill) {
         const err = { status: true, message: 'Skill is a required field' };
@@ -69,7 +69,7 @@ const AddSkill = ({ onClose, isEdit, values }) => {
     resetForm();
   };
 
-  const handleSubmitOnAdd = async (data, formValues, skillsList) => {
+  const handleSubmitOnAdd = (data, formValues, skillsList) => {
     const prevData = { ...data.get };
 
     if (skillsList.length > 0) {
@@ -102,7 +102,7 @@ const AddSkill = ({ onClose, isEdit, values }) => {
     onClose();
   };
 
-  const handleSubmitOnEdit = async formValues => {
+  const handleSubmitOnEdit = formValues => {
     const isEqual = _.isEqual(formValues, initialValues);
 
     if (isEqual) {
@@ -114,9 +114,7 @@ const AddSkill = ({ onClose, isEdit, values }) => {
       const prevData = { ...data.get };
       const skills = prevData['skills'];
 
-      const index = skills.findIndex(skill => {
-        return skill.name === values.name;
-      });
+      const index = skills.findIndex(skill => skill.id === values.id);
 
       prevData['skills'][index] = skillObj;
 
@@ -127,9 +125,13 @@ const AddSkill = ({ onClose, isEdit, values }) => {
 
   const getInitialValues = () => {
     if (isEdit) {
+      const skills = data.get.skills;
+
+      const skill = skills.find(skill => skill.id === values.id);
+
       initialValues = {
-        skill: values.name,
-        subSkills: values.subSkills
+        skill: skill.name,
+        subSkills: skill.subSkills
           .map(subSkill => {
             return subSkill.name;
           })
