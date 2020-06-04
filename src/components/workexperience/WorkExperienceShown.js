@@ -76,9 +76,9 @@ const WorkExperienceShown = ({
 
   return (
     <div className="work-experience">
-      <div className={!isHidden ? 'work-experience__row' : 'work-experience__row work-experience--hidden'}>
+      <div className="work-experience__row">
         <div className="work-experience__row-header">
-          <div className="sub-title">
+          <div className={!isHidden ? 'sub-title' : 'sub-title hidden'}>
             {subTitle}
             {isHidden && <span className="hidden-tag">Hidden</span>}
           </div>

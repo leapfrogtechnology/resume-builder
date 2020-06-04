@@ -42,9 +42,9 @@ const ProjectsUndertakenItem = ({
   };
 
   return (
-    <div className={!isHidden ? 'projects-undertaken__row' : 'projects-undertaken__row projects-undertaken--hidden'}>
+    <div className="projects-undertaken__row">
       <div className="projects-undertaken__row-header">
-        <div className="sub-title">
+        <div className={!isHidden ? 'sub-title' : 'sub-title hidden'}>
           {title}
           {isHidden && <span className="hidden-tag">Hidden</span>}
         </div>

@@ -32,9 +32,9 @@ const SkillItem = ({ id, title, values, hidden, preview, onHiddenIconClicked, on
   ));
 
   return (
-    <div className={!isHidden ? 'skills__row' : 'skills__row skills--hidden'}>
+    <div className="skills__row">
       <div className="skills__row-header">
-        <div className="skils__row-header-left sub-title">
+        <div className={!isHidden ? 'skils__row-header-left sub-title' : 'skils__row-header-left sub-title hidden'}>
           {capitalize(title)}
           {isHidden && !preview && <span className="hidden-tag">Hidden</span>}
         </div>
