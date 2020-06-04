@@ -9,7 +9,7 @@ import * as pdfStyles from '~/components/pdf/pdf.styles.js';
  */
 const Skills = ({ heading, data }) => {
   const skillsItem = data.map(({ label, subSkills }, index) => (
-    <SkillItem key={index} label={label} list={subSkills}></SkillItem>
+    <SkillItem key={index} label={label} list={subSkills} isLast={index === data.length - 1 ? true : false}></SkillItem>
   ));
 
   return (
