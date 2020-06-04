@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 import moment from 'moment';
 
 const validateAchievementInformation = Yup.object().shape({
-  name: Yup.string().label('Title of your Achievement').trim().required(),
+  name: Yup.string().label('Title of your Achievement').required(),
   date: Yup.date()
     .label('Date of the achievement')
     .required('Date is required')
