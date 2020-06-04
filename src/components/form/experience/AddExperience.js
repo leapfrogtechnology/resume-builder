@@ -7,7 +7,6 @@ import { FormContext } from '~/components/FormContext';
 import InputText from '~/components/inputtext/InputText';
 import FormHeader from '~/components/formheader/FormHeader';
 import InputRadio from '~/components/inputradio/InputRadio';
-import OutsideClickDetector from '~/components/detector/OutsideClickDetector';
 
 import validateExperience from '~/validations/Experience';
 
@@ -39,7 +38,7 @@ const AddExperience = ({ onClose }) => {
   };
 
   return (
-    <OutsideClickDetector onClose={onClose}>
+    <>
       <FormHeader title="Edit Professional Experience" modifier="dark" />
       <Formik
         initialValues={getInitialValues()}
@@ -83,7 +82,7 @@ const AddExperience = ({ onClose }) => {
           </Form>
         )}
       </Formik>
-    </OutsideClickDetector>
+    </>
   );
 };
 
