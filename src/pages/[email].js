@@ -3,11 +3,14 @@ import swal from 'sweetalert';
 import ErrorPage from 'next/error';
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
+import { PDFDownloadLink } from '@react-pdf/renderer';
 
+import MyDocument from '~/components/pdf/Pdf';
 import Header from '~/components/header/Header';
 import { FormContext } from '~/components/FormContext';
 import Dashboard from '~/components/dashboard/Dashboard';
 
+import { downloadPDF } from '~/utilities/download';
 import textConstants from '~/constant/textConstants';
 import * as resumeService from '~/service/resumeBuilder';
 import { getErrorMessage } from '~/utilities/getErrorMessage';
@@ -17,6 +20,7 @@ const PreviewResume = ({ context }) => {
   const [preview] = useState(true);
   const [data, updateData] = useState({});
   const [statusCode, setStatusCode] = useState(null);
+  const [downloadPdf, setDownloadPdf] = useState(false);
 
   const store = {
     preview: { get: preview },
@@ -42,6 +46,8 @@ const PreviewResume = ({ context }) => {
     fetchResume();
   }, [context]);
 
+  const toggleDownload = () => setDownloadPdf(!downloadPdf);
+
   if (statusCode === textConstants.NOT_FOUND) {
     return <ErrorPage statusCode={textConstants.NOT_FOUND} />;
   }
@@ -57,8 +63,16 @@ const PreviewResume = ({ context }) => {
           <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.js"></script>
         </Head>
         <FormContext.Provider value={store}>
-          <Header name={data.name} status="Employee" onPreviewBtnClicked={null} />
+          <Header name={data.name} btnType="downlaod" onclick={toggleDownload} />
           <Dashboard />
+          {downloadPdf && (
+            <PDFDownloadLink document={<MyDocument resumeJson={data} />} fileName="somename.pdf">
+              {({ url, loading }) => {
+                console.log('here');
+                downloadPDF(url, data.name, loading, toggleDownload);
+              }}
+            </PDFDownloadLink>
+          )}
         </FormContext.Provider>
       </div>
     )
