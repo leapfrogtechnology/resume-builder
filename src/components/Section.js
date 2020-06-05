@@ -62,6 +62,14 @@ const Section = ({ dataKey, component, children }) => {
     context.updateCV(data);
   };
 
+  if (preview) {
+    const data = contextData.filter(d => !d.hidden);
+
+    if (data.length < 1) {
+      return <></>;
+    }
+  }
+
   if ((!contextData || contextData.length < 1) && preview) {
     return <></>;
   }
