@@ -95,7 +95,7 @@ const Profile = () => {
           <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.js"></script>
         </Head>
         <FormContext.Provider value={store}>
-          <Header name={data.name} status="Employee" onPreviewBtnClicked={togglePreview} />
+          <Header name={data.name} btnType="preview" onclick={togglePreview} />
           <Dashboard />
         </FormContext.Provider>
       </div>
