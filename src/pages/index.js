@@ -20,6 +20,7 @@ const Profile = () => {
   const router = useRouter();
   const [data, updateData] = useState({});
   const [preview, setPreview] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const togglePreview = () => setPreview(!preview);
 
@@ -33,9 +34,9 @@ const Profile = () => {
     }
   };
 
-  const updateCvHandler = async updatedData => {
+  const updateCvHandler = updatedData => {
     try {
-      const result = await resumeService.saveResume(updatedData);
+      const result = resumeService.saveResume(updatedData);
 
       updateData(prevState => ({ ...prevState, ...updatedData }));
     } catch (err) {
@@ -75,6 +76,7 @@ const Profile = () => {
         const resume = JSON.parse(result.data);
 
         updateData(resume ? resume : {});
+        setLoading(false);
       } catch (err) {
         handleErrorResponse(err);
       }
@@ -83,19 +85,21 @@ const Profile = () => {
   }, []);
 
   return (
-    <div className="page-container">
-      <Head>
-        <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta httpEquiv="X-UA-Compatible" content="ie=edge" />
-        <title>ResumeBuilder</title>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.js"></script>
-      </Head>
-      <FormContext.Provider value={store}>
-        <Header name={data.name} status="Employee" onPreviewBtnClicked={togglePreview} />
-        <Dashboard />
-      </FormContext.Provider>
-    </div>
+    !loading && (
+      <div className="page-container">
+        <Head>
+          <meta charSet="UTF-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <meta httpEquiv="X-UA-Compatible" content="ie=edge" />
+          <title>ResumeBuilder</title>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.js"></script>
+        </Head>
+        <FormContext.Provider value={store}>
+          <Header name={data.name} btnType="preview" onclick={togglePreview} />
+          <Dashboard />
+        </FormContext.Provider>
+      </div>
+    )
   );
 };
 

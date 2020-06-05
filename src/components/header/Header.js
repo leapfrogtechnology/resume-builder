@@ -6,7 +6,7 @@ import { FormContext } from '~/components/FormContext';
 import * as dateUtils from '~/utilities/date/FormatDate';
 import UserDetail from '~/components/userdetail/UserDetail';
 
-const Header = ({ name, status, onPreviewBtnClicked }) => {
+const Header = ({ name, btnType, onclick }) => {
   const context = useContext(FormContext);
   const preview = context.preview.get;
   const experience = context.data.get.experience;
@@ -30,8 +30,9 @@ const Header = ({ name, status, onPreviewBtnClicked }) => {
         name={name}
         experience={experienceLabel}
         profileImg={profileImage}
+        btnType={btnType}
         preview={preview}
-        onPreviewBtnClicked={onPreviewBtnClicked}
+        onBtnClicked={onclick}
       />
     </header>
   );
@@ -39,8 +40,8 @@ const Header = ({ name, status, onPreviewBtnClicked }) => {
 
 Header.propTypes = {
   name: PropTypes.string,
-  status: PropTypes.string,
-  onPreviewBtnClicked: PropTypes.func,
+  btnType: PropTypes.string,
+  onclick: PropTypes.func,
 };
 
 export default Header;

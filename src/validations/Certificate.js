@@ -3,7 +3,7 @@ import moment from 'moment';
 import { linkCheck } from '~/common/constants';
 
 const validateCertificateInformation = Yup.object().shape({
-  name: Yup.string().label('Title of your Certificate').trim().min(10).max(50).required(),
+  name: Yup.string().label('Title of your Certificate').required(),
   link: Yup.string()
     .label('Link to this Certificate')
     .trim()

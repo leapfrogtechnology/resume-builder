@@ -34,7 +34,7 @@ const CertificateItem = ({ id, title, link, year, description, hidden, preview, 
           onClick={_e => window.open(link)}
         >
           {title}
-          <span className="arrow-icon">{UP_RIGHT_ARROW}</span>
+          <span className="arrow-icon">{!isHidden ? UP_RIGHT_ARROW('#4FC3F7') : UP_RIGHT_ARROW('#999999')}</span>
           {isHidden && <span className="hidden-tag">Hidden</span>}
         </div>
         {!preview && (

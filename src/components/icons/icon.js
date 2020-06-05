@@ -175,24 +175,26 @@ export const CALENDAR = (
   </svg>
 );
 
-export const UP_RIGHT_ARROW = (
-  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path
-      d="M4.66663 11.3333L11.3333 4.66663"
-      stroke="#4FC3F7"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M4.66663 4.66663H11.3333V11.3333"
-      stroke="#4FC3F7"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-);
+export const UP_RIGHT_ARROW = color => {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M4.66663 11.3333L11.3333 4.66663"
+        stroke={color}
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M4.66663 4.66663H11.3333V11.3333"
+        stroke={color}
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+};
 
 export const WARNING = (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

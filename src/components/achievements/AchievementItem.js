@@ -31,9 +31,9 @@ const AchievementItem = ({ id, title, date, description, hidden, preview, onHidd
   };
 
   return (
-    <div className={!isHidden ? 'achievements__row' : 'achievements__row achievements--hidden'}>
+    <div className="achievements__row">
       <div className="achievements__row-header">
-        <div className="sub-title">
+        <div className={!isHidden ? 'sub-title' : 'sub-title hidden '}>
           {title}
           {isHidden && <span className="hidden-tag">Hidden</span>}
         </div>

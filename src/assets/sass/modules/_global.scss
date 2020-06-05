@@ -53,7 +53,13 @@
 }
 
 .sub-title {
+  display: flex;
+  align-items: center;
   font: normal bold 16px/19px $font-primary;
+}
+
+.hidden {
+  color: $dusty-gray;
 }
 
 .edit-options {
@@ -72,7 +78,7 @@
   background: $nobel;
   color: $white;
   font: normal 600 10px/12px $font-primary;
-  padding: 4px 8px;
+  padding: 2px 8px;
   margin-left: 10px;
 }
 

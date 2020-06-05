@@ -100,9 +100,8 @@ export const createUser = (userInfo) => {
  * @returns {Promise}
  */
 export const fetchUserProfile = async (uid) => {
-  const userRef = db.ref(`users/${uid}`);
-
   try {
+    const userRef = db.ref(`users/${uid}`);
     const snapshot = await userRef.once('value');
 
     return snapshot.val().resume;
