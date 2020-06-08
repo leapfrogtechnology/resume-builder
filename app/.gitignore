@@ -1,0 +1,35 @@
+.DS_*
+*.log
+logs
+**/*.backup.*
+**/*.back.*
+.next
+.vscode
+
+# dependencies
+/node_modules
+
+# api
+api/node_modules
+api/dist
+api/logs
+api/info
+api/package-lock.json
+
+# testing
+/coverage
+
+# production
+/src/out
+
+# misc
+.DS_Store
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

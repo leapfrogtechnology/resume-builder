@@ -1,0 +1,40 @@
+.sidenav {
+  width: 31.5384%;
+
+  @include e(upload-block) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 0 24px 0;
+    margin-bottom: 28px;
+    border-bottom: 1px solid $alto;
+  }
+
+  @include e(upload-block-l) {
+    display: flex;
+    align-items: center;
+  }
+
+  @include e(cv-action) {
+    display: flex;
+    align-items: center;
+    padding-top: 30px;
+    cursor: pointer;
+  }
+
+  @include e(cv-action-icon) {
+    margin-right: 18px;
+  }
+}
+
+.sidenav-bottom {
+  margin-top: 20px;
+}
+
+.profile-image-wrapper {
+  margin-right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+}

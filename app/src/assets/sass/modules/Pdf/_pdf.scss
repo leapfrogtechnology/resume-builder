@@ -1,0 +1,100 @@
+#pdf {
+  padding: 56px 40px;
+  width: 600px;
+  margin: auto;
+}
+
+.resume-content-block {
+  width: 100%;
+  background: $white;
+  margin-top: 34px;
+  font: normal normal 12px/14px $font-primary;
+
+  .title {
+    padding-bottom: 6px;
+    font: normal bold 16px/18px $font-primary;
+  }
+
+  .card {
+    padding: 0;
+    box-shadow: unset;
+  }
+
+  .card__footer {
+    display: none;
+  }
+
+  .edit-options {
+    display: none;
+  }
+
+  .arrow-icon {
+    display: none;
+  }
+
+  .year,
+  .year--dark {
+    color: $black;
+  }
+
+  .sub-title {
+    font: normal bold 12px/14px $font-primary;
+  }
+
+  .description {
+    color: $black;
+  }
+
+  .text-link {
+    color: $black;
+  }
+
+  .work-experience,
+  .projects-undertaken,
+  .achievements,
+  .certificate {
+    padding-top: 15px;
+    font: normal normal 12px/14px $font-primary;
+  }
+
+  .work-experience__row,
+  .projects-undertaken__row,
+  .achievements__row,
+  .certificate__row {
+    border-bottom: 0;
+    padding-top: 0;
+    &:last-child {
+      padding: 0;
+    }
+  }
+}
+
+.personal-information {
+  display: flex;
+
+  @include e(left) {
+    margin-right: 20px;
+  }
+
+  @include e(content-left) {
+    width: 50px;
+    font: normal bold 12px/14px $font-primary;
+    margin-right: 20px;
+  }
+
+  @include e(content) {
+    margin-top: 24px;
+  }
+
+  @include e(content-right) {
+    font: normal normal 12px/14px $font-primary;
+  }
+
+  @include e(content-row-item) {
+    display: flex;
+  }
+
+  @include e(detail) {
+    margin-top: 24px;
+  }
+}

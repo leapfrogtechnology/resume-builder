@@ -1,0 +1,132 @@
+.header-container {
+  max-width: 1170px;
+  margin: 0 auto;
+  padding: 16px 0 18px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.user-detail-container {
+  max-width: 1170px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.main-container {
+  max-width: 1170px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.content-block {
+  margin-bottom: 25px;
+}
+
+.card {
+  background: $white;
+  box-shadow: 0px 2px 4px rgba(179, 179, 179, 0.25);
+  border-radius: 4px;
+  padding: 36px 24px 30px 34px;
+}
+
+.title {
+  font: normal 600 20px/24px $font-primary;
+}
+
+.text-link {
+  color: $dodger-blue;
+  cursor: pointer;
+  text-decoration: none;
+  @include m(small) {
+    font: normal 600 14px/17px $font-primary;
+  }
+
+  @include m(danger) {
+    color: $pomegranate;
+  }
+}
+
+.text-link-hidden {
+  color: $dusty-gray;
+}
+
+.sub-title {
+  display: flex;
+  align-items: center;
+  font: normal bold 16px/19px $font-primary;
+}
+
+.hidden {
+  color: $dusty-gray;
+}
+
+.edit-options {
+  @include e(item) {
+    display: inline-block;
+    margin-left: 16px;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}
+
+.hidden-tag {
+  border-radius: 95px;
+  background: $nobel;
+  color: $white;
+  font: normal 600 10px/12px $font-primary;
+  padding: 2px 8px;
+  margin-left: 10px;
+}
+
+.close-option-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.error {
+  color: $pomegranate;
+  padding: 4px;
+  font: normal normal 10px/12px $font-primary;
+}
+
+.empty-message {
+  text-align: center;
+  font: normal normal 20px/24px $font-primary;
+}
+
+.year {
+  color: $dusty-gray;
+}
+
+.year--dark {
+  color: $mine-shaft;
+}
+
+.description {
+  padding-top: 6px;
+  color: $dusty-gray;
+}
+
+.react-datepicker-wrapper {
+  width: 90%;
+}
+
+.react-datepicker__input-container {
+  height: 32px;
+}
+
+.react-datepicker__input-container input {
+  height: 100%;
+  width: 100%;
+  outline: none;
+}
+
+.icon {
+  cursor: pointer;
+  min-height: 24px;
+  min-width: 24px;
+}
