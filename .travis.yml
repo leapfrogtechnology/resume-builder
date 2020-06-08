@@ -61,7 +61,7 @@ matrix:
           provider: s3
           access_key_id: $AWS_ACCESS_KEY_ID
           secret_access_key: $AWS_SECRET_ACCESS_KEY
-          bucket: com.lftechnology.vyaguta.leave-$STAGE
+          bucket: com.lftechnology.vyaguta.leave-$STAGE # TODO: Needs to be changed
           region: us-east-1
           local_dir: build
           upload-dir: leave
