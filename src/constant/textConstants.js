@@ -1,6 +1,5 @@
 const textConstants = {
-  //TODO
-  GOOGLE_CLIENT_ID: '378865161938-ks6ubfpsmrkumra9pqmv46775b1lof3j.apps.googleusercontent.com',
+  GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
   GOOGLE_AUTH_KEY_ERROR_MESSAGE: 'Please Check Your Google Client ID Auth Key',
   DELETE_WARNING_DESCRIPTION: 'You will be deleting this bulletin segment!',
   DELETE_USER_WARNING_DESCRIPTION: 'You will be deleting this User !',
