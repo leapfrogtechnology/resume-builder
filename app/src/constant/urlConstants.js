@@ -5,7 +5,7 @@ const urlConstants = {
   fetchResumeUrl: '/resume/:email',
   deleteResumeUrl: '/resume/delete',
   fetchUserProfileUrl: '/users/self',
-  apiBaseUrl: 'http://0.0.0.0:8848/api',
+  apiBaseUrl: process.env.API_BASE_URL,
 };
 
 export default urlConstants;
