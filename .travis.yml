@@ -33,38 +33,8 @@ matrix:
         provider: script
         script:
           cd api;
-          envault list -secret=resume-builder/api/$STAGE > .env;
+          envault list -secret=resume-builder/$STAGE/api > .env;
           yarn && yarn build;
           up $STAGE;
         on:
           all_branches: true
-    
-      - name: App
-        node_js:
-          - 10
-        
-        #Checking File is changed or not
-        before_install:
-          if .travis/build_condition.sh $TRAVIS_COMMIT_RANGE "app";then
-            echo "Frontend is being built for $STAGE";
-          else
-            echo -e "\033[0;32mNo Changes\nStoping..." && exit 0;
-          fi;
-          export CI=false;
-        install:
-          - curl -sf https://raw.githubusercontent.com/pratishshr/envault/master/install.sh | sudo sh
-        before_deploy:
-          cd app;
-          yarn;
-          envault run -secret=resume-builder/app/$STAGE 'yarn build';
-        deploy:
-          provider: s3
-          access_key_id: $AWS_ACCESS_KEY_ID
-          secret_access_key: $AWS_SECRET_ACCESS_KEY
-          bucket: com.lftechnology.vyaguta.leave-$STAGE # TODO: Needs to be changed
-          region: us-east-1
-          local_dir: build
-          upload-dir: leave
-          skip_cleanup: true
-          on:
-            all_branches: true
