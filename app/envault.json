@@ -1,5 +1,5 @@
 {
-  "profile": "vyaguta-resume-builder",
+  "profile": "resume-builder",
   "region": "ap-south-1",
   "environments": {
     "dev": "vyaguta/resume-builder/app/dev",
