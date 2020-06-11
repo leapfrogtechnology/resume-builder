@@ -34,9 +34,9 @@ const Profile = () => {
     }
   };
 
-  const updateCvHandler = updatedData => {
+  const updateCvHandler = async updatedData => {
     try {
-      const result = resumeService.saveResume(updatedData);
+      const result = await resumeService.saveResume(updatedData);
 
       updateData(prevState => ({ ...prevState, ...updatedData }));
     } catch (err) {
