@@ -13,7 +13,7 @@ git:
   depth: false
 # Setting stage
 env:
-  - STAGE=$(if [ $TRAVIS_BRANCH == 'travis-integration' ]; then echo "dev"; elif [ $TRAVIS_BRANCH == 'master' ]; then echo 'production'; else echo "Undefined"; fi;)
+  - STAGE=$(if [ $TRAVIS_BRANCH == 'travis-integration' ] || [ $TRAVIS_BRANCH == 'dev' ] ; then echo "dev"; elif [ $TRAVIS_BRANCH == 'master' ]; then echo 'production'; else echo "Undefined"; fi;)
 
 matrix:
   include:
