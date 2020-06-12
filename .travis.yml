@@ -26,8 +26,8 @@ matrix:
         provider: script
         script:
           cd api;
-          envault list -secret=resume-builder/$STAGE/api > .env;
+          envault list -e $STAGE > .env;
           yarn && yarn build;
-          up $STAGE;
+          up deploy $STAGE;
         on:
           all_branches: true
