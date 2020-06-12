@@ -5,7 +5,7 @@
     "role": "arn:aws:iam::009409476372:role/vyaguta-production-LambdaExecutionRole-10N98L5V49MTQ",
     "vpc": {
       "subnets": ["subnet-05d176d6cd31c100c", "subnet-066bd0a92e8371f89"],
-      "security_groups": ["sg-06bb4f3c160ed173c"]
+      "security_groups": ["sg-08c5afa5033c8ef64"]
     }
   },
   "stages": {
