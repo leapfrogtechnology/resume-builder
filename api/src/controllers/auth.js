@@ -8,6 +8,13 @@ import validateGoogleToken from '../middlewares/verifyGoogleToken';
 
 const router = Router();
 
+router.get('/', (req, res, next) => {
+  return res.json({
+    app: process.env.APP_NAME,
+    version: process.env.APP_VERSION,
+  });
+});
+
 /**
  * Authenticate google login /api/auth/google
  */
