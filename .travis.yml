@@ -11,7 +11,6 @@ branches:
   
 git:
   depth: false
-
 # Setting stage
 env:
   - STAGE=$(if [ $TRAVIS_BRANCH == 'travis-integration' ]; then echo "dev"; elif [ $TRAVIS_BRANCH == 'master' ]; then echo 'production'; else echo "Undefined"; fi;)
@@ -26,8 +25,8 @@ matrix:
         provider: script
         script:
           cd api;
-          envault list -secret=resume-builder/$STAGE/api > .env;
+          envault list -e $STAGE > .env;
           yarn && yarn build;
-          up $STAGE;
+          up deploy $STAGE;
         on:
           all_branches: true
