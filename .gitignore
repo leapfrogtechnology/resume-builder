@@ -4,7 +4,7 @@ logs
 **/*.backup.*
 **/*.back.*
 .next
-
+report.*.json
 # dependencies
 /node_modules
 

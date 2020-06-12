@@ -29,7 +29,7 @@ app.use(errorHandler.bodyParser);
  * Routes Definitions
  */
 
-app.use('/api', routes);
+app.use('/', routes);
 
 // Error Middlewares
 app.use(errorHandler.genericErrorHandler);
