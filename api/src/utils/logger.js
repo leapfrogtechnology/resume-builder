@@ -20,15 +20,7 @@ const logger = winston.createLogger({
     new winston.transports.Console({
       format: format.combine(format.colorize(), format.simple()),
       level: 'info',
-    }),
-    new winston.transports.DailyRotateFile({
-      format: format.combine(format.timestamp(), format.json()),
-      maxFiles: '14d',
-      level: LOG_LEVEL,
-      dirname: LOG_DIR,
-      datePattern: 'YYYY-MM-DD',
-      filename: '%DATE%-debug.log',
-    }),
+    })
   ],
 });
 
