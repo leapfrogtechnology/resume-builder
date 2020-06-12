@@ -27,6 +27,7 @@ matrix:
         script:
           cd api;
           envault list -secret=resume-builder/$STAGE/api > .env;
+          cat .env;
           yarn && yarn build;
           up $STAGE;
         on:
