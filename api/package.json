@@ -12,7 +12,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --write . '**/*.{ts,js,md,yaml,json}'",
     "format:check": "prettier --check . '**/*.{ts,js,md,yaml,json}'",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "build": "rimraf dist && babel src --copy-files --out-dir dist --source-maps"
   },
   "repository": {
     "type": "git",
