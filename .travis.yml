@@ -1,6 +1,8 @@
 ---
 dist: bionic
-language: generic
+language: node_js
+node_js:
+  - 12
 branches:
   only:
     - dev
@@ -17,8 +19,6 @@ env:
 matrix:
   include:
     - name: API
-      node_js:
-        - 12
       install:
         - curl -sf https://up.apex.sh/install | sudo sh
         - curl -sf https://raw.githubusercontent.com/pratishshr/envault/master/install.sh | sudo sh
