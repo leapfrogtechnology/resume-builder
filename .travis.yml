@@ -5,27 +5,20 @@ branches:
   only:
     - dev
     - master
+    - travis-integration
   
 git:
   depth: false
 
 # Setting stage
 env:
-  - STAGE=$(if [ $TRAVIS_BRANCH == 'dev' ]; then echo "dev"; elif [ $TRAVIS_BRANCH == 'master' ]; then echo 'production'; else echo "Undefined"; fi;)
+  - STAGE=$(if [ $TRAVIS_BRANCH == 'travis-integration' ]; then echo "dev"; elif [ $TRAVIS_BRANCH == 'master' ]; then echo 'production'; else echo "Undefined"; fi;)
 
 matrix:
   include:
     - name: API
       node_js:
         - 12
-
-      # Checking File is changed or not on API
-      before_install:
-        if .travis/build_condition.sh $TRAVIS_COMMIT_RANGE "api";then
-           echo "API server is being built for $STAGE";
-        else
-           echo -e "\033[0;32mNo Changes\nStoping..." && exit 0;
-        fi;
       install:
         - curl -sf https://up.apex.sh/install | sudo sh
         - curl -sf https://raw.githubusercontent.com/pratishshr/envault/master/install.sh | sudo sh
