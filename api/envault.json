@@ -2,6 +2,7 @@
   "profile": "team-vyaguta",
   "region": "ap-south-1",
   "environments": {
-    "dev": "resume-builder/dev/api"
+    "dev": "resume-builder/dev/api",
+    "prod": "resume-builder/prod/api"
   }
 }
