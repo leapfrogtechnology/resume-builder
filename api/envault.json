@@ -3,6 +3,7 @@
   "region": "ap-south-1",
   "environments": {
     "dev": "resume-builder/dev/api",
+    "dirty": "resume-builder/dev/api",
     "prod": "resume-builder/prod/api"
   }
 }
