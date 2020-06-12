@@ -11,7 +11,11 @@
   },
   "stages": {
     "dev": {
-      "domain": "dev.api-resume.lftechnology.com",
+      "domain": "dev-api.resume.lftechnology.com",
+      "zone": "lftechnology.com"
+    },
+    "prod": {
+      "domain": "api.resume.lftechnology.com",
       "zone": "lftechnology.com"
     }
   },
