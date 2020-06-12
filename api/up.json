@@ -1,5 +1,6 @@
 {
   "name": "resume-builder",
+  "profile": "team-vyaguta",
   "regions": ["ap-south-1"],
   "lambda": {
     "role": "arn:aws:iam::009409476372:role/vyaguta-production-LambdaExecutionRole-10N98L5V49MTQ",
