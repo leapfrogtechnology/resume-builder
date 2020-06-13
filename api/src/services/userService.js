@@ -1,8 +1,7 @@
-import Boom from '@hapi/boom';
-
 import { db } from '../db';
 import * as tokenService from './tokenService';
 import * as sessionService from './sessionService';
+import logger from '../utils/logger';
 
 const { firebase, admin } = require('../utils/firebaseConfig');
 
@@ -36,6 +35,7 @@ export const loginUser = async (data) => {
       await createUser(userInfo.user);
       await sessionService.createSession(userInfo);
 
+      logger.info('New user created and loggen in');
       return { username: userInfo.user.name, email: userInfo.user.email, tokens: userInfo.tokens };
     }
     const tokens = tokenService.generateTokens({ email: user.email, uid: user.uid });
@@ -50,9 +50,10 @@ export const loginUser = async (data) => {
     };
 
     await sessionService.createSession(userInfo);
-
+    logger.info('User logged in');
     return { username: userInfo.user.name, email: userInfo.user.email, tokens: userInfo.tokens };
   } catch (err) {
+    logger.info(err.message);
     throw err;
   }
 };
