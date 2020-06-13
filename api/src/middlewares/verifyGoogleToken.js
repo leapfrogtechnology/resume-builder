@@ -21,11 +21,11 @@ const validateGoogleToken = async (req, res, next) => {
     if (payload) {
       const domain = payload['hd'];
 
-      if (!domain || domain !== GSUITE_DOMAIN) {
-        return res.status(HttpStatus.UNAUTHORIZED).json({
-          message: 'Sign in with lftechnology domain',
-        });
-      }
+      // if (!domain || domain !== GSUITE_DOMAIN) {
+      //   return res.status(HttpStatus.UNAUTHORIZED).json({
+      //     message: 'Sign in with lftechnology domain',
+      //   });
+      // }
 
       const data = {
         idToken: req.body.tokenId,
