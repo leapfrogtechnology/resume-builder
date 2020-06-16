@@ -2,6 +2,7 @@ import { db } from '../db';
 import * as tokenService from './tokenService';
 import * as sessionService from './sessionService';
 import logger from '../utils/logger';
+import { ADMIN_EMAIL } from '../constant';
 
 const { firebase, admin } = require('../utils/firebaseConfig');
 
@@ -16,6 +17,8 @@ export const loginUser = async (data) => {
     const { idToken, email, name } = data;
 
     const user = await fetchByEmail(email);
+
+    const isAdmin = email === ADMIN_EMAIL ? true : false;
 
     if (!user) {
       const credential = await firebase.auth.GoogleAuthProvider.credential(idToken);
@@ -35,8 +38,8 @@ export const loginUser = async (data) => {
       await createUser(userInfo.user);
       await sessionService.createSession(userInfo);
 
-      logger.info('New user created and loggen in');
-      return { username: userInfo.user.name, email: userInfo.user.email, tokens: userInfo.tokens };
+      logger.info('New user created and logged in');
+      return { username: userInfo.user.name, email: userInfo.user.email, isAdmin: isAdmin, tokens: userInfo.tokens };
     }
     const tokens = tokenService.generateTokens({ email: user.email, uid: user.uid });
 
@@ -51,9 +54,9 @@ export const loginUser = async (data) => {
 
     await sessionService.createSession(userInfo);
     logger.info('User logged in');
-    return { username: userInfo.user.name, email: userInfo.user.email, tokens: userInfo.tokens };
+    return { username: userInfo.user.name, email: userInfo.user.email, isAdmin: isAdmin, tokens: userInfo.tokens };
   } catch (err) {
-    logger.info(err.message);
+    logger.error(err.message);
     throw err;
   }
 };
