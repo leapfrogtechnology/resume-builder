@@ -65,6 +65,7 @@ const Profile = () => {
   const store = {
     preview: { get: preview, set: setPreview },
     data: { get: data, set: updateData },
+    hideSideNav: { get: false },
     deleteCV: deleteCVHandler,
     updateCV: updateCvHandler,
   };
