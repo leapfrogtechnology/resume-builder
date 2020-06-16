@@ -19,6 +19,7 @@ import { getUser } from '~/storage/LocalStorage';
 const PreviewResume = ({ context }) => {
   const router = useRouter();
   const [preview, setPreview] = useState(true);
+  const [hideSideNav, setHideSideNav] = useState(false);
   const [data, updateData] = useState({});
   const [statusCode, setStatusCode] = useState(null);
   const [downloadPdf, setDownloadPdf] = useState(false);
@@ -61,6 +62,7 @@ const PreviewResume = ({ context }) => {
 
         if (user && user.isAdmin) {
           setPreview(false);
+          setHideSideNav(true);
         }
         setStatusCode(result.status);
         updateData(resume ? resume : {});
@@ -79,6 +81,7 @@ const PreviewResume = ({ context }) => {
   const store = {
     preview: { get: preview },
     data: { get: data },
+    hideSideNav: { get: hideSideNav },
     updateCV: updateCvHandler,
   };
 
