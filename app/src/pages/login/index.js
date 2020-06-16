@@ -20,11 +20,11 @@ const Login = () => {
 
     try {
       const res = await resumeBuilderService.validateUser(data);
-      const { username, email, tokens } = res.data.data;
+      const { username, email, isAdmin, tokens } = res.data.data;
 
       await localStorage.saveAccessToken(tokens.accessToken);
       await localStorage.saveRefreshToken(tokens.refreshToken);
-      await localStorage.saveUser(username, email);
+      await localStorage.saveUser(username, email, isAdmin);
 
       router.push(routeConstants.DASHBOARD);
     } catch (err) {
