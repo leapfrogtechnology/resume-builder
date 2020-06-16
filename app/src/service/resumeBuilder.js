@@ -19,6 +19,14 @@ export const saveResume = async data => {
   return result;
 };
 
+export const editResume = async (data, email) => {
+  const saveResumeUrl = urlConstants.apiBaseUrl + urlConstants.editResumeByAdminUrl.replace(':email', email);
+
+  const result = await http.put(saveResumeUrl, data);
+
+  return result;
+};
+
 export const fetchResume = async email => {
   const fetchResumeUrl = urlConstants.apiBaseUrl + urlConstants.fetchResumeUrl.replace(':email', email);
 
@@ -37,7 +45,7 @@ export const deleteResume = (data = {}) => {
   });
 };
 
-export const fetchUserProfile = async () => {
+export const fetchUserProfile = async email => {
   const fetchUserProfile = urlConstants.apiBaseUrl + urlConstants.fetchUserProfileUrl;
 
   const result = await http.get(fetchUserProfile);
