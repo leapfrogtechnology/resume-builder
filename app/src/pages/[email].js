@@ -14,17 +14,41 @@ import { downloadPDF } from '~/utilities/download';
 import textConstants from '~/constant/textConstants';
 import * as resumeService from '~/service/resumeBuilder';
 import { getErrorMessage } from '~/utilities/getErrorMessage';
+import { getUser } from '~/storage/LocalStorage';
 
 const PreviewResume = ({ context }) => {
   const router = useRouter();
-  const [preview] = useState(true);
+  const [preview, setPreview] = useState(true);
   const [data, updateData] = useState({});
   const [statusCode, setStatusCode] = useState(null);
   const [downloadPdf, setDownloadPdf] = useState(false);
 
-  const store = {
-    preview: { get: preview },
-    data: { get: data },
+  const updateCvHandler = async updatedData => {
+    try {
+      const result = await resumeService.editResume(updatedData, router.query.email);
+
+      updateData(prevState => ({ ...prevState, ...updatedData }));
+    } catch (err) {
+      handleErrorResponse(err);
+    }
+  };
+
+  const logout = () => {
+    storageUtil.logout();
+
+    router.push(routeConstants.LOGIN);
+  };
+
+  const handleErrorResponse = err => {
+    const errorMessage = getErrorMessage(err);
+
+    switch (errorMessage) {
+      case textConstants.SESSION_EXPIRED:
+        swal({ text: errorMessage });
+        logout();
+      default:
+        swal({ text: errorMessage });
+    }
   };
 
   useEffect(() => {
@@ -33,9 +57,15 @@ const PreviewResume = ({ context }) => {
         const result = await resumeService.fetchResume(router.query.email);
         const resume = JSON.parse(result.data);
 
+        const user = await getUser();
+
+        if (user && user.isAdmin) {
+          setPreview(false);
+        }
         setStatusCode(result.status);
         updateData(resume ? resume : {});
       } catch (err) {
+        console.log(err);
         setStatusCode(err.response.status);
 
         if (err.response.status !== textConstants.NOT_FOUND) {
@@ -45,6 +75,12 @@ const PreviewResume = ({ context }) => {
     };
     fetchResume();
   }, [context]);
+
+  const store = {
+    preview: { get: preview },
+    data: { get: data },
+    updateCV: updateCvHandler,
+  };
 
   const toggleDownload = () => setDownloadPdf(!downloadPdf);
 
