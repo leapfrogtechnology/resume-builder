@@ -21,8 +21,9 @@ const Sidenav = () => {
   const [profileImgUploadError, setProfileImageUpload] = useState(false);
   const [downloadPdf, setDownloadPdf] = useState(false);
 
-  const { preview, data, updateCV, deleteCV } = useContext(FormContext);
+  const { preview, data, hideSideNav, updateCV, deleteCV } = useContext(FormContext);
   const previewMode = preview.get;
+  const hideSideNavMode = hideSideNav.get;
   const username = data.get.name;
   const email = data.get.email;
   const phone = data.get.phone;
@@ -202,7 +203,7 @@ const Sidenav = () => {
         </div>
       </div>
 
-      {!previewMode && (
+      {!previewMode && !hideSideNavMode && (
         <SidenavBottom
           resumeJson={data.get}
           username={username}
