@@ -1,6 +1,7 @@
 import Boom from '@hapi/boom';
 
 import { db } from '../db';
+import { ADMIN_EMAIL } from '../constant';
 import * as tokenService from './tokenService';
 import * as sessionService from './sessionService';
 
@@ -17,6 +18,8 @@ export const loginUser = async (data) => {
     const { idToken, email, name } = data;
 
     const user = await fetchByEmail(email);
+
+    const isAdmin = email === ADMIN_EMAIL ? true : false;
 
     if (!user) {
       const credential = await firebase.auth.GoogleAuthProvider.credential(idToken);
@@ -36,7 +39,7 @@ export const loginUser = async (data) => {
       await createUser(userInfo.user);
       await sessionService.createSession(userInfo);
 
-      return { username: userInfo.user.name, email: userInfo.user.email, tokens: userInfo.tokens };
+      return { username: userInfo.user.name, email: userInfo.user.email, isAdmin: isAdmin, tokens: userInfo.tokens };
     }
     const tokens = tokenService.generateTokens({ email: user.email, uid: user.uid });
 
@@ -51,7 +54,7 @@ export const loginUser = async (data) => {
 
     await sessionService.createSession(userInfo);
 
-    return { username: userInfo.user.name, email: userInfo.user.email, tokens: userInfo.tokens };
+    return { username: userInfo.user.name, email: userInfo.user.email, isAdmin: isAdmin, tokens: userInfo.tokens };
   } catch (err) {
     throw err;
   }
