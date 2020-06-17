@@ -65,6 +65,7 @@ const Profile = () => {
   const store = {
     preview: { get: preview, set: setPreview },
     data: { get: data, set: updateData },
+    hideSideNav: { get: false },
     deleteCV: deleteCVHandler,
     updateCV: updateCvHandler,
   };
@@ -95,7 +96,7 @@ const Profile = () => {
           <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.js"></script>
         </Head>
         <FormContext.Provider value={store}>
-          <Header name={data.name} btnType="preview" onclick={togglePreview} />
+          <Header name={data.name} showPreviewBtn={true} downloadBtnHandler={null} previewBtnHandler={togglePreview} />
           <Dashboard />
         </FormContext.Provider>
       </div>
