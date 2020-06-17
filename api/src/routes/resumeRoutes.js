@@ -2,22 +2,33 @@ import Router from 'express';
 
 import { ensureToken } from '../middlewares/ensureToken';
 import * as resumeController from '../controllers/resume';
-import { authenticateUser } from '../middlewares/firebaseAuthenticate';
+import { authenticateAdmin } from '../middlewares/authenticateAdmin';
+import { authenticateRequest, authenticateUser } from '../middlewares/firebaseAuthenticate';
 
 const router = Router();
 
 /**
- * PUT /api/resume
+ * PUT /resume/:email/edit
  */
-router.put('/', ensureToken, authenticateUser, resumeController.updateResume);
+router.put('/:email/edit', ensureToken, authenticateRequest, resumeController.updateResume);
 
 /**
- * GET /api/resume/:email
+ * PUT /resume/self/save
  */
-router.get('/:email', resumeController.fetchResume);
+router.put('/self/save', ensureToken, authenticateUser, resumeController.updateResume);
 
 /**
- * DELETE /api/resume/delete
+ * GET /resume/:email/preview
+ */
+router.get('/:email/preview', resumeController.fetchResume);
+
+/**
+ * GET /resume/:email/edit
+ */
+router.get('/:email/edit', ensureToken, authenticateRequest, resumeController.fetchResume);
+
+/**
+ * DELETE /resume/delete
  */
 router.delete('/delete', ensureToken, authenticateUser, resumeController.deleteResume);
 
