@@ -16,8 +16,8 @@ export const getUser = () => {
   return JSON.parse(localStorage.getItem(USER));
 };
 
-export const saveUser = (name, email) => {
-  localStorage.setItem(USER, JSON.stringify({ name: name, email: email }));
+export const saveUser = (name, email, isAdmin) => {
+  localStorage.setItem(USER, JSON.stringify({ name: name, email: email, isAdmin: isAdmin }));
 };
 
 export const getAccessToken = () => {
