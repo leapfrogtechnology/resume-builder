@@ -8,7 +8,7 @@
   border-radius: 2px;
   cursor: pointer;
 
-  @include m(secondary){
+  @include m(secondary) {
     border: 1px solid $alto;
     padding: 8px 16px;
     color: $alto;
@@ -19,5 +19,9 @@
     padding: 8px 16px;
     background: $pomegranate;
     color: $white;
+  }
+
+  @include m(margin) {
+    margin-left: 10px;
   }
 }
