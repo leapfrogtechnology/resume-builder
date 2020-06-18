@@ -23,7 +23,7 @@ const Button = ({ content, modifier, type, onclick = null, submitProps }) => {
 
 Button.propTypes = {
   content: PropTypes.string,
-  modifier: PropTypes.bool,
+  modifier: PropTypes.bool || PropTypes.string,
   onclick: PropTypes.func,
   submitProps: PropTypes.object,
 };
