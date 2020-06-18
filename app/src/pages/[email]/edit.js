@@ -56,18 +56,13 @@ const EditResume = ({ context }) => {
       try {
         const result = await resumeService.fetchResume(router.query.email);
         const resume = JSON.parse(result.data);
-
         const user = await getUser();
 
-        if (
-          ((user && user.email === router.query.email) || (user && user.isAdmin)) &&
-          result.status !== textConstants.UNAUTHORIZED_CODE
-        ) {
+        if (user && (user.email === router.query.email || user.isAdmin)) {
           setStatusCode(result.status);
         } else {
-          setStatusCode(404);
+          setStatusCode(textConstants.UNAUTHORIZED_CODE);
         }
-
         setLoading(false);
         updateData(resume ? resume : {});
       } catch (err) {
@@ -88,8 +83,11 @@ const EditResume = ({ context }) => {
     updateCV: updateCvHandler,
   };
 
-  if (statusCode === textConstants.NOT_FOUND) {
-    return <ErrorPage statusCode={textConstants.NOT_FOUND} />;
+  switch (statusCode) {
+    case textConstants.UNAUTHORIZED_CODE:
+      return <ErrorPage statusCode={textConstants.UNAUTHORIZED_CODE} title="Permission Denied" />;
+    case textConstants.NOT_FOUND:
+      return <ErrorPage statusCode={textConstants.NOT_FOUND} />;
   }
 
   return (
