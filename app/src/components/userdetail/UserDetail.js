@@ -42,7 +42,9 @@ const UserDetail = ({
         </div>
         <div className="user-detail__right-content">
           {showPreviewBtn && <Button content={!preview ? 'Preview' : 'Back To Edit'} onclick={previewBtnHandler} />}
-          {preview && router.query.email && <Button content="Download as PDF" onclick={downloadBtnHandler} />}
+          {preview && router.query.email && (
+            <Button content="Download as PDF" modifier="margin" onclick={downloadBtnHandler} />
+          )}
         </div>
       </div>
     </section>
