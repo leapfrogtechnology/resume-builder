@@ -19,14 +19,6 @@ export const saveResume = async data => {
   return result;
 };
 
-export const editResume = async (data, email) => {
-  const saveResumeUrl = urlConstants.apiBaseUrl + urlConstants.editResumeByAdminUrl.replace(':email', email);
-
-  const result = await http.put(saveResumeUrl, data);
-
-  return result;
-};
-
 export const fetchResume = async email => {
   const fetchResumeUrl = urlConstants.apiBaseUrl + urlConstants.fetchResumeUrl.replace(':email', email);
 
