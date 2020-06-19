@@ -34,6 +34,7 @@ const PreviewResume = ({ context }) => {
   };
 
   useEffect(() => {
+    console.log('inside preview');
     const fetchResume = async () => {
       try {
         const result = await resumeService.fetchResume(router.query.email);
