@@ -16,7 +16,6 @@ import routeConstants from '~/constant/routeConstants';
 import { getUser } from '~/storage/LocalStorage';
 import { downloadPDF } from '~/utilities/download';
 import { getErrorMessage } from '~/utilities/getErrorMessage';
-import { getUser } from '~/storage/LocalStorage';
 
 import * as resumeService from '~/service/resumeBuilder';
 
@@ -59,13 +58,6 @@ const PreviewResume = ({ context }) => {
     };
     fetchResume();
   }, [context]);
-
-  const store = {
-    preview: { get: preview },
-    data: { get: data },
-    hideSideNav: { get: hideSideNav },
-    updateCV: updateCvHandler,
-  };
 
   const toggleDownload = () => setDownloadPdf(!downloadPdf);
 
