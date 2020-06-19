@@ -1,9 +1,8 @@
 import { db } from '../db';
+import logger from '../utils/logger';
 import { ADMIN_EMAIL } from '../constant';
 import * as tokenService from './tokenService';
 import * as sessionService from './sessionService';
-import logger from '../utils/logger';
-import { ADMIN_EMAIL } from '../constant';
 
 const { firebase, admin } = require('../utils/firebaseConfig');
 
