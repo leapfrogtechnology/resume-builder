@@ -10,46 +10,28 @@ import Header from '~/components/header/Header';
 import { FormContext } from '~/components/FormContext';
 import Dashboard from '~/components/dashboard/Dashboard';
 
-import { downloadPDF } from '~/utilities/download';
 import textConstants from '~/constant/textConstants';
-import * as resumeService from '~/service/resumeBuilder';
+import routeConstants from '~/constant/routeConstants';
+
+import { getUser } from '~/storage/LocalStorage';
+import { downloadPDF } from '~/utilities/download';
 import { getErrorMessage } from '~/utilities/getErrorMessage';
 import { getUser } from '~/storage/LocalStorage';
 
+import * as resumeService from '~/service/resumeBuilder';
+
 const PreviewResume = ({ context }) => {
   const router = useRouter();
-  const [preview, setPreview] = useState(true);
-  const [hideSideNav, setHideSideNav] = useState(false);
+  const [preview] = useState(true);
+  const [showPreviewBtn, setShowPreviewBtn] = useState(false);
   const [data, updateData] = useState({});
   const [statusCode, setStatusCode] = useState(null);
   const [downloadPdf, setDownloadPdf] = useState(false);
 
-  const updateCvHandler = async updatedData => {
-    try {
-      const result = await resumeService.editResume(updatedData, router.query.email);
-
-      updateData(prevState => ({ ...prevState, ...updatedData }));
-    } catch (err) {
-      handleErrorResponse(err);
-    }
-  };
-
-  const logout = () => {
-    storageUtil.logout();
-
-    router.push(routeConstants.LOGIN);
-  };
-
-  const handleErrorResponse = err => {
-    const errorMessage = getErrorMessage(err);
-
-    switch (errorMessage) {
-      case textConstants.SESSION_EXPIRED:
-        swal({ text: errorMessage });
-        logout();
-      default:
-        swal({ text: errorMessage });
-    }
+  const store = {
+    preview: { get: preview },
+    data: { get: data },
+    hideSideNav: { get: true },
   };
 
   useEffect(() => {
@@ -60,10 +42,10 @@ const PreviewResume = ({ context }) => {
 
         const user = await getUser();
 
-        if (user && user.isAdmin) {
-          setPreview(false);
-          setHideSideNav(true);
+        if ((user && user.isAdmin) || (user && user.email === router.query.email)) {
+          setShowPreviewBtn(true);
         }
+
         setStatusCode(result.status);
         updateData(resume ? resume : {});
       } catch (err) {
@@ -87,6 +69,8 @@ const PreviewResume = ({ context }) => {
 
   const toggleDownload = () => setDownloadPdf(!downloadPdf);
 
+  const previewBtnHandler = () => router.push(routeConstants.EDIT.replace('[email]', router.query.email));
+
   if (statusCode === textConstants.NOT_FOUND) {
     return <ErrorPage statusCode={textConstants.NOT_FOUND} />;
   }
@@ -102,12 +86,16 @@ const PreviewResume = ({ context }) => {
           <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.js"></script>
         </Head>
         <FormContext.Provider value={store}>
-          <Header name={data.name} btnType="downlaod" onclick={toggleDownload} />
+          <Header
+            name={data.name}
+            showPreviewBtn={showPreviewBtn}
+            downloadBtnHandler={toggleDownload}
+            previewBtnHandler={previewBtnHandler}
+          />
           <Dashboard />
           {downloadPdf && (
             <PDFDownloadLink document={<MyDocument resumeJson={data} />} fileName="somename.pdf">
               {({ url, loading }) => {
-                console.log('here');
                 downloadPDF(url, data.name, loading, toggleDownload);
               }}
             </PDFDownloadLink>

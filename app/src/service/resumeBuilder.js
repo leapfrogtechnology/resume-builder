@@ -52,3 +52,11 @@ export const fetchUserProfile = async email => {
 
   return result.data;
 };
+
+export const editResume = async (data, email) => {
+  const saveResumeUrl = urlConstants.apiBaseUrl + urlConstants.editResumeByAdminUrl.replace(':email', email);
+
+  const result = await http.put(saveResumeUrl, data);
+
+  return result;
+};
