@@ -1,0 +1,94 @@
+.input {
+  margin-top: 18px;
+
+  @include m(short) {
+    width: 50%;
+
+    &:first-child {
+      padding-right: 10px;
+    }
+
+    &:last-child {
+      padding-left: 10px;
+    }
+  }
+
+  @include e(label) {
+    margin-bottom: 4px;
+    color: $dusty-gray;
+    display: inline-block;
+
+    @include m(dark) {
+      color: $dove-gray-light;
+    }
+  }
+
+  @include e(textarea) {
+    width: 100%;
+    border: 1px solid $alto;
+    border-radius: 2px;
+    padding: 8px 10px;
+  }
+
+  @include e(text-field) {
+    border: 1px solid $alto;
+    width: 100%;
+    border-radius: 2px;
+    padding: 8px 10px;
+  }
+
+  @include e(date) {
+    border: 1px solid $alto;
+    border-radius: 2px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 10px;
+  }
+
+  @include e(date-calendar) {
+    width: 18px;
+    height: 18px;
+    overflow: hidden;
+    object-fit: cover;
+  }
+
+  @include e(date-picker) {
+    border: 0;
+  }
+
+  @include e(date-field) {
+    border: 0;
+  }
+
+  @include e(checkbox) {
+    margin-right: 8px;
+    border: 2px solid $nobel;
+  }
+
+  @include e(select) {
+    border: 1px solid $alto;
+    border-radius: 2px;
+    display: block;
+    width: 100%;
+    padding: 8px 10px;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background: url("../../../images/dropdown.png") no-repeat right;
+  }
+
+  @include e(radio-label) {
+    color: $dove-gray-light;
+    margin-left: 6px;
+  }
+
+  @include e(label-container) {
+    padding: 16px 0 10px;
+    margin-right: 30px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}

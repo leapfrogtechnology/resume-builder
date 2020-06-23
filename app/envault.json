@@ -1,9 +1,0 @@
-{
-  "profile": "resume-builder",
-  "region": "ap-south-1",
-  "environments": {
-    "dev": "vyaguta/resume-builder/app/dev",
-    "dirty": "vyaguta/resume-builder/app/dirty",
-    "prod": "vyaguta/resume-builder/app/production"
-  }
-}
