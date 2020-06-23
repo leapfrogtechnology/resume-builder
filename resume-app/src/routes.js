@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { HashRouter, Route, Switch } from "react-router-dom";
 
 import Home from "components/home";
 import Login from "components/login";
@@ -18,19 +18,19 @@ const baseHref = process.env.REACT_APP_BASE_HREF || "/";
  *
  */
 const Router = () => (
-  <BrowserRouter basename={baseHref}>
+  <HashRouter basename={baseHref}>
     <Switch>
-      <Route exact path={routeConstants.LOGIN} component={Login} />
+      <PrivateRoute exact path={routeConstants.DASHBOARD} component={Home} />
+      <Route path={routeConstants.LOGIN} component={Login} />
       <Route exact path={routeConstants.PREVIEWRESUME} component={Preview} />
       <ProtectedRoute
         exact
         path={routeConstants.EDITRESUME}
         component={EditResume}
       />
-      <PrivateRoute exact path={routeConstants.DASHBOARD} component={Home} />
       <Route component={PageNotFound} />
     </Switch>
-  </BrowserRouter>
+  </HashRouter>
 );
 
 export default Router;
