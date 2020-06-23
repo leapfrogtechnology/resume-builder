@@ -11,7 +11,7 @@ import PageNotFound from "components/common/PageNotFound";
 
 import routeConstants from "constant/routeConstants";
 
-const baseHref = process.env.BASE_HREF || "/";
+const baseHref = process.env.REACT_APP_BASE_HREF || "/";
 
 /**
  * Route User Request Based on Routes.
