@@ -27,11 +27,11 @@ class Login extends React.Component {
 
     try {
       const res = await resumeBuilderService.validateUser(data);
-      const { username, email, tokens } = res.data.data;
+      const { username, isAdmin, email, tokens } = res.data.data;
 
       localStorage.saveAccessToken(tokens.accessToken);
       localStorage.saveRefreshToken(tokens.refreshToken);
-      localStorage.saveUser(username, email);
+      localStorage.saveUser(username, email, isAdmin);
 
       this.setState({
         loginErrorMessage: null,
