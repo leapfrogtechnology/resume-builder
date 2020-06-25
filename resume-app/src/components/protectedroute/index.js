@@ -34,7 +34,7 @@ const ProtectedRoute = ({ match, location, component: Component, ...rest }) => (
       ) : (
         <Redirect
           to={{
-            pathname: routeConstants.DASHBOARD,
+            pathname: routeConstants.NOTFOUND,
             state: { from: props.location },
           }}
         />
