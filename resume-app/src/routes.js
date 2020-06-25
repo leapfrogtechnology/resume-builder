@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 
 import Home from "components/home";
 import Login from "components/login";
@@ -28,7 +28,8 @@ const Router = () => (
         path={routeConstants.EDITRESUME}
         component={EditResume}
       />
-      <Route component={PageNotFound} />
+      <Route path="/pagenotfound" component={PageNotFound} />
+      <Redirect from="/**" to="/pagenotfound" />
     </Switch>
   </BrowserRouter>
 );
