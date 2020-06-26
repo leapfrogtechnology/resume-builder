@@ -1,6 +1,9 @@
 export const getPersonalInfoObject = ({ name, role, introduction }) => {
   return {
-    name: name,
+    name: {
+      value: name,
+      hidden: false,
+    },
     role: {
       name: role,
       label: role,
