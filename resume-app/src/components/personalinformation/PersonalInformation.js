@@ -55,10 +55,11 @@ const PersonalInformation = () => {
         {name && (
           <PersonalInfoItem
             label="name"
-            value={name}
-            hidden={false}
+            value={name.value}
+            hidden={name.hidden}
             preview={preview}
             bold={bold}
+            showIcon={true}
             onclick={updateHiddenState}
           ></PersonalInfoItem>
         )}
