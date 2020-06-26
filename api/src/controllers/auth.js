@@ -9,7 +9,7 @@ import validateGoogleToken from '../middlewares/verifyGoogleToken';
 const router = Router();
 
 /**
- * Authenticate google login /api/auth/google
+ * Authenticate google login /auth/google
  */
 router.post('/auth/google', validateGoogleToken, (req, res, next) => {
   const user = req.user;
