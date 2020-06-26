@@ -30,7 +30,7 @@ const Header = ({ name, showPreviewBtn, previewBtnHandler }) => {
   return (
     <header className="header">
       <UserDetail
-        name={name}
+        name={name.value}
         experience={experienceLabel}
         profileImg={profileImage}
         resume={context.data.get}
@@ -43,7 +43,7 @@ const Header = ({ name, showPreviewBtn, previewBtnHandler }) => {
 };
 
 Header.propTypes = {
-  name: PropTypes.string,
+  name: PropTypes.object,
   showPreviewBtn: PropTypes.bool,
   previewBtnHandler: PropTypes.func || null,
 };
