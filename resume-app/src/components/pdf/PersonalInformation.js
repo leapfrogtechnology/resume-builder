@@ -40,9 +40,11 @@ const PersonalInformation = ({
         </View>
         <View>
           <View>
-            <Text style={pdfStyles.personalInformationStyles.profileName}>
-              {name}
-            </Text>
+            {name && !name.hidden && (
+              <Text style={pdfStyles.personalInformationStyles.profileName}>
+                {name.value}
+              </Text>
+            )}
             {role && !role.hidden && (
               <Text style={pdfStyles.personalInformationStyles.profileStatus}>
                 {role.label}
@@ -81,7 +83,7 @@ const PersonalInformationItem = ({ label, value }) => {
 };
 
 PersonalInformation.propTypes = {
-  name: PropTypes.string,
+  name: PropTypes.object,
   role: PropTypes.object,
   introduction: PropTypes.object,
   profileImg: PropTypes.object,
