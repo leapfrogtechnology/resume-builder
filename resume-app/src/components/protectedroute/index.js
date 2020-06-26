@@ -27,7 +27,7 @@ const ProtectedRoute = ({ match, location, component: Component, ...rest }) => (
         );
       }
       const isAuthenticated =
-        email === match.params.email || isAdmin ? true : false;
+        email !== match.params.email || !isAdmin ? false : true;
 
       return isAuthenticated ? (
         <Component {...props} />
