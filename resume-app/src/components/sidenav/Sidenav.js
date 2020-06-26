@@ -219,7 +219,7 @@ const Sidenav = () => {
       {!previewMode && !hideSideNavMode && (
         <SidenavBottom
           resumeJson={data.get}
-          username={username}
+          username={username.value}
           deleteIconClicked={toggleDelete}
         />
       )}
