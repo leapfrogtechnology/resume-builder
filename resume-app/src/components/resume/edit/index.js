@@ -93,7 +93,7 @@ const EditResume = (props) => {
       <div className="page-container">
         <FormContext.Provider value={store}>
           <Header
-            name={data.name}
+            name={data.name ? data.name.value : ""}
             showPreviewBtn={true}
             downloadBtnHandler={null}
             previewBtnHandler={previewBtnHandler}

@@ -61,7 +61,7 @@ const Preview = ({ match }) => {
       <div className="page-container">
         <FormContext.Provider value={store}>
           <Header
-            name={data.name}
+            name={data.name ? data.name.value : ""}
             showPreviewBtn={showPreviewBtn}
             previewBtnHandler={previewBtnHandler}
           />
