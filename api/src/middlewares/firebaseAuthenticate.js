@@ -1,6 +1,5 @@
 import HttpStatus from 'http-status-codes';
-import { ADMIN_EMAIL } from '../constant';
-import { fetchByEmail } from '../services/userService';
+import { fetchByEmail, checkIsUserAdmin } from '../services/userService';
 
 /**
  * Authenticate User in firebase.
@@ -26,7 +25,9 @@ export const authenticateUser = async (req, res, next) => {
  * @param {function} next
  */
 export const authenticateRequest = async (req, res, next) => {
-  if (req.email === req.params.email || req.email === ADMIN_EMAIL) {
+  const isAdmin = await checkIsUserAdmin(req.email);
+
+  if (req.email === req.params.email || isAdmin) {
     try {
       const user = await fetchByEmail(req.params.email);
       req.uid = user.uid;
