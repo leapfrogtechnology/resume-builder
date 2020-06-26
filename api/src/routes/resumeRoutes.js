@@ -2,7 +2,6 @@ import Router from 'express';
 
 import { ensureToken } from '../middlewares/ensureToken';
 import * as resumeController from '../controllers/resume';
-import { authenticateAdmin } from '../middlewares/authenticateAdmin';
 import { authenticateRequest, authenticateUser } from '../middlewares/firebaseAuthenticate';
 
 const router = Router();
