@@ -18,7 +18,7 @@ export const loginUser = async (data) => {
 
     const user = await fetchByEmail(email);
 
-    const isAdmin = email === ADMIN_EMAIL ? true : false;
+    const isAdmin = await checkIsUserAdmin(email);
 
     if (!user) {
       const credential = await firebase.auth.GoogleAuthProvider.credential(idToken);
@@ -107,6 +107,20 @@ export const fetchUserProfile = async (uid) => {
     const snapshot = await userRef.once('value');
 
     return snapshot.val().resume;
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const checkIsUserAdmin = async (email) => {
+  try {
+    const ref = db.ref('admin/email');
+    const snapsot = await ref.once('value');
+    const adminEmails = snapsot.val();
+
+    const isAdmin = adminEmails.indexOf(email) === -1 ? 'false' : 'true';
+
+    return isAdmin;
   } catch (err) {
     throw err;
   }
