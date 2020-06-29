@@ -60,13 +60,8 @@ const EditResume = (props) => {
       try {
         const result = await resumeService.fetchResume(email);
         const resume = JSON.parse(result.data);
-        const user = await localStorage.getUser();
 
-        if (user && (user.email === email || user.isAdmin)) {
-          setStatusCode(result.status);
-        } else {
-          setStatusCode(textConstants.UNAUTHORIZED_CODE);
-        }
+        setStatusCode(result.status);
         setLoading(false);
         updateData(resume ? resume : {});
       } catch (err) {
