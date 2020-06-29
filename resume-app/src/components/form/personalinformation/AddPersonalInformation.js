@@ -30,7 +30,7 @@ const AddPersonalInformation = ({ onClose, isEdit }) => {
 
     if (isEdit) {
       initialValues = {
-        name: data.get.name ? data.get.name : "",
+        name: data.get.name ? data.get.name.value : "",
         role: data.get.role ? data.get.role.label : "",
         introduction: data.get.introduction ? data.get.introduction.value : "",
       };

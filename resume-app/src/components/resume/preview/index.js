@@ -36,9 +36,15 @@ const Preview = ({ match }) => {
 
         const user = await getUser();
 
-        if ((user && user.isAdmin) || (user && user.email === email)) {
-          setShowPreviewBtn(true);
-        }
+        const showPreview =
+          user &&
+          (user.email === match.params.email
+            ? true
+            : user.isAdmin
+            ? true
+            : false);
+
+        setShowPreviewBtn(showPreview);
 
         setStatusCode(result.status);
         updateData(resume ? resume : {});
