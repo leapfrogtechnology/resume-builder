@@ -36,13 +36,13 @@ const Preview = ({ match }) => {
 
         const user = await getUser();
 
-        const showPreview = user
-          ? user.email === match.params.email
+        const showPreview =
+          user &&
+          (user.email === match.params.email
             ? true
-            : user.isAdmin === true
+            : user.isAdmin
             ? true
-            : false
-          : false;
+            : false);
 
         setShowPreviewBtn(showPreview);
 

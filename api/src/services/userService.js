@@ -118,7 +118,7 @@ export const checkIsUserAdmin = async (email) => {
     const snapsot = await ref.once('value');
     const adminEmails = snapsot.val();
 
-    const isAdmin = adminEmails.indexOf(email) === -1 ? 'false' : 'true';
+    const isAdmin = adminEmails.indexOf(email) === -1 ? false : true;
 
     return isAdmin;
   } catch (err) {
