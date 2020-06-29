@@ -26,8 +26,9 @@ export const authenticateUser = async (req, res, next) => {
  */
 export const authenticateRequest = async (req, res, next) => {
   const isAdmin = await checkIsUserAdmin(req.email);
+  const isAuth = req.email === req.params.email ? true : isAdmin === true ? true : false;
 
-  if (req.email === req.params.email || isAdmin) {
+  if (isAuth) {
     try {
       const user = await fetchByEmail(req.params.email);
       req.uid = user.uid;
