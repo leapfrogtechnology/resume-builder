@@ -15,6 +15,20 @@ export const updateResume = (req, res, next) => {
 };
 
 /**
+ * Save resume in firebase by Admin.
+ *
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
+ */
+export const updateResumeByAdmin = (req, res, next) => {
+  resumeService
+    .updateResumeByAdmin(req.params.email, req.body)
+    .then((data) => res.json({ data }))
+    .catch((err) => next(err));
+};
+
+/**
  * Fetch resume from resume
  *
  * @param {*} req

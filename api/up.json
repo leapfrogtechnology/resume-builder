@@ -13,6 +13,10 @@
     "prod": {
       "domain": "api.resume.lftechnology.com",
       "zone": "lftechnology.com"
+    },
+   "dirty": {
+      "domain": "dirty-api.resume.lftechnology.com",
+      "zone": "lftechnology.com"
     }
   },
   "cors": {

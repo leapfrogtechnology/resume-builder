@@ -8,15 +8,8 @@ import validateGoogleToken from '../middlewares/verifyGoogleToken';
 
 const router = Router();
 
-router.get('/', (req, res, next) => {
-  return res.json({
-    app: process.env.APP_NAME,
-    version: process.env.APP_VERSION,
-  });
-});
-
 /**
- * Authenticate google login /api/auth/google
+ * Authenticate google login /auth/google
  */
 router.post('/auth/google', validateGoogleToken, (req, res, next) => {
   const user = req.user;
@@ -32,6 +25,13 @@ router.post('/refresh', validateRefreshToken, (req, res, next) => {
     .verifyRefreshToken(req.token)
     .then((data) => res.json({ accessToken: data }))
     .catch((err) => next(err));
+});
+
+router.get('/', (req, res, next) => {
+  return res.json({
+    app: process.env.APP_NAME,
+    version: process.env.APP_VERSION,
+  });
 });
 
 export default router;

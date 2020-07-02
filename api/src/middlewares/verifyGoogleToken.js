@@ -2,6 +2,7 @@ import HttpStatus from 'http-status-codes';
 import * as googleAuth from 'google-auth-library';
 
 import { GSUITE_DOMAIN } from '../constant';
+import logger from '../utils/logger';
 
 const OAuth2Client = new googleAuth.OAuth2Client(process.env.GOOGLE_CLIENT_ID, process.env.GOOGLE_SECRET);
 
@@ -34,6 +35,7 @@ const validateGoogleToken = async (req, res, next) => {
       };
       req.user = data;
 
+      logger.info('Google Authentication successful');
       return next();
     }
 
@@ -41,6 +43,7 @@ const validateGoogleToken = async (req, res, next) => {
       message: 'Unauthorized access',
     });
   } catch (err) {
+    logger.error(err.message);
     throw err;
   }
 };

@@ -7,7 +7,7 @@ import { authenticateUser } from '../middlewares/firebaseAuthenticate';
 const router = Router();
 
 /**
- * GET /api/users/self
+ * GET /users/self
  */
 router.get('/self', ensureToken, authenticateUser, userController.fetchUserProfile);
 
